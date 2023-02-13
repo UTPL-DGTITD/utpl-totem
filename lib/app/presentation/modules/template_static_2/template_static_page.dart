@@ -5,15 +5,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:rive/rive.dart';
+import 'package:utpl_totem/app/presentation/modules/banner/banner_page.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
 import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
 
-import 'package:utpl_totem/app/presentation/modules/template_static/template_static_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/template_static/widgets/side_header.dart';
+import 'package:utpl_totem/app/presentation/modules/template_static_2/template_static_controller.dart';
+import 'package:utpl_totem/app/presentation/modules/template_static_2/widgets/side_header.dart';
 import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
 
-class TemplateStaticPage extends GetView<TemplateStaticController> {
-  const TemplateStaticPage({Key? key}) : super(key: key);
+class TemplateStaticPage2 extends GetView<TemplateStaticController2> {
+  const TemplateStaticPage2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
       // appBar: AppBar(
       //   title: Obx(() => Text(controller.title.value)),
       // ),
-      body: GetX<TemplateStaticController>(
-        init: TemplateStaticController(
+      body: GetX<TemplateStaticController2>(
+        init: TemplateStaticController2(
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
@@ -111,6 +112,7 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                                       //     ),
                                       //   ),
                                       // ),
+
                                       StaggeredGridTile.count(
                                         crossAxisCellCount: 10,
                                         mainAxisCellCount: 6,
@@ -125,6 +127,14 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                                         child: Container(
                                           color: Get.theme.cardColor,
                                           child: const EventsPage(),
+                                        ),
+                                      ),
+                                      StaggeredGridTile.count(
+                                        crossAxisCellCount: 10,
+                                        mainAxisCellCount: 2.5,
+                                        child: Container(
+                                          color: Get.theme.cardColor,
+                                          child: const BannerPage(),
                                         ),
                                       ),
                                     ],

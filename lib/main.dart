@@ -9,11 +9,28 @@ import 'package:utpl_totem/app/themes/app_theme.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 import 'package:wakelock/wakelock.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'app/controllers/main_controller.dart';
 
-void main() {
+void main() async {
   // HttpOverrides.global = MyHttpOverrides();
+  // await WindowManager.instance.setFullScreen(true);
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    fullScreen: false,
+    size: Size(400, 650),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
   runApp(MyApp());
 }
 

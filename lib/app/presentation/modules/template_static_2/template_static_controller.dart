@@ -11,7 +11,7 @@ import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
-class TemplateStaticController extends GetxController
+class TemplateStaticController2 extends GetxController
     with GetTickerProviderStateMixin {
   final LocalRepository localRepository;
   final ApiRepository apiRepository;
@@ -43,7 +43,7 @@ class TemplateStaticController extends GetxController
   //       ..value.play()
   //       ..value.setLooping(true);
 
-  TemplateStaticController({
+  TemplateStaticController2({
     required this.localRepository,
     required this.apiRepository,
     required this.toastService,

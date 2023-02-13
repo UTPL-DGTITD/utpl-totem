@@ -43,10 +43,13 @@ class BannerPage extends GetView<BannerController> {
                 int index,
                 int pageViewIndex,
               ) =>
-                  _ImgBanner(
-                item: ctrl.bannerSlide[index],
-                onSectionSelect: (item) => ctrl.navigateToBannerDetail(item),
-                ctrl: ctrl,
+                  Padding(
+                padding: EdgeInsets.symmetric(vertical: ctrl.responsive.hp(0)),
+                child: _ImgBanner(
+                  item: ctrl.bannerSlide[index],
+                  onSectionSelect: (item) => ctrl.navigateToBannerDetail(item),
+                  ctrl: ctrl,
+                ),
               ),
             ),
           ));

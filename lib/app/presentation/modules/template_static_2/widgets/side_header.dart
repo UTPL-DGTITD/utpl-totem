@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
-import 'package:utpl_totem/app/presentation/modules/template_static/template_static_controller.dart';
+import 'package:utpl_totem/app/presentation/modules/template_static_2/template_static_controller.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SideHeader extends StatelessWidget {
-  final TemplateStaticController ctrl;
+  final TemplateStaticController2 ctrl;
   const SideHeader({
     Key? key,
     required this.ctrl,
@@ -138,7 +138,7 @@ class Clock extends StatelessWidget {
     required this.ctrl,
   }) : super(key: key);
 
-  final TemplateStaticController ctrl;
+  final TemplateStaticController2 ctrl;
 
   @override
   Widget build(BuildContext context) {

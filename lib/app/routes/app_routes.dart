@@ -19,4 +19,7 @@ abstract class Routes {
 
   /// Page for template static
   static const template_static = '/template_static_page';
+
+  /// Page for template static
+  static const template_static_2 = '/template_static_page_2';
 }
