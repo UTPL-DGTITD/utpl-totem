@@ -72,7 +72,12 @@ class _ImgBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Get.theme.cardColor,
+      padding: EdgeInsets.symmetric(
+        vertical: ctrl.responsive.hp(1),
+        horizontal: ctrl.responsive.wp(1),
+      ),
       width: double.maxFinite,
       child: GestureDetector(
         onTap: () => ctrl.navigateToBannerDetail(item),

@@ -1,0 +1,154 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
+import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
+import 'package:utpl_totem/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem/app/data/services/auth_service.dart';
+import 'package:utpl_totem/app/data/services/toast_service.dart';
+import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem/app/utils/helpers/uri_helper.dart';
+import 'package:utpl_totem/app/utils/types/request_method_endpoint_type.dart';
+
+class ObservatoryDetailController extends GetxController
+    with GetTickerProviderStateMixin {
+  final LocalRepository localRepository;
+  final ApiRepository apiRepository;
+  final ToastService toastService;
+  final AuthService authService;
+
+  final responsive = Responsive();
+
+  RxBool showSkeleton = true.obs;
+  Rx<EndPointBaseModel> endPoint = EndPointBaseModel().obs;
+  Rx<ObservatoryDetailModel> observatory = ObservatoryDetailModel().obs;
+  RxString title = 'Detalle Observatorio'.obs;
+  RxBool hasObservatory = false.obs;
+  ScrollController scrollController = ScrollController();
+  late Timer timerAnimate;
+
+  ObservatoryDetailController({
+    required this.localRepository,
+    required this.apiRepository,
+    required this.toastService,
+    required this.authService,
+  });
+
+  @override
+  void onInit() {
+    _initConfig();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    timerAnimate.cancel();
+    super.onInit();
+  }
+
+  void _initConfig() async {
+    try {
+      _loadRouteParams();
+      _loadInformation(endPoint.value);
+      timerAnimate = Timer.periodic(const Duration(seconds: 5), (timer) async {
+        animateList();
+      });
+    } catch (error, stack) {
+      ToolsHelper.logger.e(
+        '[observatory_detail_controller] (_initConfig)',
+        error,
+        stack,
+      );
+      toastService.presentErrorToast(
+        text: "La información necesaria es incorrecta",
+      );
+      Get.back();
+    }
+  }
+
+  void _loadRouteParams() {
+    final params = Get.arguments;
+    assert(params != null, 'Params is required');
+    assert(params['endpoint'] != null, 'endpoint is required');
+    assert(params['endpoint'] is EndPointBaseModel,
+        'endpoint is not type EndPointBaseModel');
+    endPoint.value = params['endpoint'];
+  }
+
+  void _loadInformation(EndPointBaseModel endPoint) async {
+    final composedEndPoint = await UriHelper.composeEndPoint(endPoint);
+
+    try {
+      switch (endPoint.method) {
+        case RequestMethodEndpointType.get:
+          var result = await apiRepository.getGenericObservatory(
+            url: composedEndPoint['url_base'],
+            path: composedEndPoint['url_path'],
+          );
+          observatory.value = result;
+          if (observatory.value.image != null) {
+            hasObservatory.value = true;
+          }
+
+          break;
+        default:
+      }
+      showSkeleton.value = false;
+    } on TimeoutException {
+      toastService.presentWarningToast(
+        text: "Tiempo de espera agotado",
+      );
+    } on SocketException {
+      toastService.presentWarningToast(
+        text: "Error de conexión",
+      );
+    } catch (error, stack) {
+      ToolsHelper.logger.e(
+        '[observatory_detail_controller] (_loadInformation)',
+        error,
+        stack,
+      );
+      toastService.presentErrorToast(
+        text: 'Ocurrió un error, intenta nuevamente.',
+      );
+    }
+  }
+
+  void moveLeft() {
+    scrollController.animateTo(
+      scrollController.offset - responsive.wp(50),
+      curve: Curves.linear,
+      duration: const Duration(milliseconds: 500),
+    );
+  }
+
+  void moveRight() {
+    scrollController.animateTo(
+      scrollController.offset + responsive.wp(50),
+      curve: Curves.linear,
+      duration: const Duration(milliseconds: 500),
+    );
+  }
+
+  void animateList() {
+    if (scrollController.offset != scrollController.position.maxScrollExtent) {
+      moveRight();
+    } else {
+      scrollController.animateTo(
+        0,
+        curve: Curves.linear,
+        duration: const Duration(milliseconds: 500),
+      );
+    }
+  }
+
+  String getUserSplitEmail(String email) {
+    List<String> partes = email.split("@");
+    return partes[0];
+  }
+}

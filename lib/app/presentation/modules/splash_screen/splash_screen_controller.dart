@@ -40,7 +40,7 @@ class SplashScreenController extends GetxController {
     var status = await validateServerConnection();
     if (status) {
       await Future.delayed(const Duration(seconds: 2));
-      Get.offAndToNamed(Routes.template_static_2);
+      Get.offAndToNamed(Routes.template_static);
     } else {
       navigateToTemplateOffline();
     }

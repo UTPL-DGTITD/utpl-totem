@@ -1,15 +1,18 @@
-import 'package:ext_video_player/ext_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-import 'package:rive/rive.dart';
-import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
-import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
+
+import 'package:utpl_totem/app/presentation/modules/banner/banner_page.dart';
+
+import 'package:utpl_totem/app/presentation/modules/observatories/observatories_page.dart';
+import 'package:utpl_totem/app/presentation/modules/investigation/investigation_page.dart';
+import 'package:utpl_totem/app/presentation/modules/ranking/ranking_page.dart';
 
 import 'package:utpl_totem/app/presentation/modules/template_static/template_static_controller.dart';
 import 'package:utpl_totem/app/presentation/modules/template_static/widgets/side_header.dart';
+import 'package:utpl_totem/app/presentation/modules/videos/videos_page.dart';
 import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
 
 class TemplateStaticPage extends GetView<TemplateStaticController> {
@@ -33,11 +36,12 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
           return SafeArea(
               child: ctrl.showSkeleton.isFalse
                   ? Container(
-                      // color: Colors.red,
+                      color: Get.theme.cardColor,
                       width: ctrl.responsive.wp(100),
                       height: ctrl.responsive.hp(100),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Row(
@@ -49,7 +53,7 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                                   ),
                                   color: Get.theme.cardColor,
                                   width: ctrl.responsive.wp(75),
-                                  height: ctrl.responsive.hp(90),
+                                  height: ctrl.responsive.hp(91),
                                   child: StaggeredGrid.count(
                                     // crossAxisCount: 14,
                                     crossAxisCount: 10,
@@ -63,20 +67,23 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                                         child: Container(
                                           color: Get.theme.cardColor,
                                           child: Center(
-                                            child: Text(
-                                              'UTPL+',
-                                              style: TextStyle(
-                                                fontSize:
-                                                    ctrl.responsive.ip(4.5),
-                                                color: Get
-                                                    .theme.colorScheme.primary,
-                                                fontWeight: FontWeight.bold,
+                                            child: InkWell(
+                                              onTap: () =>
+                                                  ctrl.refreshTemplate(),
+                                              child: Text(
+                                                'UTPL+',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ctrl.responsive.ip(4.5),
+                                                  color: Get.theme.colorScheme
+                                                      .primary,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-
                                       StaggeredGridTile.count(
                                         crossAxisCellCount: 5,
                                         mainAxisCellCount: 2,
@@ -89,42 +96,48 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                                           ),
                                         ),
                                       ),
-                                      // StaggeredGridTile.count(
-                                      //   crossAxisCellCount: 10,
-                                      //   mainAxisCellCount: 6,
-                                      //   child: Obx(
-                                      //     () => Container(
-                                      //       key: const Key("video-container"),
-                                      //       child: ctrl.controllerVideo.value
-                                      //           ? AspectRatio(
-                                      //               aspectRatio: ctrl
-                                      //                   .controller
-                                      //                   .value
-                                      //                   .value
-                                      //                   .aspectRatio,
-                                      //               child: VideoPlayer(
-                                      //                   ctrl.controller.value),
-                                      //             )
-                                      //           : const Center(
-                                      //               child: Text('Cargando'),
-                                      //             ),
-                                      //     ),
-                                      //   ),
-                                      // ),
+                                      // INDICADORES
                                       StaggeredGridTile.count(
                                         crossAxisCellCount: 10,
-                                        mainAxisCellCount: 6,
+                                        mainAxisCellCount: 3,
                                         child: Container(
                                           color: Get.theme.cardColor,
-                                          child: const NewsPage(),
+                                          child: const ObservatoriesPage(),
                                         ),
                                       ),
                                       StaggeredGridTile.count(
                                         crossAxisCellCount: 10,
-                                        mainAxisCellCount: 6,
+                                        mainAxisCellCount: 5,
                                         child: Container(
                                           color: Get.theme.cardColor,
-                                          child: const EventsPage(),
+                                          child: const VideosPage(),
+                                        ),
+                                      ),
+                                      StaggeredGridTile.count(
+                                        crossAxisCellCount: 10,
+                                        mainAxisCellCount: 3,
+                                        child: Container(
+                                          color: Get.theme.cardColor,
+                                          child: const BannerPage(),
+                                        ),
+                                      ),
+
+                                      StaggeredGridTile.count(
+                                        crossAxisCellCount: 10,
+                                        mainAxisCellCount: 4.5,
+                                        child: Container(
+                                          color: Get.theme.cardColor,
+                                          child: const InvestigationPage(),
+                                        ),
+                                      ),
+
+                                      StaggeredGridTile.count(
+                                        crossAxisCellCount: 10,
+                                        mainAxisCellCount: 4,
+                                        child: Container(
+                                          color: Get.theme.cardColor,
+                                          child:
+                                              const RankingPage(), //EmbeddedGraphsPage(),
                                         ),
                                       ),
                                     ],
@@ -142,7 +155,7 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                           Container(
                             alignment: Alignment.center,
                             width: double.infinity,
-                            height: ctrl.responsive.hp(10),
+                            height: ctrl.responsive.hp(9),
                             color: Get.theme.colorScheme.primary,
                             child: Marquee(
                               text: ctrl.advices.value,
@@ -165,7 +178,7 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                         ],
                       ),
                     )
-                  : const SkeletonList(length: 10));
+                  : const SkeletonList(length: 30));
         },
       ),
     );

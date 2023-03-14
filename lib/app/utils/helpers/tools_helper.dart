@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:timeago/timeago.dart' as time_ago;
@@ -178,20 +178,20 @@ class ToolsHelper {
     }
   }
 
-  static Future<String> appVersion() async {
-    try {
-      var packageInfo = await PackageInfo.fromPlatform();
+  // static Future<String> appVersion() async {
+  //   try {
+  //     var packageInfo = await PackageInfo.fromPlatform();
 
-      return packageInfo.version;
-    } catch (error, stack) {
-      FirebaseCrashlytics.instance.recordError(
-        error,
-        stack,
-        reason: '[tools_helper] (appVersion)',
-      );
-      return '0.0.0';
-    }
-  }
+  //     return packageInfo.version;
+  //   } catch (error, stack) {
+  //     FirebaseCrashlytics.instance.recordError(
+  //       error,
+  //       stack,
+  //       reason: '[tools_helper] (appVersion)',
+  //     );
+  //     return '0.0.0';
+  //   }
+  // }
 
   /// Configure the ADFS authentication parameters.
   static AadOAuth get adfsConfig {
@@ -209,20 +209,20 @@ class ToolsHelper {
     return AadOAuth(config);
   }
 
-  static Future<bool> isAppUpdated({required String serverVersion}) async {
-    try {
-      var packageInfo = await PackageInfo.fromPlatform();
-      Version currentVersion = Version.parse(packageInfo.version);
-      Version latestVersion = Version.parse(serverVersion);
-      if (currentVersion >= latestVersion) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      return true;
-    }
-  }
+  // static Future<bool> isAppUpdated({required String serverVersion}) async {
+  //   try {
+  //     var packageInfo = await PackageInfo.fromPlatform();
+  //     Version currentVersion = Version.parse(packageInfo.version);
+  //     Version latestVersion = Version.parse(serverVersion);
+  //     if (currentVersion >= latestVersion) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     return true;
+  //   }
+  // }
 
   static String formatToTimeAgo(DateTime dateTime) =>
       time_ago.format(dateTime, locale: 'es');

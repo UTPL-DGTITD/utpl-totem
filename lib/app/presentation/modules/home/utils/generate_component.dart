@@ -14,7 +14,7 @@ class GenerateComponent {
       String type, HomeController ctrl, TvTemplateBody item, int i) {
     switch (type) {
       case 'link':
-        return WebComponentPage(item);
+        return WebComponentPage(item.link?.url ?? '');
       case "embedded_youtube":
         return YoutubeVideosPage(item);
       // return SizedBox();

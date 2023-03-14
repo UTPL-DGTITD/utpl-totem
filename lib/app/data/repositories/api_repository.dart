@@ -1,4 +1,5 @@
 import 'package:utpl_totem/app/data/models/api_response_model.dart';
+import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
 
 abstract class ApiRepository {
   /* -------------------------------------------------------------------------- */
@@ -65,4 +66,35 @@ abstract class ApiRepository {
 /* -------------------------------------------------------------------------- */
 
   Future<ApiResponseModel> getWeather();
+
+/* -------------------------------------------------------------------------- */
+/*                                   RANKING                                  */
+/* -------------------------------------------------------------------------- */
+
+  Future<ApiResponseModel> getRanking({int page = 1});
+
+/* -------------------------------------------------------------------------- */
+/*                                   INVESTIGATIONS                           */
+/* -------------------------------------------------------------------------- */
+
+  Future<ApiResponseModel> getInvestigations({
+    Map<String, dynamic> headers,
+  });
+
+/* -------------------------------------------------------------------------- */
+/*                                   OBSERVATORIES                            */
+/* -------------------------------------------------------------------------- */
+
+  Future<ApiResponseModel> getObservatories({
+    Map<String, dynamic> headers,
+  });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   GENERIC                                  */
+  /* -------------------------------------------------------------------------- */
+
+  Future<ObservatoryDetailModel> getGenericObservatory({
+    required String url,
+    required String path,
+  });
 }

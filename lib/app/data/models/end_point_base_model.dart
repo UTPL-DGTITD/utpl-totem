@@ -35,8 +35,8 @@ class EndPointBaseModel {
 
   factory EndPointBaseModel.fromJson(Map<String, dynamic> json) =>
       EndPointBaseModel(
-        urlBase: json["url_base"] ?? "",
-        urlPath: json["url_path"] ?? "",
+        urlBase: json["urlBase"] ?? "",
+        urlPath: json["urlPath"] ?? "",
         version: json["version"] ?? "",
         method: json["method"] ?? "",
         authentication: json["authentication"] is String
@@ -56,12 +56,16 @@ class EndPointBaseModel {
             ? []
             : List<PathVariable>.from(
                 json["query_params"].map((x) => PathVariable.fromJson(x))),
-        gui: json["gui"] == null ? Gui() : Gui.fromJson(json["gui"]),
+        gui: json["gui"] == null
+            ? Gui()
+            : json["gui"] == ""
+                ? Gui()
+                : Gui.fromJson(json["gui"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "url_base": urlBase,
-        "url_path": urlPath,
+        "urlBase": urlBase,
+        "urlPath": urlPath,
         "version": version,
         "method": method,
         "authentication": authentication,
@@ -90,14 +94,14 @@ class PathVariable {
         name: json["name"] ?? "",
         value: json["value"],
         type: json["type"] ?? "",
-        defaultValue: json["default_value"] ?? "",
+        defaultValue: json["defaultValue"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "value": value,
         "type": type,
-        "default_value": defaultValue,
+        "defaultValue": defaultValue,
       };
 }
 

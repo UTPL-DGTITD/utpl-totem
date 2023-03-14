@@ -45,7 +45,7 @@ class BannerController extends GetxController with GetTickerProviderStateMixin {
       await loadBanners();
     } catch (error, stack) {
       ToolsHelper.logger.e(
-        '[events_controller] (_initConfig)',
+        '[banner_controller] (_initConfig)',
         error,
         stack,
       );

@@ -11,6 +11,12 @@ abstract class Routes {
   static const web = '/web_page';
   static const home = '/home_page';
 
+  /// Page for news page
+  static const news = '/news_page';
+
+  /// Page for events page
+  static const events = '/events_page';
+
   /// Page for validate mac of device
   static const validate = '/validate_page';
 
@@ -22,4 +28,7 @@ abstract class Routes {
 
   /// Page for template static
   static const template_static_2 = '/template_static_page_2';
+
+  /// Page for template observatory detail
+  static const observatory_detail = '/observatory_detail_page';
 }

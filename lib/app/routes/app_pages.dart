@@ -1,15 +1,19 @@
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/main_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/events/events_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_page.dart';
+import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
+import 'package:utpl_totem/app/presentation/modules/news/news_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_page.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_page.dart';
 import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_page.dart';
 import 'package:utpl_totem/app/presentation/modules/template_static/template_static_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/template_static/template_static_page.dart';
-import 'package:utpl_totem/app/presentation/modules/template_static_2/template_static_binding.dart';
-import 'package:utpl_totem/app/presentation/modules/template_static_2/template_static_page.dart';
 import 'package:utpl_totem/app/presentation/modules/validate/validate_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/validate/validate_page.dart';
 import 'package:utpl_totem/app/presentation/modules/web/web_binding.dart';
@@ -52,6 +56,22 @@ class AppPages {
       ],
     ),
     GetPage(
+      name: Routes.news,
+      page: () => const NewsPage(),
+      bindings: [
+        MainBinding(),
+        NewsBinding(),
+      ],
+    ),
+    GetPage(
+      name: Routes.events,
+      page: () => const EventsPage(),
+      bindings: [
+        MainBinding(),
+        EventsBinding(),
+      ],
+    ),
+    GetPage(
       name: Routes.template_offline,
       page: () => const TemplateOfflinePage(),
       bindings: [
@@ -68,11 +88,11 @@ class AppPages {
       ],
     ),
     GetPage(
-      name: Routes.template_static_2,
-      page: () => const TemplateStaticPage2(),
+      name: Routes.observatory_detail,
+      page: () => const ObservatoryDetailPage(),
       bindings: [
         MainBinding(),
-        TemplateStaticBinding2(),
+        ObservatoryDetailBinding(),
       ],
     ),
   ];

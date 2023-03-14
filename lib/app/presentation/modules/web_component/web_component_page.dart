@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/presentation/modules/web_component/web_component_controller.dart';
 
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_windows/webview_windows.dart';
 
 class WebComponentPage extends GetView<WebComponentController> {
-  final TvTemplateBody item;
+  //final TvTemplateBody item;
+  final String item;
   const WebComponentPage(this.item, {Key? key}) : super(key: key);
 
   @override
@@ -21,12 +22,14 @@ class WebComponentPage extends GetView<WebComponentController> {
       ),
     );
 
-    ctrl.loadUrl(item.link?.url ?? '');
+    //ctrl.loadUrl(item.link?.url ?? '');
+    ctrl.loadUrl(item);
     return Scaffold(
       // appBar: AppBar(
       //   title: Obx(() => Text(controller.title.value)),
       // ),
       body: GetX<WebComponentController>(
+        tag: item,
         init: WebComponentController(
           localRepository: Get.find(),
           apiRepository: Get.find(),
@@ -36,14 +39,11 @@ class WebComponentPage extends GetView<WebComponentController> {
         initState: (_) {},
         builder: (ctrl) {
           return SafeArea(
-            child: ctrl.url.isNotEmpty
+            child: controller.url.isNotEmpty
                 ? Stack(
                     children: [
-                      WebView(
-                        initialUrl: controller.url.value,
-                        javascriptMode: JavascriptMode.unrestricted,
-                        onPageFinished: (finish) =>
-                            controller.isLoading.value = false,
+                      Webview(
+                        controller.controllerWebView.value,
                       ),
                       controller.isLoading.isTrue
                           ? const Center(

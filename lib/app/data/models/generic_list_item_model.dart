@@ -26,6 +26,8 @@ class GenericListItemModel {
     this.title = "",
     this.identifier = "",
     this.description = "",
+    this.acronym = "",
+    this.value = 0,
     this.interaction = "",
     this.view = "",
     this.hour = "",
@@ -50,6 +52,8 @@ class GenericListItemModel {
   String title;
   String identifier;
   String description;
+  String acronym;
+  int value;
   String interaction;
   String view;
   IconGeneric? icon;
@@ -92,12 +96,17 @@ class GenericListItemModel {
       title: json["title"] ?? "",
       identifier: json["identifier"] ?? "",
       description: json["description"] ?? "",
+      acronym: json["acronym"] ?? "",
+      value: json["value"] ?? 0,
       icon: json["icon"] == null ? null : IconGeneric.fromJson(json["icon"]),
       type: json["type"] ?? "",
       rol: json["rol"] ?? "",
       hour: json["hour"] ?? "",
-      date:
-          json["date"] == null ? DateTime.now() : DateTime.parse(json["date"]),
+      date: json["date"] == null
+          ? DateTime.now()
+          : json["date"] == ""
+              ? DateTime.now()
+              : DateTime.parse(json["date"]),
       location: json["location"] ?? "",
       interaction: json["interaction"] ?? "",
       source: json["source"] ?? "",
@@ -114,7 +123,9 @@ class GenericListItemModel {
           : List<Attrs>.from(json["attrs"].map((x) => Attrs.fromJson(x))),
       endpoint: json["endpoint"] == null
           ? null
-          : EndPointBaseModel.fromJson(json["endpoint"]),
+          : json["endpoint"] == ""
+              ? null
+              : EndPointBaseModel.fromJson(json["endpoint"]),
       enable: json["enable"] ?? false,
       deprecated: json["deprecated"] ?? false,
     );
@@ -125,6 +136,8 @@ class GenericListItemModel {
         "title": title,
         "identifier": identifier,
         "description": description,
+        "acronym": acronym,
+        "value": value,
         "icon": icon,
         "type": type,
         "rol": rol,

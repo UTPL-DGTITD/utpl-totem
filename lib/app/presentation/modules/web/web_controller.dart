@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:webview_windows/webview_windows.dart';
 
 class WebController extends GetxController {
   final ToastService toastService;
@@ -12,6 +14,10 @@ class WebController extends GetxController {
   RxBool isLoading = true.obs;
   RxString title = ''.obs;
   RxString url = ''.obs;
+
+  final controllerWebView = WebviewController().obs;
+  final _textController = TextEditingController();
+  Rx<bool> isWebviewSuspended = false.obs;
 
   @override
   void onInit() {
@@ -47,5 +53,19 @@ class WebController extends GetxController {
     assert(params['title'] is String, 'title must be a String');
     url.value = params['url'];
     title.value = params['title'];
+    loadWebView(url.value);
+  }
+
+  void loadWebView(String url) async {
+    isLoading.value = true;
+    await controllerWebView.value.initialize();
+    controllerWebView.value.url.listen((url) {
+      _textController.text = url;
+    });
+    await controllerWebView.value.setBackgroundColor(Colors.transparent);
+    await controllerWebView.value
+        .setPopupWindowPolicy(WebviewPopupWindowPolicy.deny);
+    await controllerWebView.value.loadUrl(url);
+    isLoading.value = false;
   }
 }

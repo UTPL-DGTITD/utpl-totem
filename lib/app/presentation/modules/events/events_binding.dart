@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/news/news_controller.dart';
+import 'package:utpl_totem/app/presentation/modules/events/events_controller.dart';
 
-class NewsBinding implements Bindings {
+class EventsBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<NewsController>(
-      () => NewsController(
+    Get.lazyPut<EventsController>(
+      () => EventsController(
         localRepository: Get.find(),
         apiRepository: Get.find(),
         toastService: Get.find(),

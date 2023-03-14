@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:get/get.dart';
+import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/utils/constants/toast_position.dart';
 
 class ToastService extends GetxService {
@@ -205,9 +206,15 @@ class ToastService extends GetxService {
     bool closeButton = true,
     duration = const Duration(milliseconds: 5000),
   }) {
+    var responsive = Responsive();
     BotToast.showSimpleNotification(
+      titleStyle: TextStyle(fontSize: responsive.ip(3)),
       title: text,
       hideCloseButton: !closeButton,
+      closeIcon: Icon(
+        Icons.close,
+        size: responsive.ip(3),
+      ),
       duration: duration,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:utpl_totem/app/data/models/api_response_model.dart';
+import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/utils/helpers/network_helper.dart';
 
@@ -131,15 +132,77 @@ class ApiProvider extends ApiRepository {
   }
 
   /* -------------------------------------------------------------------------- */
-  /*                                    EVENTS                                    */
+  /*                                    WEATHER                                 */
   /* -------------------------------------------------------------------------- */
 
   @override
   Future<ApiResponseModel> getWeather() {
-    return _netUtil.get(path: 'v2/weather/city')
+    return _netUtil
+        .get(path: 'v2/weather/city')
         // .get(path: 'v2/event/collage/all?page=1')
         .then((dynamic res) {
       return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   RANKING                                  */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getRanking({int page = 1}) {
+    return _netUtil
+        .get(path: 'v1/international/ranking/all?page=$page')
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   INVESTIGATIONS                           */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getInvestigations({
+    Map<String, dynamic> headers = const {
+      "accessKey": "886D32B8F4841173DF763578BBE1C"
+    },
+  }) {
+    return _netUtil
+        .get(path: 'v1/indicators/all', headers: headers)
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   Observatories                            */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getObservatories({
+    Map<String, dynamic> headers = const {
+      "accessKey": "886D32B8F4841173DF763578BBE1C"
+    },
+  }) {
+    return _netUtil
+        .get(path: 'v1/observatory/all', headers: headers)
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   GENERIC                                  */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ObservatoryDetailModel> getGenericObservatory({
+    required String url,
+    required String path,
+  }) {
+    return _netUtil.get(url: url, path: path).then((dynamic res) {
+      return ObservatoryDetailModel.fromJson(res);
     });
   }
 }

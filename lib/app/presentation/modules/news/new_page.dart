@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:utpl_totem/app/presentation/modules/news/news_controller.dart';
+import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
 import 'package:utpl_totem/app/presentation/widgets/modal_dialog.dart';
 import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 import 'package:intl/src/intl/date_format.dart';
+import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 class NewsPage extends GetView<NewsController> {
   const NewsPage({Key? key}) : super(key: key);
@@ -16,9 +18,20 @@ class NewsPage extends GetView<NewsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Obx(() => Text(controller.title.value)),
-      // ),
+      floatingActionButton: const FloatBackButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      appBar: AppBar(
+        centerTitle: true,
+        toolbarHeight: controller.responsive.hp(8),
+        title: Obx(
+          () => Text(
+            controller.title.value,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: controller.responsive.ip(2.5)),
+          ),
+        ),
+        leading: const SizedBox(),
+      ),
       body: GetX<NewsController>(
         init: NewsController(
           localRepository: Get.find(),
@@ -29,134 +42,144 @@ class NewsPage extends GetView<NewsController> {
         initState: (_) {},
         builder: (ctrl) {
           return SafeArea(
-              child: ctrl.showSkeleton.isFalse
-                  ? Obx(
-                      () =>
-                          // TYPE: INTERACTIVE LIST
-                          Container(
-                        width: double.infinity,
-                        color: Get.theme.cardColor,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: double.infinity,
+            child: ctrl.showSkeleton.isFalse
+                ? Obx(
+                    () => Container(
+                      width: double.infinity,
+                      color: Get.theme.cardColor,
+                      child: Column(
+                        children: [
+                          customYMargin(ctrl.responsive.hp(1)),
+                          Expanded(
+                            child: Container(
                               padding: EdgeInsets.symmetric(
                                 vertical: ctrl.responsive.hp(0.5),
                                 horizontal: ctrl.responsive.wp(1),
                               ),
-                              // color: Get.theme.colorScheme.primary,
-                              child: Text(
-                                ctrl.title.value,
-                                style: TextStyle(
-                                  fontSize: ctrl.responsive.ip(1.8),
-                                  color: Get.theme.colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
+                              child: ListView.separated(
+                                separatorBuilder: (context, index) => Column(
+                                  children: [
+                                    customYMargin(ctrl.responsive.hp(0.5)),
+                                    Divider(
+                                      height: ctrl.responsive.hp(1),
+                                    ),
+                                    customYMargin(ctrl.responsive.hp(0.5)),
+                                  ],
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            customYMargin(ctrl.responsive.hp(1)),
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: ctrl.responsive.hp(0.5),
-                                  horizontal: ctrl.responsive.wp(1),
-                                ),
-                                child: ListView.builder(
-                                  controller: ctrl.scrollController,
-                                  itemCount: ctrl.news.length,
-                                  itemBuilder: (context, index) {
-                                    var item = ctrl.news[index];
-                                    return Container(
+                                controller: ctrl.scrollController,
+                                itemCount: ctrl.news.length,
+                                itemBuilder: (context, index) {
+                                  var item = ctrl.news[index];
+                                  return InkWell(
+                                    onTap: () => ModalDialog.alertFeatures(
+                                        context, item),
+                                    child: Container(
                                       padding: EdgeInsets.symmetric(
-                                          vertical: ctrl.responsive.wp(0.2)),
-                                      child: ListTile(
-                                        // minLeadingWidth: ctrl.responsive.wp(10),
-                                        onTap: () => ModalDialog.alertFeatures(
-                                            context, item),
-                                        leading: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: SizedBox(
-                                            height: ctrl.responsive.hp(8),
-                                            child: AspectRatio(
-                                              aspectRatio: 1 / 1,
-                                              child: CachedNetworkImage(
-                                                imageUrl: item.image?.url ?? '',
-                                                fit: BoxFit.cover,
-                                                errorWidget: (context, a, b) {
-                                                  return Image.asset(
-                                                      'assets/images/alt-image.png');
-                                                },
-                                                placeholder: (context, url) =>
-                                                    Image.asset(
-                                                        'assets/images/alt-image.png'),
+                                        vertical: ctrl.responsive.wp(0.2),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: SizedBox(
+                                              width: ctrl.responsive.wp(20),
+                                              height: ctrl.responsive.hp(10),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      item.image?.url ?? '',
+                                                  //fit: BoxFit.cover,
+                                                  errorWidget: (context, a, b) {
+                                                    return Image.asset(
+                                                        'assets/images/alt-image.png');
+                                                  },
+                                                  placeholder: (context, url) =>
+                                                      Image.asset(
+                                                          'assets/images/alt-image.png'),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        title: Text(
-                                          item.title,
-                                          style: TextStyle(
-                                            fontSize: ctrl.responsive.ip(1.65),
-                                            color:
-                                                Get.theme.colorScheme.primary,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                        subtitle: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            // Text(
-                                            //   item.description,
-                                            //   maxLines: 1,
-                                            //   overflow: TextOverflow.ellipsis,
-                                            // ),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  UtplCustom.calendar,
-                                                  size: ctrl.responsive.ip(1.6),
-                                                  color:
-                                                      Get.theme.iconTheme.color,
+                                          customXMargin(ctrl.responsive.wp(1)),
+                                          Expanded(
+                                            flex: 2,
+                                            child: ListTile(
+                                              onTap: () =>
+                                                  ModalDialog.alertFeatures(
+                                                      context, item),
+                                              title: Text(
+                                                ToolsHelper.htmlParser(
+                                                    item.title),
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ctrl.responsive.ip(2.2),
+                                                  color: Get.theme.colorScheme
+                                                      .primary,
+                                                  fontWeight: FontWeight.normal,
                                                 ),
-                                                customXMargin(
-                                                    ctrl.responsive.wp(1)),
-                                                Text(
-                                                  DateFormat('yyyy-MM-dd')
-                                                      .format(item.date!),
-                                                  style: TextStyle(
-                                                    fontSize:
-                                                        ctrl.responsive.ip(1.5),
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                maxLines: 3,
+                                              ),
+                                              subtitle: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  customYMargin(
+                                                      ctrl.responsive.hp(1)),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Icon(
+                                                        UtplCustom.calendar,
+                                                        size: ctrl.responsive
+                                                            .ip(2),
+                                                        color: Get.theme
+                                                            .iconTheme.color,
+                                                      ),
+                                                      customXMargin(ctrl
+                                                          .responsive
+                                                          .wp(3)),
+                                                      Text(
+                                                        DateFormat('yyyy-MM-dd')
+                                                            .format(item.date!),
+                                                        style: TextStyle(
+                                                          fontSize: ctrl
+                                                              .responsive
+                                                              .ip(1.9),
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
+                                              trailing: Icon(
+                                                UtplCustom.right_small_arrow,
+                                                size: ctrl.responsive.ip(2.5),
+                                              ),
                                             ),
-                                          ],
-                                        ),
-                                        trailing: Icon(
-                                          UtplCustom.right_small_arrow,
-                                          size: ctrl.responsive.ip(2),
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                            ctrl.loadingNews.isTrue
-                                ? const CircularProgressIndicator()
-                                : const SizedBox(),
-                          ],
-                        ),
+                          ),
+                          ctrl.loadingNews.isTrue
+                              ? const CircularProgressIndicator()
+                              : const SizedBox(),
+                        ],
                       ),
-                    )
-                  : const SkeletonList(length: 20));
+                    ),
+                  )
+                : const SkeletonList(length: 20),
+          );
         },
       ),
     );

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
+import 'package:dart_vlc/dart_vlc.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/services/theme_service.dart';
 import 'package:utpl_totem/app/main_binding.dart';
@@ -20,8 +23,10 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    fullScreen: false,
-    size: Size(400, 650),
+    // DESCOMENTAR PARA PRODUCCION
+    fullScreen: true,
+    // DESCOMENTAR PARA PROBAR DE MANERA LOCAL
+    //size: Size(385, 674),
     center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
@@ -31,6 +36,8 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
+  DartVLC.initialize();
+
   runApp(MyApp());
 }
 
@@ -44,10 +51,18 @@ class MyApp extends StatelessWidget {
     Wakelock.enable();
     return GestureDetector(
       child: GetMaterialApp(
+        scrollBehavior: const MaterialScrollBehavior().copyWith(
+          dragDevices: {
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.touch,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.unknown
+          },
+        ),
         debugShowCheckedModeBanner: false,
         navigatorKey: mainCtrl.navigatorKey,
         title: 'UTPL Totem',
-        themeMode: ThemeService().getThemeMode(),
+        themeMode: ThemeMode.light, //ThemeService().getThemeMode(),
         theme: appLightTheme,
         darkTheme: appDarkTheme,
         builder: BotToastInit(),
@@ -61,7 +76,9 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
       ),
-      onTap: () => ToolsHelper.hideKeyboard(context),
+      onTap: () {
+        ToolsHelper.hideKeyboard(context);
+      },
     );
   }
 }
