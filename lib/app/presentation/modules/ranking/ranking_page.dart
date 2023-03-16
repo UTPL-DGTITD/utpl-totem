@@ -49,9 +49,9 @@ class RankingPage extends GetView<RankingController> {
                             flex: 5,
                             child: Row(
                               children: [
-                                const Expanded(
+                                Expanded(
                                   flex: 1,
-                                  child: CarrouselSliderRanking(),
+                                  child: CarrouselSliderRanking(ctrl: ctrl),
                                 ),
                                 Expanded(
                                   flex: 1,

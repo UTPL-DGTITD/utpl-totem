@@ -20,166 +20,209 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Obx(() => Text(controller.title.value)),
-      // ),
-      body: GetX<TemplateStaticController>(
-        init: TemplateStaticController(
-          localRepository: Get.find(),
-          apiRepository: Get.find(),
-          toastService: Get.find(),
-          authService: Get.find(),
-        ),
-        initState: (_) {},
-        builder: (ctrl) {
-          return SafeArea(
-              child: ctrl.showSkeleton.isFalse
-                  ? Container(
-                      color: Get.theme.cardColor,
-                      width: ctrl.responsive.wp(100),
-                      height: ctrl.responsive.hp(100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: ctrl.responsive.wp(0.5),
-                                    vertical: ctrl.responsive.hp(1),
-                                  ),
-                                  color: Get.theme.cardColor,
-                                  width: ctrl.responsive.wp(75),
-                                  height: ctrl.responsive.hp(91),
-                                  child: StaggeredGrid.count(
-                                    // crossAxisCount: 14,
-                                    crossAxisCount: 10,
-                                    axisDirection: AxisDirection.down,
-                                    mainAxisSpacing: ctrl.responsive.hp(1),
-                                    crossAxisSpacing: ctrl.responsive.wp(0.5),
-                                    children: [
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 5,
-                                        mainAxisCellCount: 2,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child: Center(
-                                            child: InkWell(
-                                              onTap: () =>
-                                                  ctrl.refreshTemplate(),
-                                              child: Text(
-                                                'UTPL+',
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      ctrl.responsive.ip(4.5),
-                                                  color: Get.theme.colorScheme
-                                                      .primary,
-                                                  fontWeight: FontWeight.bold,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTapDown: (_) {
+        print('USUARIO: onTapDown');
+        controller.resetTimer();
+      },
+      onPanDown: (_) {
+        print('USUARIO: onPanDown');
+        controller.resetTimer();
+      },
+      onTap: () {
+        print('USUARIO: onTap');
+        controller.resetTimer();
+      },
+      child: Scaffold(
+        // appBar: AppBar(
+        //   title: Obx(() => Text(controller.title.value)),
+        // ),
+        body: GetX<TemplateStaticController>(
+          init: TemplateStaticController(
+            localRepository: Get.find(),
+            apiRepository: Get.find(),
+            toastService: Get.find(),
+            authService: Get.find(),
+          ),
+          initState: (_) {},
+          builder: (ctrl) {
+            return SafeArea(
+                child: ctrl.showSkeleton.isFalse
+                    ? Container(
+                        color: Get.theme.cardColor,
+                        width: ctrl.responsive.wp(100),
+                        height: ctrl.responsive.hp(100),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: ctrl.responsive.wp(0.5),
+                                      vertical: ctrl.responsive.hp(1),
+                                    ),
+                                    color: Get.theme.cardColor,
+                                    width: ctrl.responsive.wp(75),
+                                    height: ctrl.responsive.hp(91),
+                                    child: StaggeredGrid.count(
+                                      // crossAxisCount: 14,
+                                      crossAxisCount: 10,
+                                      axisDirection: AxisDirection.down,
+                                      mainAxisSpacing: ctrl.responsive.hp(1),
+                                      crossAxisSpacing: ctrl.responsive.wp(0.5),
+                                      children: [
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 5,
+                                          mainAxisCellCount: 2,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child: Center(
+                                              child: InkWell(
+                                                onTap: () =>
+                                                    ctrl.refreshTemplate(),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'UTPL',
+                                                      style: TextStyle(
+                                                        fontSize: ctrl
+                                                            .responsive
+                                                            .ip(4.5),
+                                                        color: Get
+                                                            .theme
+                                                            .colorScheme
+                                                            .primary,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '+',
+                                                      style: TextStyle(
+                                                        fontSize: ctrl
+                                                            .responsive
+                                                            .ip(4.5),
+                                                        color: Get
+                                                            .theme
+                                                            .colorScheme
+                                                            .tertiary,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 5,
-                                        mainAxisCellCount: 2,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child: SizedBox(
-                                            child: Image.asset(
-                                                'assets/images/smartland.png',
-                                                scale: 0.65),
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 5,
+                                          mainAxisCellCount: 2,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child: const SizedBox(),
+                                            // SizedBox(
+                                            //   child: Image.asset(
+                                            //       'assets/images/smartland.png',
+                                            //       scale: 0.65),
+                                            // ),
                                           ),
                                         ),
-                                      ),
-                                      // INDICADORES
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 10,
-                                        mainAxisCellCount: 3,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child: const ObservatoriesPage(),
+                                        // INDICADORES
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 10,
+                                          mainAxisCellCount: 3,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child: const ObservatoriesPage(),
+                                          ),
                                         ),
-                                      ),
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 10,
-                                        mainAxisCellCount: 5,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child: const VideosPage(),
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 10,
+                                          mainAxisCellCount: 5,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child: const VideosPage(),
+                                          ),
                                         ),
-                                      ),
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 10,
-                                        mainAxisCellCount: 3,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child: const BannerPage(),
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 10,
+                                          mainAxisCellCount: 3,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child: const BannerPage(),
+                                          ),
                                         ),
-                                      ),
 
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 10,
-                                        mainAxisCellCount: 4.5,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child: const InvestigationPage(),
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 10,
+                                          mainAxisCellCount: 4.5,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child: const InvestigationPage(),
+                                          ),
                                         ),
-                                      ),
 
-                                      StaggeredGridTile.count(
-                                        crossAxisCellCount: 10,
-                                        mainAxisCellCount: 4,
-                                        child: Container(
-                                          color: Get.theme.cardColor,
-                                          child:
-                                              const RankingPage(), //EmbeddedGraphsPage(),
+                                        StaggeredGridTile.count(
+                                          crossAxisCellCount: 10,
+                                          mainAxisCellCount: 4,
+                                          child: Container(
+                                            color: Get.theme.cardColor,
+                                            child:
+                                                const RankingPage(), //EmbeddedGraphsPage(),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  width: ctrl.responsive.wp(25),
-                                  height: double.infinity,
-                                  color: Get.theme.colorScheme.tertiary,
-                                  child: SideHeader(ctrl: ctrl),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            height: ctrl.responsive.hp(9),
-                            color: Get.theme.colorScheme.primary,
-                            child: Marquee(
-                              text: ctrl.advices.value,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.cardColor,
-                                fontSize: ctrl.responsive.ip(1.8),
+                                  Container(
+                                    width: ctrl.responsive.wp(25),
+                                    height: double.infinity,
+                                    color: Get.theme.colorScheme.tertiary,
+                                    child: SideHeader(ctrl: ctrl),
+                                  ),
+                                ],
                               ),
-                              scrollAxis: Axis.horizontal,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              blankSpace: 20.0,
-                              velocity: 50,
-                              pauseAfterRound: const Duration(seconds: 0),
-                              startPadding: 10.0,
-                              accelerationDuration: const Duration(seconds: 1),
-                              accelerationCurve: Curves.linear,
-                              decelerationCurve: Curves.easeOut,
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : const SkeletonList(length: 30));
-        },
+                            Container(
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              height: ctrl.responsive.hp(9),
+                              color: Get.theme.colorScheme.primary,
+                              child: Marquee(
+                                text: ctrl.advices.value,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Get.theme.cardColor,
+                                  fontSize: ctrl.responsive.ip(1.8),
+                                ),
+                                scrollAxis: Axis.horizontal,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                blankSpace: 20.0,
+                                velocity: 50,
+                                pauseAfterRound: const Duration(seconds: 0),
+                                startPadding: 10.0,
+                                accelerationDuration:
+                                    const Duration(seconds: 1),
+                                accelerationCurve: Curves.linear,
+                                decelerationCurve: Curves.easeOut,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const SkeletonList(length: 30));
+          },
+        ),
       ),
     );
   }

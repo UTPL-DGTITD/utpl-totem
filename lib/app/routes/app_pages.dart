@@ -8,6 +8,8 @@ import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
 import 'package:utpl_totem/app/presentation/modules/news/news_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_page.dart';
+import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_page.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_page.dart';
 import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_binding.dart';
@@ -93,6 +95,14 @@ class AppPages {
       bindings: [
         MainBinding(),
         ObservatoryDetailBinding(),
+      ],
+    ),
+    GetPage(
+      name: Routes.screen_protector,
+      page: () => const ScreenProtectorPage(),
+      bindings: [
+        MainBinding(),
+        ScreenProtectorBinding(),
       ],
     ),
   ];

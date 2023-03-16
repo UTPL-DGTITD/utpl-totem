@@ -47,8 +47,10 @@ class ObservatoryDetailController extends GetxController
 
   @override
   void onClose() {
-    timerAnimate.cancel();
-    super.onInit();
+    if (timerAnimate != null) {
+      timerAnimate.cancel();
+    }
+    super.onClose();
   }
 
   void _initConfig() async {

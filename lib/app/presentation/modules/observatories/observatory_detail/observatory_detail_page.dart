@@ -19,18 +19,18 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
     return Scaffold(
       floatingActionButton: const FloatBackButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      appBar: AppBar(
-        centerTitle: true,
-        toolbarHeight: controller.responsive.hp(8),
-        title: Obx(
-          () => Text(
-            controller.title.value,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: controller.responsive.ip(2.5)),
-          ),
-        ),
-        leading: const SizedBox(),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   toolbarHeight: controller.responsive.hp(8),
+      //   title: Obx(
+      //     () => Text(
+      //       controller.title.value,
+      //       textAlign: TextAlign.center,
+      //       style: TextStyle(fontSize: controller.responsive.ip(2.5)),
+      //     ),
+      //   ),
+      //   leading: const SizedBox(),
+      // ),
       body: GetX<ObservatoryDetailController>(
         init: ObservatoryDetailController(
           localRepository: Get.find(),
@@ -46,6 +46,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
               ? SingleChildScrollView(
                   child: Column(
                     children: [
+                      customYMargin(ctrl.responsive.hp(3)),
                       Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: ctrl.responsive.wp(5),
@@ -99,25 +100,25 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            customYMargin(ctrl.responsive.hp(1)),
-                            SizedBox(
-                              width: ctrl.responsive.wp(100),
-                              //height: ctrl.responsive.hp(10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: CachedNetworkImage(
-                                  height: ctrl.responsive.hp(25),
-                                  imageUrl: item.equipo,
-                                  fit: BoxFit.contain,
-                                  errorWidget: (context, a, b) {
-                                    return Image.asset(
-                                        'assets/images/alt-image.png');
-                                  },
-                                  placeholder: (context, url) => Image.asset(
-                                      'assets/images/alt-image.png'),
-                                ),
-                              ),
-                            ),
+                            // customYMargin(ctrl.responsive.hp(1)),
+                            // SizedBox(
+                            //   width: ctrl.responsive.wp(100),
+                            //   //height: ctrl.responsive.hp(10),
+                            //   child: ClipRRect(
+                            //     borderRadius: BorderRadius.circular(10),
+                            //     child: CachedNetworkImage(
+                            //       height: ctrl.responsive.hp(25),
+                            //       imageUrl: item.equipo,
+                            //       fit: BoxFit.contain,
+                            //       errorWidget: (context, a, b) {
+                            //         return Image.asset(
+                            //             'assets/images/alt-image.png');
+                            //       },
+                            //       placeholder: (context, url) => Image.asset(
+                            //           'assets/images/alt-image.png'),
+                            //     ),
+                            //   ),
+                            // ),
                             customYMargin(ctrl.responsive.hp(2)),
                             Container(
                               height: ctrl.responsive.hp(33),

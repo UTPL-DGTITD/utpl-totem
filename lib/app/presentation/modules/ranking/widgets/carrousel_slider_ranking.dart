@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:get/get.dart';
+
 import 'package:utpl_totem/app/presentation/modules/ranking/ranking_controller.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 
 class CarrouselSliderRanking extends StatelessWidget {
+  final RankingController ctrl;
   const CarrouselSliderRanking({
     Key? key,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.find<RankingController>();
     final CarouselController buttonCarouselController = CarouselController();
     return CarouselSlider.builder(
       carouselController: buttonCarouselController,
@@ -35,21 +35,23 @@ class CarrouselSliderRanking extends StatelessWidget {
       ) =>
           _ImgRanking(
         index: index,
+        ctrl: ctrl,
       ),
     );
   }
 }
 
 class _ImgRanking extends StatelessWidget {
+  final RankingController ctrl;
   final int index;
   const _ImgRanking({
     Key? key,
     required this.index,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.find<RankingController>();
     return SizedBox(
       width: double.maxFinite,
       child: GestureDetector(

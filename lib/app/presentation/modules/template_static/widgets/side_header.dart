@@ -233,13 +233,13 @@ class SideHeader extends StatelessWidget {
                 BottomLink(
                   ctrl: ctrl,
                   text: 'Noticias',
-                  onTap: () => Get.toNamed(Routes.news),
+                  onTap: () => ctrl.navigateToPage(Routes.news),
                 ),
                 customYMargin(ctrl.responsive.hp(1)),
                 BottomLink(
                   ctrl: ctrl,
                   text: 'Eventos',
-                  onTap: () => Get.toNamed(Routes.events),
+                  onTap: () => ctrl.navigateToPage(Routes.events),
                 ),
                 customYMargin(ctrl.responsive.hp(2)),
               ],

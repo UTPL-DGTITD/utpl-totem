@@ -26,7 +26,6 @@ class EventsController extends GetxController with GetTickerProviderStateMixin {
   RxBool loadingEvents = false.obs;
   final pageEvents = 1.obs;
   final ScrollController scrollController = ScrollController();
-  late Timer inactivityTimer;
 
   EventsController({
     required this.localRepository,
@@ -43,7 +42,6 @@ class EventsController extends GetxController with GetTickerProviderStateMixin {
 
   @override
   void onClose() {
-    stopTimer();
     super.onClose();
   }
 
@@ -51,7 +49,6 @@ class EventsController extends GetxController with GetTickerProviderStateMixin {
     try {
       await loadEvents();
       addListenerEvents();
-      startTimer();
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[events_controller] (_initConfig)',
@@ -102,7 +99,7 @@ class EventsController extends GetxController with GetTickerProviderStateMixin {
 
     pageEvents.value++;
     try {
-      var result = await apiRepository.getNewsPreview(page: pageEvents.value);
+      var result = await apiRepository.getEventsPreview(page: pageEvents.value);
       switch (result.status) {
         case 200:
           events.addAll(genericListItemModelFromList(result.data));
@@ -141,22 +138,5 @@ class EventsController extends GetxController with GetTickerProviderStateMixin {
         loadMoreEvents();
       }
     });
-  }
-
-  void startTimer() {
-    inactivityTimer = Timer(const Duration(seconds: 5), () {
-      print('El usuario ha estado inactivo durante 5 minutos');
-    });
-  }
-
-  void resetTimer() {
-    stopTimer();
-    startTimer();
-  }
-
-  void stopTimer() {
-    if (inactivityTimer != null) {
-      inactivityTimer.cancel();
-    }
   }
 }

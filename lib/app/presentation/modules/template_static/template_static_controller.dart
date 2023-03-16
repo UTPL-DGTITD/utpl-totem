@@ -33,9 +33,9 @@ class TemplateStaticController extends GetxController
   final currentUv = ''.obs;
   final currentDescTemp = ''.obs;
   final currentDescUv = ''.obs;
-  final c = 0.obs;
   late Timer timerConection;
   late Timer timerTemp;
+  late Timer inactivityTimer;
 
   RxString advices = 'La visión de la Universidad Técnica Particular de Loja es '
           'el humanismo de Cristo, que se traduce en sentido de perfección, en compromiso '
@@ -67,10 +67,22 @@ class TemplateStaticController extends GetxController
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
+  @override
+  void onResume() {
+    super.onReady();
+    ToolsHelper.logger.v('ON oN back');
+  }
+
   void _initConfig() async {
     try {
       loadWeather();
       // validateConection();
+      startTimer();
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[template_static_controller] (_initConfig)',
@@ -151,7 +163,7 @@ class TemplateStaticController extends GetxController
   }
 
   void updateTemp() {
-    ToolsHelper.logger.v('ACTUALIZANDO');
+    //ToolsHelper.logger.v('ACTUALIZANDO');
     var actualHour = DateTime.now().hour;
     for (Hour item in weather!.value.hours ?? []) {
       var splitted = item.interval.split(':');
@@ -187,7 +199,7 @@ class TemplateStaticController extends GetxController
       if (_tapCount == 10) {
         _tapCount = 0;
         _lastTap = null;
-        Get.offAndToNamed(Routes.template_static_2);
+        Get.offAndToNamed(Routes.template_static);
       }
     } else {
       _tapCount = 1;
@@ -197,5 +209,33 @@ class TemplateStaticController extends GetxController
         _lastTap = null;
       });
     }
+  }
+
+  void startTimer() {
+    // DESARROLLO
+    inactivityTimer = Timer(const Duration(seconds: 5), () async {
+      //inactivityTimer = Timer(const Duration(minutes: 20), () async {
+      ToolsHelper.logger.v('INACTIVIDAD USUARIO');
+      await Get.toNamed(Routes.screen_protector);
+      ToolsHelper.logger.v('VOLVISTE AL HOME');
+      resetTimer();
+    });
+  }
+
+  void resetTimer() {
+    stopTimer();
+    startTimer();
+  }
+
+  void stopTimer() {
+    if (inactivityTimer != null) {
+      inactivityTimer.cancel();
+    }
+  }
+
+  void navigateToPage(String page) async {
+    resetTimer();
+    await Get.toNamed(page);
+    resetTimer();
   }
 }

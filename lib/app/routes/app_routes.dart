@@ -26,9 +26,9 @@ abstract class Routes {
   /// Page for template static
   static const template_static = '/template_static_page';
 
-  /// Page for template static
-  static const template_static_2 = '/template_static_page_2';
-
   /// Page for template observatory detail
   static const observatory_detail = '/observatory_detail_page';
+
+  /// Page for screen protector
+  static const screen_protector = '/screen_protector_page';
 }

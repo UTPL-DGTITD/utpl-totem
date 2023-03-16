@@ -41,6 +41,14 @@ class ObservatoriesController extends GetxController
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    if (timerAnimate != null) {
+      timerAnimate.cancel();
+    }
+    super.onClose();
+  }
+
   void _initConfig() async {
     try {
       await loadObservatories();
