@@ -97,4 +97,18 @@ abstract class ApiRepository {
     required String url,
     required String path,
   });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   CHECK SCHEDULE                           */
+  /* -------------------------------------------------------------------------- */
+  Future<ApiResponseModel> getSubjectSchedule({
+    required String username,
+  });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   GET WALLPAPER                            */
+  /* -------------------------------------------------------------------------- */
+  Future<ApiResponseModel> getWallpaper({
+    required Map<String, dynamic> body,
+  });
 }

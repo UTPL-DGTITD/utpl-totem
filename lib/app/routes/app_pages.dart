@@ -8,6 +8,8 @@ import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
 import 'package:utpl_totem/app/presentation/modules/news/news_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_page.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/schedule_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/schedule_page.dart';
 import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_page.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_binding.dart';
@@ -103,6 +105,14 @@ class AppPages {
       bindings: [
         MainBinding(),
         ScreenProtectorBinding(),
+      ],
+    ),
+    GetPage(
+      name: Routes.schedule,
+      page: () => const SchedulePage(),
+      bindings: [
+        MainBinding(),
+        ScheduleBinding(),
       ],
     ),
   ];

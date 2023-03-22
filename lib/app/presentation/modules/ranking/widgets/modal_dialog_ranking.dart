@@ -43,61 +43,66 @@ class ModalDialogRanking {
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             content: Container(
               height: responsive.hp(50),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: responsive.wp(2),
-                    vertical: responsive.hp(2),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: responsive.wp(2),
-                          vertical: responsive.hp(2),
-                        ),
-                        child: SizedBox(
-                          height: responsive.hp(25),
-                          //width: responsive.wp(80),
-                          child: AspectRatio(
-                            aspectRatio: 1 / 1,
-                            child: CachedNetworkImage(
-                              imageUrl: item.image?.url ?? '',
-                              fit: BoxFit.contain,
-                              errorWidget: (context, a, b) {
-                                return Image.asset(
-                                    'assets/images/alt-image.png');
-                              },
-                              placeholder: (context, url) =>
-                                  Image.asset('assets/images/alt-image.png'),
+              child: Scrollbar(
+                controller: ctrl.contentScrollController,
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  controller: ctrl.contentScrollController,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: responsive.wp(2),
+                      vertical: responsive.hp(2),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: responsive.wp(2),
+                            vertical: responsive.hp(2),
+                          ),
+                          child: SizedBox(
+                            height: responsive.hp(25),
+                            //width: responsive.wp(80),
+                            child: AspectRatio(
+                              aspectRatio: 1 / 1,
+                              child: CachedNetworkImage(
+                                imageUrl: item.image?.url ?? '',
+                                fit: BoxFit.contain,
+                                errorWidget: (context, a, b) {
+                                  return Image.asset(
+                                      'assets/images/alt-image.png');
+                                },
+                                placeholder: (context, url) =>
+                                    Image.asset('assets/images/alt-image.png'),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        ToolsHelper.htmlParser(item.description),
-                        style: Get.textTheme.headline6?.copyWith(
-                          fontSize: responsive.ip(1.8),
-                          fontWeight: FontWeight.normal,
-                          color: Get.theme.colorScheme.primary,
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              customYMargin(ctrl.responsive.hp(1)),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: _generateItems(ctrl),
-                              ),
-                            ],
+                        Text(
+                          ToolsHelper.htmlParser(item.description),
+                          style: Get.textTheme.headline6?.copyWith(
+                            fontSize: responsive.ip(1.8),
+                            fontWeight: FontWeight.normal,
+                            color: Get.theme.colorScheme.primary,
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customYMargin(ctrl.responsive.hp(1)),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: _generateItems(ctrl),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

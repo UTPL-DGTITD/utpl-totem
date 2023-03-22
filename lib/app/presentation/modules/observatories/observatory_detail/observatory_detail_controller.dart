@@ -29,6 +29,7 @@ class ObservatoryDetailController extends GetxController
   Rx<ObservatoryDetailModel> observatory = ObservatoryDetailModel().obs;
   RxString title = 'Detalle Observatorio'.obs;
   RxBool hasObservatory = false.obs;
+  ScrollController contentScrollController = ScrollController();
   ScrollController scrollController = ScrollController();
   late Timer timerAnimate;
 

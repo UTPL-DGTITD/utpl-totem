@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/widgets/schedule_grid.dart';
+import 'package:utpl_totem/app/themes/custom_margin.dart';
+
+class ScheduleResults extends StatelessWidget {
+  final ScheduleController ctrl;
+  const ScheduleResults({
+    super.key,
+    required this.ctrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Get.theme.cardColor,
+      padding: EdgeInsets.only(
+        top: ctrl.responsive.hp(1),
+      ),
+      width: double.infinity,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(
+              right: ctrl.responsive.wp(4),
+              left: ctrl.responsive.wp(10),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    'Usuario UTPL: ${ctrl.inputController.value.text}\nTotal materias: ${ctrl.userSchedule.length}',
+                    style: TextStyle(
+                      fontSize: ctrl.responsive.ip(2.2),
+                      fontWeight: FontWeight.bold,
+                      color: Get.theme.colorScheme.primary,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: InkWell(
+                    onTap: () => ctrl.newQuery(),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.replay_outlined,
+                          size: ctrl.responsive.ip(3),
+                          color: Get.theme.colorScheme.primary,
+                        ),
+                        Text(
+                          'Volver a buscar',
+                          style: TextStyle(
+                            fontSize: ctrl.responsive.ip(1.6),
+                            fontWeight: FontWeight.bold,
+                            color: Get.theme.colorScheme.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          customYMargin(ctrl.responsive.hp(1)),
+          Divider(
+            color: Get.theme.colorScheme.primary,
+            height: ctrl.responsive.hp(0.5),
+            thickness: ctrl.responsive.hp(0.5),
+          ),
+          customYMargin(ctrl.responsive.hp(1)),
+          ctrl.userSchedule.isNotEmpty
+              ? Expanded(
+                  child: Scrollbar(
+                    controller: ctrl.contentResultsScrollController,
+                    thumbVisibility: true,
+                    child: SingleChildScrollView(
+                      controller: ctrl.contentResultsScrollController,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: generateSchedule(ctrl, context),
+                      ),
+                    ),
+                  ),
+                )
+              : Row(
+                  children: [
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      size: ctrl.responsive.ip(2.5),
+                    ),
+                    customXMargin(ctrl.responsive.wp(2)),
+                    const Text(
+                      "No se encontraron resultados",
+                    ),
+                  ],
+                ),
+          //customYMargin(ctrl.responsive.hp(2)),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> generateSchedule(ScheduleController ctrl, BuildContext context) {
+    List<Widget> items = [];
+    for (var i = 0; i < ctrl.userSchedule.length; i++) {
+      items.add(
+        ScheduleGrid(
+          isLoading: false,
+          scheduleData: ctrl.userSchedule[i],
+          onTap: (value) => ctrl.showModal(
+            ctrl.userSchedule[i],
+            context,
+            ctrl,
+            value,
+          ),
+        ),
+      );
+      if (i == ctrl.userSchedule.length - 1) {
+        items.add(customYMargin(ctrl.responsive.hp(4)));
+      }
+    }
+    return items;
+  }
+}

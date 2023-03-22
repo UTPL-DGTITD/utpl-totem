@@ -33,14 +33,14 @@ class SideHeader extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 5,
+            flex: 6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   '${ctrl.weather?.value.day}',
                   style: TextStyle(
-                    fontSize: ctrl.responsive.ip(2.4),
+                    fontSize: ctrl.responsive.ip(2.2),
                     color: Get.theme.colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -220,6 +220,36 @@ class SideHeader extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
+                    customYMargin(ctrl.responsive.hp(2)),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: MaterialButton(
+                            padding: EdgeInsets.symmetric(
+                              vertical: ctrl.responsive.hp(2),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 1,
+                            color: Get.theme.colorScheme.primary,
+                            child: Text(
+                              'Horario',
+                              style: Get.textTheme.headlineMedium?.copyWith(
+                                fontSize: ctrl.responsive.ip(1.7),
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.colorScheme.onPrimary,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            onPressed: () {
+                              ctrl.navigateToPage(Routes.schedule);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -241,29 +271,24 @@ class SideHeader extends StatelessWidget {
                   text: 'Eventos',
                   onTap: () => ctrl.navigateToPage(Routes.events),
                 ),
-                customYMargin(ctrl.responsive.hp(2)),
+                customYMargin(ctrl.responsive.hp(1)),
               ],
             ),
           ),
           Expanded(
             flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  color: Get.theme.colorScheme.tertiary,
-                  child: PrettyQr(
-                    //image: const AssetImage('assets/images/logo_utpl_azul.png'),
-                    elementColor: Colors.black,
-                    typeNumber: null,
-                    size: ctrl.responsive.ip(11),
-                    data: 'https://smartland.utpl.edu.ec/',
-                    errorCorrectLevel: QrErrorCorrectLevel.M,
-                    roundEdges: true,
-                  ),
-                ),
-              ],
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              color: Get.theme.colorScheme.tertiary,
+              child: PrettyQr(
+                //image: const AssetImage('assets/images/logo_utpl_azul.png'),
+                elementColor: Colors.black,
+                typeNumber: null,
+                size: ctrl.responsive.ip(10),
+                data: 'https://appmovil.utpl.edu.ec/',
+                errorCorrectLevel: QrErrorCorrectLevel.M,
+                roundEdges: true,
+              ),
             ),
           ),
         ],
@@ -329,37 +354,40 @@ class Clock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DigitalClock(
-      is24HourTimeFormat: true,
-      areaDecoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
-      areaAligment: AlignmentDirectional.center,
-      minuteDigitDecoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
-      hourMinuteDigitTextStyle: TextStyle(
-        fontSize: ctrl.responsive.ip(2.5),
-        color: Get.theme.colorScheme.primary,
-        fontWeight: FontWeight.bold,
-      ),
-      secondDigitTextStyle: TextStyle(
-        fontSize: ctrl.responsive.ip(1),
-        color: Get.theme.colorScheme.primary,
-        fontWeight: FontWeight.bold,
-      ),
-      showSecondsDigit: false,
-      amPmDigitTextStyle: TextStyle(
-        color: Get.theme.colorScheme.primary,
-        fontWeight: FontWeight.bold,
-        fontSize: ctrl.responsive.ip(1.2),
-      ),
-      colon: Text(
-        ':',
-        style: TextStyle(
-          fontSize: ctrl.responsive.ip(3),
+    return InkWell(
+      onTap: () => ctrl.navigateToPage(Routes.screen_protector),
+      child: DigitalClock(
+        is24HourTimeFormat: true,
+        areaDecoration: const BoxDecoration(
+          color: Colors.transparent,
+        ),
+        areaAligment: AlignmentDirectional.center,
+        minuteDigitDecoration: const BoxDecoration(
+          color: Colors.transparent,
+        ),
+        hourMinuteDigitTextStyle: TextStyle(
+          fontSize: ctrl.responsive.ip(2.5),
           color: Get.theme.colorScheme.primary,
           fontWeight: FontWeight.bold,
+        ),
+        secondDigitTextStyle: TextStyle(
+          fontSize: ctrl.responsive.ip(1),
+          color: Get.theme.colorScheme.primary,
+          fontWeight: FontWeight.bold,
+        ),
+        showSecondsDigit: false,
+        amPmDigitTextStyle: TextStyle(
+          color: Get.theme.colorScheme.primary,
+          fontWeight: FontWeight.bold,
+          fontSize: ctrl.responsive.ip(1.2),
+        ),
+        colon: Text(
+          ':',
+          style: TextStyle(
+            fontSize: ctrl.responsive.ip(3),
+            color: Get.theme.colorScheme.primary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

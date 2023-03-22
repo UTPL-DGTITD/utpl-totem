@@ -65,8 +65,12 @@ class CustomDecoration {
       hintText: hintText,
       hintStyle: TextStyle(
         // color: Get.theme.colorScheme.primary,
-        fontSize: responsive.ip(1.5),
+        fontSize: responsive.ip(2),
         fontWeight: FontWeight.normal,
+      ),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: responsive.wp(4),
+        vertical: responsive.hp(2),
       ),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.all(
@@ -76,7 +80,7 @@ class CustomDecoration {
       )),
       labelStyle: TextStyle(
         color: Get.theme.colorScheme.primary,
-        fontSize: responsive.ip(1.5),
+        fontSize: responsive.ip(2),
       ),
     );
   }

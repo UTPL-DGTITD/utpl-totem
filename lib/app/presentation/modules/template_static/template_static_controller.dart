@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/models/weather_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
@@ -29,6 +30,7 @@ class TemplateStaticController extends GetxController
 
   // WEATHER
   Rx<WeatherModel>? weather = WeatherModel().obs;
+  Rx<GenericListItemModel> wallpaper = GenericListItemModel().obs;
   final currentTemp = ''.obs;
   final currentUv = ''.obs;
   final currentDescTemp = ''.obs;
@@ -67,22 +69,12 @@ class TemplateStaticController extends GetxController
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  @override
-  void onResume() {
-    super.onReady();
-    ToolsHelper.logger.v('ON oN back');
-  }
-
   void _initConfig() async {
     try {
       loadWeather();
+      loadWallpaper();
       // validateConection();
-      startTimer();
+      startTimer(const Duration(minutes: 20));
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[template_static_controller] (_initConfig)',
@@ -131,10 +123,8 @@ class TemplateStaticController extends GetxController
         case 200:
           weather?.value = WeatherModel.fromJson(result.data);
           updateTemp();
-          // timerTemp = Timer(const Duration(minutes: 30), () {
-          //   updateTemp();
-          // });
-          timerTemp = Timer.periodic(const Duration(seconds: 5), (timer) async {
+
+          timerTemp = Timer.periodic(const Duration(minutes: 1), (timer) async {
             updateTemp();
           });
           break;
@@ -211,20 +201,23 @@ class TemplateStaticController extends GetxController
     }
   }
 
-  void startTimer() {
+  void startTimer(Duration duration) {
     // DESARROLLO
-    inactivityTimer = Timer(const Duration(seconds: 5), () async {
-      //inactivityTimer = Timer(const Duration(minutes: 20), () async {
+    //inactivityTimer = Timer(const Duration(seconds: 5), () async {
+    //inactivityTimer = Timer(const Duration(minutes: 20), () async {
+    inactivityTimer = Timer(duration, () async {
       ToolsHelper.logger.v('INACTIVIDAD USUARIO');
-      await Get.toNamed(Routes.screen_protector);
+      await Get.toNamed(Routes.screen_protector, arguments: {
+        "wallpaper": wallpaper.value,
+      });
       ToolsHelper.logger.v('VOLVISTE AL HOME');
       resetTimer();
     });
   }
 
-  void resetTimer() {
+  void resetTimer({Duration duration = const Duration(minutes: 20)}) {
     stopTimer();
-    startTimer();
+    startTimer(duration);
   }
 
   void stopTimer() {
@@ -234,8 +227,42 @@ class TemplateStaticController extends GetxController
   }
 
   void navigateToPage(String page) async {
+    resetTimer(duration: const Duration(minutes: 5));
+    await Get.toNamed(page, arguments: {
+      "wallpaper": wallpaper.value,
+    });
     resetTimer();
-    await Get.toNamed(page);
-    resetTimer();
+  }
+
+  void loadWallpaper() async {
+    try {
+      showSkeleton.value = true;
+      var result = await apiRepository
+          .getWallpaper(body: {"enable": true, "source": "totem"});
+      switch (result.status) {
+        case 200:
+          wallpaper.value = GenericListItemModel.fromJson(result.data);
+          break;
+        default:
+          ToolsHelper.logger.i("Not results found");
+      }
+    } on TimeoutException {
+      toastService.presentWarningToast(
+        text: "Tiempo de espera agotado",
+      );
+    } on SocketException {
+      toastService.presentWarningToast(
+        text: "Error de conexión",
+      );
+    } catch (error, stack) {
+      ToolsHelper.logger.e(
+        '[home_controller] (loadWallpaper)',
+        error,
+        stack,
+      );
+      toastService.presentErrorToast(
+        text: 'Error nuestro, intenta más tarde',
+      );
+    }
   }
 }

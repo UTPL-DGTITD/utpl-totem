@@ -15,6 +15,7 @@ class ModalDialog {
         barrierDismissible: true,
         builder: (context) {
           Responsive responsive = Responsive();
+          ScrollController _contentScrollController = ScrollController();
           return AlertDialog(
             insetPadding: EdgeInsets.only(
               left: responsive.wp(12),
@@ -41,47 +42,52 @@ class ModalDialog {
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             content: Container(
               height: responsive.hp(50),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: responsive.wp(2),
-                    vertical: responsive.hp(2),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: responsive.wp(2),
-                          vertical: responsive.hp(2),
-                        ),
-                        child: SizedBox(
-                          height: responsive.hp(25),
-                          // width: responsive.wp(80),
-                          child: AspectRatio(
-                            aspectRatio: 1 / 1,
-                            child: CachedNetworkImage(
-                              imageUrl: item.image?.url ?? '',
-                              fit: BoxFit.contain,
-                              errorWidget: (context, a, b) {
-                                return Image.asset(
-                                    'assets/images/alt-image.png');
-                              },
-                              placeholder: (context, url) =>
-                                  Image.asset('assets/images/alt-image.png'),
+              child: Scrollbar(
+                controller: _contentScrollController,
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  controller: _contentScrollController,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: responsive.wp(2),
+                      vertical: responsive.hp(2),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: responsive.wp(2),
+                            vertical: responsive.hp(2),
+                          ),
+                          child: SizedBox(
+                            height: responsive.hp(25),
+                            // width: responsive.wp(80),
+                            child: AspectRatio(
+                              aspectRatio: 1 / 1,
+                              child: CachedNetworkImage(
+                                imageUrl: item.image?.url ?? '',
+                                fit: BoxFit.contain,
+                                errorWidget: (context, a, b) {
+                                  return Image.asset(
+                                      'assets/images/alt-image.png');
+                                },
+                                placeholder: (context, url) =>
+                                    Image.asset('assets/images/alt-image.png'),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        ToolsHelper.htmlParser(item.description),
-                        style: Get.textTheme.headline6?.copyWith(
-                          fontSize: responsive.ip(1.8),
-                          fontWeight: FontWeight.normal,
-                          color: Get.theme.colorScheme.primary,
+                        Text(
+                          ToolsHelper.htmlParser(item.description),
+                          style: Get.textTheme.headline6?.copyWith(
+                            fontSize: responsive.ip(1.8),
+                            fontWeight: FontWeight.normal,
+                            color: Get.theme.colorScheme.primary,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -51,7 +51,7 @@ dependencies:
   slide_countdown: ^0.3.4
   store_redirect: ^2.0.1
   timeago: ^3.3.0
-  # timelines: ^0.1.0
+  timelines: ^0.1.0
   url_launcher: ^6.1.6
   version: ^3.0.0
   webview_flutter: ^3.0.4
@@ -72,6 +72,8 @@ dependencies:
   ffi: ^2.0.1
   youtube_explode_dart: ^1.12.3
   gauge_indicator: ^0.3.3
+  virtual_keyboard_multi_language: ^1.0.3
+  fdottedline_nullsafety: ^2.0.1
 
 dev_dependencies:
   flutter_test:

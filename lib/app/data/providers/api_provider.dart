@@ -205,4 +205,37 @@ class ApiProvider extends ApiRepository {
       return ObservatoryDetailModel.fromJson(res);
     });
   }
+
+  @override
+  Future<ApiResponseModel> getSubjectSchedule({
+    required String username,
+  }) {
+    return _netUtil
+        .get(
+      url: 'https://srv-si-001.utpl.edu.ec/apim/mobile/api',
+      path: 'services/app/HorarioPersona/GetPersonalSchedule?'
+          'input=$username',
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                              TV TEMPLATE BY CODE                           */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getWallpaper({
+    required Map<String, dynamic> body,
+  }) {
+    return _netUtil
+        .post(
+      path: 'v1/wallpaper/active/show',
+      body: body,
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
 }

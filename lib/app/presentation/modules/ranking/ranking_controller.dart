@@ -32,6 +32,7 @@ class RankingController extends GetxController
   final selectedIndex = 0.obs;
 
   RxString title = 'Ranking UTPL'.obs;
+  ScrollController contentScrollController = ScrollController();
 
   RankingController({
     required this.localRepository,

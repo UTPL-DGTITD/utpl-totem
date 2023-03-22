@@ -24,6 +24,7 @@ class ScreenProtectorController extends GetxController
 
   RxBool showSkeleton = false.obs;
   RxString title = 'Protector de Pantalla'.obs;
+  Rx<GenericListItemModel> wallpaper = GenericListItemModel().obs;
 
   ScreenProtectorController({
     required this.localRepository,
@@ -39,7 +40,9 @@ class ScreenProtectorController extends GetxController
   }
 
   void _initConfig() async {
-    try {} catch (error, stack) {
+    try {
+      _loadRouteParams();
+    } catch (error, stack) {
       ToolsHelper.logger.e(
         '[screen_protector_controller] (_initConfig)',
         error,
@@ -54,5 +57,14 @@ class ScreenProtectorController extends GetxController
 
   void exitScreenProtector() {
     Get.back();
+  }
+
+  void _loadRouteParams() {
+    final params = Get.arguments;
+    assert(params != null, 'Params is required');
+    assert(params['wallpaper'] != null, 'wallpaper is required');
+    assert(params['wallpaper'] is GenericListItemModel,
+        'wallpaper is not type GenericListItemModel');
+    wallpaper.value = params['wallpaper'];
   }
 }

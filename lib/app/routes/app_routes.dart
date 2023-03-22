@@ -31,4 +31,7 @@ abstract class Routes {
 
   /// Page for screen protector
   static const screen_protector = '/screen_protector_page';
+
+  /// Page for schedule
+  static const schedule = '/schedule_page';
 }

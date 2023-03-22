@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:rive/rive.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 
 import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_controller.dart';
+import 'package:utpl_totem/app/themes/custom_margin.dart';
 
 class ScreenProtectorPage extends GetView<ScreenProtectorController> {
   const ScreenProtectorPage({Key? key}) : super(key: key);
@@ -43,7 +45,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                           height: ctrl.responsive.hp(10),
                           color: Get.theme.colorScheme.primary,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               DigitalClock(
                                 //areaAligment: AlignmentDirectional.topEnd,
@@ -90,23 +92,30 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                           width: double.infinity,
                           //color: Colors.green,
                           height: ctrl.responsive.hp(30),
-                          child: Center(
-                            child: SizedBox(
-                              width: ctrl.responsive.wp(50),
-                              child: const RiveAnimation.asset(
-                                alignment: Alignment.center,
-                                'assets/rive/logo_utpl.riv',
-                                animations: ['entry'],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                //width: ctrl.responsive.wp(10),
+                                height: ctrl.responsive.hp(7),
+                                child: const RiveAnimation.asset(
+                                  alignment: Alignment.center,
+                                  'assets/rive/logo_utpl.riv',
+                                  animations: ['entry'],
+                                ),
                               ),
-                            ),
+                              SizedBox(
+                                height: ctrl.responsive.hp(2),
+                              ),
+                            ],
                           ),
                         ),
                         // CONTENT DYNAMIC
-                        Divider(
-                          color: Get.theme.colorScheme.tertiary,
-                          height: ctrl.responsive.hp(0.5),
-                          thickness: ctrl.responsive.hp(0.5),
-                        ),
+                        // Divider(
+                        //   color: Get.theme.colorScheme.tertiary,
+                        //   height: ctrl.responsive.hp(0.5),
+                        //   thickness: ctrl.responsive.hp(0.5),
+                        // ),
                         Container(
                           width: double.infinity,
                           height: ctrl.responsive.hp(40),
@@ -117,10 +126,36 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                 child: Container(
                                   color: Get.theme.colorScheme.primary,
                                   child: Center(
-                                    child: Image(
-                                      image: const AssetImage(
-                                          'assets/images/intro/intro_page_3.png'),
-                                      width: ctrl.responsive.wp(70),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        // Text(
+                                        //   ctrl.wallpaper.value.title,
+                                        //   style: TextStyle(
+                                        //     fontSize: ctrl.responsive.ip(2),
+                                        //     color: Get.theme.cardColor,
+                                        //     fontWeight: FontWeight.bold,
+                                        //   ),
+                                        //   textAlign: TextAlign.center,
+                                        // ),
+                                        // customYMargin(ctrl.responsive.hp(2)),
+                                        CachedNetworkImage(
+                                          //height: ctrl.responsive.hp(50),
+                                          height: ctrl.responsive.hp(35),
+                                          imageUrl:
+                                              ctrl.wallpaper.value.image?.url ??
+                                                  '',
+                                          fit: BoxFit.contain,
+                                          errorWidget: (context, a, b) {
+                                            return Image.asset(
+                                                'assets/images/logo-utpl-full.png');
+                                          },
+                                          placeholder: (context, url) =>
+                                              Image.asset(
+                                                  'assets/images/logo-utpl-full.png'),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -137,11 +172,12 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                         color: Get.theme.colorScheme.primary,
                                         child: Center(
                                           child: Text(
-                                            'La aplicación UTPL+ te ofrece una amplia gama de funcionalidades que te permitirán tener todo lo que necesitas. \n!Descárgala ya!',
+                                            ctrl.wallpaper.value.description,
                                             style: TextStyle(
                                               fontSize: ctrl.responsive.ip(2),
                                               color: Get.theme.cardColor,
                                             ),
+                                            textAlign: TextAlign.justify,
                                           ),
                                         ),
                                       ),
@@ -162,7 +198,8 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                                 elementColor: Colors.black,
                                                 typeNumber: null,
                                                 size: ctrl.responsive.ip(13),
-                                                data:
+                                                data: ctrl.wallpaper.value.link
+                                                        ?.url ??
                                                     'https://appmovil.utpl.edu.ec/',
                                                 errorCorrectLevel:
                                                     QrErrorCorrectLevel.M,
@@ -179,11 +216,11 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                             ],
                           ),
                         ),
-                        Divider(
-                          color: Get.theme.colorScheme.tertiary,
-                          height: ctrl.responsive.hp(0.5),
-                          thickness: ctrl.responsive.hp(0.5),
-                        ),
+                        // Divider(
+                        //   color: Get.theme.colorScheme.tertiary,
+                        //   height: ctrl.responsive.hp(0.5),
+                        //   thickness: ctrl.responsive.hp(0.5),
+                        // ),
                         Container(
                           width: double.infinity,
                           height: ctrl.responsive.hp(15),
@@ -196,7 +233,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                   'Touch me...',
                                   style: TextStyle(
                                     fontSize: ctrl.responsive.ip(3),
-                                    color: Get.theme.cardColor,
+                                    color: Get.theme.colorScheme.tertiary,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -209,7 +246,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                   child: Icon(
                                     Icons.touch_app,
                                     size: ctrl.responsive.ip(5),
-                                    color: Get.theme.cardColor,
+                                    color: Get.theme.colorScheme.tertiary,
                                   ),
                                 ),
                               ],

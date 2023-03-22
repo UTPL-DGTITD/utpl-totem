@@ -4,7 +4,7 @@ class Environment {
   static const String server = "https://appmovil.utpl.edu.ec:8080";
   // static const String server = "http://172.18.137.102:3000";
 
-  static const int httpTimeout = 8000;
+  static const int httpTimeout = 12000;
 
   /// List of domains with Microsoft JWT authentication
   static const jwtMsAllowedDomains = [
