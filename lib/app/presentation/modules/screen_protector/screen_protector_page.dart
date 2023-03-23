@@ -43,9 +43,11 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                         Container(
                           width: double.infinity,
                           height: ctrl.responsive.hp(10),
+                          padding:
+                              EdgeInsets.only(right: ctrl.responsive.wp(2)),
                           color: Get.theme.colorScheme.primary,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               DigitalClock(
                                 //areaAligment: AlignmentDirectional.topEnd,
@@ -105,7 +107,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                 ),
                               ),
                               SizedBox(
-                                height: ctrl.responsive.hp(2),
+                                height: ctrl.responsive.hp(9),
                               ),
                             ],
                           ),

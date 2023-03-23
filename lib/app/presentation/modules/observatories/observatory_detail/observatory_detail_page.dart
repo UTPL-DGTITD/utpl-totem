@@ -48,7 +48,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                   children: [
                     Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: ctrl.responsive.hp(1)),
+                          EdgeInsets.symmetric(vertical: ctrl.responsive.hp(2)),
                       height: ctrl.responsive.hp(93),
                       child: Scrollbar(
                         thumbVisibility: true,
@@ -62,14 +62,17 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  ToolsHelper.htmlParser(item.name),
-                                  style: TextStyle(
-                                    fontSize: ctrl.responsive.ip(2.4),
-                                    color: Get.theme.colorScheme.primary,
-                                    fontWeight: FontWeight.bold,
+                                Container(
+                                  width: double.infinity,
+                                  child: Text(
+                                    ToolsHelper.htmlParser(item.name),
+                                    style: TextStyle(
+                                      fontSize: ctrl.responsive.ip(2.4),
+                                      color: Get.theme.colorScheme.primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                                 customYMargin(ctrl.responsive.hp(1)),
                                 SizedBox(

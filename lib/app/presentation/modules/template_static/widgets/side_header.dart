@@ -221,34 +221,34 @@ class SideHeader extends StatelessWidget {
                       ),
                     ),
                     customYMargin(ctrl.responsive.hp(2)),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: MaterialButton(
-                            padding: EdgeInsets.symmetric(
-                              vertical: ctrl.responsive.hp(2),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            elevation: 1,
-                            color: Get.theme.colorScheme.primary,
+                    InkWell(
+                      onTap: () => ctrl.navigateToPage(Routes.schedule),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
                             child: Text(
-                              'Horario',
-                              style: Get.textTheme.headlineMedium?.copyWith(
+                              'Consulta Horarios',
+                              style: TextStyle(
                                 fontSize: ctrl.responsive.ip(1.7),
+                                color: Get.theme.cardColor,
                                 fontWeight: FontWeight.bold,
-                                color: Get.theme.colorScheme.onPrimary,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            onPressed: () {
-                              ctrl.navigateToPage(Routes.schedule);
-                            },
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                UtplCustom.right_small_arrow,
+                                size: ctrl.responsive.ip(2.5),
+                                color: Get.theme.cardColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

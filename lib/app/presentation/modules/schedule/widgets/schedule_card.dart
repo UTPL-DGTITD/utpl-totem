@@ -22,7 +22,7 @@ class ScheduleCard extends StatelessWidget {
       children: [
         Container(
           width: responsive.wp(100),
-          height: responsive.hp(8),
+          height: responsive.hp(7),
           decoration: BoxDecoration(
             color: Get.theme.colorScheme.tertiary,
             borderRadius: BorderRadius.circular(20),
@@ -30,100 +30,118 @@ class ScheduleCard extends StatelessWidget {
           padding: EdgeInsets.only(
             right: responsive.wp(2),
             left: responsive.wp(2),
-            top: responsive.hp(1),
+            top: responsive.hp(0.2),
           ),
-          child: Column(
+          child: Row(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  customXMargin(responsive.wp(20)),
-                  Icon(
-                    Icons.timeline,
-                    color: Get.textTheme.headline2?.color,
-                    size: responsive.ip(2),
-                  ),
-                  customXMargin(responsive.wp(1.5)),
-                  Text(
-                    '${scheduleData.beginClass} - ${scheduleData.endClass}',
-                    style: Get.textTheme.headline4?.copyWith(
-                      fontSize: responsive.ip(1.8),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: (HSLColor.fromColor(Get.theme.colorScheme.primary)
-                              .withLightness(0.76)
-                              .withSaturation(0.48))
-                          .toColor(),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: responsive.wp(1.5),
-                      vertical: responsive.hp(0.2),
-                    ),
-                    child: Text(
-                      scheduleData.typeSchedule,
-                      style: Get.textTheme.headline5?.copyWith(
-                        fontSize: responsive.ip(1.3),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  customXMargin(responsive.wp(3)),
-                  Icon(
-                    UtplCustom.info,
-                    color: Get.theme.colorScheme.onTertiaryContainer,
-                    size: responsive.ip(2),
-                  ),
-                  customXMargin(responsive.wp(1)),
-                ],
-              ),
-              customYMargin(responsive.hp(0.7)),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Row(
+              Expanded(
+                flex: 12,
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        customXMargin(responsive.wp(20)),
                         Icon(
-                          Icons.location_on_rounded,
+                          Icons.timeline,
                           color: Get.textTheme.headline2?.color,
                           size: responsive.ip(2),
                         ),
-                        customXMargin(responsive.wp(1)),
+                        customXMargin(responsive.wp(1.5)),
                         Text(
-                          'Ubicación:',
-                          style: Get.textTheme.headline2?.copyWith(
-                            fontSize: responsive.ip(1.6),
+                          '${scheduleData.beginClass} - ${scheduleData.endClass}',
+                          style: Get.textTheme.headline4?.copyWith(
+                            fontSize: responsive.ip(1.8),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        customXMargin(responsive.wp(1)),
-                        Expanded(
+                        const Spacer(),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: (HSLColor.fromColor(
+                                        Get.theme.colorScheme.primary)
+                                    .withLightness(0.76)
+                                    .withSaturation(0.48))
+                                .toColor(),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: responsive.wp(1.5),
+                            vertical: responsive.hp(0.2),
+                          ),
                           child: Text(
-                            scheduleData.place.isNotEmpty
-                                ? '${scheduleData.place} ${scheduleData.classroom.isNotEmpty ? '- ${scheduleData.classroom}' : ''}'
-                                : scheduleData.classroom.isNotEmpty
-                                    ? scheduleData.classroom
-                                    : ' -- ',
-                            maxLines: 1,
-                            style: Get.textTheme.headline4?.copyWith(
-                              fontSize: responsive.ip(1.6),
+                            scheduleData.typeSchedule,
+                            style: Get.textTheme.headline5?.copyWith(
+                              fontSize: responsive.ip(1.3),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
+                        customXMargin(responsive.wp(3)),
+                        // Icon(
+                        //   UtplCustom.info,
+                        //   color: Get.theme.colorScheme.onTertiaryContainer,
+                        //   size: responsive.ip(2),
+                        // ),
+                        //customXMargin(responsive.wp(1)),
                       ],
                     ),
-                  ),
-                ],
+                    customYMargin(responsive.hp(0.7)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.location_on_rounded,
+                                color: Get.textTheme.headline2?.color,
+                                size: responsive.ip(2),
+                              ),
+                              customXMargin(responsive.wp(1)),
+                              Text(
+                                'Ubicación:',
+                                style: Get.textTheme.headline2?.copyWith(
+                                  fontSize: responsive.ip(1.6),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              customXMargin(responsive.wp(1)),
+                              Expanded(
+                                child: Text(
+                                  scheduleData.place.isNotEmpty
+                                      ? '${scheduleData.place} ${scheduleData.classroom.isNotEmpty ? '- ${scheduleData.classroom}' : ''}'
+                                      : scheduleData.classroom.isNotEmpty
+                                          ? scheduleData.classroom
+                                          : ' -- ',
+                                  maxLines: 1,
+                                  style: Get.textTheme.headline4?.copyWith(
+                                    fontSize: responsive.ip(1.6),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    //const Spacer(),
+                    //const Spacer(),
+                  ],
+                ),
               ),
-              //const Spacer(),
-              //const Spacer(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    UtplCustom.right_small_arrow,
+                    size: responsive.ip(2.5),
+                    color: Get.theme.cardColor,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
