@@ -2,13 +2,25 @@ import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/presentation/modules/videos/videos_controller.dart';
 
 class VideosPage extends GetView<VideosController> {
-  const VideosPage({Key? key}) : super(key: key);
+  final TvTemplateBody item;
+  const VideosPage(this.item, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final ctrl = Get.put(
+    //   VideosController(
+    //     localRepository: Get.find(),
+    //     apiRepository: Get.find(),
+    //     toastService: Get.find(),
+    //     authService: Get.find(),
+    //   ),
+    // );
+    //ctrl.urlVideos.value = item.embeddedYoutube;
+    //ctrl.player.play();
     return Scaffold(
       // appBar: AppBar(
       //   title: Obx(() => Text(controller.title.value)),
@@ -20,7 +32,9 @@ class VideosPage extends GetView<VideosController> {
           toastService: Get.find(),
           authService: Get.find(),
         ),
-        initState: (_) {},
+        initState: (ctrl) {
+          ctrl.controller!.urlVideos.value = item.embeddedYoutube;
+        },
         builder: (ctrl) {
           return SafeArea(
             child: ctrl.showSkeleton.isTrue

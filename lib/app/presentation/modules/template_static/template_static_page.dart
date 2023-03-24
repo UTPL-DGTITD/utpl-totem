@@ -3,51 +3,51 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-
-import 'package:utpl_totem/app/presentation/modules/banner/banner_page.dart';
-
-import 'package:utpl_totem/app/presentation/modules/observatories/observatories_page.dart';
-import 'package:utpl_totem/app/presentation/modules/investigation/investigation_page.dart';
-import 'package:utpl_totem/app/presentation/modules/ranking/ranking_page.dart';
+import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 
 import 'package:utpl_totem/app/presentation/modules/template_static/template_static_controller.dart';
+import 'package:utpl_totem/app/presentation/modules/template_static/utils/generate_component.dart';
 import 'package:utpl_totem/app/presentation/modules/template_static/widgets/side_header.dart';
 import 'package:utpl_totem/app/presentation/modules/videos/videos_page.dart';
 import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
+import 'package:utpl_totem/app/themes/custom_margin.dart';
+import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 class TemplateStaticPage extends GetView<TemplateStaticController> {
   const TemplateStaticPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTapDown: (_) {
-        print('USUARIO: onTapDown');
-        controller.resetTimer();
-      },
-      onPanDown: (_) {
-        print('USUARIO: onPanDown');
-        controller.resetTimer();
-      },
-      onTap: () {
-        print('USUARIO: onTap');
-        controller.resetTimer();
-      },
-      child: Scaffold(
-        // appBar: AppBar(
-        //   title: Obx(() => Text(controller.title.value)),
-        // ),
-        body: GetX<TemplateStaticController>(
-          init: TemplateStaticController(
-            localRepository: Get.find(),
-            apiRepository: Get.find(),
-            toastService: Get.find(),
-            authService: Get.find(),
-          ),
-          initState: (_) {},
-          builder: (ctrl) {
-            return SafeArea(
+    //TvTemplateModel item = tvTemplateModelFromJson('');
+
+    return Scaffold(
+      // appBar: AppBar(
+      //   title: Obx(() => Text(controller.title.value)),
+      // ),
+      body: GetX<TemplateStaticController>(
+        init: TemplateStaticController(
+          localRepository: Get.find(),
+          apiRepository: Get.find(),
+          toastService: Get.find(),
+          authService: Get.find(),
+        ),
+        initState: (_) {},
+        builder: (ctrl) {
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTapDown: (_) {
+              ToolsHelper.logger.v('USUARIO: onTapDown');
+              ctrl.resetTimer();
+            },
+            onPanDown: (_) {
+              ToolsHelper.logger.v('USUARIO: onPanDown');
+              ctrl.resetTimer();
+            },
+            onTap: () {
+              ToolsHelper.logger.v('USUARIO: onTap');
+              ctrl.resetTimer();
+            },
+            child: SafeArea(
                 child: ctrl.showSkeleton.isFalse
                     ? Container(
                         color: Get.theme.cardColor,
@@ -68,117 +68,59 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                                     color: Get.theme.cardColor,
                                     width: ctrl.responsive.wp(75),
                                     height: ctrl.responsive.hp(91),
-                                    child: StaggeredGrid.count(
-                                      // crossAxisCount: 14,
-                                      crossAxisCount: 10,
-                                      axisDirection: AxisDirection.down,
-                                      mainAxisSpacing: ctrl.responsive.hp(1),
-                                      crossAxisSpacing: ctrl.responsive.wp(0.5),
+                                    child: Column(
                                       children: [
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 5,
-                                          mainAxisCellCount: 2,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child: Center(
-                                              child: InkWell(
-                                                onTap: () =>
-                                                    ctrl.refreshTemplate(),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'UTPL',
-                                                      style: TextStyle(
-                                                        fontSize: ctrl
-                                                            .responsive
-                                                            .ip(4.5),
-                                                        color: Get
-                                                            .theme
-                                                            .colorScheme
-                                                            .primary,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '+',
-                                                      style: TextStyle(
-                                                        fontSize: ctrl
-                                                            .responsive
-                                                            .ip(4.5),
-                                                        color: Get
-                                                            .theme
-                                                            .colorScheme
-                                                            .tertiary,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ],
+                                        Container(
+                                          color: Get.theme.cardColor,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: ctrl.responsive.wp(4),
+                                          ),
+                                          child: InkWell(
+                                            onTap: () => ctrl.refreshTemplate(),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'UTPL',
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        ctrl.responsive.ip(4),
+                                                    color: Get.theme.colorScheme
+                                                        .primary,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                              ),
+                                                Text(
+                                                  '+',
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        ctrl.responsive.ip(4),
+                                                    color: Get.theme.colorScheme
+                                                        .tertiary,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 5,
-                                          mainAxisCellCount: 2,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child: const SizedBox(),
-                                            // SizedBox(
-                                            //   child: Image.asset(
-                                            //       'assets/images/smartland.png',
-                                            //       scale: 0.65),
-                                            // ),
-                                          ),
-                                        ),
-                                        // INDICADORES
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 10,
-                                          mainAxisCellCount: 3,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child: const ObservatoriesPage(),
-                                          ),
-                                        ),
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 10,
-                                          mainAxisCellCount: 5,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child: const VideosPage(),
-                                          ),
-                                        ),
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 10,
-                                          mainAxisCellCount: 3,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child: const BannerPage(),
-                                          ),
-                                        ),
-
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 10,
-                                          mainAxisCellCount: 4.5,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child: const InvestigationPage(),
-                                          ),
-                                        ),
-
-                                        StaggeredGridTile.count(
-                                          crossAxisCellCount: 10,
-                                          mainAxisCellCount: 4,
-                                          child: Container(
-                                            color: Get.theme.cardColor,
-                                            child:
-                                                const RankingPage(), //EmbeddedGraphsPage(),
+                                        customYMargin(ctrl.responsive.hp(0.5)),
+                                        Expanded(
+                                          child: StaggeredGrid.count(
+                                            // crossAxisCount: 14,
+                                            crossAxisCount: 10,
+                                            axisDirection: AxisDirection.down,
+                                            mainAxisSpacing:
+                                                ctrl.responsive.hp(1),
+                                            crossAxisSpacing:
+                                                ctrl.responsive.wp(0.5),
+                                            children:
+                                                //
+                                                generateComponents(ctrl),
+                                            //generateStaticComponents(ctrl),
                                           ),
                                         ),
                                       ],
@@ -220,30 +162,87 @@ class TemplateStaticPage extends GetView<TemplateStaticController> {
                           ],
                         ),
                       )
-                    : const SkeletonList(length: 30));
-          },
-        ),
+                    : const SkeletonList(length: 30)),
+          );
+        },
       ),
     );
   }
 
-  // List<StaggeredGridTile> generateComponents(TemplateStaticController ctrl) {
-  //   List<StaggeredGridTile> items = [];
-  //   items.add(
-  //     StaggeredGridTile.count(
-  //         crossAxisCellCount: 10,
-  //         mainAxisCellCount: 6,
-  //         // child: Container()
-  //         child: Obx(() => Container(
-  //               child: ctrl.controller.value.value.initialized
-  //                   ? AspectRatio(
-  //                       aspectRatio: ctrl.controller.value.value.aspectRatio,
-  //                       child: VideoPlayer(ctrl.controller.value),
-  //                     )
-  //                   : const Center(child: Text('Cargando')),
-  //             ))),
-  //   );
+  List<StaggeredGridTile> generateComponents(TemplateStaticController ctrl) {
+    List<StaggeredGridTile> items = [];
+    for (var i = 0;
+        i <
+            ctrl.currentTemplate.value.tvTemplateHeader!.tvTemplateBodies
+                .length;
+        i++) {
+      var item =
+          ctrl.currentTemplate.value.tvTemplateHeader!.tvTemplateBodies[i];
+      items.add(
+        StaggeredGridTile.count(
+          crossAxisCellCount: item.totalColumns,
+          mainAxisCellCount: item.totalRows,
+          child: GenerateComponent.generateComponent(
+              item.interaction, ctrl, item, i),
+        ),
+      );
+    }
 
-  //   return items;
-  // }
+    return items;
+  }
+
+  List<StaggeredGridTile> generateStaticComponents(
+      TemplateStaticController ctrl) {
+    List<StaggeredGridTile> items = [];
+    items.add(
+      // INDICADORES
+      // StaggeredGridTile.count(
+      //   crossAxisCellCount: 10,
+      //   mainAxisCellCount: 3,
+      //   child: Container(
+      //     color: Get.theme.cardColor,
+      //     child:
+      //         const ObservatoriesPage(),
+      //   ),
+      // ),
+      StaggeredGridTile.count(
+        crossAxisCellCount: 10,
+        mainAxisCellCount: 5,
+        child: Container(
+          color: Get.theme.cardColor,
+          child: VideosPage(TvTemplateBody()),
+        ),
+      ),
+      // StaggeredGridTile.count(
+      //   crossAxisCellCount: 10,
+      //   mainAxisCellCount: 3,
+      //   child: Container(
+      //     color: Get.theme.cardColor,
+      //     child: const BannerPage(),
+      //   ),
+      // ),
+
+      // StaggeredGridTile.count(
+      //   crossAxisCellCount: 10,
+      //   mainAxisCellCount: 5,
+      //   child: Container(
+      //     color: Get.theme.cardColor,
+      //     child:
+      //         const InvestigationPage(),
+      //   ),
+      // ),
+
+      // StaggeredGridTile.count(
+      //   crossAxisCellCount: 10,
+      //   mainAxisCellCount: 4,
+      //   child: Container(
+      //     color: Get.theme.cardColor,
+      //     child: const RankingPage(),
+      //   ),
+      // ),
+      //],
+    );
+
+    return items;
+  }
 }

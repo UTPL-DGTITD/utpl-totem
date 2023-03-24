@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/models/weather_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
@@ -37,7 +38,8 @@ class TemplateStaticController extends GetxController
   final currentDescUv = ''.obs;
   late Timer timerConection;
   late Timer timerTemp;
-  late Timer inactivityTimer;
+  late Timer inactivityTimer = Timer(const Duration(minutes: 20), () {});
+  final currentTemplate = TvTemplateModel().obs;
 
   RxString advices = 'La visión de la Universidad Técnica Particular de Loja es '
           'el humanismo de Cristo, que se traduce en sentido de perfección, en compromiso '
@@ -71,6 +73,7 @@ class TemplateStaticController extends GetxController
 
   void _initConfig() async {
     try {
+      _loadRouteParams();
       loadWeather();
       loadWallpaper();
       // validateConection();
@@ -86,6 +89,16 @@ class TemplateStaticController extends GetxController
       );
       Get.back();
     }
+  }
+
+  void _loadRouteParams() {
+    ToolsHelper.logger.v('TEMPLATE RECIBIDO');
+    final params = Get.arguments;
+    assert(params != null, 'Params is required');
+    assert(params['currentTemplate'] != null, 'currentTemplate is required');
+    assert(params['currentTemplate'] is TvTemplateModel,
+        'currentTemplate type is not TvTemplateModel');
+    currentTemplate.value = params['currentTemplate'];
   }
 
   void validateConection() {
@@ -189,7 +202,13 @@ class TemplateStaticController extends GetxController
       if (_tapCount == 10) {
         _tapCount = 0;
         _lastTap = null;
-        Get.offAndToNamed(Routes.template_static);
+
+        inactivityTimer.cancel();
+        ToolsHelper.logger.v('RESET TEMPLATE');
+
+        Get.offAllNamed(Routes.template_static, arguments: {
+          'currentTemplate': currentTemplate.value,
+        });
       }
     } else {
       _tapCount = 1;
@@ -221,7 +240,7 @@ class TemplateStaticController extends GetxController
   }
 
   void stopTimer() {
-    if (inactivityTimer != null) {
+    if (inactivityTimer.isActive) {
       inactivityTimer.cancel();
     }
   }

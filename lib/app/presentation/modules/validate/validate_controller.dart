@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mac_address/mac_address.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
@@ -35,6 +36,8 @@ class ValidateController extends GetxController
 
   final title = 'Utpl Tv'.obs;
 
+  final deviceCode = ''.obs;
+
   ValidateController({
     required this.localRepository,
     required this.apiRepository,
@@ -50,8 +53,8 @@ class ValidateController extends GetxController
 
   void _initConfig() async {
     try {
-      macAddress.value = await GetMac.macAddress;
-      tvCode.value = macAddress.value;
+      deviceCode.value = await PlatformDeviceId.getDeviceId ?? '';
+
       descriptionController.value.text = tvCode.value;
     } catch (error, stack) {
       ToolsHelper.logger.e(
@@ -76,7 +79,7 @@ class ValidateController extends GetxController
         toastService.presentLoading();
         var result = await apiRepository.getTvTemplateByCode(
           body: {
-            "tv_code": tvCode.value,
+            "tv_code": deviceCode.value,
           },
         );
         switch (result.status) {

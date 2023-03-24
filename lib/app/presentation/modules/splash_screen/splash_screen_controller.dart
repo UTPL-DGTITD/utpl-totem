@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
@@ -22,9 +23,8 @@ class SplashScreenController extends GetxController {
 
   Rx<String> subtitle = ''.obs;
 
-  final tvCode = ''.obs;
+  final deviceCode = ''.obs;
   final currentTemplate = TvTemplateModel().obs;
-  final macAddress = ''.obs;
 
   SplashScreenController({
     required this.localRepository,
@@ -42,17 +42,17 @@ class SplashScreenController extends GetxController {
     if (status) {
       var token = generateQaToken;
       ToolsHelper.logger.i("WSO2", token.substring(token.length - 10));
-
       authService.setAwsToken(token);
-      await Future.delayed(const Duration(seconds: 2));
-      Get.offAndToNamed(Routes.template_static);
+      validateCode();
+      // await Future.delayed(const Duration(seconds: 2));
+      // Get.offAndToNamed(Routes.template_static);
     } else {
       navigateToTemplateOffline();
     }
   }
 
   void navigateToHomePage() {
-    Get.toNamed(Routes.home, arguments: {
+    Get.toNamed(Routes.template_static, arguments: {
       'currentTemplate': currentTemplate.value,
     });
   }
@@ -103,5 +103,57 @@ class SplashScreenController extends GetxController {
         "RWdwAWTQSMp5fAutSLKsCUkzvCaW-nKWCIcBNtp4Mdiv3A80Sjdo1wexgLTlirwdFq"
         "F1uaj7juWOmtgKQJ2XReiyP7t4olGhVpIG9yqG7NJmJvaCoqE85OSp8dk-wvPJijTh"
         "PSan8uEIBp4-hweB-6ptpBzL91ddSOTFXfUgp3-9LkwIB_b7erLfDZZHsWPA==";
+  }
+
+  void validateCode() async {
+    try {
+      deviceCode.value = await PlatformDeviceId.getDeviceId ?? '';
+      deviceCode.value = deviceCode.trim();
+      ToolsHelper.logger.v('-${deviceCode.trim()}-');
+      //deviceCode.value = '5F6B4244-F2D7-B34D-A01D-1593561B9E98';
+      var result = await apiRepository.getTvTemplateByCode(
+        body: {
+          "tv_code": deviceCode.value,
+        },
+      );
+      switch (result.status) {
+        case 200:
+          currentTemplate.value = TvTemplateModel.fromJson(result.data);
+          navigateToHomePage();
+          // toastService.hideLoading();
+          break;
+        case 404:
+          Get.offAndToNamed(Routes.validate);
+          toastService.presentWarningToast(
+            text: "No existe dispositivo, ingresar un código válido",
+          );
+          break;
+
+        default:
+      }
+    } on TimeoutException {
+      toastService.hideLoading();
+      navigateToTemplateOffline();
+      toastService.presentWarningToast(
+        text: "Tiempo de espera agotado",
+      );
+    } on SocketException {
+      toastService.hideLoading();
+      navigateToTemplateOffline();
+      toastService.presentWarningToast(
+        text: "Error de conexión",
+      );
+    } catch (error, stack) {
+      toastService.hideLoading();
+      navigateToTemplateOffline();
+      ToolsHelper.logger.e(
+        '[splash_screen_controller] (validate_code)',
+        error,
+        stack,
+      );
+      toastService.presentErrorToast(
+        text: 'Error nuestro, intenta más tarde',
+      );
+    }
   }
 }

@@ -25,7 +25,8 @@ class ObservatoriesController extends GetxController
   RxBool showSkeleton = false.obs;
   RxString title = 'Observatorios'.obs;
   ScrollController scrollController = ScrollController();
-  late Timer timerAnimate;
+  late Timer timerAnimate =
+      Timer.periodic(const Duration(seconds: 5), (timer) {});
   RxList<GenericListItemModel> observatories = <GenericListItemModel>[].obs;
 
   ObservatoriesController({

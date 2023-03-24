@@ -74,6 +74,7 @@ dependencies:
   gauge_indicator: ^0.3.3
   virtual_keyboard_multi_language: ^1.0.3
   fdottedline_nullsafety: ^2.0.1
+  platform_device_id: ^1.0.1
 
 dev_dependencies:
   flutter_test:

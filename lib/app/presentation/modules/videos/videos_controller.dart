@@ -59,6 +59,8 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
           Timer.periodic(const Duration(minutes: 1), (timer) async {
         validateVideo();
       });
+      //player.play();
+      ToolsHelper.logger.v('VIDEOS CONTROLLER $urlVideos');
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[videos_controller] (_initConfig)',
@@ -147,6 +149,7 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void playVideos() {
+    ToolsHelper.logger.v('NOW PLAYING');
     showSkeleton = false.obs;
     player.open(
       Playlist(medias: loadNetworkVideos()),
@@ -161,7 +164,7 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void validateVideo() {
-    ToolsHelper.logger.v('VALIDAR VIDEO 1');
+    ToolsHelper.logger.v('VALIDAR VIDEO');
     if (!player.playback.isPlaying) {
       ToolsHelper.logger.v('VIDEO PAUSADO');
       player.play();
