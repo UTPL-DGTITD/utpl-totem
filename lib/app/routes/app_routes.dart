@@ -23,9 +23,6 @@ abstract class Routes {
   /// Page for template offline
   static const template_offline = '/template_offline_page';
 
-  /// Page for template static
-  static const template_static = '/template_static_page';
-
   /// Page for template observatory detail
   static const observatory_detail = '/observatory_detail_page';
 

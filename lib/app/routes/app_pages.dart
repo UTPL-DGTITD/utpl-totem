@@ -16,8 +16,8 @@ import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_page.dart';
 import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_page.dart';
-import 'package:utpl_totem/app/presentation/modules/template_static/template_static_binding.dart';
-import 'package:utpl_totem/app/presentation/modules/template_static/template_static_page.dart';
+import 'package:utpl_totem/app/presentation/modules/home/home_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/home/home_page.dart';
 import 'package:utpl_totem/app/presentation/modules/validate/validate_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/validate/validate_page.dart';
 import 'package:utpl_totem/app/presentation/modules/web/web_binding.dart';
@@ -81,14 +81,6 @@ class AppPages {
       bindings: [
         MainBinding(),
         TemplateOfflineBinding(),
-      ],
-    ),
-    GetPage(
-      name: Routes.template_static,
-      page: () => const TemplateStaticPage(),
-      bindings: [
-        MainBinding(),
-        TemplateStaticBinding(),
       ],
     ),
     GetPage(

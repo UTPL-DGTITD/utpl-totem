@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/controllers/main_controller.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/models/weather_model.dart';
@@ -10,6 +9,7 @@ import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
 import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
+import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
@@ -19,20 +19,43 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final ToastService toastService;
   final AuthService authService;
 
-  final mainCtrl = Get.find<MainController>();
   final responsive = Responsive();
 
   RxBool showSkeleton = false.obs;
+  RxBool controllerVideo = false.obs;
+  final title = 'UTPL+'.obs;
+  // HACK taps
+  DateTime? _lastTap;
+  int _tapCount = 0;
 
-  RxList<GenericListItemModel> news = <GenericListItemModel>[].obs;
+  // WEATHER
   Rx<WeatherModel>? weather = WeatherModel().obs;
+  Rx<GenericListItemModel> wallpaper = GenericListItemModel().obs;
   final currentTemp = ''.obs;
+  final currentUv = ''.obs;
+  final currentDescTemp = ''.obs;
+  final currentDescUv = ''.obs;
+  late Timer timerConection;
   late Timer timerTemp;
-  final title = 'Utpl Tv'.obs;
-
-  final pageNews = 1.obs;
-
+  late Timer inactivityTimer = Timer(const Duration(minutes: 20), () {});
   final currentTemplate = TvTemplateModel().obs;
+
+  RxString advices = 'La visión de la Universidad Técnica Particular de Loja es '
+          'el humanismo de Cristo, que se traduce en sentido de perfección, en compromiso '
+          'institucional, en servicio a la sociedad, en mejora continua y en la búsqueda '
+          'constante de la excelencia. El humanismo de Cristo que, en su manifestación '
+          'histórica y el desarrollo de su pensamiento en la tradición de la Iglesia '
+          'Católica, propugna una universidad potenciadora, conforme a la dignidad que '
+          'el ser humano tiene como “hijo de Dios” y que hace a la Universidad acoger, '
+          'defender y promover en la sociedad, el producto y la reflexión de toda '
+          'experiencia humana'
+      .obs;
+
+  // Rx<VideoPlayerController> controller =
+  //     VideoPlayerController.asset('assets/videos/becas_utpl.mp4').obs
+  //       ..value.initialize()
+  //       ..value.play()
+  //       ..value.setLooping(true);
 
   HomeController({
     required this.localRepository,
@@ -50,12 +73,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void _initConfig() async {
     try {
       _loadRouteParams();
-      await loadWeather();
-      await loadNews();
-      ToolsHelper.logger.v('INICIO');
+      loadWeather();
+      loadWallpaper();
+      // validateConection();
+      startTimer(const Duration(minutes: 20));
     } catch (error, stack) {
       ToolsHelper.logger.e(
-        '[home_controller] (_initConfig)',
+        '[template_static_controller] (_initConfig)',
         error,
         stack,
       );
@@ -67,6 +91,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void _loadRouteParams() {
+    ToolsHelper.logger.v('TEMPLATE RECIBIDO');
     final params = Get.arguments;
     assert(params != null, 'Params is required');
     assert(params['currentTemplate'] != null, 'currentTemplate is required');
@@ -75,35 +100,30 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     currentTemplate.value = params['currentTemplate'];
   }
 
-  Future<void> loadNews() async {
-    try {
-      showSkeleton.value = true;
-      var result = await apiRepository.getNewsPreview();
-      switch (result.status) {
-        case 200:
-          news.assignAll(genericListItemModelFromList(result.data));
-          break;
-        default:
-          ToolsHelper.logger.i("Not results found");
+  void validateConection() {
+    timerConection.cancel();
+    timerConection = Timer.periodic(const Duration(seconds: 5), (timer) async {
+      ToolsHelper.logger.v('PROBANDO CONEXION');
+      var status = await validateServerConnection();
+      if (status) {
+        timerConection.cancel();
+        Get.offAndToNamed(Routes.splash_screen);
       }
-      showSkeleton.value = false;
-    } on TimeoutException {
-      toastService.presentWarningToast(
-        text: "Tiempo de espera agotado",
-      );
+      ToolsHelper.logger.v('INTERNET: $status');
+    });
+  }
+
+  Future<bool> validateServerConnection() async {
+    try {
+      var result = await apiRepository.getBackendStatus();
+      if (result.status == 200) {
+        return true;
+      }
+      return false;
     } on SocketException {
-      toastService.presentWarningToast(
-        text: "Error de conexión",
-      );
+      return false;
     } catch (error, stack) {
-      ToolsHelper.logger.e(
-        '[home_controller] (loadNews)',
-        error,
-        stack,
-      );
-      toastService.presentErrorToast(
-        text: 'Error nuestro, intenta más tarde',
-      );
+      return false;
     }
   }
 
@@ -115,7 +135,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         case 200:
           weather?.value = WeatherModel.fromJson(result.data);
           updateTemp();
-          timerTemp = Timer(const Duration(minutes: 30), () {
+
+          timerTemp = Timer.periodic(const Duration(minutes: 1), (timer) async {
             updateTemp();
           });
           break;
@@ -144,6 +165,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void updateTemp() {
+    //ToolsHelper.logger.v('ACTUALIZANDO');
     var actualHour = DateTime.now().hour;
     for (Hour item in weather!.value.hours ?? []) {
       var splitted = item.interval.split(':');
@@ -151,15 +173,114 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
       if (actualHour >= compare && actualHour < (compare + 3)) {
         currentTemp.value = item.temp;
+        currentUv.value = item.uvIndex;
+        currentDescTemp.value = item.symbolDescription;
+        if (double.parse(currentUv.value) <= 2) {
+          currentDescUv.value = 'Baja';
+        } else if ((double.parse(currentUv.value) > 2) &&
+            (double.parse(currentUv.value) <= 5)) {
+          currentDescUv.value = 'Moderada';
+        } else if ((double.parse(currentUv.value) > 5) &&
+            (double.parse(currentUv.value) <= 7)) {
+          currentDescUv.value = 'Alta';
+        } else if ((double.parse(currentUv.value) > 7) &&
+            (double.parse(currentUv.value) <= 10)) {
+          currentDescUv.value = 'Muy alta';
+        } else {
+          currentDescUv.value = 'Extrema';
+        }
       }
     }
   }
 
-  String loadAdvices() {
-    var advices = '';
-    for (GenericListItemModel item in news) {
-      advices = '$advices              ${item.title}';
+  void refreshTemplate() {
+    if (_lastTap != null &&
+        DateTime.now().difference(_lastTap!).inSeconds < 2) {
+      _tapCount++;
+      _lastTap = DateTime.now();
+      if (_tapCount == 10) {
+        _tapCount = 0;
+        _lastTap = null;
+
+        inactivityTimer.cancel();
+        ToolsHelper.logger.v('RESET TEMPLATE');
+
+        Get.offAllNamed(Routes.home, arguments: {
+          'currentTemplate': currentTemplate.value,
+        });
+      }
+    } else {
+      _tapCount = 1;
+      _lastTap = DateTime.now();
+      Future.delayed(const Duration(seconds: 3), () {
+        _tapCount = 0;
+        _lastTap = null;
+      });
     }
-    return advices;
+  }
+
+  void startTimer(Duration duration) {
+    // DESARROLLO
+    //inactivityTimer = Timer(const Duration(seconds: 5), () async {
+    //inactivityTimer = Timer(const Duration(minutes: 20), () async {
+    inactivityTimer = Timer(duration, () async {
+      ToolsHelper.logger.v('INACTIVIDAD USUARIO');
+      await Get.toNamed(Routes.screen_protector, arguments: {
+        "wallpaper": wallpaper.value,
+      });
+      ToolsHelper.logger.v('VOLVISTE AL HOME');
+      resetTimer();
+    });
+  }
+
+  void resetTimer({Duration duration = const Duration(minutes: 20)}) {
+    stopTimer();
+    startTimer(duration);
+  }
+
+  void stopTimer() {
+    if (inactivityTimer.isActive) {
+      inactivityTimer.cancel();
+    }
+  }
+
+  void navigateToPage(String page) async {
+    resetTimer(duration: const Duration(minutes: 5));
+    await Get.toNamed(page, arguments: {
+      "wallpaper": wallpaper.value,
+    });
+    resetTimer();
+  }
+
+  void loadWallpaper() async {
+    try {
+      showSkeleton.value = true;
+      var result = await apiRepository
+          .getWallpaper(body: {"enable": true, "source": "totem"});
+      switch (result.status) {
+        case 200:
+          wallpaper.value = GenericListItemModel.fromJson(result.data);
+          break;
+        default:
+          ToolsHelper.logger.i("Not results found");
+      }
+    } on TimeoutException {
+      toastService.presentWarningToast(
+        text: "Tiempo de espera agotado",
+      );
+    } on SocketException {
+      toastService.presentWarningToast(
+        text: "Error de conexión",
+      );
+    } catch (error, stack) {
+      ToolsHelper.logger.e(
+        '[home_controller] (loadWallpaper)',
+        error,
+        stack,
+      );
+      toastService.presentErrorToast(
+        text: 'Error nuestro, intenta más tarde',
+      );
+    }
   }
 }
