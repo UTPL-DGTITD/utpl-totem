@@ -36,7 +36,7 @@ class ValidatePage extends GetView<ValidateController> {
                         height: ctrl.responsive.hp(60),
                         width: ctrl.responsive.wp(100),
                         padding: EdgeInsets.symmetric(
-                          horizontal: ctrl.responsive.wp(20),
+                          horizontal: ctrl.responsive.wp(10),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,15 +61,16 @@ class ValidatePage extends GetView<ValidateController> {
                             customYMargin(ctrl.responsive.hp(2)),
                             Container(
                               margin: EdgeInsets.symmetric(
-                                horizontal: ctrl.responsive.wp(10),
+                                horizontal: ctrl.responsive.wp(0),
                               ),
                               child: TextFormField(
                                 controller: ctrl.descriptionController.value,
                                 // maxLength: 10,
+
                                 autocorrect: false,
                                 decoration: CustomDecoration
                                     .inputRecommendationDecoration(
-                                  hintText: ctrl.macAddress.value,
+                                  hintText: ctrl.deviceCode.value,
                                   text: 'Código',
                                 ),
                                 maxLines: 1,
@@ -78,7 +79,7 @@ class ValidatePage extends GetView<ValidateController> {
                                     ctrl.validatorsForm.validateLength(
                                   value: value,
                                   min: 5,
-                                  max: 30,
+                                  max: 50,
                                 ),
                                 onChanged: (value) => ctrl.onChangeCode(value),
                               ),

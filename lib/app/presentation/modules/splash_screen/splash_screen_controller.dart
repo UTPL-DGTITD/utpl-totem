@@ -76,33 +76,7 @@ class SplashScreenController extends GetxController {
   }
 
   String get generateQaToken {
-    return "eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TV"
-        "dSbFpEZzROemM0WkE9PSIsImtpZCI6ImdhdGV3YXlfY2VydGlmaWNhdGVfYWxpYXMi"
-        "LCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJVVFBMLkVEVS5FQ1wvZ"
-        "GZzYXJtaWVudG9AY2FyYm9uLnN1cGVyIiwiYXBwbGljYXRpb24iOnsib3duZXIiOi"
-        "JVVFBMLkVEVS5FQ1wvZGZzYXJtaWVudG8iLCJ0aWVyUXVvdGFUeXBlIjpudWxsLCJ0"
-        "aWVyIjoiVW5saW1pdGVkIiwibmFtZSI6IkFwcCBNb3ZpbCBGbHV0dGVyIiwiaWQiOj"
-        "EyMDMsInV1aWQiOiI4NWIzNjUyYi05NTc4LTQyZjAtYTA5NC1iMWU0YWUzNjNmMzMi"
-        "fSwiaXNzIjoiaHR0cHM6XC9cL3Nydi1zaS0wMDEudXRwbC5lZHUuZWM6NDQzXC9vYX"
-        "V0aDJcL3Rva2VuIiwidGllckluZm8iOnsiVW5saW1pdGVkIjp7InRpZXJRdW90YVR5"
-        "cGUiOiJyZXF1ZXN0Q291bnQiLCJncmFwaFFMTWF4Q29tcGxleGl0eSI6MCwiZ3JhcGh"
-        "RTE1heERlcHRoIjowLCJzdG9wT25RdW90YVJlYWNoIjp0cnVlLCJzcGlrZUFycmVzd"
-        "ExpbWl0IjowLCJzcGlrZUFycmVzdFVuaXQiOm51bGx9fSwia2V5dHlwZSI6IlNBTkR"
-        "CT1giLCJwZXJtaXR0ZWRSZWZlcmVyIjoiIiwic3Vic2NyaWJlZEFQSXMiOlt7InN1Y"
-        "nNjcmliZXJUZW5hbnREb21haW4iOiJjYXJib24uc3VwZXIiLCJuYW1lIjoiTW9iaWxl"
-        "QXBpIiwiY29udGV4dCI6IlwvYXBpbVwvbW9iaWxlIiwicHVibGlzaGVyIjoiVVRQTC"
-        "5FRFUuRUNcL2pzY2FsZGVyb24iLCJ2ZXJzaW9uIjoiMS4wLjAiLCJzdWJzY3JpcHR"
-        "pb25UaWVyIjoiVW5saW1pdGVkIn0seyJzdWJzY3JpYmVyVGVuYW50RG9tYWluIjoiY"
-        "2FyYm9uLnN1cGVyIiwibmFtZSI6Ik5ldENvcmVBcGkiLCJjb250ZXh0IjoiXC9hcGl"
-        "tXC9uZXRjb3JlXC8xLjAiLCJwdWJsaXNoZXIiOiJVVFBMLkVEVS5FQ1wvanNjYWxkZ"
-        "XJvbiIsInZlcnNpb24iOiIxLjAiLCJzdWJzY3JpcHRpb25UaWVyIjoiVW5saW1pdGV"
-        "kIn1dLCJwZXJtaXR0ZWRJUCI6IiIsImlhdCI6MTY2Mzg1NDIzMywianRpIjoiMWU4M"
-        "GE2NWUtMDU1Ny00MjBlLWEzNTQtMTQyYjc3OWIwZTA4In0=.eYmYie42NQkqkgOOpL"
-        "LXLbukzmkR8xjlzKlg6nm7LaYe_ponEO5uKoZgG1FhTo9U4AbT2R7O2Zv9_Ly8WzuT"
-        "ylROTsrsybGFvQ-mem-QQLF2sOIYFwzpbQMsG9gXnV50rmx1_LC3i5FrMPv2HX5Ktd"
-        "RWdwAWTQSMp5fAutSLKsCUkzvCaW-nKWCIcBNtp4Mdiv3A80Sjdo1wexgLTlirwdFq"
-        "F1uaj7juWOmtgKQJ2XReiyP7t4olGhVpIG9yqG7NJmJvaCoqE85OSp8dk-wvPJijTh"
-        "PSan8uEIBp4-hweB-6ptpBzL91ddSOTFXfUgp3-9LkwIB_b7erLfDZZHsWPA==";
+    return "eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkE9PSIsImtpZCI6ImdhdGV3YXlfY2VydGlmaWNhdGVfYWxpYXMiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJVVFBMLkVEVS5FQ1wvZGZzYXJtaWVudG9AY2FyYm9uLnN1cGVyIiwiYXBwbGljYXRpb24iOnsib3duZXIiOiJVVFBMLkVEVS5FQ1wvZGZzYXJtaWVudG8iLCJ0aWVyUXVvdGFUeXBlIjpudWxsLCJ0aWVyIjoiVW5saW1pdGVkIiwibmFtZSI6IkFwcCBNb3ZpbCBGbHV0dGVyIiwiaWQiOjEyMDMsInV1aWQiOiI4NWIzNjUyYi05NTc4LTQyZjAtYTA5NC1iMWU0YWUzNjNmMzMifSwiaXNzIjoiaHR0cHM6XC9cL3Nydi1zaS0wMDEudXRwbC5lZHUuZWM6NDQzXC9vYXV0aDJcL3Rva2VuIiwidGllckluZm8iOnsiVW5saW1pdGVkIjp7InRpZXJRdW90YVR5cGUiOiJyZXF1ZXN0Q291bnQiLCJncmFwaFFMTWF4Q29tcGxleGl0eSI6MCwiZ3JhcGhRTE1heERlcHRoIjowLCJzdG9wT25RdW90YVJlYWNoIjp0cnVlLCJzcGlrZUFycmVzdExpbWl0IjowLCJzcGlrZUFycmVzdFVuaXQiOm51bGx9fSwia2V5dHlwZSI6IlBST0RVQ1RJT04iLCJwZXJtaXR0ZWRSZWZlcmVyIjoiIiwic3Vic2NyaWJlZEFQSXMiOlt7InN1YnNjcmliZXJUZW5hbnREb21haW4iOiJjYXJib24uc3VwZXIiLCJuYW1lIjoiTW9iaWxlQXBpIiwiY29udGV4dCI6IlwvYXBpbVwvbW9iaWxlIiwicHVibGlzaGVyIjoiVVRQTC5FRFUuRUNcL2pzY2FsZGVyb24iLCJ2ZXJzaW9uIjoiMS4wLjAiLCJzdWJzY3JpcHRpb25UaWVyIjoiVW5saW1pdGVkIn0seyJzdWJzY3JpYmVyVGVuYW50RG9tYWluIjoiY2FyYm9uLnN1cGVyIiwibmFtZSI6Ik5ldENvcmVBcGkiLCJjb250ZXh0IjoiXC9hcGltXC9uZXRjb3JlXC8xLjAiLCJwdWJsaXNoZXIiOiJVVFBMLkVEVS5FQ1wvanNjYWxkZXJvbiIsInZlcnNpb24iOiIxLjAiLCJzdWJzY3JpcHRpb25UaWVyIjoiVW5saW1pdGVkIn1dLCJwZXJtaXR0ZWRJUCI6IiIsImlhdCI6MTY2Mzg1NDE0OCwianRpIjoiNDVkNmEwZWEtZDljNy00ZTNjLTg4YWEtOWUyYjQzZDM2MGE4In0=.tTCKnScwg6VNFzZRrLJGPetb-Isv34iGCM_eGNiHQL5h3ogc_ZlYegavEPDPRj6zsbfbeaaxoSuCwQHr9g6lcqc7BxpNodQOw6POJ68JrvYvbB_6HqG4qNbuyFx5P5xgNGLXrvm1Z3-TOdl4q0jIF5kL4JGvmX7Y2TNLwolCyIhFi6Q13JEquEEWn1JiavPwwI4N4jNSkjpe7fdMdg-Uj1SoYwpaOazKAyRvKDmt2fDjePR7t1YC5UWGuOkGP5-8Jyw3fpn9X9XQXCme5icmlaGtgg14mKKyipfOqU58es4WwBzkAJwY3nuIIvEkO60CT69IT226TlsgC7C3XkhiDQ==";
   }
 
   void validateCode() async {
@@ -111,6 +85,7 @@ class SplashScreenController extends GetxController {
       deviceCode.value = deviceCode.trim();
       ToolsHelper.logger.v('-${deviceCode.trim()}-');
       //deviceCode.value = '5F6B4244-F2D7-B34D-A01D-1593561B9E98';
+      //deviceCode.value = '03000200-0400-0500-0006-000700080009';
       var result = await apiRepository.getTvTemplateByCode(
         body: {
           "tv_code": deviceCode.value,

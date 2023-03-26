@@ -27,10 +27,9 @@ class ValidateController extends GetxController
 
   Rx<TextEditingController> descriptionController =
       TextEditingController(text: '').obs;
-  final tvCode = ''.obs;
+  //final tvCode = ''.obs;
   final currentTemplate = TvTemplateModel().obs;
   final responsive = Responsive();
-  final macAddress = ''.obs;
 
   RxBool showSkeleton = false.obs;
 
@@ -55,7 +54,7 @@ class ValidateController extends GetxController
     try {
       deviceCode.value = await PlatformDeviceId.getDeviceId ?? '';
 
-      descriptionController.value.text = tvCode.value;
+      descriptionController.value.text = deviceCode.value;
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[validate_controller] (_initConfig)',
@@ -70,7 +69,7 @@ class ValidateController extends GetxController
   }
 
   void onChangeCode(String value) async {
-    tvCode.value = value;
+    deviceCode.value = value;
   }
 
   void validateCode() async {
@@ -79,7 +78,7 @@ class ValidateController extends GetxController
         toastService.presentLoading();
         var result = await apiRepository.getTvTemplateByCode(
           body: {
-            "tv_code": deviceCode.value,
+            "tv_code": deviceCode.value.trim(),
           },
         );
         switch (result.status) {

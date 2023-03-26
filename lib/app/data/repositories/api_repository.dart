@@ -102,7 +102,8 @@ abstract class ApiRepository {
   /*                                   CHECK SCHEDULE                           */
   /* -------------------------------------------------------------------------- */
   Future<ApiResponseModel> getSubjectSchedule({
-    required String username,
+    required Map<String, dynamic> body,
+    Map<String, dynamic> headers,
   });
 
   /* -------------------------------------------------------------------------- */

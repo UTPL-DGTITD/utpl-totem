@@ -1,3 +1,4 @@
+import 'package:utpl_totem/app/data/enviroment.dart';
 import 'package:utpl_totem/app/data/models/api_response_model.dart';
 import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
@@ -165,7 +166,7 @@ class ApiProvider extends ApiRepository {
   @override
   Future<ApiResponseModel> getInvestigations({
     Map<String, dynamic> headers = const {
-      "accessKey": "886D32B8F4841173DF763578BBE1C"
+      "accessKey": Environment.accessKey,
     },
   }) {
     return _netUtil
@@ -182,7 +183,7 @@ class ApiProvider extends ApiRepository {
   @override
   Future<ApiResponseModel> getObservatories({
     Map<String, dynamic> headers = const {
-      "accessKey": "886D32B8F4841173DF763578BBE1C"
+      "accessKey": Environment.accessKey,
     },
   }) {
     return _netUtil
@@ -208,13 +209,16 @@ class ApiProvider extends ApiRepository {
 
   @override
   Future<ApiResponseModel> getSubjectSchedule({
-    required String username,
+    required Map<String, dynamic> body,
+    Map<String, dynamic> headers = const {
+      "accessKey": Environment.accessKey,
+    },
   }) {
     return _netUtil
-        .get(
-      url: 'https://srv-si-001.utpl.edu.ec/apim/mobile/api',
-      path: 'services/app/HorarioPersona/GetPersonalSchedule?'
-          'input=$username',
+        .post(
+      path: '/v1/academic/schuelder/user',
+      body: body,
+      headers: headers,
     )
         .then((dynamic res) {
       return ApiResponseModel.fromJson(res);

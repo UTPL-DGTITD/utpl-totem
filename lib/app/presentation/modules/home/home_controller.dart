@@ -79,7 +79,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       startTimer(const Duration(minutes: 20));
     } catch (error, stack) {
       ToolsHelper.logger.e(
-        '[template_static_controller] (_initConfig)',
+        '[home_controller] (_initConfig)',
         error,
         stack,
       );

@@ -24,9 +24,9 @@ void main() async {
 
   WindowOptions windowOptions = const WindowOptions(
     // DESCOMENTAR PARA PRODUCCION
-    //fullScreen: true,
+    fullScreen: true,
     // DESCOMENTAR PARA PROBAR DE MANERA LOCAL
-    size: Size(385, 674),
+    //size: Size(385, 674),
     center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,

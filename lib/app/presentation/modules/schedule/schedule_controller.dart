@@ -87,7 +87,9 @@ class ScheduleController extends GetxController
       try {
         toastService.presentLoading();
         var result = await apiRepository.getSubjectSchedule(
-          username: inputController.value.text,
+          body: {
+            "user": inputController.value.text,
+          },
         );
         switch (result.status) {
           case 200:

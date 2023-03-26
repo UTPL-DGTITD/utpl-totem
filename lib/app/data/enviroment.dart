@@ -2,6 +2,8 @@ class Environment {
   Environment._();
 
   static const String server = "https://appmovil.utpl.edu.ec:8080";
+
+  static const String accessKey = "886D32B8F4841173DF763578BBE1C";
   // static const String server = "http://172.18.137.102:3000";
 
   static const int httpTimeout = 12000;
