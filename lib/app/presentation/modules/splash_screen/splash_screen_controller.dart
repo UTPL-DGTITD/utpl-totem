@@ -52,7 +52,7 @@ class SplashScreenController extends GetxController {
   }
 
   void navigateToHomePage() {
-    Get.toNamed(Routes.home, arguments: {
+    Get.offAllNamed(Routes.home, arguments: {
       'currentTemplate': currentTemplate.value,
     });
   }

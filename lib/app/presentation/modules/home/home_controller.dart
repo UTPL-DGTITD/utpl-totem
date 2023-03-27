@@ -220,8 +220,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void startTimer(Duration duration) {
-    // DESARROLLO
-    //inactivityTimer = Timer(const Duration(seconds: 5), () async {
     //inactivityTimer = Timer(const Duration(minutes: 20), () async {
     inactivityTimer = Timer(duration, () async {
       ToolsHelper.logger.v('INACTIVIDAD USUARIO');
