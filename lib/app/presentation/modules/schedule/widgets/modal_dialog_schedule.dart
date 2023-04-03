@@ -19,8 +19,11 @@ class ModalDialogSchedule {
         builder: (context) {
           Responsive responsive = Responsive();
           return AlertDialog(
-            insetPadding: EdgeInsets.symmetric(
-              horizontal: ctrl.responsive.wp(10),
+            insetPadding: EdgeInsets.only(
+              top: responsive.hp(8),
+              bottom: responsive.hp(15),
+              right: ctrl.responsive.wp(10),
+              left: ctrl.responsive.wp(10),
             ),
             backgroundColor: Get.theme.canvasColor,
             contentPadding: EdgeInsets.symmetric(

@@ -223,9 +223,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     //inactivityTimer = Timer(const Duration(minutes: 20), () async {
     inactivityTimer = Timer(duration, () async {
       ToolsHelper.logger.v('INACTIVIDAD USUARIO');
-      await Get.toNamed(Routes.screen_protector, arguments: {
-        "wallpaper": wallpaper.value,
-      });
+      if (Get.currentRoute == Routes.home) {
+        await Get.toNamed(Routes.screen_protector, arguments: {
+          "wallpaper": wallpaper.value,
+        });
+      } else {
+        Get.until((route) => Get.currentRoute == Routes.home);
+      }
+
       ToolsHelper.logger.v('VOLVISTE AL HOME');
       resetTimer();
     });

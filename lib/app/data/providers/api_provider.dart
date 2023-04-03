@@ -226,7 +226,7 @@ class ApiProvider extends ApiRepository {
   }
 
 /* -------------------------------------------------------------------------- */
-/*                              TV TEMPLATE BY CODE                           */
+/*                              WALLPAPER                                     */
 /* -------------------------------------------------------------------------- */
 
   @override
@@ -237,6 +237,71 @@ class ApiProvider extends ApiRepository {
         .post(
       path: 'v1/wallpaper/active/show',
       body: body,
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   BUILDINGS                                */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getBuildings({
+    int page = 1,
+    Map<String, dynamic> headers = const {
+      "accessKey": Environment.accessKey,
+    },
+  }) {
+    return _netUtil
+        .get(
+      path: 'v1/academic/place/building/all?page=$page',
+      headers: headers,
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   CLASSROOM                                */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getClassrooms({
+    required String buildingCode,
+    int page = 1,
+    Map<String, dynamic> headers = const {
+      "accessKey": Environment.accessKey,
+    },
+  }) {
+    return _netUtil
+        .get(
+      path: 'v1/academic/place/building/$buildingCode/classroom/all?page=$page',
+      headers: headers,
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+/* -------------------------------------------------------------------------- */
+/*                                   CLASSROOM SCHEDULE                       */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getClassroomSchedule({
+    required Map<String, dynamic> body,
+    Map<String, dynamic> headers = const {
+      "accessKey": Environment.accessKey,
+    },
+  }) {
+    return _netUtil
+        .post(
+      path: 'v1/academic/schuelder/build',
+      body: body,
+      headers: headers,
     )
         .then((dynamic res) {
       return ApiResponseModel.fromJson(res);

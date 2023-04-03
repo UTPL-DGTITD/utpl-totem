@@ -25,6 +25,7 @@ class ScreenProtectorController extends GetxController
   RxBool showSkeleton = false.obs;
   RxString title = 'Protector de Pantalla'.obs;
   Rx<GenericListItemModel> wallpaper = GenericListItemModel().obs;
+  Color colorContent = const Color(0xFFCACACA);
 
   ScreenProtectorController({
     required this.localRepository,

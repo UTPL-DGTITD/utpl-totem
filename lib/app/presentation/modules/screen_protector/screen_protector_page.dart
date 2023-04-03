@@ -60,17 +60,17 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                 ),
                                 hourMinuteDigitTextStyle: TextStyle(
                                   fontSize: ctrl.responsive.ip(4.5),
-                                  color: Get.theme.cardColor,
+                                  color: ctrl.colorContent,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 secondDigitTextStyle: TextStyle(
                                   fontSize: ctrl.responsive.ip(3),
-                                  color: Get.theme.cardColor,
+                                  color: ctrl.colorContent,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 showSecondsDigit: false,
                                 amPmDigitTextStyle: TextStyle(
-                                  color: Get.theme.cardColor,
+                                  color: ctrl.colorContent,
                                   fontWeight: FontWeight.bold,
                                   fontSize: ctrl.responsive.ip(4),
                                 ),
@@ -78,7 +78,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                   ':',
                                   style: TextStyle(
                                     fontSize: ctrl.responsive.ip(3.5),
-                                    color: Get.theme.cardColor,
+                                    color: ctrl.colorContent,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -177,7 +177,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                             ctrl.wallpaper.value.description,
                                             style: TextStyle(
                                               fontSize: ctrl.responsive.ip(2),
-                                              color: Get.theme.cardColor,
+                                              color: ctrl.colorContent,
                                             ),
                                             textAlign: TextAlign.justify,
                                           ),
@@ -189,6 +189,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                         color: Get.theme.colorScheme.primary,
                                         child: Center(
                                           child: Card(
+                                            color: ctrl.colorContent,
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
                                                 vertical: ctrl.responsive.hp(1),

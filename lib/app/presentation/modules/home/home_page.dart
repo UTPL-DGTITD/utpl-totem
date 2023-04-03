@@ -48,121 +48,121 @@ class HomePage extends GetView<HomeController> {
               ctrl.resetTimer();
             },
             child: SafeArea(
-                child: ctrl.showSkeleton.isFalse
-                    ? Container(
-                        color: Get.theme.cardColor,
-                        width: ctrl.responsive.wp(100),
-                        height: ctrl.responsive.hp(100),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: ctrl.responsive.wp(0.5),
-                                      vertical: ctrl.responsive.hp(1),
-                                    ),
-                                    color: Get.theme.cardColor,
-                                    width: ctrl.responsive.wp(75),
-                                    height: ctrl.responsive.hp(91),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          color: Get.theme.cardColor,
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: ctrl.responsive.wp(4),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () => ctrl.refreshTemplate(),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'UTPL',
-                                                  style: TextStyle(
-                                                    fontSize:
-                                                        ctrl.responsive.ip(4),
-                                                    color: Get.theme.colorScheme
-                                                        .primary,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '+',
-                                                  style: TextStyle(
-                                                    fontSize:
-                                                        ctrl.responsive.ip(4),
-                                                    color: Get.theme.colorScheme
-                                                        .tertiary,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        customYMargin(ctrl.responsive.hp(0.5)),
-                                        Expanded(
-                                          child: StaggeredGrid.count(
-                                            // crossAxisCount: 14,
-                                            crossAxisCount: 10,
-                                            axisDirection: AxisDirection.down,
-                                            mainAxisSpacing:
-                                                ctrl.responsive.hp(1),
-                                            crossAxisSpacing:
-                                                ctrl.responsive.wp(0.5),
-                                            children:
-                                                //
-                                                generateComponents(ctrl),
-                                            //generateStaticComponents(ctrl),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+              child: ctrl.showSkeleton.isFalse
+                  ? Container(
+                      color: Get.theme.cardColor,
+                      width: ctrl.responsive.wp(100),
+                      height: ctrl.responsive.hp(100),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ctrl.responsive.wp(0.5),
+                                    vertical: ctrl.responsive.hp(1),
                                   ),
-                                  Container(
-                                    width: ctrl.responsive.wp(25),
-                                    height: double.infinity,
-                                    color: Get.theme.colorScheme.tertiary,
-                                    child: SideHeader(ctrl: ctrl),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              width: double.infinity,
-                              height: ctrl.responsive.hp(9),
-                              color: Get.theme.colorScheme.primary,
-                              child: Marquee(
-                                text: ctrl.advices.value,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
                                   color: Get.theme.cardColor,
-                                  fontSize: ctrl.responsive.ip(1.8),
+                                  width: ctrl.responsive.wp(75),
+                                  height: ctrl.responsive.hp(91),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        color: Get.theme.cardColor,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: ctrl.responsive.wp(4),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () => ctrl.refreshTemplate(),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'UTPL',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ctrl.responsive.ip(4),
+                                                  color: Get.theme.colorScheme
+                                                      .primary,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                '+',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ctrl.responsive.ip(4),
+                                                  color: Get.theme.colorScheme
+                                                      .tertiary,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      customYMargin(ctrl.responsive.hp(0.5)),
+                                      Expanded(
+                                        child: StaggeredGrid.count(
+                                          // crossAxisCount: 14,
+                                          crossAxisCount: 10,
+                                          axisDirection: AxisDirection.down,
+                                          mainAxisSpacing:
+                                              ctrl.responsive.hp(1),
+                                          crossAxisSpacing:
+                                              ctrl.responsive.wp(0.5),
+                                          children:
+                                              //
+                                              generateComponents(ctrl),
+                                          //generateStaticComponents(ctrl),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                scrollAxis: Axis.horizontal,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                blankSpace: 20.0,
-                                velocity: 50,
-                                pauseAfterRound: const Duration(seconds: 0),
-                                startPadding: 10.0,
-                                accelerationDuration:
-                                    const Duration(seconds: 1),
-                                accelerationCurve: Curves.linear,
-                                decelerationCurve: Curves.easeOut,
-                              ),
+                                Container(
+                                  width: ctrl.responsive.wp(25),
+                                  height: double.infinity,
+                                  color: Get.theme.colorScheme.tertiary,
+                                  child: SideHeader(ctrl: ctrl),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      )
-                    : const SkeletonList(length: 30)),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            height: ctrl.responsive.hp(9),
+                            color: Get.theme.colorScheme.primary,
+                            child: Marquee(
+                              text: ctrl.advices.value,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.cardColor,
+                                fontSize: ctrl.responsive.ip(1.8),
+                              ),
+                              scrollAxis: Axis.horizontal,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              blankSpace: 20.0,
+                              velocity: 50,
+                              pauseAfterRound: const Duration(seconds: 0),
+                              startPadding: 10.0,
+                              accelerationDuration: const Duration(seconds: 1),
+                              accelerationCurve: Curves.linear,
+                              decelerationCurve: Curves.easeOut,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const Center(child: CircularProgressIndicator()),
+            ),
           );
         },
       ),

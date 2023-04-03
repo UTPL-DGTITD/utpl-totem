@@ -220,7 +220,7 @@ class SideHeader extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    customYMargin(ctrl.responsive.hp(2)),
+                    customYMargin(ctrl.responsive.hp(4)),
                     InkWell(
                       onTap: () => ctrl.navigateToPage(Routes.schedule),
                       child: Row(

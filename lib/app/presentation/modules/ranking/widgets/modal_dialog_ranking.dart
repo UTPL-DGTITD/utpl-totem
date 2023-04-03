@@ -19,6 +19,8 @@ class ModalDialogRanking {
           Responsive responsive = Responsive();
           return AlertDialog(
             insetPadding: EdgeInsets.only(
+              top: responsive.hp(8),
+              bottom: responsive.hp(15),
               left: responsive.wp(12),
               right: responsive.wp(12),
             ),
@@ -42,7 +44,7 @@ class ModalDialogRanking {
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             content: Container(
-              height: responsive.hp(50),
+              height: responsive.hp(100),
               child: Scrollbar(
                 controller: ctrl.contentScrollController,
                 thumbVisibility: true,
@@ -86,6 +88,7 @@ class ModalDialogRanking {
                             fontWeight: FontWeight.normal,
                             color: Get.theme.colorScheme.primary,
                           ),
+                          textAlign: TextAlign.justify,
                         ),
                         Column(
                           children: [

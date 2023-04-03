@@ -112,4 +112,29 @@ abstract class ApiRepository {
   Future<ApiResponseModel> getWallpaper({
     required Map<String, dynamic> body,
   });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   GET BUILDINGS                            */
+  /* -------------------------------------------------------------------------- */
+  Future<ApiResponseModel> getBuildings({
+    int page = 1,
+    Map<String, dynamic> headers,
+  });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   GET CLASSROOMS                            */
+  /* -------------------------------------------------------------------------- */
+  Future<ApiResponseModel> getClassrooms({
+    required String buildingCode,
+    int page = 1,
+    Map<String, dynamic> headers,
+  });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   GET CLASSROOM SCHEDULE                   */
+  /* -------------------------------------------------------------------------- */
+  Future<ApiResponseModel> getClassroomSchedule({
+    required Map<String, dynamic> body,
+    Map<String, dynamic> headers,
+  });
 }

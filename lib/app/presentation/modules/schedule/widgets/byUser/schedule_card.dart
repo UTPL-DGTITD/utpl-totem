@@ -5,10 +5,10 @@ import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 
-class ScheduleCard extends StatelessWidget {
+class ScheduleCardSubject extends StatelessWidget {
   final Datum scheduleData;
 
-  const ScheduleCard({
+  const ScheduleCardSubject({
     required this.scheduleData,
     Key? key,
   }) : super(key: key);

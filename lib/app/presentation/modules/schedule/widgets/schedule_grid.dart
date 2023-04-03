@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/extra_base_model.dart';
 import 'package:utpl_totem/app/data/models/generic_schedule_model.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/schedule_card.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byClassroom/schedule_card_day.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byUser/schedule_card.dart';
+
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 
@@ -11,12 +13,14 @@ class ScheduleGrid extends StatelessWidget {
   final GenericScheduleModel scheduleData;
   final ValueChanged<Datum>? onTap;
   final bool isLoading;
+  final String groupBy;
 
   const ScheduleGrid({
     Key? key,
     required this.scheduleData,
     required this.isLoading,
     this.onTap,
+    required this.groupBy,
   }) : super(key: key);
 
   @override
@@ -25,6 +29,7 @@ class ScheduleGrid extends StatelessWidget {
 
     return FadeInLeft(
       child: Container(
+        color: Get.theme.cardColor,
         width: responsive.width,
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -41,7 +46,7 @@ class ScheduleGrid extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Materia:',
+                        groupBy == 'subject' ? 'Materia:' : 'Día:',
                         style: TextStyle(
                           fontSize: responsive.ip(2),
                           fontWeight: FontWeight.bold,
@@ -83,14 +88,21 @@ class ScheduleGrid extends StatelessWidget {
                                 onTap!(schedule);
                               }
                             },
-                            child: ScheduleCard(
-                              scheduleData: schedule,
-                            ),
+                            child: groupBy == 'subject'
+                                ? ScheduleCardSubject(
+                                    scheduleData: schedule,
+                                  )
+                                : ScheduleCardDay(
+                                    scheduleData: schedule,
+                                  ),
                           );
                         },
                       ).toList(),
                     ]),
               ),
+              groupBy == 'day'
+                  ? customYMargin(responsive.hp(5))
+                  : const SizedBox(),
             ],
           ),
         ),

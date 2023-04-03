@@ -1,21 +1,28 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
+
+import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
-class ModalDialog {
-  static Future<dynamic> alertFeatures(
-      BuildContext context, GenericListItemModel item) {
+class ModalDialogBuildings {
+  static Future<dynamic> showModalList({
+    required String title,
+    required String type,
+    required BuildContext context,
+    required RxList<GenericListItemModel> items,
+    required ScheduleController ctrl,
+    required ScrollController scrollController,
+    required bool isLoading,
+  }) {
     return showDialog(
         context: context,
         barrierDismissible: true,
         builder: (context) {
           Responsive responsive = Responsive();
-          ScrollController _contentScrollController = ScrollController();
           return AlertDialog(
             insetPadding: EdgeInsets.only(
               top: responsive.hp(8),
@@ -31,7 +38,7 @@ class ModalDialog {
             title: Container(
               width: responsive.wp(50),
               child: Text(
-                ToolsHelper.htmlParser(item.title),
+                title,
                 style: Get.textTheme.headline6?.copyWith(
                   fontSize: responsive.ip(2.2),
                   fontWeight: FontWeight.bold,
@@ -42,59 +49,70 @@ class ModalDialog {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            content: Container(
-              height: responsive.hp(100),
-              child: Scrollbar(
-                controller: _contentScrollController,
-                thumbVisibility: true,
-                child: SingleChildScrollView(
-                  controller: _contentScrollController,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: responsive.wp(2),
-                      vertical: responsive.hp(2),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: responsive.wp(2),
-                            vertical: responsive.hp(2),
-                          ),
-                          child: SizedBox(
-                            height: responsive.hp(25),
-                            // width: responsive.wp(80),
-                            child: AspectRatio(
-                              aspectRatio: 1 / 1,
-                              child: CachedNetworkImage(
-                                imageUrl: item.image?.url ?? '',
-                                fit: BoxFit.contain,
-                                errorWidget: (context, a, b) {
-                                  return Image.asset(
-                                      'assets/images/alt-image.png');
-                                },
-                                placeholder: (context, url) =>
-                                    Image.asset('assets/images/alt-image.png'),
-                              ),
+            content: Obx(() => Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        //width: double.infinity,
+                        height: responsive.hp(50),
+                        width: responsive.wp(100),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: responsive.wp(2),
+                          vertical: responsive.hp(2),
+                        ),
+                        child: Scrollbar(
+                          controller: scrollController,
+                          thumbVisibility: true,
+                          child: ListView.separated(
+                            controller: scrollController,
+                            scrollDirection: Axis.vertical,
+                            separatorBuilder: (context, index) => Column(
+                              children: [
+                                customYMargin(ctrl.responsive.hp(0.5)),
+                                Divider(
+                                  height: ctrl.responsive.hp(1),
+                                ),
+                                customYMargin(ctrl.responsive.hp(0.5)),
+                              ],
                             ),
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              var item = items[index];
+                              return Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: ctrl.responsive.wp(0.2),
+                                ),
+                                child: ListTile(
+                                  onTap: () =>
+                                      ctrl.onSelectBuilding(type, item),
+                                  title: Text(
+                                    ToolsHelper.htmlParser(item.title),
+                                    style: TextStyle(
+                                      fontSize: ctrl.responsive.ip(2.2),
+                                      color: Get.theme.colorScheme.primary,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    maxLines: 3,
+                                  ),
+                                  trailing: Icon(
+                                    UtplCustom.right_small_arrow,
+                                    size: ctrl.responsive.ip(2.5),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
-                        Text(
-                          ToolsHelper.htmlParser(item.description),
-                          style: Get.textTheme.headline6?.copyWith(
-                            fontSize: responsive.ip(1.8),
-                            fontWeight: FontWeight.normal,
-                            color: Get.theme.colorScheme.primary,
-                          ),
-                          textAlign: TextAlign.justify,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                    ctrl.loadingBuildings.isTrue
+                        ? const CircularProgressIndicator()
+                        : const SizedBox(),
+                    ctrl.loadingClassrooms.isTrue
+                        ? const CircularProgressIndicator()
+                        : const SizedBox(),
+                  ],
+                )),
             actions: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
