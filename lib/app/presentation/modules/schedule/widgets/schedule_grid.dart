@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/extra_base_model.dart';
 import 'package:utpl_totem/app/data/models/generic_schedule_model.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
 import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byClassroom/schedule_card_day.dart';
 import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byUser/schedule_card.dart';
 
@@ -10,6 +11,7 @@ import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 
 class ScheduleGrid extends StatelessWidget {
+  final ScheduleController ctrl;
   final GenericScheduleModel scheduleData;
   final ValueChanged<Datum>? onTap;
   final bool isLoading;
@@ -21,6 +23,7 @@ class ScheduleGrid extends StatelessWidget {
     required this.isLoading,
     this.onTap,
     required this.groupBy,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
@@ -90,10 +93,12 @@ class ScheduleGrid extends StatelessWidget {
                             },
                             child: groupBy == 'subject'
                                 ? ScheduleCardSubject(
+                                    ctrl: ctrl,
                                     scheduleData: schedule,
                                   )
                                 : ScheduleCardDay(
                                     scheduleData: schedule,
+                                    ctrl: ctrl,
                                   ),
                           );
                         },

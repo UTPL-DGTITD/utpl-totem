@@ -110,6 +110,7 @@ class ClassroomSchedule extends StatelessWidget {
                                         (classroomSchedule) =>
                                             SingleChildScrollView(
                                           child: ScheduleGrid(
+                                            ctrl: ctrl,
                                             groupBy: 'day',
                                             isLoading: false,
                                             scheduleData: classroomSchedule,
@@ -172,6 +173,7 @@ class ClassroomSchedule extends StatelessWidget {
     for (var i = 0; i < ctrl.classroomSchedule.length; i++) {
       items.add(
         ScheduleGrid(
+          ctrl: ctrl,
           groupBy: 'day',
           isLoading: false,
           scheduleData: ctrl.classroomSchedule[i],

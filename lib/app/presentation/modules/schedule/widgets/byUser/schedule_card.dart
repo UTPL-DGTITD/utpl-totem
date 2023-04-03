@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/extra_base_model.dart';
+import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 
 class ScheduleCardSubject extends StatelessWidget {
+  final ScheduleController ctrl;
   final Datum scheduleData;
 
   const ScheduleCardSubject({
     required this.scheduleData,
     Key? key,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
@@ -114,7 +117,15 @@ class ScheduleCardSubject extends StatelessWidget {
                                       ? '${scheduleData.place} ${scheduleData.classroom.isNotEmpty ? '- ${scheduleData.classroom}' : ''}'
                                       : scheduleData.classroom.isNotEmpty
                                           ? scheduleData.classroom
-                                          : ' -- ',
+                                          : ctrl.getStringByIdentifier(
+                                                      scheduleData.relation,
+                                                      'Modalidad') ==
+                                                  'EN LINEA'
+                                              ? ctrl.getStringByIdentifier(
+                                                      scheduleData.relation,
+                                                      'Modalidad') ??
+                                                  ' -- '
+                                              : ' -- ',
                                   maxLines: 1,
                                   style: Get.textTheme.headline4?.copyWith(
                                     fontSize: responsive.ip(1.6),

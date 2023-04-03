@@ -224,15 +224,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     inactivityTimer = Timer(duration, () async {
       ToolsHelper.logger.v('INACTIVIDAD USUARIO');
       if (Get.currentRoute == Routes.home) {
-        await Get.toNamed(Routes.screen_protector, arguments: {
-          "wallpaper": wallpaper.value,
-        });
+        navigateToPage(Routes.screen_protector);
       } else {
         Get.until((route) => Get.currentRoute == Routes.home);
+        resetTimer();
       }
 
       ToolsHelper.logger.v('VOLVISTE AL HOME');
-      resetTimer();
+      //resetTimer();
     });
   }
 
@@ -248,7 +247,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void navigateToPage(String page) async {
-    resetTimer(duration: const Duration(minutes: 5));
+    switch (page) {
+      case Routes.screen_protector:
+        resetTimer(duration: const Duration(minutes: 30));
+        break;
+      default:
+        resetTimer(duration: const Duration(minutes: 5));
+    }
+
     await Get.toNamed(page, arguments: {
       "wallpaper": wallpaper.value,
     });

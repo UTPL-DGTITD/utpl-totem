@@ -113,6 +113,7 @@ class ScheduleResults extends StatelessWidget {
     for (var i = 0; i < ctrl.userSchedule.length; i++) {
       items.add(
         ScheduleGrid(
+          ctrl: ctrl,
           groupBy: 'subject',
           isLoading: false,
           scheduleData: ctrl.userSchedule[i],
