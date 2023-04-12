@@ -26,6 +26,7 @@ class GenericListItemModel {
     this.title = "",
     this.identifier = "",
     this.description = "",
+    this.typeNotify = "",
     this.acronym = "",
     this.value = 0,
     this.interaction = "",
@@ -53,6 +54,7 @@ class GenericListItemModel {
   String identifier;
   String description;
   String acronym;
+  String typeNotify;
   int value;
   String interaction;
   String view;
@@ -96,6 +98,7 @@ class GenericListItemModel {
       title: json["title"] ?? "",
       identifier: json["identifier"] ?? "",
       description: json["description"] ?? "",
+      typeNotify: json["type_notify"] ?? "",
       acronym: json["acronym"] ?? "",
       value: json["value"] ?? 0,
       icon: json["icon"] == null ? null : IconGeneric.fromJson(json["icon"]),
@@ -136,6 +139,7 @@ class GenericListItemModel {
         "title": title,
         "identifier": identifier,
         "description": description,
+        "type_notify": typeNotify,
         "acronym": acronym,
         "value": value,
         "icon": icon,

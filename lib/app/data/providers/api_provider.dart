@@ -307,4 +307,23 @@ class ApiProvider extends ApiRepository {
       return ApiResponseModel.fromJson(res);
     });
   }
+/* -------------------------------------------------------------------------- */
+/*                                   GET NOTIFY                               */
+/* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getNotify({
+    Map<String, dynamic> headers = const {
+      "accessKey": Environment.accessKey,
+    },
+  }) {
+    return _netUtil
+        .get(
+      path: 'v1/notify/general/active',
+      headers: headers,
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
 }

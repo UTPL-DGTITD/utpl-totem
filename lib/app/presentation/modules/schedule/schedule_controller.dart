@@ -42,8 +42,7 @@ class ScheduleController extends GetxController
   final selectedIdClassroom = ''.obs;
   final selectedClassroom = ''.obs;
 
-  RegExp regExp =
-      RegExp(r'^[a-zA-Z0-9\b\u{0008}]+$'); //RegExp(r'[a-zA-Z0-9\b]');
+  RegExp regExp = RegExp(r''); //RegExp(r'^[a-zA-Z0-9.\b\u{0008}]+$');
 
   RxBool showSkeleton = false.obs;
   RxBool showSchedule = false.obs;

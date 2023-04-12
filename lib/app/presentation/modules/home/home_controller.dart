@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
@@ -31,6 +32,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   // WEATHER
   Rx<WeatherModel>? weather = WeatherModel().obs;
   Rx<GenericListItemModel> wallpaper = GenericListItemModel().obs;
+  Rx<GenericListItemModel> notifies = GenericListItemModel().obs;
   final currentTemp = ''.obs;
   final currentUv = ''.obs;
   final currentDescTemp = ''.obs;
@@ -40,7 +42,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   late Timer inactivityTimer = Timer(const Duration(minutes: 20), () {});
   final currentTemplate = TvTemplateModel().obs;
 
-  RxString advices = 'La visión de la Universidad Técnica Particular de Loja es '
+  RxString utplMessage = 'La visión de la Universidad Técnica Particular de Loja es '
           'el humanismo de Cristo, que se traduce en sentido de perfección, en compromiso '
           'institucional, en servicio a la sociedad, en mejora continua y en la búsqueda '
           'constante de la excelencia. El humanismo de Cristo que, en su manifestación '
@@ -50,6 +52,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           'defender y promover en la sociedad, el producto y la reflexión de toda '
           'experiencia humana'
       .obs;
+  RxString notify = ''.obs;
+  Rx<Color> colorNotify = Colors.transparent.obs;
+  Rx<Color> colorTextNotify = Get.theme.cardColor.obs;
 
   // Rx<VideoPlayerController> controller =
   //     VideoPlayerController.asset('assets/videos/becas_utpl.mp4').obs
@@ -72,9 +77,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void _initConfig() async {
     try {
+      notify = utplMessage;
       _loadRouteParams();
       loadWeather();
       loadWallpaper();
+      loadNotify();
+      //updateColorNotify('success');
       // validateConection();
       startTimer(const Duration(minutes: 20));
     } catch (error, stack) {
@@ -102,7 +110,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void validateConection() {
     timerConection.cancel();
-    timerConection = Timer.periodic(const Duration(seconds: 5), (timer) async {
+    timerConection = Timer.periodic(const Duration(minutes: 1), (timer) async {
       ToolsHelper.logger.v('PROBANDO CONEXION');
       var status = await validateServerConnection();
       if (status) {
@@ -138,6 +146,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
           timerTemp = Timer.periodic(const Duration(minutes: 1), (timer) async {
             updateTemp();
+            loadNotify();
           });
           break;
         default:
@@ -290,6 +299,67 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',
       );
+    }
+  }
+
+  void loadNotify() async {
+    try {
+      //showSkeleton.value = true;
+      var result = await apiRepository.getNotify();
+      switch (result.status) {
+        case 200:
+          notifies.value = GenericListItemModel.fromJson(result.data);
+          notify.value = notifies.value.description;
+          updateColorNotify(notifies.value.typeNotify);
+          ToolsHelper.logger.v('RESULT NOTIFY 200');
+          break;
+        default:
+          ToolsHelper.logger.i("Not results found");
+      }
+    } on TimeoutException {
+      toastService.presentWarningToast(
+        text: "Tiempo de espera agotado",
+      );
+    } on SocketException {
+      toastService.presentWarningToast(
+        text: "Error de conexión",
+      );
+    } catch (error, stack) {
+      ToolsHelper.logger.e(
+        '[home_controller] (loadNotify)',
+        error,
+        stack,
+      );
+      toastService.presentErrorToast(
+        text: 'Error nuestro, intenta más tarde',
+      );
+    }
+  }
+
+  void updateColorNotify(String type) {
+    switch (type) {
+      case 'warning':
+        colorNotify.value = const Color(0xFFFFF4C8);
+        colorTextNotify.value = const Color(0xFF8A6400);
+        break;
+      case 'info':
+        //colorNotify.value = const Color(0xFFCBEDF3);
+        //colorTextNotify.value = const Color(0xFF005562);
+        colorNotify.value = Colors.transparent;
+        colorTextNotify.value = Get.theme.cardColor;
+        break;
+      case 'success':
+        colorNotify.value = const Color(0xFFCEEED8);
+        colorTextNotify.value = const Color(0xFF01591C);
+        break;
+      case 'danger':
+        colorNotify.value = const Color(0xFFFED5DB);
+        colorTextNotify.value = const Color(0xFF7B1021);
+        break;
+      default:
+        colorNotify.value = Colors.transparent;
+        colorTextNotify.value = Get.theme.cardColor;
+        notify = utplMessage;
     }
   }
 }

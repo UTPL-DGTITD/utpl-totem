@@ -9,6 +9,7 @@ import 'package:slide_digital_clock/slide_digital_clock.dart';
 
 import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_controller.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
+import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 
 class ScreenProtectorPage extends GetView<ScreenProtectorController> {
   const ScreenProtectorPage({Key? key}) : super(key: key);
@@ -93,7 +94,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                               vertical: ctrl.responsive.hp(1)),
                           width: double.infinity,
                           //color: Colors.green,
-                          height: ctrl.responsive.hp(30),
+                          height: ctrl.responsive.hp(26),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -118,6 +119,34 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                         //   height: ctrl.responsive.hp(0.5),
                         //   thickness: ctrl.responsive.hp(0.5),
                         // ),
+                        ctrl.wallpaper.value.title != ''
+                            ? Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      ctrl.wallpaper.value.title,
+                                      style: TextStyle(
+                                        fontSize: ctrl.responsive.ip(3.2),
+                                        color: ctrl.colorContent,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.right,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Icon(
+                                        UtplCustom.right_small_arrow,
+                                        size: ctrl.responsive.ip(3),
+                                        color: ctrl.colorContent,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : const SizedBox(),
                         Container(
                           width: double.infinity,
                           height: ctrl.responsive.hp(40),
@@ -132,18 +161,7 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        // Text(
-                                        //   ctrl.wallpaper.value.title,
-                                        //   style: TextStyle(
-                                        //     fontSize: ctrl.responsive.ip(2),
-                                        //     color: Get.theme.cardColor,
-                                        //     fontWeight: FontWeight.bold,
-                                        //   ),
-                                        //   textAlign: TextAlign.center,
-                                        // ),
-                                        // customYMargin(ctrl.responsive.hp(2)),
                                         CachedNetworkImage(
-                                          //height: ctrl.responsive.hp(50),
                                           height: ctrl.responsive.hp(35),
                                           imageUrl:
                                               ctrl.wallpaper.value.image?.url ??
@@ -184,46 +202,49 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Container(
-                                        color: Get.theme.colorScheme.primary,
-                                        child: Center(
-                                          child: Card(
-                                            color: ctrl.colorContent,
+                                    ctrl.wallpaper.value.link?.url != ''
+                                        ? Expanded(
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: ctrl.responsive.hp(1),
-                                                horizontal:
-                                                    ctrl.responsive.wp(2),
-                                              ),
-                                              child: PrettyQr(
-                                                //image: const AssetImage('assets/images/logo_utpl_azul.png'),
-                                                elementColor: Colors.black,
-                                                typeNumber: null,
-                                                size: ctrl.responsive.ip(13),
-                                                data: ctrl.wallpaper.value.link
-                                                        ?.url ??
-                                                    'https://appmovil.utpl.edu.ec/',
-                                                errorCorrectLevel:
-                                                    QrErrorCorrectLevel.M,
-                                                roundEdges: true,
+                                              color:
+                                                  Get.theme.colorScheme.primary,
+                                              child: Center(
+                                                child: Card(
+                                                  color: ctrl.colorContent,
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      vertical:
+                                                          ctrl.responsive.hp(1),
+                                                      horizontal:
+                                                          ctrl.responsive.wp(2),
+                                                    ),
+                                                    child: PrettyQr(
+                                                      //image: const AssetImage('assets/images/logo_utpl_azul.png'),
+                                                      elementColor:
+                                                          Colors.black,
+                                                      typeNumber: null,
+                                                      size: ctrl.responsive
+                                                          .ip(13),
+                                                      data: ctrl.wallpaper.value
+                                                              .link?.url ??
+                                                          'https://appmovil.utpl.edu.ec/',
+                                                      errorCorrectLevel:
+                                                          QrErrorCorrectLevel.M,
+                                                      roundEdges: true,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
+                                          )
+                                        : const SizedBox(),
                                   ],
                                 ),
                               )
                             ],
                           ),
                         ),
-                        // Divider(
-                        //   color: Get.theme.colorScheme.tertiary,
-                        //   height: ctrl.responsive.hp(0.5),
-                        //   thickness: ctrl.responsive.hp(0.5),
-                        // ),
+                        customYMargin(ctrl.responsive.hp(2)),
                         Container(
                           width: double.infinity,
                           height: ctrl.responsive.hp(15),

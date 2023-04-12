@@ -9,7 +9,6 @@ import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
 import 'package:utpl_totem/app/presentation/modules/home/utils/generate_component.dart';
 import 'package:utpl_totem/app/presentation/modules/home/widgets/side_header.dart';
 import 'package:utpl_totem/app/presentation/modules/videos/videos_page.dart';
-import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
@@ -140,22 +139,29 @@ class HomePage extends GetView<HomeController> {
                             width: double.infinity,
                             height: ctrl.responsive.hp(9),
                             color: Get.theme.colorScheme.primary,
-                            child: Marquee(
-                              text: ctrl.advices.value,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.cardColor,
-                                fontSize: ctrl.responsive.ip(1.8),
+                            child: Container(
+                              // margin: EdgeInsets.symmetric(
+                              //   vertical: ctrl.responsive.hp(2),
+                              // ),
+                              color: ctrl.colorNotify.value,
+                              child: Marquee(
+                                text: ctrl.notify.value,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: ctrl.colorTextNotify.value,
+                                  fontSize: ctrl.responsive.ip(1.8),
+                                ),
+                                scrollAxis: Axis.horizontal,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                blankSpace: 20.0,
+                                velocity: 50,
+                                pauseAfterRound: const Duration(seconds: 0),
+                                startPadding: 10.0,
+                                accelerationDuration:
+                                    const Duration(seconds: 1),
+                                accelerationCurve: Curves.linear,
+                                decelerationCurve: Curves.easeOut,
                               ),
-                              scrollAxis: Axis.horizontal,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              blankSpace: 20.0,
-                              velocity: 50,
-                              pauseAfterRound: const Duration(seconds: 0),
-                              startPadding: 10.0,
-                              accelerationDuration: const Duration(seconds: 1),
-                              accelerationCurve: Curves.linear,
-                              decelerationCurve: Curves.easeOut,
                             ),
                           ),
                         ],

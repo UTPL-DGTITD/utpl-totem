@@ -137,4 +137,11 @@ abstract class ApiRepository {
     required Map<String, dynamic> body,
     Map<String, dynamic> headers,
   });
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   GET NOTIFY                               */
+  /* -------------------------------------------------------------------------- */
+  Future<ApiResponseModel> getNotify({
+    Map<String, dynamic> headers,
+  });
 }

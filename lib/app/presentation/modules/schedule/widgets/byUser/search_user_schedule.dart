@@ -76,7 +76,7 @@ class SearchUserSchedule extends StatelessWidget {
                                     ctrl.validatorsForm.validateLength(
                                   value: value,
                                   min: 1,
-                                  max: 15,
+                                  max: 30,
                                 ),
                                 onChanged: (value) =>
                                     ctrl.onChangeUsername(value),

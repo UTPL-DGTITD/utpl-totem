@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/observatories/observatories_controller.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_controller.dart';
 import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
 import 'package:utpl_totem/app/presentation/widgets/footer_utpl.dart';
