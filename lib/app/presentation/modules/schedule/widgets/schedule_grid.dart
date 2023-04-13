@@ -42,36 +42,38 @@ class ScheduleGrid extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                color: Get.theme.cardColor,
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        groupBy == 'subject' ? 'Materia:' : 'Día:',
-                        style: TextStyle(
-                          fontSize: responsive.ip(2),
-                          fontWeight: FontWeight.bold,
-                          color: Get.theme.colorScheme.primary,
-                        ),
-                        textAlign: TextAlign.center,
+              groupBy == 'subject'
+                  ? Container(
+                      color: Get.theme.cardColor,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              groupBy == 'subject' ? 'Materia:' : 'Día:',
+                              style: TextStyle(
+                                fontSize: responsive.ip(2),
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.colorScheme.primary,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              scheduleData.title,
+                              style: TextStyle(
+                                fontSize: responsive.ip(2),
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Text(
-                        scheduleData.title,
-                        style: TextStyle(
-                          fontSize: responsive.ip(2),
-                          fontWeight: FontWeight.bold,
-                          color: Get.theme.colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                    )
+                  : const SizedBox(),
               customYMargin(responsive.hp(2)),
               Container(
                 padding: EdgeInsets.symmetric(

@@ -24,6 +24,7 @@ class SchedulePage extends GetView<ScheduleController> {
         bottom: TabBar(
           controller: controller.tabController,
           tabs: controller.tabs,
+          labelStyle: TextStyle(fontSize: controller.responsive.ip(2)),
         ),
         centerTitle: true,
         toolbarHeight: controller.responsive.hp(8),

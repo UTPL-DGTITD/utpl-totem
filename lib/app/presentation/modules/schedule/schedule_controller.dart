@@ -41,6 +41,7 @@ class ScheduleController extends GetxController
   final selectedBuilding = ''.obs;
   final selectedIdClassroom = ''.obs;
   final selectedClassroom = ''.obs;
+  final selectedDay = ''.obs;
 
   RegExp regExp = RegExp(r''); //RegExp(r'^[a-zA-Z0-9.\b\u{0008}]+$');
 
@@ -98,6 +99,7 @@ class ScheduleController extends GetxController
       ),
     ];
     tabController = TabController(length: tabs.length, vsync: this);
+
     super.onInit();
   }
 
@@ -356,6 +358,8 @@ class ScheduleController extends GetxController
 
           tabControllerWeeks =
               TabController(length: classroomSchedule.length, vsync: this);
+          tabControllerWeeks.addListener(handleTabSelection);
+          selectedDay.value = classroomSchedule.first.title;
 
           showClassroomSchedule.value = true;
 
@@ -505,5 +509,9 @@ class ScheduleController extends GetxController
         text: 'Error nuestro, intenta más tarde',
       );
     }
+  }
+
+  void handleTabSelection() {
+    selectedDay.value = classroomSchedule[tabControllerWeeks.index].title;
   }
 }

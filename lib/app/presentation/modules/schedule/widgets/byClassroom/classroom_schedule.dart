@@ -22,7 +22,7 @@ class ClassroomSchedule extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: ctrl.responsive.hp(30),
+              height: ctrl.responsive.hp(28),
               color: Get.theme.cardColor,
               padding: EdgeInsets.symmetric(horizontal: ctrl.responsive.wp(5)),
               child: Column(
@@ -39,7 +39,9 @@ class ClassroomSchedule extends StatelessWidget {
                       isLoading: ctrl.loadingBuildings.value,
                     ),
                     child: DropdownButtonFormField<String>(
+                      iconSize: ctrl.responsive.ip(3),
                       isDense: false,
+                      style: TextStyle(fontSize: ctrl.responsive.ip(2)),
                       isExpanded: true,
                       hint: Text(
                         ctrl.selectedBuilding.value,
@@ -65,6 +67,8 @@ class ClassroomSchedule extends StatelessWidget {
                       isLoading: ctrl.loadingClassrooms.value,
                     ),
                     child: DropdownButtonFormField<String>(
+                      iconSize: ctrl.responsive.ip(3),
+                      style: TextStyle(fontSize: ctrl.responsive.ip(2)),
                       isDense: false,
                       isExpanded: true,
                       hint: Text(
@@ -81,9 +85,24 @@ class ClassroomSchedule extends StatelessWidget {
                   ),
                   customYMargin(ctrl.responsive.hp(2)),
                   ctrl.classroomSchedule.isNotEmpty
-                      ? TabBar(
-                          controller: ctrl.tabControllerWeeks,
-                          tabs: ctrl.tabsWeek,
+                      ? Column(
+                          children: [
+                            TabBar(
+                              controller: ctrl.tabControllerWeeks,
+                              tabs: ctrl.tabsWeek,
+                              labelStyle:
+                                  TextStyle(fontSize: ctrl.responsive.ip(2)),
+                            ),
+                            customYMargin(ctrl.responsive.hp(1)),
+                            Text(
+                              ctrl.selectedDay.value,
+                              style: TextStyle(
+                                fontSize: ctrl.responsive.ip(2),
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.colorScheme.primary,
+                              ),
+                            ),
+                          ],
                         )
                       : const SizedBox(),
                 ],
@@ -99,7 +118,7 @@ class ClassroomSchedule extends StatelessWidget {
                             ctrl.contentResultsClassroomScrollController,
                         child: Container(
                           width: ctrl.responsive.wp(100),
-                          height: ctrl.responsive.hp(47.7),
+                          height: ctrl.responsive.hp(49.7),
                           child: Column(
                             children: [
                               Expanded(
@@ -134,6 +153,7 @@ class ClassroomSchedule extends StatelessWidget {
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.warning_amber_rounded,
