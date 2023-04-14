@@ -25,8 +25,8 @@ class ModalDialogBuildings {
           Responsive responsive = Responsive();
           return AlertDialog(
             insetPadding: EdgeInsets.only(
-              top: responsive.hp(8),
-              bottom: responsive.hp(15),
+              top: responsive.hp(15),
+              bottom: responsive.hp(18),
               left: responsive.wp(12),
               right: responsive.wp(12),
             ),
