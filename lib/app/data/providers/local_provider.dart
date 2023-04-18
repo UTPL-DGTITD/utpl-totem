@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:utpl_totem/app/data/models/roles_model.dart';
 import 'package:utpl_totem/app/data/models/user_profile_model.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
@@ -61,8 +60,6 @@ class LocalProvider extends LocalRepository {
             key: "user_profile",
             value: data != null ? userProfileModelToJson(data) : null)
         .catchError((onError) {
-      FirebaseCrashlytics.instance.recordError(onError, null,
-          reason: '[local_provider] (saveUserProfile)');
       ToolsHelper.logger.e("save user_profile", onError);
     });
     return;
@@ -84,8 +81,6 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "user_roles", value: rolesModelListToJson(data))
         .catchError((onError) {
-      FirebaseCrashlytics.instance
-          .recordError(onError, null, reason: '[local_provider] (saveRoles)');
       ToolsHelper.logger.e("save user_roles", onError);
     });
     return;
@@ -130,8 +125,6 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "skip_intro", value: skip.toString())
         .catchError((onError) {
-      FirebaseCrashlytics.instance.recordError(onError, null,
-          reason: '[local_provider] (saveSkipIntro)');
       ToolsHelper.logger.e("saveSkipIntro", onError);
     });
     return;
@@ -153,8 +146,6 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "beta_code", value: code.toString())
         .catchError((onError) {
-      FirebaseCrashlytics.instance.recordError(onError, null,
-          reason: '[local_provider] (saveBetaCode)');
       ToolsHelper.logger.e("saveBetaCode", onError);
     });
     return;
@@ -176,8 +167,6 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "device_id", value: id.toString())
         .catchError((onError) {
-      FirebaseCrashlytics.instance.recordError(onError, null,
-          reason: '[local_provider] (saveDeviceId)');
       ToolsHelper.logger.e("saveDeviceId", onError);
     });
     return;
@@ -199,8 +188,6 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: 'skip_version', value: appVersion.toString())
         .catchError((onError) {
-      FirebaseCrashlytics.instance.recordError(onError, null,
-          reason: '[local_provider] (saveSkipVersion)');
       ToolsHelper.logger.e("saveSkipVersion", onError);
     });
     return;

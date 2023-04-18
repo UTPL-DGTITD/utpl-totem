@@ -14,8 +14,6 @@ import 'package:window_manager/window_manager.dart';
 import 'app/controllers/main_controller.dart';
 
 void main() async {
-  // HttpOverrides.global = MyHttpOverrides();
-  // await WindowManager.instance.setFullScreen(true);
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
@@ -79,12 +77,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class MyHttpOverrides extends HttpOverrides {
-//   @override
-//   HttpClient createHttpClient(SecurityContext? context) {
-//     return super.createHttpClient(context)
-//       ..badCertificateCallback =
-//           (X509Certificate cert, String host, int port) => true;
-//   }
-// }

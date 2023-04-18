@@ -1,18 +1,21 @@
 import 'dart:io' as io;
 
+import 'package:aad_oauth/aad_oauth.dart';
+import 'package:aad_oauth/model/config.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-// import 'package:package_info_plus/package_info_plus.dart';
+
+//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:store_redirect/store_redirect.dart';
+//import 'package:store_redirect/store_redirect.dart';
 import 'package:timeago/timeago.dart' as time_ago;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:aad_oauth/model/config.dart';
-import 'package:aad_oauth/aad_oauth.dart';
+//import 'package:aad_oauth/model/config.dart';
+//import 'package:aad_oauth/aad_oauth.dart';
 import 'package:utpl_totem/app/controllers/main_controller.dart';
 import 'package:utpl_totem/app/data/enviroment.dart';
+//import 'package:utpl_totem/app/data/enviroment.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 
 import 'package:logger/logger.dart';
@@ -46,12 +49,7 @@ class ToolsHelper {
     } else {
       try {
         await launchUrlString(url, mode: LaunchMode.externalApplication);
-      } catch (error, stack) {
-        FirebaseCrashlytics.instance.recordError(
-          error,
-          stack,
-          reason: '[tools_helper] (openUrl)',
-        );
+      } catch (error) {
         _toastUtilInterface.presentErrorToast(
           text: 'No se puede abrir la url: $url',
         );
@@ -67,12 +65,7 @@ class ToolsHelper {
     } else {
       try {
         await launchUrl(phoneUrl);
-      } catch (error, stack) {
-        FirebaseCrashlytics.instance.recordError(
-          error,
-          stack,
-          reason: '[tools_helper] (openPhone)',
-        );
+      } catch (error) {
         _toastUtilInterface.presentErrorToast(
           text: 'No se puede abrir el número: $phoneNumber',
         );
@@ -112,12 +105,7 @@ class ToolsHelper {
       final RegExp regex = RegExp(r'(.*)(?=@)');
       final String? result = regex.firstMatch(email)?.group(0);
       return result ?? '';
-    } catch (error, stack) {
-      FirebaseCrashlytics.instance.recordError(
-        error,
-        stack,
-        reason: '[tools_helper] (getUsernameOfEmail)',
-      );
+    } catch (error) {
       ToolsHelper.logger.e('[tools_helper] (getUsernameOfEmail)', error);
       return '';
     }
@@ -136,34 +124,9 @@ class ToolsHelper {
         return description.replaceFirst(result, '').trimLeft();
       }
       return description;
-    } catch (error, stack) {
-      FirebaseCrashlytics.instance.recordError(
-        error,
-        stack,
-        reason: '[tools_helper] (wipeMsEventDescription)',
-      );
+    } catch (error) {
       ToolsHelper.logger.e('[tools_helper] (wipeMsEventDescription)', error);
       return description ?? '';
-    }
-  }
-
-  static void openExternalApp(String? iosId, String? androidId) {
-    var platform = GetPlatform.isAndroid
-        ? 'android'
-        : GetPlatform.isIOS
-            ? 'ios'
-            : 'undefined';
-
-    if (platform == 'ios' && iosId != null && (iosId.isNotEmpty)) {
-      StoreRedirect.redirect(iOSAppId: iosId);
-    } else if (platform == 'android' &&
-        androidId != null &&
-        (androidId.isNotEmpty)) {
-      StoreRedirect.redirect(androidAppId: androidId);
-    } else {
-      _toastUtilInterface.presentWarningToast(
-        text: "La aplicación no está disponible para este dispositivo",
-      );
     }
   }
 
@@ -176,21 +139,6 @@ class ToolsHelper {
       return '';
     }
   }
-
-  // static Future<String> appVersion() async {
-  //   try {
-  //     var packageInfo = await PackageInfo.fromPlatform();
-
-  //     return packageInfo.version;
-  //   } catch (error, stack) {
-  //     FirebaseCrashlytics.instance.recordError(
-  //       error,
-  //       stack,
-  //       reason: '[tools_helper] (appVersion)',
-  //     );
-  //     return '0.0.0';
-  //   }
-  // }
 
   /// Configure the ADFS authentication parameters.
   static AadOAuth get adfsConfig {
@@ -207,21 +155,6 @@ class ToolsHelper {
 
     return AadOAuth(config);
   }
-
-  // static Future<bool> isAppUpdated({required String serverVersion}) async {
-  //   try {
-  //     var packageInfo = await PackageInfo.fromPlatform();
-  //     Version currentVersion = Version.parse(packageInfo.version);
-  //     Version latestVersion = Version.parse(serverVersion);
-  //     if (currentVersion >= latestVersion) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     return true;
-  //   }
-  // }
 
   static String formatToTimeAgo(DateTime dateTime) =>
       time_ago.format(dateTime, locale: 'es');
