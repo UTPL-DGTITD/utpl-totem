@@ -101,6 +101,59 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
+                                // customYMargin(ctrl.responsive.hp(1)),
+                                // Container(
+                                //   width: ctrl.responsive.wp(100),
+                                //   padding: EdgeInsets.only(
+                                //     bottom: ctrl.responsive.hp(1),
+                                //     right: ctrl.responsive.wp(10),
+                                //     left: ctrl.responsive.wp(10),
+                                //   ),
+                                //   child: ElevatedButton(
+                                //     style: ButtonStyle(
+                                //         shape: MaterialStateProperty.all<
+                                //             RoundedRectangleBorder>(
+                                //           RoundedRectangleBorder(
+                                //             borderRadius: BorderRadius.circular(
+                                //                 ctrl.responsive.ip(2)),
+                                //           ),
+                                //         ),
+                                //         backgroundColor:
+                                //             MaterialStateColor.resolveWith(
+                                //                 (states) => Get.theme
+                                //                     .colorScheme.primary)),
+                                //     child: Padding(
+                                //       padding: EdgeInsets.symmetric(
+                                //           vertical: ctrl.responsive.hp(1)),
+                                //       child: Row(
+                                //         children: [
+                                //           Expanded(
+                                //             child: Icon(
+                                //               Icons.stacked_bar_chart,
+                                //               size: ctrl.responsive.ip(2.5),
+                                //               color: Get.theme.cardColor,
+                                //             ),
+                                //           ),
+                                //           Expanded(
+                                //             flex: 2,
+                                //             child: Text(
+                                //               'Ver estadísticas',
+                                //               style: Get.textTheme.headline6
+                                //                   ?.copyWith(
+                                //                 fontSize: ctrl.responsive.ip(2),
+                                //                 fontWeight: FontWeight.bold,
+                                //                 color: Get.theme.cardColor,
+                                //               ),
+                                //             ),
+                                //           ),
+                                //         ],
+                                //       ),
+                                //     ),
+                                //     onPressed: () {
+                                //       ctrl.navigateToUrl('da');
+                                //     },
+                                //   ),
+                                // ),
                                 customYMargin(ctrl.responsive.hp(1)),
                                 Text(
                                   'Equipo',

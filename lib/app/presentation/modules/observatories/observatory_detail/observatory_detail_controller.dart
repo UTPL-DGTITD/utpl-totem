@@ -10,6 +10,7 @@ import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
 import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
+import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 import 'package:utpl_totem/app/utils/helpers/uri_helper.dart';
@@ -153,5 +154,14 @@ class ObservatoryDetailController extends GetxController
   String getUserSplitEmail(String email) {
     List<String> partes = email.split("@");
     return partes[0];
+  }
+
+  void navigateToUrl(String url) {
+    url =
+        'https://smartland.maps.arcgis.com/apps/dashboards/565fc2eccbc7488db6639233cf555c83';
+    Get.toNamed(Routes.web, arguments: {
+      "url": url,
+      "title": title.value,
+    });
   }
 }

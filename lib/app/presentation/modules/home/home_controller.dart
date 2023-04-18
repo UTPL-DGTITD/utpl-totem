@@ -214,7 +214,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         inactivityTimer.cancel();
         ToolsHelper.logger.v('RESET TEMPLATE');
 
-        Get.offAllNamed(Routes.home, arguments: {
+        Get.offAllNamed(Routes.splash_screen, arguments: {
           'currentTemplate': currentTemplate.value,
         });
       }

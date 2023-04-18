@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
@@ -26,16 +27,17 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
   late Timer timerVideoPlaying;
   final title = 'Vídeos UTPL'.obs;
 
-  final urlVideos = [
+  RxList<String> urlVideos = <String>[
     'ZBHfZLyP1SI',
-    'zdagGm-DrDQ',
+    //'zdagGm-DrDQ',
     //'gyo8ee5aXF8',
     //'nNkw3Fo9Aqk',
     //'eycU0vO9Gzc',
   ].obs;
   final urlNetworkVideos = [].obs;
+  final Rx<TvTemplateBody> item = TvTemplateBody().obs;
 
-  Player player = Player(id: 69420);
+  Rx<Player> player = Player(id: 69420).obs;
 
   VideosController({
     required this.localRepository,
@@ -52,15 +54,16 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
 
   void _initConfig() async {
     try {
-      player.play();
-      await generateUrls();
-      playVideos();
-      timerVideoPlaying =
-          Timer.periodic(const Duration(minutes: 1), (timer) async {
-        validateVideo();
-      });
-      //player.play();
       ToolsHelper.logger.v('VIDEOS CONTROLLER $urlVideos');
+      //player.value.play();
+      //await generateUrls(urlVideos.value);
+      //playVideos();
+      // timerVideoPlaying =
+      //     Timer.periodic(const Duration(minutes: 1), (timer) async {
+      //   validateVideo();
+      // });
+      //player.play();
+      //ToolsHelper.logger.v('VIDEOS CONTROLLER $urlVideos ${urlVideos.length}');
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[videos_controller] (_initConfig)',
@@ -116,7 +119,9 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  Future<void> generateUrls() async {
+  Future<void> generateUrls(List<String> urlVideos) async {
+    //ToolsHelper.logger.v(urlVideos.length);
+    urlNetworkVideos.value = [].obs;
     for (var i = 0; i < urlVideos.length; i++) {
       await getYoutubeVideoQualityUrls(
         urlVideos[i],
@@ -151,13 +156,13 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
   void playVideos() {
     ToolsHelper.logger.v('NOW PLAYING');
     showSkeleton = false.obs;
-    player.open(
+    player.value.open(
       Playlist(medias: loadNetworkVideos()),
       autoStart: true,
     );
-    player.playbackStream.listen((PlaybackState state) {
+    player.value.playbackStream.listen((PlaybackState state) {
       if (state.isCompleted) {
-        player.play();
+        player.value.play();
       }
     });
     showSkeleton = true.obs;
@@ -165,9 +170,9 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
 
   void validateVideo() {
     ToolsHelper.logger.v('VALIDAR VIDEO');
-    if (!player.playback.isPlaying) {
+    if (!player.value.playback.isPlaying) {
       ToolsHelper.logger.v('VIDEO PAUSADO');
-      player.play();
+      player.value.play();
     }
   }
 }
