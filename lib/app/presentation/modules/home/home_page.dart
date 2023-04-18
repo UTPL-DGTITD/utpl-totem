@@ -3,12 +3,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 
 import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
 import 'package:utpl_totem/app/presentation/modules/home/utils/generate_component.dart';
 import 'package:utpl_totem/app/presentation/modules/home/widgets/side_header.dart';
-import 'package:utpl_totem/app/presentation/modules/videos/videos_page.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 

@@ -37,8 +37,6 @@ class LocalProvider extends LocalRepository {
     try {
       final String? user = await _storage.read(key: 'username');
 
-      // HACK: Set custom username
-      // return 'nopiedra';
       return user == null || user.isEmpty ? "undefined" : user;
     } catch (e) {
       return "undefined";
@@ -49,12 +47,7 @@ class LocalProvider extends LocalRepository {
   Future<String> getSingleValue({required String key}) async {
     try {
       final String? value = await _storage.read(key: key);
-      // HACK: Set custom username
-      // if (value != null && value.isNotEmpty && key == 'username') {
-      //   return 'nopiedra';
-      // } else {
-      //   return value == null || value.isEmpty ? "undefined" : value;
-      // }
+
       return value == null || value.isEmpty ? "undefined" : value;
     } catch (e) {
       return "undefined";

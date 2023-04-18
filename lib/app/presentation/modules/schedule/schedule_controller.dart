@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/extra_base_model.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
@@ -14,7 +13,6 @@ import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/presentation/modules/schedule/widgets/modal_dialog_schedule.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 import 'package:utpl_totem/app/utils/validators/validators_forms.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
@@ -80,7 +78,7 @@ class ScheduleController extends GetxController
     _initConfig();
     tabs = [
       Tab(
-        iconMargin: EdgeInsets.symmetric(),
+        iconMargin: const EdgeInsets.symmetric(),
         text: 'Por usuario',
         height: responsive.hp(7),
         icon: Icon(
@@ -89,7 +87,7 @@ class ScheduleController extends GetxController
         ),
       ),
       Tab(
-        iconMargin: EdgeInsets.symmetric(),
+        iconMargin: const EdgeInsets.symmetric(),
         text: 'Por aula',
         height: responsive.hp(7),
         icon: Icon(
@@ -101,11 +99,6 @@ class ScheduleController extends GetxController
     tabController = TabController(length: tabs.length, vsync: this);
 
     super.onInit();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 
   void _initConfig() async {

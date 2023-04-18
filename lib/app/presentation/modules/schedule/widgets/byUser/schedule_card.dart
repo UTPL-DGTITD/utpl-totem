@@ -48,13 +48,13 @@ class ScheduleCardSubject extends StatelessWidget {
                         customXMargin(responsive.wp(20)),
                         Icon(
                           Icons.timeline,
-                          color: Get.textTheme.headline2?.color,
+                          color: Get.textTheme.displayMedium?.color,
                           size: responsive.ip(2),
                         ),
                         customXMargin(responsive.wp(1.5)),
                         Text(
                           '${scheduleData.beginClass} - ${scheduleData.endClass}',
-                          style: Get.textTheme.headline4?.copyWith(
+                          style: Get.textTheme.headlineMedium?.copyWith(
                             fontSize: responsive.ip(1.8),
                             fontWeight: FontWeight.w600,
                           ),
@@ -75,7 +75,7 @@ class ScheduleCardSubject extends StatelessWidget {
                           ),
                           child: Text(
                             scheduleData.typeSchedule,
-                            style: Get.textTheme.headline5?.copyWith(
+                            style: Get.textTheme.headlineSmall?.copyWith(
                               fontSize: responsive.ip(1.3),
                               fontWeight: FontWeight.w600,
                             ),
@@ -99,13 +99,13 @@ class ScheduleCardSubject extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.location_on_rounded,
-                                color: Get.textTheme.headline2?.color,
+                                color: Get.textTheme.displayMedium?.color,
                                 size: responsive.ip(2),
                               ),
                               customXMargin(responsive.wp(1)),
                               Text(
                                 'Ubicación:',
-                                style: Get.textTheme.headline2?.copyWith(
+                                style: Get.textTheme.displayMedium?.copyWith(
                                   fontSize: responsive.ip(1.6),
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -127,7 +127,7 @@ class ScheduleCardSubject extends StatelessWidget {
                                                   ' -- '
                                               : ' -- ',
                                   maxLines: 1,
-                                  style: Get.textTheme.headline4?.copyWith(
+                                  style: Get.textTheme.headlineMedium?.copyWith(
                                     fontSize: responsive.ip(1.6),
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -178,7 +178,7 @@ class ScheduleCardSubject extends StatelessWidget {
             ),
             child: Text(
               scheduleData.day,
-              style: Get.textTheme.headline2?.copyWith(
+              style: Get.textTheme.displayMedium?.copyWith(
                 fontSize: responsive.ip(1.5),
                 fontWeight: FontWeight.w700,
               ),

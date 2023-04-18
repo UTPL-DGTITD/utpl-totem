@@ -17,7 +17,7 @@ class ClassroomSchedule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
+      () => SizedBox(
         width: double.infinity,
         child: Column(
           children: [
@@ -48,7 +48,7 @@ class ClassroomSchedule extends StatelessWidget {
                       ),
                       decoration: CustomDecoration.roundedDropdown(),
                       onChanged: (value) => ctrl.onBuildingChange(value),
-                      items: [],
+                      items: const [],
                       //generateDropDownItems(ctrl.buildings),
                       value: ctrl.selectedBuilding.value.isNotEmpty
                           ? ctrl.selectedBuilding.value
@@ -76,7 +76,7 @@ class ClassroomSchedule extends StatelessWidget {
                       ),
                       decoration: CustomDecoration.roundedDropdown(),
                       onChanged: (value) => ctrl.onClassroomChange(value),
-                      items: [],
+                      items: const [],
                       //generateDropDownItems(ctrl.classrooms),
                       value: ctrl.selectedClassroom.value.isNotEmpty
                           ? ctrl.selectedClassroom.value
@@ -116,7 +116,7 @@ class ClassroomSchedule extends StatelessWidget {
                       child: SingleChildScrollView(
                         controller:
                             ctrl.contentResultsClassroomScrollController,
-                        child: Container(
+                        child: SizedBox(
                           width: ctrl.responsive.wp(100),
                           height: ctrl.responsive.hp(49.7),
                           child: Column(

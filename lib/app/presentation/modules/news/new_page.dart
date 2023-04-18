@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'package:utpl_totem/app/presentation/modules/news/news_controller.dart';
 import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
@@ -9,7 +10,6 @@ import 'package:utpl_totem/app/presentation/widgets/modal_dialog.dart';
 import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
-import 'package:intl/src/intl/date_format.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 class NewsPage extends GetView<NewsController> {

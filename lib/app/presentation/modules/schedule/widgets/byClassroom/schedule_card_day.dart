@@ -48,7 +48,7 @@ class ScheduleCardDay extends StatelessWidget {
                         customXMargin(responsive.wp(22)),
                         // Icon(
                         //   Icons.location_on,
-                        //   color: Get.textTheme.headline2?.color,
+                        //   color: Get.textTheme.displayMedium?.color,
                         //   size: responsive.ip(2),
                         // ),
                         // customXMargin(responsive.wp(1.5)),
@@ -56,7 +56,7 @@ class ScheduleCardDay extends StatelessWidget {
                           ctrl.getStringByIdentifier(
                                   scheduleData.relation, 'Periodo Academico') ??
                               ' -- ',
-                          style: Get.textTheme.headline4?.copyWith(
+                          style: Get.textTheme.headlineMedium?.copyWith(
                             fontSize: responsive.ip(1.6),
                             fontWeight: FontWeight.w600,
                           ),
@@ -77,7 +77,7 @@ class ScheduleCardDay extends StatelessWidget {
                           ),
                           child: Text(
                             scheduleData.typeSchedule,
-                            style: Get.textTheme.headline5?.copyWith(
+                            style: Get.textTheme.headlineSmall?.copyWith(
                               fontSize: responsive.ip(1.3),
                               fontWeight: FontWeight.w600,
                             ),
@@ -101,13 +101,13 @@ class ScheduleCardDay extends StatelessWidget {
                             children: [
                               // Icon(
                               //   UtplCustom.education,
-                              //   color: Get.textTheme.headline2?.color,
+                              //   color: Get.textTheme.displayMedium?.color,
                               //   size: responsive.ip(2),
                               // ),
                               // customXMargin(responsive.wp(1)),
                               // Text(
                               //   'Componente:',
-                              //   style: Get.textTheme.headline2?.copyWith(
+                              //   style: Get.textTheme.displayMedium?.copyWith(
                               //     fontSize: responsive.ip(1.6),
                               //     fontWeight: FontWeight.w600,
                               //   ),
@@ -117,7 +117,7 @@ class ScheduleCardDay extends StatelessWidget {
                                 child: Text(
                                   scheduleData.title,
                                   maxLines: 1,
-                                  style: Get.textTheme.headline4?.copyWith(
+                                  style: Get.textTheme.headlineMedium?.copyWith(
                                     fontSize: responsive.ip(1.6),
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -168,7 +168,7 @@ class ScheduleCardDay extends StatelessWidget {
             ),
             child: Text(
               '${scheduleData.beginClass} - ${scheduleData.endClass}',
-              style: Get.textTheme.headline2?.copyWith(
+              style: Get.textTheme.displayMedium?.copyWith(
                 fontSize: responsive.ip(1.5),
                 fontWeight: FontWeight.w700,
               ),

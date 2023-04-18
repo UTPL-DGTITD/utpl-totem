@@ -15,28 +15,25 @@ final ThemeData appLightTheme = ThemeData(
         primaryContainer: LightSchema.lightColorDark,
       ),
   textTheme: ThemeData.light().textTheme.copyWith(
-        headline3: ThemeData.light().textTheme.headline3?.copyWith(
+        displaySmall: ThemeData.light().textTheme.displaySmall?.copyWith(
               color: LightSchema.lightColor,
             ),
-        headline5: ThemeData.light().textTheme.headline5?.copyWith(
+        headlineSmall: ThemeData.light().textTheme.headlineSmall?.copyWith(
               color: LightSchema.primaryColor,
             ),
-        headline6: ThemeData.light().textTheme.headline6?.copyWith(
+        titleLarge: ThemeData.light().textTheme.titleLarge?.copyWith(
               color: LightSchema.darkColorDark,
             ),
-        bodyText1: ThemeData.light().textTheme.bodyText1?.copyWith(
+        bodyMedium: ThemeData.light().textTheme.bodyMedium?.copyWith(
               color: LightSchema.darkColor,
             ),
-        bodyText2: ThemeData.light().textTheme.bodyText2?.copyWith(
-              color: LightSchema.mediumColor,
-            ),
-        subtitle1: ThemeData.light().textTheme.subtitle1?.copyWith(
+        titleMedium: ThemeData.light().textTheme.titleMedium?.copyWith(
               color: LightSchema.darkColorLight,
             ),
-        subtitle2: ThemeData.light().textTheme.subtitle2?.copyWith(
+        titleSmall: ThemeData.light().textTheme.titleSmall?.copyWith(
               color: LightSchema.mediumColorDark,
             ),
-        caption: ThemeData.light().textTheme.caption?.copyWith(
+        bodySmall: ThemeData.light().textTheme.bodySmall?.copyWith(
               color: LightSchema.mediumColor,
             ),
       ),

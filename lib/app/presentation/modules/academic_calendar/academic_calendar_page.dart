@@ -47,7 +47,7 @@ class AcademicCalendarPage extends GetView<AcademicCalendarController> {
                                   children: [
                                     Text(
                                       'Modalidad',
-                                      style: Get.textTheme.headline6?.copyWith(
+                                      style: Get.textTheme.titleLarge?.copyWith(
                                         fontSize: ctrl.responsive.ip(2),
                                         fontWeight: FontWeight.bold,
                                       ),

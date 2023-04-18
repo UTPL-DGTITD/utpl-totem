@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 
@@ -17,7 +16,7 @@ class FloatBackButton extends StatelessWidget {
         Positioned(
           bottom: responsive.hp(5),
           left: responsive.wp(33.5),
-          child: Container(
+          child: SizedBox(
             width: responsive.wp(33),
             height: responsive.hp(6),
             child: FloatingActionButton.extended(

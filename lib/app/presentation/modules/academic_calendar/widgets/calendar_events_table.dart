@@ -62,7 +62,7 @@ class CalendarEventsTable extends StatelessWidget {
             child: ListTile(
               title: Text(
                 item.elementAt(i).elementAt(j).title,
-                style: Get.textTheme.bodyText1?.copyWith(
+                style: Get.textTheme.bodyLarge?.copyWith(
                   fontSize: ctrl.responsive.ip(1.7),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.onPrimary,
@@ -78,7 +78,7 @@ class CalendarEventsTable extends StatelessWidget {
           child: ListTile(
             title: Text(
               item.elementAt(i).elementAt(j).description,
-              style: Get.textTheme.headline6?.copyWith(
+              style: Get.textTheme.titleLarge?.copyWith(
                 fontSize: ctrl.responsive.ip(1.5),
               ),
             ),
@@ -96,7 +96,7 @@ class CalendarEventsTable extends StatelessWidget {
                     ),
                     Text(
                       ' ${DateFormat('yyyy-MM-dd').format(item.elementAt(i).elementAt(j).startDate!)} hasta ${DateFormat('yyyy-MM-dd').format(item.elementAt(i).elementAt(j).endDate!)}',
-                      style: Get.textTheme.bodyText2?.copyWith(
+                      style: Get.textTheme.bodyMedium?.copyWith(
                         fontSize: ctrl.responsive.ip(1.5),
                         color: Get.theme.colorScheme.primary,
                       ),

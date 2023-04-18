@@ -15,7 +15,6 @@ import 'package:utpl_totem/app/controllers/main_controller.dart';
 import 'package:utpl_totem/app/data/enviroment.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 
-import 'package:version/version.dart';
 import 'package:logger/logger.dart';
 import 'package:html/parser.dart';
 import 'package:get/get.dart';

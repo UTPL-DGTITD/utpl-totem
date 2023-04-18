@@ -44,7 +44,7 @@ class ValidatePage extends GetView<ValidateController> {
                           children: [
                             Text(
                               'UTPL+',
-                              style: Get.textTheme.headline6?.copyWith(
+                              style: Get.textTheme.titleLarge?.copyWith(
                                 fontSize: ctrl.responsive.ip(4),
                                 fontWeight: FontWeight.bold,
                                 color: LightSchema.primaryColor,
@@ -53,7 +53,7 @@ class ValidatePage extends GetView<ValidateController> {
                             customYMargin(ctrl.responsive.hp(2)),
                             Text(
                               'Ingrese el código del dispositivo',
-                              style: Get.textTheme.headline6?.copyWith(
+                              style: Get.textTheme.titleLarge?.copyWith(
                                 fontSize: ctrl.responsive.ip(2),
                                 fontWeight: FontWeight.bold,
                               ),
@@ -105,7 +105,7 @@ class ValidatePage extends GetView<ValidateController> {
                                 color: Get.theme.colorScheme.tertiary,
                                 child: Text(
                                   'Enviar',
-                                  style: Get.textTheme.headline5?.copyWith(
+                                  style: Get.textTheme.headlineSmall?.copyWith(
                                     fontSize: ctrl.responsive.ip(1.5),
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,

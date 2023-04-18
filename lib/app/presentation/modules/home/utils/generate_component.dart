@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/presentation/modules/banner/banner_page.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
@@ -21,7 +20,7 @@ class GenerateComponent {
         return WebComponentPage(item.link?.url ?? '');
       case "embedded_youtube":
         return VideosPage(item);
-      //return SizedBox();
+      //return const SizedBox();
       case "banner":
         return const BannerPage();
       case "graph":
@@ -34,13 +33,10 @@ class GenerateComponent {
         return const EventsPage();
       case "ranking":
         return const RankingPage();
-
       case "observatories":
         return const ObservatoriesPage();
-
       case "indicators":
         return const InvestigationPage();
-
       default:
         return const SizedBox();
     }

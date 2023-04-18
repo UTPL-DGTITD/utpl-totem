@@ -66,7 +66,7 @@ class SplashScreenController extends GetxController {
       return false;
     } on SocketException {
       return false;
-    } catch (error, stack) {
+    } catch (error) {
       return false;
     }
   }

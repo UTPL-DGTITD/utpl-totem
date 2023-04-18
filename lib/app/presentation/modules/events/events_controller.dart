@@ -40,11 +40,6 @@ class EventsController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   void _initConfig() async {
     try {
       await loadEvents();

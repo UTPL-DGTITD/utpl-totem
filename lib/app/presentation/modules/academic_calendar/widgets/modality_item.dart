@@ -28,7 +28,7 @@ class ModalityItem extends StatelessWidget {
               Get.theme.colorScheme.tertiaryContainer.withOpacity(0.4),
           label: Text(
             item.title,
-            style: Get.textTheme.headline6?.copyWith(
+            style: Get.textTheme.titleLarge?.copyWith(
               fontSize: responsive.ip(1.5),
               fontWeight: FontWeight.normal,
               color: ctrl.selectedIndexModality.value == index

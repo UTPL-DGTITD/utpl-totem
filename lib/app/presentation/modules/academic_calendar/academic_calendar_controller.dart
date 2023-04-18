@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/academic_calendar_model.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/data/models/user_profile_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
 import 'package:utpl_totem/app/data/services/auth_service.dart';

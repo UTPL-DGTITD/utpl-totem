@@ -123,7 +123,7 @@ class GraphPage extends GetView<GraphController> {
                       Expanded(
                           flex: 3,
                           child: Center(
-                            child: Container(
+                            child: SizedBox(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

@@ -46,7 +46,7 @@ class EmptyResultsWidget extends StatelessWidget {
             child: Text(
               description,
               textAlign: TextAlign.center,
-              style: Get.textTheme.headline2?.copyWith(
+              style: Get.textTheme.displayMedium?.copyWith(
                 fontSize: responsive.ip(1.6),
                 fontWeight: FontWeight.w400,
               ),

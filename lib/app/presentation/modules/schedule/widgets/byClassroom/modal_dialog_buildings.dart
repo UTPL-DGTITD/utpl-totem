@@ -35,11 +35,11 @@ class ModalDialogBuildings {
               horizontal: responsive.wp(5),
               vertical: responsive.hp(1),
             ),
-            title: Container(
+            title: SizedBox(
               width: responsive.wp(50),
               child: Text(
                 title,
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontSize: responsive.ip(2.2),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.primary,
@@ -147,7 +147,7 @@ class ModalDialogBuildings {
                               flex: 2,
                               child: Text(
                                 'Cerrar',
-                                style: Get.textTheme.headline6?.copyWith(
+                                style: Get.textTheme.titleLarge?.copyWith(
                                   fontSize: responsive.ip(2),
                                   fontWeight: FontWeight.bold,
                                   color: Get.theme.colorScheme.onError,

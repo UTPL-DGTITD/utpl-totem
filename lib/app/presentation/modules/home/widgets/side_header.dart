@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-//import 'package:gauge_indicator/gauge_indicator.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
@@ -60,7 +56,7 @@ class SideHeader extends StatelessWidget {
                 Obx(
                   () => Text(
                     '${ctrl.currentTemp.value}ºC',
-                    style: Get.textTheme.headline6?.copyWith(
+                    style: Get.textTheme.titleLarge?.copyWith(
                       fontSize: ctrl.responsive.ip(2.5),
                       fontWeight: FontWeight.bold,
                       color: Get.theme.cardColor,
@@ -75,7 +71,7 @@ class SideHeader extends StatelessWidget {
                     Expanded(
                       child: Text(
                         'Mín\n${ctrl.weather?.value.tempMin}ºC',
-                        style: Get.textTheme.headline6?.copyWith(
+                        style: Get.textTheme.titleLarge?.copyWith(
                           fontSize: ctrl.responsive.ip(1.6),
                           fontWeight: FontWeight.bold,
                           color: Get.theme.colorScheme.primary,
@@ -86,7 +82,7 @@ class SideHeader extends StatelessWidget {
                     Expanded(
                       child: Text(
                         'Máx\n${ctrl.weather?.value.tempMax}ºC',
-                        style: Get.textTheme.headline6?.copyWith(
+                        style: Get.textTheme.titleLarge?.copyWith(
                           fontSize: ctrl.responsive.ip(1.6),
                           fontWeight: FontWeight.bold,
                           color: Get.theme.colorScheme.primary,

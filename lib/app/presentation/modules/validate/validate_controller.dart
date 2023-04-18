@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:mac_address/mac_address.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';

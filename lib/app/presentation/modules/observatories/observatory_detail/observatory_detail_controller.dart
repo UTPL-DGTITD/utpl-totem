@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
@@ -49,7 +48,7 @@ class ObservatoryDetailController extends GetxController
 
   @override
   void onClose() {
-    if (timerAnimate != null) {
+    if (timerAnimate.isActive) {
       timerAnimate.cancel();
     }
     super.onClose();
@@ -95,7 +94,7 @@ class ObservatoryDetailController extends GetxController
             path: composedEndPoint['url_path'],
           );
           observatory.value = result;
-          if (observatory.value.image != null) {
+          if (observatory.value.image != '') {
             hasObservatory.value = true;
           }
 

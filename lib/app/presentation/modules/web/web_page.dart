@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:utpl_totem/app/presentation/modules/web/web_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/back_arrow_button.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';

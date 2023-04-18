@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
@@ -111,10 +109,10 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
       return urls;
     } catch (error) {
       if (error.toString().contains('XMLHttpRequest')) {
-        print(
+        ToolsHelper.logger.v(
             '(INFO) To play youtube video in WEB, Please enable CORS in your browser');
       }
-      print('===== YOUTUBE API ERROR: $error ==========');
+      ToolsHelper.logger.v('===== YOUTUBE API ERROR: $error ==========');
       rethrow;
     }
   }

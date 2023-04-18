@@ -30,11 +30,11 @@ class ModalDialogSchedule {
               horizontal: responsive.wp(2),
               vertical: responsive.hp(1),
             ),
-            title: Container(
+            title: SizedBox(
               width: responsive.wp(100),
               child: Text(
                 item.title,
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontSize: responsive.ip(2.2),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.primary,
@@ -44,7 +44,7 @@ class ModalDialogSchedule {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            content: Container(
+            content: SizedBox(
               height: responsive.hp(50),
               child: Scrollbar(
                 thumbVisibility: true,
@@ -158,7 +158,7 @@ class ModalDialogSchedule {
                               flex: 2,
                               child: Text(
                                 'Cerrar',
-                                style: Get.textTheme.headline6?.copyWith(
+                                style: Get.textTheme.titleLarge?.copyWith(
                                   fontSize: responsive.ip(2),
                                   fontWeight: FontWeight.bold,
                                   color: Get.theme.colorScheme.onError,
@@ -202,7 +202,7 @@ class InfoSchedule extends StatelessWidget {
               flex: 1,
               child: Text(
                 title,
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontSize: responsive.ip(1.9),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.primary,
@@ -215,7 +215,7 @@ class InfoSchedule extends StatelessWidget {
               flex: 1,
               child: Text(
                 description != '' ? description : ' -- ',
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontSize: responsive.ip(1.9),
                   fontWeight: FontWeight.normal,
                   color: Get.theme.colorScheme.primary,
@@ -225,7 +225,7 @@ class InfoSchedule extends StatelessWidget {
             ),
           ],
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }

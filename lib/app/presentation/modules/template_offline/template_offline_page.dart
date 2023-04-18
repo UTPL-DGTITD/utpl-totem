@@ -28,7 +28,7 @@ class TemplateOfflinePage extends GetView<TemplateOfflineController> {
         builder: (ctrl) {
           return SafeArea(
               child: ctrl.showSkeleton.isFalse
-                  ? Container(
+                  ? SizedBox(
                       // color: Colors.red,
                       width: ctrl.responsive.wp(100),
                       height: ctrl.responsive.hp(100),

@@ -44,7 +44,7 @@ class ObservatoriesController extends GetxController
 
   @override
   void onClose() {
-    if (timerAnimate != null) {
+    if (timerAnimate.isActive) {
       timerAnimate.cancel();
     }
     super.onClose();

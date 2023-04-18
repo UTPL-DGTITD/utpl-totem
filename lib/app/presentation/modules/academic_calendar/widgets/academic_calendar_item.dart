@@ -46,7 +46,7 @@ class AcademicCalendarItem extends StatelessWidget {
                           child: Text(
                             ctrl.getProgramCalendar(
                                 item.first.first.academicProgram),
-                            style: Get.textTheme.headline6?.copyWith(
+                            style: Get.textTheme.titleLarge?.copyWith(
                               fontSize: responsive.ip(1.75),
                               fontWeight: FontWeight.w500,
                             ),

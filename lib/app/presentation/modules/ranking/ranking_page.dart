@@ -7,7 +7,6 @@ import 'package:utpl_totem/app/presentation/modules/ranking/widgets/carrousel_sl
 import 'package:utpl_totem/app/presentation/modules/ranking/widgets/modal_dialog_ranking.dart';
 import 'package:utpl_totem/app/presentation/widgets/empty_results_widget.dart';
 
-import 'package:utpl_totem/app/themes/metro_ui_icons.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
 
 class RankingPage extends GetView<RankingController> {
@@ -37,7 +36,7 @@ class RankingPage extends GetView<RankingController> {
                           Expanded(
                             child: Text(
                               'Ranking Internacional UTPL',
-                              style: Get.textTheme.headline6?.copyWith(
+                              style: Get.textTheme.titleLarge?.copyWith(
                                 fontSize: ctrl.responsive.ip(1.6),
                                 fontWeight: FontWeight.bold,
                                 color: Get.theme.colorScheme.primary,
@@ -68,8 +67,8 @@ class RankingPage extends GetView<RankingController> {
                                       children: [
                                         Text(
                                           ctrl.selectedRanking.value.title,
-                                          style:
-                                              Get.textTheme.headline6?.copyWith(
+                                          style: Get.textTheme.titleLarge
+                                              ?.copyWith(
                                             fontSize: ctrl.responsive.ip(1.6),
                                             fontWeight: FontWeight.bold,
                                             color:
@@ -100,7 +99,7 @@ class RankingPage extends GetView<RankingController> {
                                                     Text(
                                                       'Ver más',
                                                       style: Get
-                                                          .textTheme.headline6
+                                                          .textTheme.titleLarge
                                                           ?.copyWith(
                                                         fontSize: ctrl
                                                             .responsive

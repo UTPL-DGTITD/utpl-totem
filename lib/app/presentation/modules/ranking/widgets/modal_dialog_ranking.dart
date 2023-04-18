@@ -29,11 +29,11 @@ class ModalDialogRanking {
               horizontal: responsive.wp(5),
               vertical: responsive.hp(1),
             ),
-            title: Container(
+            title: SizedBox(
               width: responsive.wp(50),
               child: Text(
                 ToolsHelper.htmlParser(item.title),
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontSize: responsive.ip(2.2),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.primary,
@@ -43,7 +43,7 @@ class ModalDialogRanking {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            content: Container(
+            content: SizedBox(
               height: responsive.hp(100),
               child: Scrollbar(
                 controller: ctrl.contentScrollController,
@@ -83,7 +83,7 @@ class ModalDialogRanking {
                         ),
                         Text(
                           ToolsHelper.htmlParser(item.description),
-                          style: Get.textTheme.headline6?.copyWith(
+                          style: Get.textTheme.titleLarge?.copyWith(
                             fontSize: responsive.ip(1.8),
                             fontWeight: FontWeight.normal,
                             color: Get.theme.colorScheme.primary,
@@ -144,7 +144,7 @@ class ModalDialogRanking {
                               flex: 2,
                               child: Text(
                                 'Cerrar',
-                                style: Get.textTheme.headline6?.copyWith(
+                                style: Get.textTheme.titleLarge?.copyWith(
                                   fontSize: responsive.ip(2),
                                   fontWeight: FontWeight.bold,
                                   color: Get.theme.colorScheme.onError,
@@ -182,7 +182,7 @@ class ModalDialogRanking {
                   children: [
                     Text(
                       ctrl.selectedRanking.value.related[i].name,
-                      style: Get.textTheme.headline6?.copyWith(
+                      style: Get.textTheme.titleLarge?.copyWith(
                         fontSize: ctrl.responsive.ip(2),
                         fontWeight: FontWeight.bold,
                       ),
@@ -208,7 +208,7 @@ class ModalDialogRanking {
                       ),
                       title: Text(
                         ctrl.selectedRanking.value.related[i].name,
-                        style: Get.textTheme.headline6?.copyWith(
+                        style: Get.textTheme.titleLarge?.copyWith(
                           fontSize: ctrl.responsive.ip(1.75),
                           fontWeight: FontWeight.bold,
                           color: Get.theme.colorScheme.primary,
@@ -216,7 +216,7 @@ class ModalDialogRanking {
                       ),
                       subtitle: Text(
                         ctrl.selectedRanking.value.related[i].type,
-                        style: Get.textTheme.headline6?.copyWith(
+                        style: Get.textTheme.titleLarge?.copyWith(
                           fontSize: ctrl.responsive.ip(1.5),
                           fontWeight: FontWeight.normal,
                           color: Get.theme.colorScheme.primary,

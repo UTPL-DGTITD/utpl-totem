@@ -33,7 +33,7 @@ class ToastService extends GetxService {
               decoration: BoxDecoration(
                 border: Border(
                   left: BorderSide(
-                    color: Get.theme.errorColor,
+                    color: Get.theme.colorScheme.onError,
                     width: 9,
                   ),
                 ),
@@ -51,20 +51,20 @@ class ToastService extends GetxService {
                     Icon(
                       Icons.cancel,
                       size: 34,
-                      color: Get.theme.errorColor,
+                      color: Get.theme.colorScheme.onError,
                     ),
                   ],
                 ),
                 title: Text(
                   title,
-                  style: Get.textTheme.bodyText1?.copyWith(
+                  style: Get.textTheme.bodyLarge?.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(
                   text,
-                  style: Get.textTheme.bodyText1?.copyWith(
+                  style: Get.textTheme.bodyLarge?.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),
@@ -86,7 +86,7 @@ class ToastService extends GetxService {
                         onPressed: cancel,
                         child: Text(
                           'CERRAR',
-                          style: Get.textTheme.bodyText1?.copyWith(
+                          style: Get.textTheme.bodyLarge?.copyWith(
                             fontSize: 16,
                             color: Get.theme.dividerColor.withOpacity(0.3),
                           ),
@@ -151,14 +151,14 @@ class ToastService extends GetxService {
                 ),
                 title: Text(
                   title,
-                  style: Get.textTheme.bodyText1?.copyWith(
+                  style: Get.textTheme.bodyLarge?.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(
                   text,
-                  style: Get.textTheme.bodyText1?.copyWith(
+                  style: Get.textTheme.bodyLarge?.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),
@@ -180,7 +180,7 @@ class ToastService extends GetxService {
                         onPressed: cancel,
                         child: Text(
                           'CERRAR',
-                          style: Get.textTheme.bodyText1?.copyWith(
+                          style: Get.textTheme.bodyLarge?.copyWith(
                             fontSize: 16,
                             color: Get.theme.dividerColor.withOpacity(0.3),
                           ),
@@ -268,14 +268,14 @@ class ToastService extends GetxService {
                 ),
                 title: Text(
                   title,
-                  style: Get.textTheme.bodyText1?.copyWith(
+                  style: Get.textTheme.bodyLarge?.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(
                   text,
-                  style: Get.textTheme.bodyText1?.copyWith(
+                  style: Get.textTheme.bodyLarge?.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),
@@ -297,7 +297,7 @@ class ToastService extends GetxService {
                         onPressed: cancel,
                         child: Text(
                           'CERRAR',
-                          style: Get.textTheme.bodyText1?.copyWith(
+                          style: Get.textTheme.bodyLarge?.copyWith(
                             fontSize: 16,
                             color: Get.theme.dividerColor.withOpacity(0.3),
                           ),

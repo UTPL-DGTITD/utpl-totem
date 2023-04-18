@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatories_controller.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
@@ -106,7 +105,7 @@ class ObservatoriesPage extends GetView<ObservatoriesController> {
                                     child: Text(
                                       'Observatorio\n${ctrl.observatories[index].acronym}'
                                           .replaceAll("-", "\u00ad"),
-                                      style: Get.textTheme.bodyText1?.copyWith(
+                                      style: Get.textTheme.bodyLarge?.copyWith(
                                         fontSize: ctrl.responsive.ip(1.2),
                                         fontWeight: FontWeight.w400,
                                         letterSpacing: 0.2,
@@ -144,7 +143,7 @@ class ObservatoriesPage extends GetView<ObservatoriesController> {
                     ),
                   ],
                 )
-              : SizedBox();
+              : const SizedBox();
         },
       ),
     );

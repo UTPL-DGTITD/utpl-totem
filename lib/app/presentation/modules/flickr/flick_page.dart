@@ -52,7 +52,7 @@ class FlickrPage extends GetView<FlickrController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Container(
+                          child: SizedBox(
                             child: Text(
                               'Flickr UTPL',
                               style: TextStyle(
@@ -66,7 +66,7 @@ class FlickrPage extends GetView<FlickrController> {
                         ),
                         customYMargin(ctrl.responsive.hp(1)),
                         Center(
-                          child: Container(
+                          child: SizedBox(
                             child: Text(
                               ctrl.currentFlickrDesc.value,
                               style: TextStyle(
@@ -82,7 +82,7 @@ class FlickrPage extends GetView<FlickrController> {
                   ),
                   Expanded(
                     flex: 2,
-                    child: Container(
+                    child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         //color: Colors.red,
@@ -96,7 +96,7 @@ class FlickrPage extends GetView<FlickrController> {
                           itemHeight: ctrl.responsive.hp(30),
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
-                              onTap: () => null,
+                              //onTap: () => null,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
                                 child: FadeInImage(

@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/services/theme_service.dart';
 import 'package:utpl_totem/app/main_binding.dart';
 import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/app_theme.dart';

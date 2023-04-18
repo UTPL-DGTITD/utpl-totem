@@ -50,7 +50,7 @@ class SchedulePage extends GetView<ScheduleController> {
             child: ctrl.showSkeleton.isFalse
                 ? Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         //color: Colors.red,
                         height: ctrl.responsive.hp(77.7),

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -74,7 +73,7 @@ class InvestigationPage extends GetView<InvestigationController> {
 
                             itemCount: ctrl.investigations.length,
                             itemBuilder: (context, index) => InkWell(
-                              onTap: () => null,
+                              //onTap: () => null,
                               child: Container(
                                 width: ctrl.responsive.wp(20),
                                 color: Get.theme.cardColor,
@@ -101,11 +100,11 @@ class InvestigationPage extends GetView<InvestigationController> {
                                     Expanded(
                                       child: Column(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             child: Text(
                                               ctrl.investigations[index].value
                                                   .toString(),
-                                              style: Get.textTheme.bodyText1
+                                              style: Get.textTheme.bodyLarge
                                                   ?.copyWith(
                                                 fontSize:
                                                     ctrl.responsive.ip(1.6),
@@ -119,11 +118,11 @@ class InvestigationPage extends GetView<InvestigationController> {
                                               maxLines: 2,
                                             ),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             child: Text(
                                               ctrl.investigations[index].title
                                                   .replaceAll("-", "\u00ad"),
-                                              style: Get.textTheme.bodyText1
+                                              style: Get.textTheme.bodyLarge
                                                   ?.copyWith(
                                                 fontSize:
                                                     ctrl.responsive.ip(1.4),
@@ -165,7 +164,7 @@ class InvestigationPage extends GetView<InvestigationController> {
                     ],
                   ),
                 )
-              : SizedBox();
+              : const SizedBox();
         },
       ),
     );

@@ -81,7 +81,7 @@ class SideHeader extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Decide ser más',
-                    style: Get.textTheme.headline6?.copyWith(
+                    style: Get.textTheme.titleLarge?.copyWith(
                       fontSize: ctrl.responsive.ip(1.4),
                       fontWeight: FontWeight.bold,
                       color: Get.theme.colorScheme.primary,

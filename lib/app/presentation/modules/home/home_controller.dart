@@ -25,7 +25,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxBool showSkeleton = false.obs;
   RxBool controllerVideo = false.obs;
   final title = 'UTPL+'.obs;
-  // HACK taps
   DateTime? _lastTap;
   int _tapCount = 0;
 
@@ -130,7 +129,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       return false;
     } on SocketException {
       return false;
-    } catch (error, stack) {
+    } catch (error) {
       return false;
     }
   }

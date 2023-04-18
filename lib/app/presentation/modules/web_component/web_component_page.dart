@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/presentation/modules/web_component/web_component_controller.dart';
 
 import 'package:webview_windows/webview_windows.dart';

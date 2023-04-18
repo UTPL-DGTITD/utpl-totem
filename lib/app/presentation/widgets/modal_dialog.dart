@@ -15,7 +15,7 @@ class ModalDialog {
         barrierDismissible: true,
         builder: (context) {
           Responsive responsive = Responsive();
-          ScrollController _contentScrollController = ScrollController();
+          ScrollController contentScrollController = ScrollController();
           return AlertDialog(
             insetPadding: EdgeInsets.only(
               top: responsive.hp(8),
@@ -28,11 +28,11 @@ class ModalDialog {
               horizontal: responsive.wp(5),
               vertical: responsive.hp(1),
             ),
-            title: Container(
+            title: SizedBox(
               width: responsive.wp(50),
               child: Text(
                 ToolsHelper.htmlParser(item.title),
-                style: Get.textTheme.headline6?.copyWith(
+                style: Get.textTheme.titleLarge?.copyWith(
                   fontSize: responsive.ip(2.2),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.primary,
@@ -42,13 +42,13 @@ class ModalDialog {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            content: Container(
+            content: SizedBox(
               height: responsive.hp(100),
               child: Scrollbar(
-                controller: _contentScrollController,
+                controller: contentScrollController,
                 thumbVisibility: true,
                 child: SingleChildScrollView(
-                  controller: _contentScrollController,
+                  controller: contentScrollController,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: responsive.wp(2),
@@ -82,7 +82,7 @@ class ModalDialog {
                         ),
                         Text(
                           ToolsHelper.htmlParser(item.description),
-                          style: Get.textTheme.headline6?.copyWith(
+                          style: Get.textTheme.titleLarge?.copyWith(
                             fontSize: responsive.ip(1.8),
                             fontWeight: FontWeight.normal,
                             color: Get.theme.colorScheme.primary,
@@ -129,7 +129,7 @@ class ModalDialog {
                               flex: 2,
                               child: Text(
                                 'Cerrar',
-                                style: Get.textTheme.headline6?.copyWith(
+                                style: Get.textTheme.titleLarge?.copyWith(
                                   fontSize: responsive.ip(2),
                                   fontWeight: FontWeight.bold,
                                   color: Get.theme.colorScheme.onError,

@@ -60,7 +60,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: double.infinity,
                                   child: Text(
                                     ToolsHelper.htmlParser(item.name),
@@ -138,7 +138,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                 //             flex: 2,
                                 //             child: Text(
                                 //               'Ver estadísticas',
-                                //               style: Get.textTheme.headline6
+                                //               style: Get.textTheme.titleLarge
                                 //                   ?.copyWith(
                                 //                 fontSize: ctrl.responsive.ip(2),
                                 //                 fontWeight: FontWeight.bold,
@@ -183,7 +183,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                 //   ),
                                 // ),
                                 customYMargin(ctrl.responsive.hp(2)),
-                                Container(
+                                SizedBox(
                                   height: ctrl.responsive.hp(33),
                                   width: double.infinity,
                                   child: ListView.separated(
@@ -198,7 +198,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                     itemBuilder: (context, index) {
                                       var member = item.members[index];
                                       return InkWell(
-                                        onTap: () => null,
+                                        //onTap: () => null,
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
                                             horizontal: ctrl.responsive.wp(1),
@@ -246,7 +246,7 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                                   ),
                                                 ),
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 height: ctrl.responsive.hp(9),
                                                 child: Column(
                                                   crossAxisAlignment:
