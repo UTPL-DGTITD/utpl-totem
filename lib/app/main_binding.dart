@@ -4,7 +4,6 @@ import 'package:utpl_totem/app/data/providers/api_provider.dart';
 import 'package:utpl_totem/app/data/providers/local_provider.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 
 class MainBinding extends Bindings {
@@ -21,9 +20,6 @@ class MainBinding extends Bindings {
     );
     Get.put(
       ToastService(),
-    );
-    Get.put(
-      AuthService(),
     );
   }
 }

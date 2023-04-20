@@ -18,7 +18,6 @@ class FlickrPage extends GetView<FlickrController> {
         localRepository: Get.find(),
         apiRepository: Get.find(),
         toastService: Get.find(),
-        authService: Get.find(),
       ),
     );
     ctrl.currentItem.value = item;
@@ -33,7 +32,6 @@ class FlickrPage extends GetView<FlickrController> {
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
-          authService: Get.find(),
         ),
         initState: (_) {},
         builder: (ctrl) {

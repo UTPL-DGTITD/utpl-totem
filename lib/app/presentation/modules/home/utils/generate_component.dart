@@ -9,7 +9,6 @@ import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatories_page.dart';
 import 'package:utpl_totem/app/presentation/modules/ranking/ranking_page.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/videos/videos_page.dart';
 import 'package:utpl_totem/app/presentation/modules/web_component/web_component_page.dart';
 
 class GenerateComponent {
@@ -19,8 +18,8 @@ class GenerateComponent {
       case 'link':
         return WebComponentPage(item.link?.url ?? '');
       case "embedded_youtube":
-        return VideosPage(item);
-      //return const SizedBox();
+        //return VideosPage(item);
+        return const SizedBox();
       case "banner":
         return const BannerPage();
       case "graph":

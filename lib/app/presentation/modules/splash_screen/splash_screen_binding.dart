@@ -7,7 +7,6 @@ class SplashScreenBinding implements Bindings {
     Get.put<SplashScreenController>(
       SplashScreenController(
         localRepository: Get.find(),
-        authService: Get.find(),
       ),
     );
   }

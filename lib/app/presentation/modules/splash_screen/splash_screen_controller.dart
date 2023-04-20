@@ -7,7 +7,6 @@ import 'package:platform_device_id/platform_device_id.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
@@ -15,7 +14,6 @@ import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 class SplashScreenController extends GetxController {
   final LocalRepository localRepository;
-  final AuthService authService;
   final ToastService toastService = Get.find<ToastService>();
   final ApiRepository apiRepository = Get.find<ApiRepository>();
 
@@ -28,7 +26,6 @@ class SplashScreenController extends GetxController {
 
   SplashScreenController({
     required this.localRepository,
-    required this.authService,
   });
 
   @override
@@ -42,7 +39,6 @@ class SplashScreenController extends GetxController {
     if (status) {
       var token = generateQaToken;
       ToolsHelper.logger.i("WSO2", token.substring(token.length - 10));
-      authService.setAwsToken(token);
       validateCode();
       // await Future.delayed(const Duration(seconds: 2));
       // Get.offAndToNamed(Routes.template_static);

@@ -22,7 +22,6 @@ class ValidatePage extends GetView<ValidateController> {
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
-          authService: Get.find(),
         ),
         initState: (_) {},
         builder: (ctrl) {

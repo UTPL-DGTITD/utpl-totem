@@ -9,7 +9,7 @@ class BannerBinding implements Bindings {
         localRepository: Get.find(),
         apiRepository: Get.find(),
         toastService: Get.find(),
-        authService: Get.find(),
+        //authService: Get.find(),
       ),
     );
   }

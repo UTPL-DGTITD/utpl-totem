@@ -7,7 +7,6 @@ import 'package:platform_device_id/platform_device_id.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
@@ -19,7 +18,6 @@ class ValidateController extends GetxController
   final LocalRepository localRepository;
   final ApiRepository apiRepository;
   final ToastService toastService;
-  final AuthService authService;
 
   final ValidatorsForm validatorsForm = ValidatorsForm();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -40,7 +38,6 @@ class ValidateController extends GetxController
     required this.localRepository,
     required this.apiRepository,
     required this.toastService,
-    required this.authService,
   });
 
   @override

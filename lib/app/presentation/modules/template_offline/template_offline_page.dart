@@ -22,7 +22,6 @@ class TemplateOfflinePage extends GetView<TemplateOfflineController> {
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
-          authService: Get.find(),
         ),
         initState: (_) {},
         builder: (ctrl) {

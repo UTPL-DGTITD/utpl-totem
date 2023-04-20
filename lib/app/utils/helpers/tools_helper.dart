@@ -1,30 +1,16 @@
 import 'dart:io' as io;
 
-import 'package:aad_oauth/aad_oauth.dart';
-import 'package:aad_oauth/model/config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-//import 'package:store_redirect/store_redirect.dart';
 import 'package:timeago/timeago.dart' as time_ago;
 import 'package:url_launcher/url_launcher.dart';
-//import 'package:aad_oauth/model/config.dart';
-//import 'package:aad_oauth/aad_oauth.dart';
-import 'package:utpl_totem/app/controllers/main_controller.dart';
-import 'package:utpl_totem/app/data/enviroment.dart';
-//import 'package:utpl_totem/app/data/enviroment.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
-
 import 'package:logger/logger.dart';
 import 'package:html/parser.dart';
 import 'package:get/get.dart';
 
 class ToolsHelper {
   static final _toastUtilInterface = Get.put(ToastService());
-  static final _mainCtrl = Get.put(MainController());
 
   static Logger get logger => Logger(
         printer: PrettyPrinter(
@@ -138,22 +124,6 @@ class ToolsHelper {
     } else {
       return '';
     }
-  }
-
-  /// Configure the ADFS authentication parameters.
-  static AadOAuth get adfsConfig {
-    final Config config = Config(
-      aOptions: const AndroidOptions(),
-      isB2C: false,
-      tenant: Environment.adfsTenant,
-      clientId: Environment.adfsClientId,
-      scope: Environment.adfsScope,
-      redirectUri: Environment.adfsRedirectUri,
-      navigatorKey: _mainCtrl.navigatorKey,
-      domainHint: "utpl.edu.ec",
-    );
-
-    return AadOAuth(config);
   }
 
   static String formatToTimeAgo(DateTime dateTime) =>

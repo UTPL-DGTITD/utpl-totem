@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
@@ -17,7 +16,7 @@ class BannerController extends GetxController with GetTickerProviderStateMixin {
   final LocalRepository localRepository;
   final ApiRepository apiRepository;
   final ToastService toastService;
-  final AuthService authService;
+  //final AuthService authService;
 
   final responsive = Responsive();
 
@@ -31,7 +30,7 @@ class BannerController extends GetxController with GetTickerProviderStateMixin {
     required this.localRepository,
     required this.apiRepository,
     required this.toastService,
-    required this.authService,
+    //required this.authService,
   });
 
   @override

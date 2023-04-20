@@ -9,7 +9,6 @@ import 'package:utpl_totem/app/data/models/generic_schedule_model.dart';
 import 'package:utpl_totem/app/data/models/related_base_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/presentation/modules/schedule/widgets/modal_dialog_schedule.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
@@ -22,7 +21,6 @@ class ScheduleController extends GetxController
   final LocalRepository localRepository;
   final ApiRepository apiRepository;
   final ToastService toastService;
-  final AuthService authService;
 
   final responsive = Responsive();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -70,7 +68,6 @@ class ScheduleController extends GetxController
     required this.localRepository,
     required this.apiRepository,
     required this.toastService,
-    required this.authService,
   });
 
   @override

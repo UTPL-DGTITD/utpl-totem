@@ -11,12 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  aad_oauth: ^0.4.0 
   animate_do: ^2.1.0
   bot_toast: ^4.0.3
   cached_network_image: ^3.2.2
   carousel_slider: ^4.1.1
-  corsac_jwt: ^1.0.0-nullsafety.1
   dio: ^4.0.6
   flutter_secure_storage: ^6.0.0
   flutter_svg: ^1.1.6

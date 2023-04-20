@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
@@ -16,7 +15,6 @@ class InvestigationController extends GetxController
   final LocalRepository localRepository;
   final ApiRepository apiRepository;
   final ToastService toastService;
-  final AuthService authService;
 
   final responsive = Responsive();
 
@@ -31,7 +29,6 @@ class InvestigationController extends GetxController
     required this.localRepository,
     required this.apiRepository,
     required this.toastService,
-    required this.authService,
   });
 
   @override

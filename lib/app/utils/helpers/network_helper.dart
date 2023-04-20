@@ -2,17 +2,11 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:aad_oauth/helper/auth_storage.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:get/get.dart' as get_package;
-import 'package:corsac_jwt/corsac_jwt.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:dio/dio.dart';
 import 'package:utpl_totem/app/data/enviroment.dart';
-import 'package:utpl_totem/app/data/services/auth_service.dart';
 import 'package:utpl_totem/app/utils/exceptions/http_exception.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 const String _endpoint = Environment.server;
 
@@ -59,58 +53,7 @@ class InterceptorToken extends InterceptorsWrapper {
 
 class NetworkUtil {
   static final NetworkUtil _instance = NetworkUtil.internal();
-  NetworkUtil.internal() {
-    _dio.interceptors.add(
-      InterceptorToken(
-        msToken: () async {
-          var authStorage = AuthStorage(
-            aOptions: const AndroidOptions(),
-          );
-
-          var cacheToken = await authStorage.loadTokenFromCache();
-
-          if (!cacheToken.hasValidAccessToken() &&
-              cacheToken.hasRefreshToken()) {
-            var adfsAuth = ToolsHelper.adfsConfig;
-            await adfsAuth.login(refreshIfAvailable: true);
-          }
-
-          cacheToken = await authStorage.loadTokenFromCache();
-
-          if (cacheToken.hasValidAccessToken()) {
-            var decodedToken = JWT.parse(cacheToken.accessToken ?? "");
-            var issuedAt = DateTime.fromMillisecondsSinceEpoch(
-                (decodedToken.issuedAt ?? 0) * 1000);
-            var expiresAt = DateTime.fromMillisecondsSinceEpoch(
-                (decodedToken.expiresAt ?? 0) * 1000);
-
-            ToolsHelper.logger.i(
-              "Token [login_adfs_service](getToken)",
-              "${issuedAt.toString()} :: ${expiresAt.toString()}",
-            );
-          }
-
-          final composeToken = '${cacheToken.accessToken}';
-          return composeToken;
-        },
-        awsToken: () async {
-          var token = await _authServiceInterface.getAwsToken();
-          final composeToken = '$token';
-          return (token != null && token.isNotEmpty) ? composeToken : '';
-        },
-        deviceId: () async {
-          var deviceId = await _authServiceInterface.getDeviceId();
-          return deviceId;
-        },
-        userRoles: () async {
-          var roles = await _authServiceInterface.getUserRoles();
-          final composeRoles =
-              roles.map((role) => '"${role.code.toUpperCase()}"').join(',');
-          return roles.isNotEmpty ? composeRoles : '';
-        },
-      ),
-    );
-  }
+  NetworkUtil.internal();
   factory NetworkUtil() => _instance;
 
   static BaseOptions options = BaseOptions(
@@ -118,7 +61,6 @@ class NetworkUtil {
     connectTimeout: Environment.httpTimeout,
   );
   final Dio _dio = Dio(options);
-  final _authServiceInterface = get_package.Get.put<AuthService>(AuthService());
 
   Future<dynamic> get({
     String url = _endpoint,

@@ -16,7 +16,6 @@ class GraphPage extends GetView<GraphController> {
         localRepository: Get.find(),
         apiRepository: Get.find(),
         toastService: Get.find(),
-        authService: Get.find(),
       ),
     );
     ctrl.currentItem.value = item;
@@ -30,7 +29,6 @@ class GraphPage extends GetView<GraphController> {
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
-          authService: Get.find(),
         ),
         initState: (_) {},
         builder: (ctrl) {

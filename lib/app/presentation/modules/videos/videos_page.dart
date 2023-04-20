@@ -19,7 +19,6 @@ class VideosPage extends GetView<VideosController> {
     //     localRepository: Get.find(),
     //     apiRepository: Get.find(),
     //     toastService: Get.find(),
-    //     authService: Get.find(),
     //   ),
     // );
     //ctrl.player.play();
@@ -32,7 +31,6 @@ class VideosPage extends GetView<VideosController> {
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
-          authService: Get.find(),
         ),
         initState: (ctrl) async {
           ToolsHelper.logger.v('es el 1: ');

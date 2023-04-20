@@ -17,7 +17,6 @@ class WebComponentPage extends GetView<WebComponentController> {
         localRepository: Get.find(),
         apiRepository: Get.find(),
         toastService: Get.find(),
-        authService: Get.find(),
       ),
     );
 
@@ -33,7 +32,6 @@ class WebComponentPage extends GetView<WebComponentController> {
           localRepository: Get.find(),
           apiRepository: Get.find(),
           toastService: Get.find(),
-          authService: Get.find(),
         ),
         initState: (_) {},
         builder: (ctrl) {
