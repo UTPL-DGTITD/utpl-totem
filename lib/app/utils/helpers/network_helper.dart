@@ -96,7 +96,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -106,7 +106,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -153,7 +153,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -163,7 +163,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -203,7 +203,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -213,7 +213,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -252,7 +252,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -262,7 +262,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -328,7 +328,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -338,7 +338,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -380,7 +380,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -390,7 +390,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -456,7 +456,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -466,7 +466,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');
@@ -532,7 +532,7 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectTimeout,
+          DioErrorType.connectionTimeout,
           DioErrorType.receiveTimeout,
           DioErrorType.sendTimeout
         ].contains(e.type)) {
@@ -542,7 +542,7 @@ class NetworkUtil {
           SocketException,
           HandshakeException,
         ].contains(e.error.runtimeType)) {
-          throw SocketException(e.message);
+          throw SocketException(e.message ?? '');
         }
         throw FetchDataException(
             'Error occurred while Communication with Server ${e.requestOptions.baseUrl} with StatusCode : Error:${e.message}]');

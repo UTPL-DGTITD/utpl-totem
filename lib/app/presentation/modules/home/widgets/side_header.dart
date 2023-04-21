@@ -100,7 +100,10 @@ class SideHeader extends StatelessWidget {
                             ? 'assets/svg/sunny.svg'
                             : 'assets/svg/cloudy.svg',
                     width: ctrl.responsive.ip(9),
-                    color: Get.theme.colorScheme.primary,
+                    colorFilter: ColorFilter.mode(
+                      Get.theme.colorScheme.primary,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
                 Obx(

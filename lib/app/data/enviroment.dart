@@ -6,7 +6,7 @@ class Environment {
   static const String accessKey = "886D32B8F4841173DF763578BBE1C";
   // static const String server = "http://172.18.137.102:3000";
 
-  static const int httpTimeout = 12000;
+  static const Duration httpTimeout = Duration(milliseconds: 12000);
 
   /// List of domains with Microsoft JWT authentication
   static const jwtMsAllowedDomains = [

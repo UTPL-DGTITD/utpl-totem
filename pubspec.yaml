@@ -11,20 +11,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  animate_do: ^2.1.0
+  animate_do: ^3.0.2
   bot_toast: ^4.0.3
   cached_network_image: ^3.2.2
   carousel_slider: ^4.1.1
-  dio: ^4.0.6
-  flutter_secure_storage: ^6.0.0
-  flutter_svg: ^1.1.6
+  dio: ^5.1.1
+  flutter_secure_storage: ^8.0.0
+  flutter_svg: ^2.0.5
   g_skeleton: ^0.1.0
   get: ^4.6.5
   get_storage: ^2.0.3
   html: ^0.15.1
   logger: ^1.1.0
   mime_type: ^1.0.0
-  rive: ^0.9.1
+  rive: ^0.10.4
   timeago: ^3.3.0
   url_launcher: ^6.1.6
   slide_digital_clock: ^1.0.2
@@ -42,7 +42,7 @@ dependencies:
   gauge_indicator: ^0.3.3
   virtual_keyboard_multi_language: ^1.0.3
   platform_device_id: ^1.0.1
-  intl: ^0.17.0
+  intl: ^0.18.1
   http_parser: ^4.0.2
 
 

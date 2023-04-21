@@ -92,8 +92,10 @@ class ObservatoriesPage extends GetView<ObservatoriesController> {
                                               "",
                                           fit: BoxFit.contain,
                                           width: ctrl.responsive.ip(6),
-                                          color:
-                                              Get.theme.colorScheme.onTertiary,
+                                          colorFilter: ColorFilter.mode(
+                                            Get.theme.cardColor,
+                                            BlendMode.srcIn,
+                                          ),
                                         ),
                                       ),
                                     ),

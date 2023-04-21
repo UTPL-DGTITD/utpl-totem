@@ -91,8 +91,10 @@ class InvestigationPage extends GetView<InvestigationController> {
                                                   ?.url ??
                                               "",
                                           fit: BoxFit.contain,
-                                          //width: ctrl.responsive.ip(6),
-                                          color: Get.theme.colorScheme.primary,
+                                          colorFilter: ColorFilter.mode(
+                                            Get.theme.colorScheme.primary,
+                                            BlendMode.srcIn,
+                                          ),
                                         ),
                                       ),
                                     ),
