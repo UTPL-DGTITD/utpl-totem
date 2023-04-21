@@ -11,8 +11,40 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  animate_do: ^3.0.2
+  bot_toast: ^4.0.3
+  cached_network_image: ^3.2.2
+  carousel_slider: ^4.1.1
+  dio: ^5.1.1
+  flutter_secure_storage: ^8.0.0
+  flutter_svg: ^2.0.5
+  g_skeleton: ^0.1.0
+  get: ^4.6.5
+  get_storage: ^2.0.3
+  html: ^0.15.1
+  logger: ^1.1.0
+  mime_type: ^1.0.0
+  rive: ^0.10.4
+  timeago: ^3.3.0
+  url_launcher: ^6.1.6
+  slide_digital_clock: ^1.0.2
+  charts_painter: ^3.0.0
+  flutter_staggered_grid_view: ^0.6.2
+  card_swiper: ^2.0.4
+  marquee: ^2.2.3
+  ext_video_player: ^0.1.2
+  wakelock: ^0.6.2
+  pretty_qr_code: ^2.0.2
+  window_manager: ^0.3.0
+  webview_windows: ^0.2.1
+  dart_vlc: ^0.4.0
+  youtube_explode_dart: ^1.12.3
+  gauge_indicator: ^0.3.3
+  virtual_keyboard_multi_language: ^1.0.3
+  platform_device_id: ^1.0.1
+  intl: ^0.18.1
+  http_parser: ^4.0.2
 
-  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -22,5 +54,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  #
+  assets:
+    - assets/rive/
+    - assets/svg/
+    - assets/images/
+    - assets/images/story-set/
+    - assets/images/intro/
+    - assets/videos/
+  fonts:
+    - family: UtplCustom
+      fonts:
+        - asset: fonts/UtplCustom.ttf
+    - family: MetroUi
+      fonts:
+        - asset: fonts/MetroUi.ttf
