@@ -64,7 +64,7 @@ class TvTemplateHeader {
 
   String id;
   String title;
-  int? totalRows;
+  double? totalRows;
   int? totalColumns;
 
   List<TvTemplateBody> tvTemplateBodies;
@@ -104,7 +104,7 @@ class TvTemplateBody {
   });
 
   String title;
-  int totalRows;
+  double totalRows;
   int totalColumns;
   int orderComponent;
   dynamic interaction;
