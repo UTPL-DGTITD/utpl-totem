@@ -43,7 +43,9 @@ class ApiProvider extends ApiRepository {
 
   @override
   Future<ApiResponseModel> getBannersAvailable() {
-    return _netUtil.get(path: 'v1/banner/home/top').then((dynamic res) {
+    return _netUtil
+        .get(path: 'v2/banner/home/totem/avalible')
+        .then((dynamic res) {
       return ApiResponseModel.fromJson(res);
     });
   }
