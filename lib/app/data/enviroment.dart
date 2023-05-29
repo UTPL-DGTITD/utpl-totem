@@ -4,18 +4,18 @@ class Environment {
   static const String server = "https://appmovil.utpl.edu.ec:8080";
 
   static const String accessKey = "886D32B8F4841173DF763578BBE1C";
-  //static const String server = "http://172.18.137.101:3000";
+  //static const String server = "http://172.18.137.104:3000";
 
   static const Duration httpTimeout = Duration(milliseconds: 12000);
 
   /// List of domains with Microsoft JWT authentication
   static const jwtMsAllowedDomains = [
-    '172.18.137.101',
+    '172.18.137.104',
     'graph.microsoft.com',
     'appmovil.utpl.edu.ec'
   ];
   static const jwtAwsAllowedDomains = ['srv-si-001.utpl.edu.ec'];
-  static const rolesAllowedDomains = ['172.18.137.101', 'appmovil.utpl.edu.ec'];
+  static const rolesAllowedDomains = ['172.18.137.104', 'appmovil.utpl.edu.ec'];
 
   // List of allowed roles for the user
   // static List<RolesModel> allowedRoles = [

@@ -38,6 +38,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   late Timer timerTemp;
   late Timer inactivityTimer = Timer(const Duration(minutes: 20), () {});
   final currentTemplate = TvTemplateModel().obs;
+  late Timer timerReset;
 
   RxString utplMessage = 'La visión de la Universidad Técnica Particular de Loja es '
           'el humanismo de Cristo, que se traduce en sentido de perfección, en compromiso '
@@ -81,6 +82,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       //updateColorNotify('success');
       // validateConection();
       startTimer(const Duration(minutes: 20));
+      timerReset = Timer(const Duration(hours: 5), () {
+        Get.offAllNamed(Routes.splash_screen, arguments: {
+          'currentTemplate': currentTemplate.value,
+        });
+      });
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[home_controller] (_initConfig)',
