@@ -47,6 +47,15 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    player.value.dispose();
+    if (timerVideoPlaying.isActive) {
+      timerVideoPlaying.cancel();
+    }
+    super.onClose();
+  }
+
   void _initConfig() async {
     try {
       ToolsHelper.logger.v('VIDEOS CONTROLLER $urlVideos');
