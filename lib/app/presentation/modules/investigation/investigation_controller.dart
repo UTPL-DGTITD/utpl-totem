@@ -81,14 +81,17 @@ class InvestigationController extends GetxController
   }
 
   void animateList() {
-    if (scrollController.offset != scrollController.position.maxScrollExtent) {
-      moveRight();
-    } else {
-      scrollController.animateTo(
-        0,
-        curve: Curves.linear,
-        duration: const Duration(milliseconds: 500),
-      );
+    if (scrollController.hasClients) {
+      if (scrollController.offset !=
+          scrollController.position.maxScrollExtent) {
+        moveRight();
+      } else {
+        scrollController.animateTo(
+          0,
+          curve: Curves.linear,
+          duration: const Duration(milliseconds: 500),
+        );
+      }
     }
   }
 
