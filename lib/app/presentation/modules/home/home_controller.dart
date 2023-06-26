@@ -34,7 +34,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final currentUv = ''.obs;
   final currentDescTemp = ''.obs;
   final currentDescUv = ''.obs;
-  late Timer timerConection;
+  //late Timer timerConection;
   late Timer timerTemp;
   late Timer inactivityTimer = Timer(const Duration(minutes: 20), () {});
   final currentTemplate = TvTemplateModel().obs;
@@ -72,6 +72,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    closeTimers();
+    super.onClose();
+  }
+
+  void closeTimers() {
+    ToolsHelper.logger.v('CERRANDO TIMERS');
+    //timerConection.isActive ? timerConection.cancel() : null;
+    timerTemp.isActive ? timerTemp.cancel() : null;
+    inactivityTimer.isActive ? inactivityTimer.cancel() : null;
+    timerReset.isActive ? timerReset.cancel() : null;
+  }
+
   void _initConfig() async {
     try {
       notify = utplMessage;
@@ -83,6 +97,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       // validateConection();
       startTimer(const Duration(minutes: 20));
       timerReset = Timer(const Duration(hours: 5), () {
+        closeTimers();
         Get.offAllNamed(Routes.splash_screen, arguments: {
           'currentTemplate': currentTemplate.value,
         });
@@ -110,18 +125,18 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     currentTemplate.value = params['currentTemplate'];
   }
 
-  void validateConection() {
-    timerConection.cancel();
-    timerConection = Timer.periodic(const Duration(minutes: 1), (timer) async {
-      ToolsHelper.logger.v('PROBANDO CONEXION');
-      var status = await validateServerConnection();
-      if (status) {
-        timerConection.cancel();
-        Get.offAndToNamed(Routes.splash_screen);
-      }
-      ToolsHelper.logger.v('INTERNET: $status');
-    });
-  }
+  // void validateConection() {
+  //   timerConection.cancel();
+  //   timerConection = Timer.periodic(const Duration(minutes: 1), (timer) async {
+  //     ToolsHelper.logger.v('PROBANDO CONEXION');
+  //     var status = await validateServerConnection();
+  //     if (status) {
+  //       timerConection.cancel();
+  //       Get.offAndToNamed(Routes.splash_screen);
+  //     }
+  //     ToolsHelper.logger.v('INTERNET: $status');
+  //   });
+  // }
 
   Future<bool> validateServerConnection() async {
     try {
@@ -215,7 +230,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
         inactivityTimer.cancel();
         ToolsHelper.logger.v('RESET TEMPLATE');
-
+        closeTimers();
         Get.offAllNamed(Routes.splash_screen, arguments: {
           'currentTemplate': currentTemplate.value,
         });

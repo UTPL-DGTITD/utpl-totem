@@ -124,10 +124,12 @@ class TvTemplateBody {
         embeddedData: json["embedded_data"],
         link:
             json["link"] == null ? null : LinkBaseModel.fromJson(json["link"]),
-        flickrData: json["flickr_data"] is String
+        flickrData: json["flickr_data"] == null
             ? []
-            : List<FlickrData>.from(
-                json["flickr_data"].map((x) => FlickrData.fromJson(x))),
+            : json["flickr_data"] is String
+                ? []
+                : List<FlickrData>.from(
+                    json["flickr_data"].map((x) => FlickrData.fromJson(x))),
         graphData: json["graph_data"] == null
             ? []
             : List<GraphData>.from(
