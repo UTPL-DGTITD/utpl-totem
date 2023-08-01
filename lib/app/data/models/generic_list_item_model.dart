@@ -47,6 +47,8 @@ class GenericListItemModel {
     this.endpoint,
     this.enable = false,
     this.deprecated = false,
+    this.typeMedia = '',
+    this.video = const [],
   });
 
   dynamic id;
@@ -74,6 +76,8 @@ class GenericListItemModel {
   EndPointBaseModel? endpoint;
   bool enable;
   bool deprecated;
+  String typeMedia;
+  List<String> video;
 
   factory GenericListItemModel.fromJson(Map<String, dynamic> json) {
     if (json["date"] == null &&
@@ -131,6 +135,10 @@ class GenericListItemModel {
               : EndPointBaseModel.fromJson(json["endpoint"]),
       enable: json["enable"] ?? false,
       deprecated: json["deprecated"] ?? false,
+      typeMedia: json["type_media"] ?? '',
+      video: json["video"] == null
+          ? []
+          : List<String>.from(json["video"].map((x) => x)),
     );
   }
 
@@ -161,6 +169,8 @@ class GenericListItemModel {
         "endpoint": endpoint?.toJson(),
         "enable": enable,
         "deprecated": deprecated,
+        "type_media": typeMedia,
+        "video": List<dynamic>.from(video.map((x) => x)),
       };
 }
 

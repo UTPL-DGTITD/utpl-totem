@@ -160,7 +160,7 @@ class HomePage extends GetView<HomeController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     blankSpace: 20.0,
-                                    velocity: 50,
+                                    velocity: 25,
                                     pauseAfterRound: const Duration(seconds: 0),
                                     startPadding: 10.0,
                                     accelerationDuration:
