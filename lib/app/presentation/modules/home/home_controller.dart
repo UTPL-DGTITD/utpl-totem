@@ -9,6 +9,7 @@ import 'package:utpl_totem/app/data/models/weather_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/data/repositories/local_repository.dart';
 import 'package:utpl_totem/app/data/services/toast_service.dart';
+import 'package:utpl_totem/app/presentation/modules/videos/videos_controller.dart';
 import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
@@ -275,16 +276,48 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void navigateToPage(String page) async {
     switch (page) {
       case Routes.screen_protector:
+        ToolsHelper.logger.v('volviste 30 min');
         resetTimer(duration: const Duration(minutes: 30));
         break;
       default:
+        ToolsHelper.logger.v('volviste 5 min');
         resetTimer(duration: const Duration(minutes: 5));
     }
-
+    //PAUSAR VIDEOS SI EXISTE COMPONENTE VIDEOS
+    stopVideosComponent();
     await Get.toNamed(page, arguments: {
       "wallpaper": wallpaper.value,
     });
+    playVideosComponent();
+    ToolsHelper.logger.v('volviste');
     resetTimer();
+  }
+
+  void stopVideosComponent() {
+    try {
+      final VideosController videosController = Get.find<VideosController>();
+      videosController.player.value.pause();
+      videosController.timerVideoPlaying.isActive
+          ? videosController.timerVideoPlaying.cancel()
+          : null;
+    } catch (e) {
+      ToolsHelper.logger.v('NO EXISTE COMPONENTE DE VIDEOS');
+    }
+  }
+
+  void playVideosComponent() {
+    try {
+      final VideosController videosController = Get.find<VideosController>();
+      videosController.player.value.play();
+      videosController.timerVideoPlaying.isActive
+          ? null
+          : videosController.timerVideoPlaying =
+              Timer.periodic(const Duration(minutes: 1), (timer) async {
+              videosController.validateVideo();
+            });
+    } catch (e) {
+      ToolsHelper.logger.v('NO EXISTE COMPONENTE DE VIDEOS');
+    }
   }
 
   void loadWallpaper() async {

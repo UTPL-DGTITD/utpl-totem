@@ -49,6 +49,7 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
 
   @override
   void onClose() {
+    //player.value.stop();
     player.value.dispose();
     if (timerVideoPlaying.isActive) {
       timerVideoPlaying.cancel();
@@ -59,15 +60,6 @@ class VideosController extends GetxController with GetTickerProviderStateMixin {
   void _initConfig() async {
     try {
       ToolsHelper.logger.v('VIDEOS CONTROLLER $urlVideos');
-      //player.value.play();
-      //await generateUrls(urlVideos.value);
-      //playVideos();
-      // timerVideoPlaying =
-      //     Timer.periodic(const Duration(minutes: 1), (timer) async {
-      //   validateVideo();
-      // });
-      //player.play();
-      //ToolsHelper.logger.v('VIDEOS CONTROLLER $urlVideos ${urlVideos.length}');
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[videos_controller] (_initConfig)',

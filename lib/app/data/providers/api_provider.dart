@@ -328,4 +328,21 @@ class ApiProvider extends ApiRepository {
       return ApiResponseModel.fromJson(res);
     });
   }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     GET FLICKER VIDEO IMG                  */
+  /* -------------------------------------------------------------------------- */
+
+  @override
+  Future<ApiResponseModel> getFlickerVideoImage(
+      {String id = '', String media = '', String quality = ''}) {
+    return _netUtil.get(
+      path: 'v1/flickr/photo/show/$id?quality=$quality&media=$media',
+      headers: {
+        "accessKey": Environment.accessKey,
+      },
+    ).then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
 }

@@ -25,6 +25,7 @@ class TvTemplateModel {
     this.description = "",
     this.createdAt = "",
     this.tvTemplateHeader,
+    this.orientation = '',
   });
 
   String id;
@@ -32,6 +33,7 @@ class TvTemplateModel {
   String description;
   String createdAt;
   TvTemplateHeader? tvTemplateHeader;
+  String orientation;
 
   factory TvTemplateModel.fromJson(Map<String, dynamic> json) =>
       TvTemplateModel(
@@ -42,6 +44,7 @@ class TvTemplateModel {
         tvTemplateHeader: json["tv_template_header"] == null
             ? TvTemplateHeader()
             : TvTemplateHeader.fromJson(json["tv_template_header"]),
+        orientation: json["orientation"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,6 +53,7 @@ class TvTemplateModel {
         "description": description,
         "created_at": createdAt,
         "tv_template_header": tvTemplateHeader?.toJson(),
+        "orientation": orientation,
       };
 }
 

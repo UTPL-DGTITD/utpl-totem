@@ -144,4 +144,14 @@ abstract class ApiRepository {
   Future<ApiResponseModel> getNotify({
     Map<String, dynamic> headers,
   });
+
+/* -------------------------------------------------------------------------- */
+/*                                    GET FLICKER VIDEO IMG                   */
+/* -------------------------------------------------------------------------- */
+
+  Future<ApiResponseModel> getFlickerVideoImage({
+    required String id,
+    required String media,
+    required String quality,
+  });
 }

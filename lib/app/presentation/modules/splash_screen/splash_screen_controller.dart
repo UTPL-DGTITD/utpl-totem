@@ -37,13 +37,14 @@ class SplashScreenController extends GetxController {
   void _initConfig() async {
     var status = await validateServerConnection();
     if (status) {
-      var token = generateQaToken;
-      ToolsHelper.logger.i("WSO2", token.substring(token.length - 10));
+      //var token = generateQaToken;
+      //ToolsHelper.logger.i("WSO2", token.substring(token.length - 10));
       validateCode();
       // await Future.delayed(const Duration(seconds: 2));
       // Get.offAndToNamed(Routes.template_static);
     } else {
-      navigateToTemplateOffline();
+      //navigateToTemplateOffline();
+      validateCode();
     }
   }
 
