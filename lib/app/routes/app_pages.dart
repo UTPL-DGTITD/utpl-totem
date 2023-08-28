@@ -14,8 +14,6 @@ import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_prot
 import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_page.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/splash_screen/splash_screen_page.dart';
-import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_binding.dart';
-import 'package:utpl_totem/app/presentation/modules/template_offline/template_offline_page.dart';
 import 'package:utpl_totem/app/presentation/modules/validate/validate_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/validate/validate_page.dart';
 import 'package:utpl_totem/app/presentation/modules/web/web_binding.dart';
@@ -71,14 +69,6 @@ class AppPages {
       bindings: [
         MainBinding(),
         EventsBinding(),
-      ],
-    ),
-    GetPage(
-      name: Routes.template_offline,
-      page: () => const TemplateOfflinePage(),
-      bindings: [
-        MainBinding(),
-        TemplateOfflineBinding(),
       ],
     ),
     GetPage(
