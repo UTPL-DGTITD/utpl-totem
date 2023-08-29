@@ -4,6 +4,7 @@ import 'package:utpl_totem/app/presentation/modules/banner/banner_page.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
 import 'package:utpl_totem/app/presentation/modules/flickr/flick_page.dart';
 import 'package:utpl_totem/app/presentation/modules/graph/graph_page.dart';
+import 'package:utpl_totem/app/presentation/modules/image/image_page.dart';
 import 'package:utpl_totem/app/presentation/modules/investigation/investigation_page.dart';
 import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
 import 'package:utpl_totem/app/presentation/modules/observatories/observatories_page.dart';
@@ -37,6 +38,8 @@ class GenerateComponent {
         return const ObservatoriesPage();
       case "indicators":
         return const InvestigationPage();
+      case "image":
+        return ImagePage(item);
       default:
         return const SizedBox();
     }

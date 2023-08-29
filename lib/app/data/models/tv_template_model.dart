@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:utpl_totem/app/data/models/image_base_model.dart';
 import 'package:utpl_totem/app/data/models/link_base_model.dart';
 
 TvTemplateModel tvTemplateModelFromJson(String str) =>
@@ -105,6 +106,7 @@ class TvTemplateBody {
     this.flickrData = const [],
     this.graphData = const [],
     this.embeddedYoutube = const [],
+    this.image,
   });
 
   String title;
@@ -117,6 +119,7 @@ class TvTemplateBody {
   List<FlickrData> flickrData;
   List<GraphData> graphData;
   List<String> embeddedYoutube;
+  ImageBaseModel? image;
   // dynamic flickrData;
 
   factory TvTemplateBody.fromJson(Map<String, dynamic> json) => TvTemplateBody(
@@ -141,6 +144,9 @@ class TvTemplateBody {
         embeddedYoutube: json["embedded_youtube"] == null
             ? []
             : List<String>.from(json["embedded_youtube"]!.map((x) => x)),
+        image: json["image"] == null
+            ? null
+            : ImageBaseModel.fromJson(json["image"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -154,6 +160,7 @@ class TvTemplateBody {
         "flickr_data": List<dynamic>.from(flickrData.map((x) => x.toJson())),
         "graph_data": List<dynamic>.from(graphData.map((x) => x.toJson())),
         "embedded_youtube": List<dynamic>.from(embeddedYoutube.map((x) => x)),
+        "image": image == null ? image : image?.toJson(),
 
         // "flickr_data": flickrData,
       };
