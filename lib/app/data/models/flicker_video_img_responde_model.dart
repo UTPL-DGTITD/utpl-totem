@@ -16,8 +16,8 @@ List<FlickerVideoImgResponseModel> flickerVideoImgResponseModelFromList(
 
 class FlickerVideoImgResponseModel {
   String? label;
-  dynamic? width;
-  dynamic? height;
+  dynamic width;
+  dynamic height;
   String? source;
   String? url;
   String? media;
