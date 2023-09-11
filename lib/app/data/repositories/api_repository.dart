@@ -154,4 +154,16 @@ abstract class ApiRepository {
     required String media,
     required String quality,
   });
+
+/* -------------------------------------------------------------------------- */
+/*                               BUSES UTPL                                   */
+/* -------------------------------------------------------------------------- */
+
+  Future<ApiResponseModel> postBusesRoutesByWeekDay({
+    required int weekDay,
+  });
+
+  Future<ApiResponseModel> showBusRoute({
+    required String id,
+  });
 }

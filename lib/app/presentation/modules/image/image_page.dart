@@ -46,7 +46,7 @@ class ImagePage extends GetView<ImageController> {
                     ),
                   ),
                 )
-              : SizedBox();
+              : const SizedBox();
         },
       ),
     );

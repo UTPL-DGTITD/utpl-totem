@@ -46,7 +46,7 @@ class WebComponentPage extends GetView<WebComponentController> {
                           ? const Center(
                               child: CircularProgressIndicator(),
                             )
-                          : Stack(),
+                          : const Stack(),
                     ],
                   )
                 : const Center(
