@@ -8,7 +8,6 @@ import 'package:marquee/marquee.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
 import 'package:utpl_totem/app/presentation/modules/home/utils/generate_component.dart';
 import 'package:utpl_totem/app/presentation/modules/home/widgets/side_header.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_more_services.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
