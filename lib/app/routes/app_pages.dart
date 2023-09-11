@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/main_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/bus_routes/bus_schedule_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/bus_routes/bus_schedule_page.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_binding.dart';
@@ -93,6 +95,14 @@ class AppPages {
       bindings: [
         MainBinding(),
         ScheduleBinding(),
+      ],
+    ),
+    GetPage(
+      name: Routes.bus_schedule,
+      page: () => const BusSchedulePage(),
+      bindings: [
+        MainBinding(),
+        BusScheduleBinding(),
       ],
     ),
   ];

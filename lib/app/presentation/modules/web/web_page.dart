@@ -39,7 +39,7 @@ class WebPage extends GetView<WebController> {
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : Stack(),
+                        : const Stack(),
                   ],
                 )
               : const Center(

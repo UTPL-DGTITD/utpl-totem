@@ -18,167 +18,174 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     //TvTemplateModel item = tvTemplateModelFromJson('');
 
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Obx(() => Text(controller.title.value)),
-      // ),
-      body: GetX<HomeController>(
-        init: HomeController(
-          localRepository: Get.find(),
-          apiRepository: Get.find(),
-          toastService: Get.find(),
-        ),
-        initState: (_) {},
-        builder: (ctrl) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTapDown: (_) {
-              ToolsHelper.logger.v('USUARIO: onTapDown');
-              ctrl.resetTimer();
-            },
-            onPanDown: (_) {
-              ToolsHelper.logger.v('USUARIO: onPanDown');
-              ctrl.resetTimer();
-            },
-            onTap: () {
-              ToolsHelper.logger.v('USUARIO: onTap');
-              ctrl.resetTimer();
-            },
-            child: SafeArea(
-              child: ctrl.showSkeleton.isFalse
-                  ? Container(
-                      color: Get.theme.cardColor,
-                      width: ctrl.responsive.wp(100),
-                      height: ctrl.responsive.hp(100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: ctrl.responsive.wp(0.5),
-                                  vertical: ctrl.responsive.hp(1),
-                                ),
-                                color: Get.theme.cardColor,
-                                width: ctrl.responsive.wp(75),
-                                height: ctrl.responsive.hp(91),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      color: Get.theme.cardColor,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: ctrl.responsive.wp(4),
-                                      ),
-                                      child: InkWell(
-                                        onTap: () => ctrl.refreshTemplate(),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'UTPL',
-                                              style: TextStyle(
-                                                fontSize: ctrl.responsive.ip(4),
-                                                color: Get
-                                                    .theme.colorScheme.primary,
-                                                fontWeight: FontWeight.bold,
+    return Obx(
+      () => Scaffold(
+        floatingActionButton: controller.showSkeleton.isFalse
+            ? const SizedBox()
+            : const SizedBox(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: GetX<HomeController>(
+          init: HomeController(
+            localRepository: Get.find(),
+            apiRepository: Get.find(),
+            toastService: Get.find(),
+          ),
+          initState: (_) {},
+          builder: (ctrl) {
+            return GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTapDown: (_) {
+                ToolsHelper.logger.v('USUARIO: onTapDown');
+                ctrl.resetTimer();
+              },
+              onPanDown: (_) {
+                ToolsHelper.logger.v('USUARIO: onPanDown');
+                ctrl.resetTimer();
+              },
+              onTap: () {
+                ToolsHelper.logger.v('USUARIO: onTap');
+                ctrl.resetTimer();
+              },
+              child: SafeArea(
+                child: ctrl.showSkeleton.isFalse
+                    ? Container(
+                        color: Get.theme.cardColor,
+                        width: ctrl.responsive.wp(100),
+                        height: ctrl.responsive.hp(100),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ctrl.responsive.wp(0.5),
+                                    vertical: ctrl.responsive.hp(1),
+                                  ),
+                                  color: Get.theme.cardColor,
+                                  width: ctrl.responsive.wp(75),
+                                  height: ctrl.responsive.hp(91),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        color: Get.theme.cardColor,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: ctrl.responsive.wp(4),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () => ctrl.refreshTemplate(),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'UTPL',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ctrl.responsive.ip(4),
+                                                  color: Get.theme.colorScheme
+                                                      .primary,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              '+',
-                                              style: TextStyle(
-                                                fontSize: ctrl.responsive.ip(4),
-                                                color: Get
-                                                    .theme.colorScheme.tertiary,
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                '+',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ctrl.responsive.ip(4),
+                                                  color: Get.theme.colorScheme
+                                                      .tertiary,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    customYMargin(ctrl.responsive.hp(0.5)),
-                                    Expanded(
-                                      child: StaggeredGrid.count(
-                                        // crossAxisCount: 14,
-                                        crossAxisCount: 10,
-                                        axisDirection: AxisDirection.down,
-                                        mainAxisSpacing: ctrl.responsive.hp(1),
-                                        crossAxisSpacing:
-                                            ctrl.responsive.wp(0.5),
-                                        children:
-                                            //
-                                            generateComponents(ctrl),
-                                        //generateStaticComponents(ctrl),
+                                      customYMargin(ctrl.responsive.hp(0.5)),
+                                      Expanded(
+                                        child: StaggeredGrid.count(
+                                          // crossAxisCount: 14,
+                                          crossAxisCount: 10,
+                                          axisDirection: AxisDirection.down,
+                                          mainAxisSpacing:
+                                              ctrl.responsive.hp(1),
+                                          crossAxisSpacing:
+                                              ctrl.responsive.wp(0.5),
+                                          children:
+                                              //
+                                              generateComponents(ctrl),
+                                          //generateStaticComponents(ctrl),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: ctrl.responsive.wp(25),
-                                height: ctrl.responsive.hp(91),
-                                color: Get.theme.colorScheme.tertiary,
-                                child: SideHeader(ctrl: ctrl),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: ctrl.responsive.hp(0),
-                                ),
-                                width: ctrl.responsive.wp(20),
-                                height: ctrl.responsive.hp(9),
-                                decoration: BoxDecoration(
-                                  color: Get.theme.colorScheme.tertiary,
-                                ),
-                                child: SvgPicture.asset(
-                                  'assets/svg/dgti_utpl.svg',
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                width: ctrl.responsive.wp(80),
-                                height: ctrl.responsive.hp(9),
-                                color: Get.theme.colorScheme.primary,
-                                child: Container(
-                                  color: ctrl.colorNotify.value,
-                                  child: Marquee(
-                                    text: ctrl.notify.value,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ctrl.colorTextNotify.value,
-                                      fontSize: ctrl.responsive.ip(1.8),
-                                    ),
-                                    scrollAxis: Axis.horizontal,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    blankSpace: 20.0,
-                                    velocity: 25,
-                                    pauseAfterRound: const Duration(seconds: 0),
-                                    startPadding: 10.0,
-                                    accelerationDuration:
-                                        const Duration(seconds: 1),
-                                    accelerationCurve: Curves.linear,
-                                    decelerationCurve: Curves.easeOut,
+                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  : const Center(child: CircularProgressIndicator()),
-            ),
-          );
-        },
+                                Container(
+                                  width: ctrl.responsive.wp(25),
+                                  height: ctrl.responsive.hp(91),
+                                  color: Get.theme.colorScheme.tertiary,
+                                  child: SideHeader(ctrl: ctrl),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: ctrl.responsive.hp(0),
+                                  ),
+                                  width: ctrl.responsive.wp(20),
+                                  height: ctrl.responsive.hp(9),
+                                  decoration: BoxDecoration(
+                                    color: Get.theme.colorScheme.tertiary,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    'assets/svg/dgti_utpl.svg',
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: ctrl.responsive.wp(80),
+                                  height: ctrl.responsive.hp(9),
+                                  color: Get.theme.colorScheme.primary,
+                                  child: Container(
+                                    color: ctrl.colorNotify.value,
+                                    child: Marquee(
+                                      text: ctrl.notify.value,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: ctrl.colorTextNotify.value,
+                                        fontSize: ctrl.responsive.ip(1.8),
+                                      ),
+                                      scrollAxis: Axis.horizontal,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      blankSpace: 20.0,
+                                      velocity: 25,
+                                      pauseAfterRound:
+                                          const Duration(seconds: 0),
+                                      startPadding: 10.0,
+                                      accelerationDuration:
+                                          const Duration(seconds: 1),
+                                      accelerationCurve: Curves.linear,
+                                      decelerationCurve: Curves.easeOut,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    : const Center(child: CircularProgressIndicator()),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

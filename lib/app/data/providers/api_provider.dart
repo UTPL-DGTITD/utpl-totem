@@ -345,4 +345,35 @@ class ApiProvider extends ApiRepository {
       return ApiResponseModel.fromJson(res);
     });
   }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  BUSES UTPL                                */
+  /* -------------------------------------------------------------------------- */
+  @override
+  Future<ApiResponseModel> postBusesRoutesByWeekDay({
+    required int weekDay,
+  }) {
+    var data = {"day": weekDay};
+    return _netUtil
+        .post(
+      path: 'v3/buses/route/itinerary',
+      body: data,
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+  @override
+  Future<ApiResponseModel> showBusRoute({
+    required String id,
+  }) {
+    return _netUtil
+        .get(
+      path: 'v3/buses/route/show/$id',
+    )
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
 }

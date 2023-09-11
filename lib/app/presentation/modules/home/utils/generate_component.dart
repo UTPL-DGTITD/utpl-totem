@@ -21,7 +21,7 @@ class GenerateComponent {
         return WebComponentPage(item.link?.url ?? '');
       case "embedded_youtube":
         return VideosPage(item);
-      //return const SizedBox();
+      // return const SizedBox();
       case "banner":
         return const BannerPage();
       case "graph":

@@ -31,4 +31,7 @@ abstract class Routes {
 
   /// Page for schedule
   static const schedule = '/schedule_page';
+
+  /// Page for schedule
+  static const bus_schedule = '/bus_schedule_page';
 }

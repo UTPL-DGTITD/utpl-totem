@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
+import 'package:utpl_totem/app/presentation/widgets/modal_services.dart';
 import 'package:utpl_totem/app/routes/app_pages.dart';
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
@@ -29,7 +30,7 @@ class SideHeader extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 6,
+            flex: 7,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -219,7 +220,7 @@ class SideHeader extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    customYMargin(ctrl.responsive.hp(4)),
+                    customYMargin(ctrl.responsive.hp(2)),
                     InkWell(
                       onTap: () => ctrl.navigateToPage(Routes.schedule),
                       child: Row(
@@ -255,10 +256,17 @@ class SideHeader extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                BottomLink(
+                  ctrl: ctrl,
+                  text: 'Buses',
+                  onTap: () => ctrl.navigateToPage(Routes.bus_schedule),
+                ),
+                customYMargin(ctrl.responsive.hp(1)),
                 BottomLink(
                   ctrl: ctrl,
                   text: 'Noticias',
@@ -271,6 +279,38 @@ class SideHeader extends StatelessWidget {
                   onTap: () => ctrl.navigateToPage(Routes.events),
                 ),
                 customYMargin(ctrl.responsive.hp(1)),
+                ElevatedButton(
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(ctrl.responsive.ip(1.6)),
+                        ),
+                      ),
+                      backgroundColor: MaterialStateColor.resolveWith(
+                          (states) => Get.theme.colorScheme.primary)),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: ctrl.responsive.hp(1)),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Text('Ver más',
+                              style: Get.textTheme.titleLarge?.copyWith(
+                                fontSize: ctrl.responsive.ip(1.5),
+                                fontWeight: FontWeight.bold,
+                                color: Get.theme.colorScheme.onPrimaryContainer,
+                              ),
+                              textAlign: TextAlign.center),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onPressed: () {
+                    ModalServices.alertMoreServices(context);
+                  },
+                ),
               ],
             ),
           ),
@@ -283,7 +323,7 @@ class SideHeader extends StatelessWidget {
                 //image: const AssetImage('assets/images/logo_utpl_azul.png'),
                 elementColor: Colors.black,
                 typeNumber: null,
-                size: ctrl.responsive.ip(10),
+                size: ctrl.responsive.ip(6.5),
                 data: 'https://appmovil.utpl.edu.ec/',
                 errorCorrectLevel: QrErrorCorrectLevel.M,
                 roundEdges: true,
@@ -324,7 +364,7 @@ class BottomLink extends StatelessWidget {
                 color: Get.theme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
           ),
           Expanded(
