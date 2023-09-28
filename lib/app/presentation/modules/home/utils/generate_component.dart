@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:utpl_totem/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem/app/presentation/modules/banner/banner_page.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
-import 'package:utpl_totem/app/presentation/modules/flickr/flick_page.dart';
 import 'package:utpl_totem/app/presentation/modules/graph/graph_page.dart';
 import 'package:utpl_totem/app/presentation/modules/image/image_page.dart';
 import 'package:utpl_totem/app/presentation/modules/investigation/investigation_page.dart';
@@ -26,8 +25,6 @@ class GenerateComponent {
         return const BannerPage();
       case "graph":
         return GraphPage(item);
-      case "embedded_flickr":
-        return FlickrPage(item);
       case "news":
         return const NewsPage();
       case "events":

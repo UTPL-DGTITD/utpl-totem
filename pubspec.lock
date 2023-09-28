@@ -185,6 +185,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
+  easy_image_viewer:
+    dependency: "direct main"
+    description:
+      name: easy_image_viewer
+      sha256: "8d11a4630e9beb7aacf043c98da2dd4b3bc3b47aa4073d2016ba696376161272"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   equatable:
     dependency: transitive
     description:
@@ -331,6 +339,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_wall_layout:
+    dependency: "direct main"
+    description:
+      name: flutter_wall_layout
+      sha256: "321dc9bfa85705c43908b0ce73b57f5c5cdccbb931e52f7f6faa6d681df4f42b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -592,6 +608,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
+  photo_view:
+    dependency: "direct main"
+    description:
+      name: photo_view
+      sha256: "8036802a00bae2a78fc197af8a158e3e2f7b500561ed23b4c458107685e645bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.14.0"
   platform:
     dependency: transitive
     description:

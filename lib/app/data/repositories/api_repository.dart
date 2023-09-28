@@ -155,6 +155,11 @@ abstract class ApiRepository {
     required String quality,
   });
 
+  Future<ApiResponseModel> getAlbumsFlicker({int page = 1});
+
+  Future<ApiResponseModel> getFlickerByAlbum(
+      {required String idAlbum, int page = 1});
+
 /* -------------------------------------------------------------------------- */
 /*                               BUSES UTPL                                   */
 /* -------------------------------------------------------------------------- */

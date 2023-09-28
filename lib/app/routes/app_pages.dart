@@ -4,6 +4,10 @@ import 'package:utpl_totem/app/presentation/modules/bus_routes/bus_schedule_bind
 import 'package:utpl_totem/app/presentation/modules/bus_routes/bus_schedule_page.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/events/events_page.dart';
+import 'package:utpl_totem/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_page.dart';
+import 'package:utpl_totem/app/presentation/modules/flickr/flickr_albums/flickr_albums_binding.dart';
+import 'package:utpl_totem/app/presentation/modules/flickr/flickr_albums/flickr_albums_page.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_binding.dart';
 import 'package:utpl_totem/app/presentation/modules/home/home_page.dart';
 import 'package:utpl_totem/app/presentation/modules/news/new_page.dart';
@@ -103,6 +107,22 @@ class AppPages {
       bindings: [
         MainBinding(),
         BusScheduleBinding(),
+      ],
+    ),
+    GetPage(
+      name: Routes.flickr,
+      page: () => const FlickrAlbumsPage(),
+      bindings: [
+        MainBinding(),
+        FlickrAlbumsBinding(),
+      ],
+    ),
+    GetPage(
+      name: Routes.flickr_detail,
+      page: () => const FlickrAlbumDetailPage(),
+      bindings: [
+        MainBinding(),
+        FlickrAlbumDetailBinding(),
       ],
     ),
   ];
