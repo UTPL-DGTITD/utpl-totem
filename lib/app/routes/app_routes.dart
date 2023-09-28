@@ -34,4 +34,8 @@ abstract class Routes {
 
   /// Page for schedule
   static const bus_schedule = '/bus_schedule_page';
+
+  /// Page for flicker
+  static const flickr = '/flickr_page';
+  static const flickr_detail = '/flickr_detail_page';
 }

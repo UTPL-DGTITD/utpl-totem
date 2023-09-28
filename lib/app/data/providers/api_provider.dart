@@ -3,6 +3,7 @@ import 'package:utpl_totem/app/data/models/api_response_model.dart';
 import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
 import 'package:utpl_totem/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem/app/utils/helpers/network_helper.dart';
+import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
 
 class ApiProvider extends ApiRepository {
   final NetworkUtil _netUtil = NetworkUtil();
@@ -13,6 +14,7 @@ class ApiProvider extends ApiRepository {
 
   @override
   Future<ApiResponseModel> getBackendStatus() {
+    ToolsHelper.logger.v(_netUtil.get(path: 'status'));
     return _netUtil.get(path: 'status').then((dynamic res) {
       return ApiResponseModel.fromJson(res);
     });
@@ -342,6 +344,30 @@ class ApiProvider extends ApiRepository {
         "accessKey": Environment.accessKey,
       },
     ).then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+  @override
+  Future<ApiResponseModel> getAlbumsFlicker({int page = 1}) {
+    return _netUtil
+        .get(path: 'v1/flickr/albums/enable?page=$page')
+        .then((dynamic res) {
+      return ApiResponseModel.fromJson(res);
+    });
+  }
+
+  @override
+  Future<ApiResponseModel> getFlickerByAlbum(
+      {String idAlbum = '', int page = 1}) {
+    return _netUtil.get(
+      path: 'v1/flickr/albums/$idAlbum/photos/all',
+      headers: {
+        'accessKey': Environment.accessKey,
+      },
+    )
+        // .get(path: 'v2/event/collage/all?page=1')
+        .then((dynamic res) {
       return ApiResponseModel.fromJson(res);
     });
   }

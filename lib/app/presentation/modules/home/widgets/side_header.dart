@@ -30,7 +30,7 @@ class SideHeader extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 7,
+            flex: 8,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

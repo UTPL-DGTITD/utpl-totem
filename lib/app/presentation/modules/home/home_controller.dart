@@ -273,15 +273,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  void navigateToPage(String page) async {
+  Future<void> navigateToPage(String page) async {
     switch (page) {
       case Routes.screen_protector:
         ToolsHelper.logger.v('volviste 30 min');
         resetTimer(duration: const Duration(minutes: 30));
         break;
       default:
-        ToolsHelper.logger.v('volviste 5 min');
-        resetTimer(duration: const Duration(minutes: 5));
+        ToolsHelper.logger.v('volviste 8 min');
+        resetTimer(duration: const Duration(minutes: 8));
     }
     //PAUSAR VIDEOS SI EXISTE COMPONENTE VIDEOS
     stopVideosComponent();

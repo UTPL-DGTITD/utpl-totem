@@ -31,6 +31,11 @@ class ModalServices {
         'route': Routes.events,
         'icon': Icons.event_available,
       },
+      {
+        'title': 'Flickr UTPL',
+        'route': Routes.flickr,
+        'icon': Icons.photo,
+      },
     ];
     return showDialog(
         context: context,
@@ -181,6 +186,8 @@ class ServiceItem extends StatelessWidget {
     HomeController ctrl = Get.find<HomeController>();
     return InkWell(
       onTap: () async {
+        Get.back();
+        ModalServices.alertMoreServices(context);
         ctrl.navigateToPage(route);
       },
       child: Column(
