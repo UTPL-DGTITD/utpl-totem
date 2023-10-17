@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:utpl_totem/app/data/models/extra_base_model.dart';
-
 import 'package:utpl_totem/app/data/models/generic_schedule_model.dart';
-
 import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-
 import 'package:utpl_totem/app/themes/custom_margin.dart';
 import 'package:utpl_totem/app/themes/responsive.dart';
 
 class ModalDialogSchedule {
-  static Future<dynamic> alertSchedule(BuildContext context,
-      GenericScheduleModel item, ScheduleController ctrl, Datum datum) {
+  static Future<dynamic> alertSchedule(
+      BuildContext context,
+      GenericScheduleModel item,
+      ScheduleController ctrl,
+      Datum datum,
+      bool showReference) {
     return showDialog(
         context: context,
         barrierDismissible: true,
@@ -35,7 +36,7 @@ class ModalDialogSchedule {
               child: Text(
                 item.title,
                 style: Get.textTheme.titleLarge?.copyWith(
-                  fontSize: responsive.ip(2.2),
+                  fontSize: responsive.ip(2.5),
                   fontWeight: FontWeight.bold,
                   color: Get.theme.colorScheme.primary,
                 ),
@@ -46,82 +47,111 @@ class ModalDialogSchedule {
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             content: SizedBox(
               height: responsive.hp(50),
-              child: Scrollbar(
-                thumbVisibility: true,
-                controller: ctrl.contentScrollController,
-                child: SingleChildScrollView(
-                  controller: ctrl.contentScrollController,
-                  scrollDirection: Axis.vertical,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: responsive.wp(2),
-                      vertical: responsive.hp(2),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        InfoSchedule(
-                          title: 'Día:',
-                          description: datum.day,
+              child: Column(
+                children: [
+                  showReference
+                      ? Text(
+                          ctrl.getReferenceClassroom(
+                              ctrl.selectedIdClassroom.value, datum),
+                          style: TextStyle(
+                            fontSize: ctrl.responsive.ip(2.2),
+                            color: Get.theme.colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      : datum.place == ''
+                          ? const SizedBox()
+                          : Text(
+                              '${datum.place} - ${datum.classroom}',
+                              style: TextStyle(
+                                fontSize: ctrl.responsive.ip(2.2),
+                                color: Get.theme.colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                  customYMargin(ctrl.responsive.hp(1)),
+                  Expanded(
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      controller: ctrl.contentScrollController,
+                      child: SingleChildScrollView(
+                        controller: ctrl.contentScrollController,
+                        scrollDirection: Axis.vertical,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: responsive.wp(2),
+                            vertical: responsive.hp(2),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              InfoSchedule(
+                                title: 'Día:',
+                                description: datum.day,
+                              ),
+                              InfoSchedule(
+                                title: 'Tipo de horario:',
+                                description: datum.typeSchedule,
+                              ),
+                              InfoSchedule(
+                                title: 'Hora inicio:',
+                                description: datum.beginClass,
+                              ),
+                              InfoSchedule(
+                                title: 'Hora fin:',
+                                description: datum.endClass,
+                              ),
+                              InfoSchedule(
+                                title: 'Paralelo:',
+                                description: datum.title,
+                              ),
+                              InfoSchedule(
+                                title: 'Edificio:',
+                                description: datum.place,
+                              ),
+                              InfoSchedule(
+                                title: 'Aula:',
+                                description: datum.classroom,
+                              ),
+                              InfoSchedule(
+                                title: 'Docente:',
+                                description: ctrl.getStringByIdentifier(
+                                        datum.relation, 'Docente') ??
+                                    '-',
+                              ),
+                              InfoSchedule(
+                                title: 'Modalidad:',
+                                description: ctrl.getStringByIdentifier(
+                                        datum.relation, 'Modalidad') ??
+                                    '-',
+                              ),
+                              InfoSchedule(
+                                title: 'Periódo Académico:',
+                                description: ctrl.getStringByIdentifier(
+                                        datum.relation, 'Periodo Academico') ??
+                                    '-',
+                              ),
+                              InfoSchedule(
+                                title: 'Nivel Acádemico:',
+                                description: ctrl.getStringByIdentifier(
+                                        datum.relation, 'Nivel Acádemico') ??
+                                    '-',
+                              ),
+                              // InfoSchedule(
+                              //   title: 'Enlace Tutoría:',
+                              //   description: ctrl.getStringByIdentifier(
+                              //           datum.relation, 'EnlaceTutoria') ??
+                              //       '-',
+                              // ),
+                            ],
+                          ),
                         ),
-                        InfoSchedule(
-                          title: 'Tipo de horario:',
-                          description: datum.typeSchedule,
-                        ),
-                        InfoSchedule(
-                          title: 'Hora inicio:',
-                          description: datum.beginClass,
-                        ),
-                        InfoSchedule(
-                          title: 'Hora fin:',
-                          description: datum.endClass,
-                        ),
-                        InfoSchedule(
-                          title: 'Paralelo:',
-                          description: datum.title,
-                        ),
-                        InfoSchedule(
-                          title: 'Edificio:',
-                          description: datum.place,
-                        ),
-                        InfoSchedule(
-                          title: 'Aula:',
-                          description: datum.classroom,
-                        ),
-                        InfoSchedule(
-                          title: 'Docente:',
-                          description: ctrl.getStringByIdentifier(
-                                  datum.relation, 'Docente') ??
-                              '-',
-                        ),
-                        InfoSchedule(
-                          title: 'Modalidad:',
-                          description: ctrl.getStringByIdentifier(
-                                  datum.relation, 'Modalidad') ??
-                              '-',
-                        ),
-                        InfoSchedule(
-                          title: 'Periódo Académico:',
-                          description: ctrl.getStringByIdentifier(
-                                  datum.relation, 'Periodo Academico') ??
-                              '-',
-                        ),
-                        InfoSchedule(
-                          title: 'Nivel Acádemico:',
-                          description: ctrl.getStringByIdentifier(
-                                  datum.relation, 'Nivel Acádemico') ??
-                              '-',
-                        ),
-                        // InfoSchedule(
-                        //   title: 'Enlace Tutoría:',
-                        //   description: ctrl.getStringByIdentifier(
-                        //           datum.relation, 'EnlaceTutoria') ??
-                        //       '-',
-                        // ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
             actions: [

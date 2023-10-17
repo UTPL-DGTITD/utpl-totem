@@ -154,26 +154,28 @@ class HomePage extends GetView<HomeController> {
                                   color: Get.theme.colorScheme.primary,
                                   child: Container(
                                     color: ctrl.colorNotify.value,
-                                    child: Marquee(
-                                      text: ctrl.notify.value,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: ctrl.colorTextNotify.value,
-                                        fontSize: ctrl.responsive.ip(1.8),
-                                      ),
-                                      scrollAxis: Axis.horizontal,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      blankSpace: 20.0,
-                                      velocity: 25,
-                                      pauseAfterRound:
-                                          const Duration(seconds: 0),
-                                      startPadding: 10.0,
-                                      accelerationDuration:
-                                          const Duration(seconds: 1),
-                                      accelerationCurve: Curves.linear,
-                                      decelerationCurve: Curves.easeOut,
-                                    ),
+                                    child: ctrl.notify.isNotEmpty
+                                        ? Marquee(
+                                            text: ctrl.notify.value,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: ctrl.colorTextNotify.value,
+                                              fontSize: ctrl.responsive.ip(1.8),
+                                            ),
+                                            scrollAxis: Axis.horizontal,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            blankSpace: 20.0,
+                                            velocity: 25,
+                                            pauseAfterRound:
+                                                const Duration(seconds: 0),
+                                            startPadding: 10.0,
+                                            accelerationDuration:
+                                                const Duration(seconds: 1),
+                                            accelerationCurve: Curves.linear,
+                                            decelerationCurve: Curves.easeOut,
+                                          )
+                                        : const SizedBox(),
                                   ),
                                 ),
                               ],

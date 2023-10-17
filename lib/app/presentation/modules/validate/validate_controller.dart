@@ -128,6 +128,7 @@ class ValidateController extends GetxController
   void navigateToHomePage() {
     Get.toNamed(Routes.home, arguments: {
       'currentTemplate': currentTemplate.value,
+      'idDevice': descriptionController.value.text,
     });
   }
 

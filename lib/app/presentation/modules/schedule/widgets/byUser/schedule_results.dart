@@ -122,6 +122,7 @@ class ScheduleResults extends StatelessWidget {
             context,
             ctrl,
             value,
+            false,
           ),
         ),
       );

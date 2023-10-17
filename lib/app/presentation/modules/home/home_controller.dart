@@ -52,6 +52,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
           'experiencia humana'
       .obs;
   RxString notify = ''.obs;
+  RxString idDevice = ''.obs;
   Rx<Color> colorNotify = Colors.transparent.obs;
   Rx<Color> colorTextNotify = Get.theme.cardColor.obs;
 
@@ -123,7 +124,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     assert(params['currentTemplate'] != null, 'currentTemplate is required');
     assert(params['currentTemplate'] is TvTemplateModel,
         'currentTemplate type is not TvTemplateModel');
+
+    assert(params['idDevice'] != null, 'idDevice is required');
+    assert(params['idDevice'] is String, 'idDevice type is not String');
     currentTemplate.value = params['currentTemplate'];
+    idDevice.value = params['idDevice'];
   }
 
   // void validateConection() {
@@ -355,7 +360,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void loadNotify() async {
     try {
       //showSkeleton.value = true;
-      var result = await apiRepository.getNotify();
+      var result = await apiRepository.getNotify(idDevice: idDevice.value);
       switch (result.status) {
         case 200:
           notifies.value = GenericListItemModel.fromJson(result.data);

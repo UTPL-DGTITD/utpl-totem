@@ -204,8 +204,9 @@ class ScheduleController extends GetxController
   }
 
   void showModal(GenericScheduleModel item, BuildContext context,
-      ScheduleController ctrl, Datum datum) {
-    ModalDialogSchedule.alertSchedule(context, item, ctrl, datum);
+      ScheduleController ctrl, Datum datum, bool reference) {
+    ToolsHelper.logger.v('El id es: ${datum.identifier}');
+    ModalDialogSchedule.alertSchedule(context, item, ctrl, datum, reference);
   }
 
   String? getStringByIdentifier(
@@ -503,5 +504,24 @@ class ScheduleController extends GetxController
 
   void handleTabSelection() {
     selectedDay.value = classroomSchedule[tabControllerWeeks.index].title;
+  }
+
+  String getReferenceClassroom(String identifier, Datum datum) {
+    String building = '';
+    String floor = '';
+    String classroom = '';
+    if (isNumber(identifier[0])) {
+      building = identifier.substring(0, 2);
+      floor = identifier[identifier.length - 2];
+      classroom = identifier[identifier.length - 1];
+      return 'Edificio ${building.toString()} - Piso ${floor.toString()} - Aula ${classroom.toString()}';
+    } else {
+      return '${datum.place} - ${datum.classroom}';
+    }
+  }
+
+  bool isNumber(String caracter) {
+    // Verifica si el carácter es un número comparando su valor Unicode.
+    return caracter.codeUnitAt(0) >= 48 && caracter.codeUnitAt(0) <= 57;
   }
 }
