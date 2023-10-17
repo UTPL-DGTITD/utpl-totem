@@ -51,6 +51,7 @@ class SplashScreenController extends GetxController {
   void navigateToHomePage() {
     Get.offAllNamed(Routes.home, arguments: {
       'currentTemplate': currentTemplate.value,
+      'idDevice': deviceCode.value,
     });
   }
 

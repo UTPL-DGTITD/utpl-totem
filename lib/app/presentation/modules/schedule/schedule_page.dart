@@ -65,7 +65,7 @@ class SchedulePage extends GetView<ScheduleController> {
                           ],
                         ),
                       ),
-                      const FooterUTPL(),
+                      const Expanded(child: FooterUTPL()),
                     ],
                   )
                 : const SkeletonList(length: 20),

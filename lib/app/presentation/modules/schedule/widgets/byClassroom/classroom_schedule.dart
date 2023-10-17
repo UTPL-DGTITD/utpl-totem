@@ -85,24 +85,30 @@ class ClassroomSchedule extends StatelessWidget {
                   ),
                   customYMargin(ctrl.responsive.hp(2)),
                   ctrl.classroomSchedule.isNotEmpty
-                      ? Column(
-                          children: [
-                            TabBar(
-                              controller: ctrl.tabControllerWeeks,
-                              tabs: ctrl.tabsWeek,
-                              labelStyle:
-                                  TextStyle(fontSize: ctrl.responsive.ip(2)),
-                            ),
-                            customYMargin(ctrl.responsive.hp(1)),
-                            Text(
-                              ctrl.selectedDay.value,
-                              style: TextStyle(
-                                fontSize: ctrl.responsive.ip(2),
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.colorScheme.primary,
+                      ? Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: TabBar(
+                                  controller: ctrl.tabControllerWeeks,
+                                  tabs: ctrl.tabsWeek,
+                                  labelStyle: TextStyle(
+                                      fontSize: ctrl.responsive.ip(2)),
+                                ),
                               ),
-                            ),
-                          ],
+                              // customYMargin(ctrl.responsive.hp(1)),
+                              Expanded(
+                                child: Text(
+                                  ctrl.selectedDay.value,
+                                  style: TextStyle(
+                                    fontSize: ctrl.responsive.ip(2),
+                                    fontWeight: FontWeight.bold,
+                                    color: Get.theme.colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                       : const SizedBox(),
                 ],
@@ -134,11 +140,11 @@ class ClassroomSchedule extends StatelessWidget {
                                             isLoading: false,
                                             scheduleData: classroomSchedule,
                                             onTap: (value) => ctrl.showModal(
-                                              classroomSchedule,
-                                              context,
-                                              ctrl,
-                                              value,
-                                            ),
+                                                classroomSchedule,
+                                                context,
+                                                ctrl,
+                                                value,
+                                                true),
                                           ),
                                         ),
                                       )
@@ -186,29 +192,5 @@ class ClassroomSchedule extends StatelessWidget {
         )
       ],
     ];
-  }
-
-  List<Widget> generateSchedule(ScheduleController ctrl, BuildContext context) {
-    List<Widget> items = [];
-    for (var i = 0; i < ctrl.classroomSchedule.length; i++) {
-      items.add(
-        ScheduleGrid(
-          ctrl: ctrl,
-          groupBy: 'day',
-          isLoading: false,
-          scheduleData: ctrl.classroomSchedule[i],
-          onTap: (value) => ctrl.showModal(
-            ctrl.classroomSchedule[i],
-            context,
-            ctrl,
-            value,
-          ),
-        ),
-      );
-      if (i == ctrl.classroomSchedule.length - 1) {
-        items.add(customYMargin(ctrl.responsive.hp(4)));
-      }
-    }
-    return items;
   }
 }

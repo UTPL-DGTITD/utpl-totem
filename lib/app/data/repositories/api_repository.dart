@@ -142,7 +142,7 @@ abstract class ApiRepository {
   /*                                   GET NOTIFY                               */
   /* -------------------------------------------------------------------------- */
   Future<ApiResponseModel> getNotify({
-    Map<String, dynamic> headers,
+    String idDevice = '',
   });
 
 /* -------------------------------------------------------------------------- */

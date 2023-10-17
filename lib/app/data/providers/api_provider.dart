@@ -317,14 +317,11 @@ class ApiProvider extends ApiRepository {
 
   @override
   Future<ApiResponseModel> getNotify({
-    Map<String, dynamic> headers = const {
-      "accessKey": Environment.accessKey,
-    },
+    String idDevice = '',
   }) {
     return _netUtil
         .get(
-      path: 'v1/notify/general/active',
-      headers: headers,
+      path: 'v2/notify/general/device/$idDevice',
     )
         .then((dynamic res) {
       return ApiResponseModel.fromJson(res);
