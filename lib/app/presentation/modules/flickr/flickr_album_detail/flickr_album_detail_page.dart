@@ -38,7 +38,7 @@ class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
+                  SizedBox(
                     width: ctrl.responsive.wp(100),
                     height: ctrl.responsive.hp(8),
                     child: Marquee(

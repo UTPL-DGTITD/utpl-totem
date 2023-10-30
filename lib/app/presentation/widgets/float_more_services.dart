@@ -16,7 +16,7 @@ class FloatMoreServices extends StatelessWidget {
       children: [
         Positioned(
           bottom: responsive.hp(4.5),
-          child: Container(
+          child: SizedBox(
             // color: Colors.yellow,
             width: responsive.wp(100),
             height: responsive.hp(8),

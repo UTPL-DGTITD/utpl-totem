@@ -47,7 +47,7 @@ class ModalBusScheduleDetail {
             ),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            content: Container(
+            content: SizedBox(
               // color: Colors.red,
               // height: responsive.hp(200),
               width: responsive.wp(100),
