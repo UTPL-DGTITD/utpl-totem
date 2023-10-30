@@ -47,7 +47,8 @@ class BannerPage extends GetView<BannerController> {
                 padding: EdgeInsets.symmetric(vertical: ctrl.responsive.hp(0)),
                 child: _ImgBanner(
                   item: ctrl.bannerSlide[index],
-                  onSectionSelect: (item) => ctrl.navigateToBannerDetail(item),
+                  onSectionSelect: (item) => null,
+                  // ctrl.navigateToBannerDetail(item),
                   ctrl: ctrl,
                 ),
               ),
@@ -80,7 +81,7 @@ class _ImgBanner extends StatelessWidget {
       ),
       width: double.maxFinite,
       child: GestureDetector(
-        onTap: () => ctrl.navigateToBannerDetail(item),
+        // onTap: () => ctrl.navigateToBannerDetail(item),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ctrl.responsive.wp(0)),
           child: CachedNetworkImage(
