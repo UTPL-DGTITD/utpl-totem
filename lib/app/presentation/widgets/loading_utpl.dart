@@ -17,7 +17,7 @@ class LoadingUtpl extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               //color: Get.theme.canvasColor,
               height: responsive.hp(30),
               child: Center(
