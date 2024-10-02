@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:utpl_totem/app/data/models/extra_base_model.dart';
 import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
 import 'package:utpl_totem/app/data/models/generic_schedule_model.dart';
@@ -523,5 +526,299 @@ class ScheduleController extends GetxController
   bool isNumber(String caracter) {
     // Verifica si el carácter es un número comparando su valor Unicode.
     return caracter.codeUnitAt(0) >= 48 && caracter.codeUnitAt(0) <= 57;
+  }
+
+  void printScheduleThermalByDay(BuildContext context) async {
+    try {
+      final port = SerialPort('COM4');
+
+      if (!port.openReadWrite()) {
+        throw 'Error al abrir el puerto COM4: ${SerialPort.lastError}';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Iniciando la impresión...')),
+      );
+
+      // Generar el texto del recibo
+      StringBuffer buffer = StringBuffer();
+
+      buffer.writeln(centerText('\x1B\x45\x01HORARIO DE CLASES\x1B\x45\x00'));
+
+      // Datos del estudiante
+      buffer.writeln(
+          '\x1B\x45\x01UTPLiD:\x1B\x45\x00 ${inputController.value.text}');
+
+      buffer.writeln(generateLine('='));
+
+      // Agrupar eventos por día
+      Map<String, List> groupedByDay = groupEventsByDay(userSchedule);
+
+      // Recorrer los días de la semana
+      for (var day in groupedByDay.keys) {
+        buffer.writeln(centerText('\x1B\x45\x01$day\x1B\x45\x00'));
+        buffer.writeln(generateLine('-'));
+
+        // Recorrer los eventos del día
+        for (var event in groupedByDay[day]!) {
+          buffer.write('\x1B\x45\x01- ${event['typeSchedule']}:\x1B\x45\x00 ');
+          buffer.writeln(
+              '(${event['beginClass']}-${event['endClass']}) ${event['subject']} (${event['period']})');
+
+          if (event['place'].isEmpty && event['classroom'].isEmpty) {
+            buffer.writeln('EN LINEA');
+          } else {
+            buffer.writeln(
+                '${event['place'].isNotEmpty ? event['place'] : ""}${event['place'].isNotEmpty && event['classroom'].isNotEmpty ? ": " : ""}${event['classroom'].isNotEmpty ? event['classroom'] : ""}');
+          }
+        }
+
+        buffer.writeln(generateLine('-'));
+      }
+
+      // Fecha y hora
+      buffer.writeln(
+          '\x1B\x45\x01Fecha:\x1B\x45\x00 ${DateFormat('yyyy-MM-dd').format(DateTime.now())} - \x1B\x45\x01Hora:\x1B\x45\x00 ${DateFormat('HH:mm:ss').format(DateTime.now())}');
+      buffer.writeln(
+        centerText(
+            '\x1B\x45\x01Powered by DGTI & TD\x1B\x45\x00\x0A\x0A\x0A\x0A'),
+      );
+
+      // Guardar el contenido del buffer en una variable para impresión en consola
+      String bufferContent = buffer.toString();
+
+      // Imprimir en consola
+      ToolsHelper.logger.v(bufferContent);
+      //print(bufferContent);
+
+      // Enviar el contenido del buffer a la impresora
+      final Uint8List data = Uint8List.fromList(bufferContent.codeUnits);
+      const int fragmentSize = 512;
+      for (int i = 0; i < data.length; i += fragmentSize) {
+        int end =
+            (i + fragmentSize < data.length) ? i + fragmentSize : data.length;
+        port.write(data.sublist(i, end));
+        await Future.delayed(const Duration(milliseconds: 50));
+      }
+
+      // CORTAR PAPEL
+      final Uint8List cutCommand = Uint8List.fromList([0x1D, 0x56, 0x00]);
+      port.write(cutCommand);
+
+      // Cerrar el puerto
+      port.close();
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Impresión completada con éxito')),
+      );
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error durante la impresión: $e')),
+      );
+    }
+  }
+
+  void printScheduleThermal(BuildContext context) async {
+    try {
+      final port = SerialPort('COM4');
+
+      if (!port.openReadWrite()) {
+        throw 'Error al abrir el puerto COM4: ${SerialPort.lastError}';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Iniciando la impresión...')),
+      );
+
+      // Generar el texto del recibo
+      StringBuffer buffer = StringBuffer();
+
+      buffer.writeln(centerText('\x1B\x45\x01HORARIO DE CLASES\x1B\x45\x00'));
+
+      // Datos del estudiante
+      buffer.writeln(
+          '\x1B\x45\x01UTPLiD:\x1B\x45\x00 ${inputController.value.text}');
+      buffer.writeln(generateLine('='));
+
+      // Recorrer cada asignatura
+      for (var subject in userSchedule) {
+        // Título de la asignatura en negrita
+        buffer.writeln(
+          centerText('\x1B\x45\x01${subject.title}\x1B\x45\x00'),
+        );
+        buffer.writeln(
+          centerText(getStringByIdentifier(
+                  subject.extras[0].data[0].relation, 'Periodo Academico') ??
+              ''),
+        );
+
+        // Horarios
+        for (var schedule in subject.extras[0].data) {
+          buffer.write(
+              '\x1B\x45\x01- ${schedule.typeSchedule}:\x1B\x45\x00 '); // Tipo de horario
+          buffer.writeln(
+              '${schedule.day} (${schedule.beginClass}-${schedule.endClass})'); // Día y horas
+
+          if (schedule.place.isEmpty && schedule.classroom.isEmpty) {
+            buffer.writeln('EN LINEA');
+          } else {
+            buffer.writeln(
+                '${schedule.place.isNotEmpty ? schedule.place : ""}${schedule.place.isNotEmpty && schedule.classroom.isNotEmpty ? ": " : ""}${schedule.classroom.isNotEmpty ? schedule.classroom : ""}');
+          }
+        }
+        buffer.writeln(generateLine('-'));
+      }
+
+      // Fecha y hora
+      buffer.writeln(
+          '\x1B\x45\x01Fecha:\x1B\x45\x00 ${DateFormat('yyyy-MM-dd').format(DateTime.now())} - \x1B\x45\x01Hora:\x1B\x45\x00 ${DateFormat('HH:mm:ss').format(DateTime.now())}');
+      buffer.writeln(
+        centerText(
+            '\x1B\x45\x01Powered by DGTI & TD\x1B\x45\x00\x0A\x0A\x0A\x0A'),
+      );
+
+      final Uint8List data = Uint8List.fromList(buffer.toString().codeUnits);
+      const int fragmentSize = 512;
+      for (int i = 0; i < data.length; i += fragmentSize) {
+        int end =
+            (i + fragmentSize < data.length) ? i + fragmentSize : data.length;
+        port.write(data.sublist(i, end));
+        await Future.delayed(const Duration(milliseconds: 50));
+      }
+
+      // CORTAR PAPEL
+      final Uint8List cutCommand = Uint8List.fromList([0x1D, 0x56, 0x00]);
+      port.write(cutCommand);
+
+      // Cerrar el puerto
+      port.close();
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Impresión completada con éxito')),
+      );
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error durante la impresión: $e')),
+      );
+    }
+  }
+
+  Map<String, List> groupEventsByDay(List<GenericScheduleModel> userSchedule) {
+    // Define el orden de los días de la semana
+    final List<String> weekDaysOrder = [
+      'LUNES',
+      'MARTES',
+      'MIERCOLES',
+      'JUEVES',
+      'VIERNES',
+      'SABADO',
+      'DOMINGO'
+    ];
+
+    Map<String, List> groupedByDay = {};
+
+    // Agrupar los eventos por día
+    for (var subject in userSchedule) {
+      for (var extra in subject.extras) {
+        for (var schedule in extra.data) {
+          // Si el día no está en el mapa, se inicializa con una lista vacía
+          if (!groupedByDay.containsKey(schedule.day)) {
+            groupedByDay[schedule.day] = [];
+          }
+          // Añadir el evento a la lista correspondiente al día
+          groupedByDay[schedule.day]!.add({
+            'subject': subject.title,
+            'typeSchedule': schedule.typeSchedule,
+            'beginClass': schedule.beginClass,
+            'endClass': schedule.endClass,
+            'place': schedule.place,
+            'classroom': schedule.classroom,
+            'period':
+                getStringByIdentifier(schedule.relation, 'Periodo Academico') ??
+                    ''
+          });
+        }
+      }
+    }
+
+    // Ordenar el mapa según el orden de los días de la semana
+    Map<String, List> sortedGroupedByDay = Map.fromEntries(
+      weekDaysOrder.where((day) => groupedByDay.containsKey(day)).map(
+            (day) => MapEntry(day, groupedByDay[day]!),
+          ),
+    );
+
+    return sortedGroupedByDay;
+  }
+
+  Map<String, Map<String, List>> groupEventsByDay2(
+      List<GenericScheduleModel> userSchedule) {
+    // Define el orden de los días de la semana
+    final List<String> weekDaysOrder = [
+      'LUNES',
+      'MARTES',
+      'MIERCOLES',
+      'JUEVES',
+      'VIERNES',
+      'SABADO',
+      'DOMINGO'
+    ];
+    Map<String, Map<String, List>> groupedByDayAndSubject = {};
+
+    for (var subject in userSchedule) {
+      for (var extra in subject.extras) {
+        for (var schedule in extra.data) {
+          String subjectKey =
+              '${subject.title} - ${getStringByIdentifier(schedule.relation, 'Periodo Academico') ?? ''}';
+          if (!groupedByDayAndSubject.containsKey(schedule.day)) {
+            groupedByDayAndSubject[schedule.day] = {};
+          }
+          if (!groupedByDayAndSubject[schedule.day]!.containsKey(subjectKey)) {
+            groupedByDayAndSubject[schedule.day]![subjectKey] = [];
+          }
+          groupedByDayAndSubject[schedule.day]![subjectKey]!.add({
+            'subject': subject.title,
+            'typeSchedule': schedule.typeSchedule,
+            'beginClass': schedule.beginClass,
+            'endClass': schedule.endClass,
+            'place': schedule.place,
+            'classroom': schedule.classroom,
+            'period':
+                getStringByIdentifier(schedule.relation, 'Periodo Academico') ??
+                    ''
+          });
+        }
+      }
+    }
+
+    Map<String, Map<String, List>> sortedGroupedByDayAndSubject =
+        Map.fromEntries(
+      weekDaysOrder.where((day) => groupedByDayAndSubject.containsKey(day)).map(
+            (day) => MapEntry(day, groupedByDayAndSubject[day]!),
+          ),
+    );
+
+    return sortedGroupedByDayAndSubject;
+  }
+
+  String centerText(String text, {int width = 48}) {
+    int spaces = (width - text.length) ~/ 2;
+    return ' ' * spaces + text + ' ' * spaces;
+  }
+
+  String generateLine(String character, {int width = 42}) {
+    return character * width;
+  }
+
+  String generateDoubleLine() {
+    return generateLine('=');
+  }
+
+  String generateOneLine() {
+    return generateLine('-');
   }
 }

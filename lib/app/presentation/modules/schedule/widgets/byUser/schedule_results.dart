@@ -64,7 +64,22 @@ class ScheduleResults extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () => _showPrintOptions(context, ctrl),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.print,
+                            size: ctrl.responsive.ip(3),
+                            color: Get.theme.colorScheme.primary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -105,6 +120,117 @@ class ScheduleResults extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  // Función para mostrar el modal de selección de impresión con RadioListTile
+  void _showPrintOptions(BuildContext context, ScheduleController ctrl) {
+    String selectedOption = 'Día'; // Valor por defecto
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: Text(
+                'Seleccione tipo de agrupación',
+                style: TextStyle(
+                  fontSize: ctrl.responsive.ip(2.3),
+                  fontWeight: FontWeight.bold,
+                  color: Get.theme.colorScheme.primary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  RadioListTile<String>(
+                    activeColor: Get.theme.colorScheme.primary,
+                    title: Text(
+                      'Por Día',
+                      style: TextStyle(
+                        fontSize: ctrl.responsive.ip(2.2),
+                        fontWeight: FontWeight.normal,
+                        color: Get.theme.colorScheme.primary,
+                      ),
+                    ),
+                    value: 'Día',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value!;
+                      });
+                    },
+                  ),
+                  RadioListTile<String>(
+                    activeColor: Get.theme.colorScheme.primary,
+                    title: Text(
+                      'Por Componente',
+                      style: TextStyle(
+                        fontSize: ctrl.responsive.ip(2.2),
+                        fontWeight: FontWeight.normal,
+                        color: Get.theme.colorScheme.primary,
+                      ),
+                    ),
+                    value: 'Componente',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    color: Get.theme.cardColor,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ctrl.responsive.wp(10),
+                    vertical: ctrl.responsive.hp(1),
+                  ),
+                  width: double.maxFinite,
+                  child: MaterialButton(
+                    padding: EdgeInsets.symmetric(
+                      vertical: ctrl.responsive.hp(3),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 0,
+                    color: Get.theme.colorScheme.tertiary,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Confirmar',
+                          style: Get.textTheme.headlineMedium?.copyWith(
+                            fontSize: ctrl.responsive.ip(2),
+                            fontWeight: FontWeight.bold,
+                            color: Get.theme.colorScheme.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      if (selectedOption == 'Día') {
+                        ctrl.printScheduleThermalByDay(context);
+                      } else {
+                        ctrl.printScheduleThermal(context);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 

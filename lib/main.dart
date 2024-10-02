@@ -21,8 +21,8 @@ void main() async {
     // DESCOMENTAR PARA PRODUCCION
     fullScreen: true,
     // DESCOMENTAR PARA PROBAR DE MANERA LOCAL   size: Size(385, 674),
-    // size: Size(385, 674),
-    center: true,
+    //size: Size(385, 674),
+    //center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,

@@ -7,6 +7,7 @@
 #include "generated_plugin_registrant.h"
 
 #include <dart_vlc/dart_vlc_plugin.h>
+#include <flutter_libserialport/flutter_libserialport_plugin.h>
 #include <flutter_secure_storage_linux/flutter_secure_storage_linux_plugin.h>
 #include <platform_device_id_linux/platform_device_id_linux_plugin.h>
 #include <screen_retriever/screen_retriever_plugin.h>
@@ -17,6 +18,9 @@ void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) dart_vlc_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "DartVlcPlugin");
   dart_vlc_plugin_register_with_registrar(dart_vlc_registrar);
+  g_autoptr(FlPluginRegistrar) flutter_libserialport_registrar =
+      fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterLibserialportPlugin");
+  flutter_libserialport_plugin_register_with_registrar(flutter_libserialport_registrar);
   g_autoptr(FlPluginRegistrar) flutter_secure_storage_linux_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterSecureStorageLinuxPlugin");
   flutter_secure_storage_linux_plugin_register_with_registrar(flutter_secure_storage_linux_registrar);

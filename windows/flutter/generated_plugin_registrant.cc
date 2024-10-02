@@ -7,6 +7,7 @@
 #include "generated_plugin_registrant.h"
 
 #include <dart_vlc/dart_vlc_plugin.h>
+#include <flutter_libserialport/flutter_libserialport_plugin.h>
 #include <flutter_secure_storage_windows/flutter_secure_storage_windows_plugin.h>
 #include <platform_device_id_windows/platform_device_id_windows_plugin.h>
 #include <rive_common/rive_plugin.h>
@@ -18,6 +19,8 @@
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   DartVlcPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("DartVlcPlugin"));
+  FlutterLibserialportPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterLibserialportPlugin"));
   FlutterSecureStorageWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterSecureStorageWindowsPlugin"));
   PlatformDeviceIdWindowsPluginRegisterWithRegistrar(
