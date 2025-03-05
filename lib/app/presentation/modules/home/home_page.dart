@@ -3,16 +3,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
-import 'package:marquee/marquee.dart';
+import 'package:text_marquee/text_marquee.dart';
 
-import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/home/utils/generate_component.dart';
-import 'package:utpl_totem/app/presentation/modules/home/widgets/side_header.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/home/home_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/home/utils/generate_component.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/home/widgets/side_header.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -155,25 +155,28 @@ class HomePage extends GetView<HomeController> {
                                   child: Container(
                                     color: ctrl.colorNotify.value,
                                     child: ctrl.notify.isNotEmpty
-                                        ? Marquee(
-                                            text: ctrl.notify.value,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: ctrl.colorTextNotify.value,
-                                              fontSize: ctrl.responsive.ip(1.8),
+                                        ? Obx(
+                                            () => TextMarquee(
+                                              ctrl.notify.value,
+                                              spaceSize: 72,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color:
+                                                    ctrl.colorTextNotify.value,
+                                                fontSize:
+                                                    ctrl.responsive.ip(1.8),
+                                              ),
+                                              rtl: false,
+                                              curve: Curves.linear,
+                                              delay: Duration(seconds: 1),
+                                              duration: Duration(
+                                                seconds: (ctrl
+                                                            .notify.value.length
+                                                            .toDouble() *
+                                                        0.30)
+                                                    .toInt(),
+                                              ),
                                             ),
-                                            scrollAxis: Axis.horizontal,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            blankSpace: 20.0,
-                                            velocity: 25,
-                                            pauseAfterRound:
-                                                const Duration(seconds: 0),
-                                            startPadding: 10.0,
-                                            accelerationDuration:
-                                                const Duration(seconds: 1),
-                                            accelerationCurve: Curves.linear,
-                                            decelerationCurve: Curves.easeOut,
                                           )
                                         : const SizedBox(),
                                   ),

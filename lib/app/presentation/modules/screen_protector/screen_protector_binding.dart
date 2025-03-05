@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/screen_protector/screen_protector_controller.dart';
 
 class ScreenProtectorBinding implements Bindings {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:utpl_totem/app/themes/metro_ui_icons.dart';
+import 'package:utpl_totem_oficial/app/themes/metro_ui_icons.dart';
 
 class CategoryServiceIcon {
   static IconData categoryServiceIcon(String name) {

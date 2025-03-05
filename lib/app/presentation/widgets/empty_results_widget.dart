@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class EmptyResultsWidget extends StatelessWidget {
   final VoidCallback? onTap;
@@ -13,13 +13,13 @@ class EmptyResultsWidget extends StatelessWidget {
   final bool showBtn;
 
   const EmptyResultsWidget({
-    Key? key,
+    super.key,
     this.onTap,
     required this.description,
     required this.assetPath,
     this.btnText = 'Undefined',
     this.showBtn = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:utpl_totem/app/data/models/bus_route_schedule_model.dart';
-import 'package:utpl_totem/app/data/models/bus_station_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/bus_route_schedule_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/bus_station_model.dart';
 
 BusRouteDetailModel busRouteDetailModelFromJson(String str) =>
     BusRouteDetailModel.fromJson(json.decode(str));

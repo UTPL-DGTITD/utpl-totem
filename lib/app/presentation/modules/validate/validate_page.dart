@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/validate/validate_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
-import 'package:utpl_totem/app/themes/app_theme.dart';
-import 'package:utpl_totem/app/themes/custom_decoration.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/validate/validate_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/skeleton_list.dart';
+import 'package:utpl_totem_oficial/app/themes/app_theme.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_decoration.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ValidatePage extends GetView<ValidateController> {
-  const ValidatePage({Key? key}) : super(key: key);
+  const ValidatePage({super.key});
 
   @override
   Widget build(BuildContext context) {

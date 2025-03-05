@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:timeago/timeago.dart' as time_ago;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
 import 'package:logger/logger.dart';
 import 'package:html/parser.dart';
 import 'package:get/get.dart';
@@ -74,7 +74,7 @@ class ToolsHelper {
       final String result = initials.join();
       return result.length > 3 ? result.substring(0, 3) : result;
     } catch (e) {
-      ToolsHelper.logger.e('[tools_helper] (getInitialsFromText)', e);
+      ToolsHelper.logger.e('[tools_helper] (getInitialsFromText)', error: e);
       return 'SN';
     }
   }
@@ -92,7 +92,7 @@ class ToolsHelper {
       final String? result = regex.firstMatch(email)?.group(0);
       return result ?? '';
     } catch (error) {
-      ToolsHelper.logger.e('[tools_helper] (getUsernameOfEmail)', error);
+      ToolsHelper.logger.e('[tools_helper] (getUsernameOfEmail)', error: error);
       return '';
     }
   }
@@ -111,7 +111,8 @@ class ToolsHelper {
       }
       return description;
     } catch (error) {
-      ToolsHelper.logger.e('[tools_helper] (wipeMsEventDescription)', error);
+      ToolsHelper.logger
+          .e('[tools_helper] (wipeMsEventDescription)', error: error);
       return description ?? '';
     }
   }

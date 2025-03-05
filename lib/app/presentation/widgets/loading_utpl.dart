@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
 
 class LoadingUtpl extends StatelessWidget {
   const LoadingUtpl({

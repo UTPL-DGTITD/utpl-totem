@@ -4,10 +4,10 @@
 
 import 'dart:convert';
 
-import 'package:utpl_totem/app/data/models/app_base_model.dart';
-import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
-import 'package:utpl_totem/app/data/models/image_base_model.dart';
-import 'package:utpl_totem/app/data/models/link_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/app_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/end_point_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/image_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/link_base_model.dart';
 
 GenericListItemModel genericListItemModelFromJson(String str) =>
     GenericListItemModel.fromJson(json.decode(str));

@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/end_point_base_model.dart';
 
 List<ServiceSectionModel> serviceSectionModelFromJson(String str) =>
     List<ServiceSectionModel>.from(

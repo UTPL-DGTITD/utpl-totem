@@ -1,5 +1,5 @@
-import 'package:utpl_totem/app/data/models/api_response_model.dart';
-import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/api_response_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/observatory_detail_model.dart';
 
 abstract class ApiRepository {
   /* -------------------------------------------------------------------------- */

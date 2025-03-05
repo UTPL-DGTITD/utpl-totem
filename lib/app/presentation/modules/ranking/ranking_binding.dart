@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/ranking/ranking_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/ranking/ranking_controller.dart';
 
 class RankingBinding implements Bindings {
   @override

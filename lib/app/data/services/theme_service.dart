@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 enum ThemeName { dark, light, system }
 
@@ -12,7 +12,7 @@ class ThemeService {
 
   void saveThemeData(ThemeName mode) {
     _getStorage.write(_darkThemeKey, mode.name);
-    ToolsHelper.logger.v("mode", mode.name);
+    ToolsHelper.logger.v("mode", error: mode.name);
   }
 
   ThemeName isSavedDarkMode() {

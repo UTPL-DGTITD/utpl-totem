@@ -4,8 +4,8 @@
 // import 'package:aad_oauth/helper/auth_storage.dart';
 // import 'package:corsac_jwt/corsac_jwt.dart';
 // import 'package:get/get.dart';
-// import 'package:utpl_totem/app/data/models/roles_model.dart';
-// import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+// import 'package:utpl_totem_oficial/app/data/models/roles_model.dart';
+// import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 // class AuthService extends GetxService {
 //   final loggedStream = StreamController<bool>.broadcast();

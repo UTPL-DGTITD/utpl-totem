@@ -3,11 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
-import 'package:utpl_totem/app/presentation/modules/investigation/investigation_controller.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/investigation/investigation_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class InvestigationPage extends GetView<InvestigationController> {
-  const InvestigationPage({Key? key}) : super(key: key);
+  const InvestigationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
 
-import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ModalDialogBuildings {
   static Future<dynamic> showModalList({
@@ -123,13 +123,13 @@ class ModalDialogBuildings {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(responsive.ip(2)),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
+                          backgroundColor: WidgetStateColor.resolveWith(
                               (states) => Get.theme.colorScheme.error)),
                       child: Padding(
                         padding:

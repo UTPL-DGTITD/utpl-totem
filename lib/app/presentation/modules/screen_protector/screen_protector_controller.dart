@@ -1,15 +1,17 @@
 import 'dart:async';
 
-import 'package:dart_vlc/dart_vlc.dart';
+//import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/flicker_video_img_responde_model.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
+import 'package:utpl_totem_oficial/app/data/models/flicker_video_img_responde_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ScreenProtectorController extends GetxController
     with GetTickerProviderStateMixin {
@@ -23,7 +25,8 @@ class ScreenProtectorController extends GetxController
   RxString title = 'Protector de Pantalla'.obs;
   Rx<GenericListItemModel> wallpaper = GenericListItemModel().obs;
   Color colorContent = const Color(0xFFCACACA);
-  Rx<Player> player = Player(id: 69421).obs;
+  Rx<Player> player = Player().obs;
+  late final controller = VideoController(player.value);
 
   ScreenProtectorController({
     required this.localRepository,
@@ -49,8 +52,12 @@ class ScreenProtectorController extends GetxController
     ToolsHelper.logger.v('CERRAR VIDEOS');
     timerVideoPlaying.isActive ? timerVideoPlaying.cancel() : null;
     //player.value.currentController.done;
-    player.value.dispose();
-    // player.value.stop();
+    //MEDIA KIT
+
+    player.value.stop();
+    //player.value.dispose();
+    controllerVideo.close();
+
     super.onClose();
   }
 
@@ -60,8 +67,8 @@ class ScreenProtectorController extends GetxController
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[screen_protector_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: "La información necesaria es incorrecta",
@@ -71,6 +78,7 @@ class ScreenProtectorController extends GetxController
   }
 
   void exitScreenProtector() {
+    player.value.stop();
     Get.back();
   }
 
@@ -83,38 +91,44 @@ class ScreenProtectorController extends GetxController
     wallpaper.value = params['wallpaper'];
   }
 
-  void playVideos() {
+  // void playVideos() {
+  //   ToolsHelper.logger.v('NOW PLAYING');
+  //   player.value.open(
+  //     Playlist(medias: loadNetworkVideos()),
+  //     autoStart: true,
+  //   );
+  //   player.value.playbackStream.listen((PlaybackState state) {
+  //     if (state.isCompleted) {
+  //       player.value.play();
+  //     }
+  //   });
+  // }
+
+  void playVideos() async {
     ToolsHelper.logger.v('NOW PLAYING');
-    //showSkeleton = false.obs;
     player.value.open(
-      Playlist(medias: loadNetworkVideos()),
-      autoStart: true,
+      Media(flickerItem.value.source ?? ''),
     );
-    player.value.playbackStream.listen((PlaybackState state) {
-      if (state.isCompleted) {
-        player.value.play();
-      }
-    });
-    //showSkeleton = true.obs;
+    await player.value.setPlaylistMode(PlaylistMode.loop);
   }
 
-  List<Media> loadNetworkVideos() {
-    List<Media> medias = [];
-    medias.add(
-      Media.network(
-        flickerItem.value.source,
-      ),
-    );
-    return medias;
-  }
+  // List<Media> loadNetworkVideos() {
+  //   List<Media> medias = [];
+  //   medias.add(
+  //     Media.network(
+  //       flickerItem.value.source,
+  //     ),
+  //   );
+  //   return medias;
+  // }
 
-  void validateVideo() {
-    ToolsHelper.logger.v('VALIDAR VIDEO');
-    if (!player.value.playback.isPlaying) {
-      ToolsHelper.logger.v('VIDEO PAUSADO');
-      player.value.play();
-    }
-  }
+  // void validateVideo() {
+  //   ToolsHelper.logger.v('VALIDAR VIDEO');
+  //   if (!player.value.playback.isPlaying) {
+  //     ToolsHelper.logger.v('VIDEO PAUSADO');
+  //     player.value.play();
+  //   }
+  // }
 
   Future<void> loadFlickerVideo(String id) async {
     try {
@@ -141,8 +155,8 @@ class ScreenProtectorController extends GetxController
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[screen_protector_controller] (loadFlickerVideo)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/investigation/investigation_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/investigation/investigation_controller.dart';
 
 class InvestigationBinding implements Bindings {
   @override

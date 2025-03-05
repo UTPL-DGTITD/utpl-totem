@@ -1,9 +1,9 @@
-import 'package:utpl_totem/app/data/enviroment.dart';
-import 'package:utpl_totem/app/data/models/api_response_model.dart';
-import 'package:utpl_totem/app/data/models/observatory_detail_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/utils/helpers/network_helper.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/enviroment.dart';
+import 'package:utpl_totem_oficial/app/data/models/api_response_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/observatory_detail_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/network_helper.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ApiProvider extends ApiRepository {
   final NetworkUtil _netUtil = NetworkUtil();

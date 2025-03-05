@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:utpl_totem/app/presentation/modules/ranking/ranking_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/ranking/widgets/carrousel_slider_ranking.dart';
-import 'package:utpl_totem/app/presentation/modules/ranking/widgets/modal_dialog_ranking.dart';
-import 'package:utpl_totem/app/presentation/widgets/empty_results_widget.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/ranking/ranking_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/ranking/widgets/carrousel_slider_ranking.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/ranking/widgets/modal_dialog_ranking.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/empty_results_widget.dart';
 
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class RankingPage extends GetView<RankingController> {
-  const RankingPage({Key? key}) : super(key: key);
+  const RankingPage({super.key});
 
   @override
   Widget build(BuildContext context) {

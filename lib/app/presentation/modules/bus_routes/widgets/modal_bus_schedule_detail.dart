@@ -3,12 +3,12 @@ import 'package:flutter_map/flutter_map.dart';
 
 import 'package:get/get.dart';
 import 'package:timelines/timelines.dart';
-import 'package:utpl_totem/app/presentation/modules/bus_routes/bus_schedule_controller.dart';
-import 'package:utpl_totem/app/themes/app_theme.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/extensions/date_extensions.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/bus_routes/bus_schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/app_theme.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/extensions/date_extensions.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ModalBusScheduleDetail {
   static Future<dynamic> showBusScheduleDetail(
@@ -60,8 +60,8 @@ class ModalBusScheduleDetail {
                     child: FlutterMap(
                       mapController: ctrl.mapController.value,
                       options: MapOptions(
-                        rotation: 90,
-                        zoom: 10.0,
+                        initialRotation: 90,
+                        initialZoom: 9.0,
                         minZoom: 1.0,
                         maxZoom: 18.0,
                         onMapReady: () {
@@ -72,7 +72,7 @@ class ModalBusScheduleDetail {
                       children: [
                         TileLayer(
                           urlTemplate:
-                              'https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=f7ad4a23545846299ebd1d1f2dfa96b4',
+                              'https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=726e6f8d558145528bcb78351560ecd0',
                           subdomains: const ['a', 'b', 'c'],
                         ),
                         Obx(
@@ -280,13 +280,13 @@ class ModalBusScheduleDetail {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(responsive.ip(2)),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
+                          backgroundColor: WidgetStateColor.resolveWith(
                               (states) => Get.theme.colorScheme.error)),
                       child: Padding(
                         padding:

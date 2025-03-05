@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byUser/search_user_schedule.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/widgets/byUser/search_user_schedule.dart';
 
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/presentation/widgets/footer_utpl.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/footer_utpl.dart';
 
-import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/skeleton_list.dart';
 
 import 'widgets/byClassroom/classroom_schedule.dart';
 
 class SchedulePage extends GetView<ScheduleController> {
-  const SchedulePage({Key? key}) : super(key: key);
+  const SchedulePage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,19 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "utpl_totem (dev mode)",
+            "name": "utpl_totem_oficial (dev mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
         },
         {
-            "name": "utpl_totem (profile)",
+            "name": "utpl_totem_oficial (profile)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
         },
         {
-            "name": "utpl_totem (release mode)",
+            "name": "utpl_totem_oficial (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

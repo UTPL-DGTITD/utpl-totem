@@ -1,28 +1,24 @@
-import 'dart:async';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart' as flutter_widgets;
 
 import 'package:get/get.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:rive/rive.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 
-import 'package:utpl_totem/app/presentation/modules/screen_protector/screen_protector_controller.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/screen_protector/screen_protector_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class ScreenProtectorPage extends GetView<ScreenProtectorController> {
-  const ScreenProtectorPage({Key? key}) : super(key: key);
+  const ScreenProtectorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Obx(() => Text(controller.title.value)),
-      // ),
       body: GetX<ScreenProtectorController>(
         init: ScreenProtectorController(
           localRepository: Get.find(),
@@ -36,10 +32,10 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
             if (state.controller!.controllerVideo.value) {
               state.controller?.player.value.play();
               state.controller?.playVideos();
-              state.controller?.timerVideoPlaying =
-                  Timer.periodic(const Duration(minutes: 1), (timer) async {
-                state.controller!.validateVideo();
-              });
+              // state.controller?.timerVideoPlaying =
+              //     Timer.periodic(const Duration(minutes: 1), (timer) async {
+              //   state.controller!.validateVideo();
+              // });
             }
           }
         },
@@ -140,11 +136,11 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                   child: SizedBox(
                                     width: ctrl.responsive.wp(60),
                                     child: Video(
+                                      controller: ctrl.controller,
                                       fit: BoxFit.contain,
-                                      fillColor: Get.theme.colorScheme.primary,
-                                      player: ctrl.player.value,
-                                      scale: 2.0, // default
-                                      showControls: false, // default
+                                      wakelock: true,
+                                      controls: (state) => SizedBox(),
+                                      fill: Colors.transparent,
                                     ),
                                   ),
                                 ),
@@ -210,12 +206,14 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
                                                     fit: BoxFit.contain,
                                                     errorWidget:
                                                         (context, a, b) {
-                                                      return Image.asset(
-                                                          'assets/images/logo-utpl-full.png');
+                                                      return flutter_widgets
+                                                              .Image
+                                                          .asset(
+                                                              'assets/images/logo-utpl-full.png');
                                                     },
                                                     placeholder: (context,
                                                             url) =>
-                                                        Image.asset(
+                                                        flutter_widgets.Image.asset(
                                                             'assets/images/logo-utpl-full.png'),
                                                   ),
                                                 ],

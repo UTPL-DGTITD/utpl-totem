@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ModalDialog {
   static Future<dynamic> alertFeatures(
@@ -68,6 +68,10 @@ class ModalDialog {
                             child: AspectRatio(
                               aspectRatio: 1 / 1,
                               child: CachedNetworkImage(
+                                httpHeaders: const {
+                                  'User-Agent':
+                                      'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                                },
                                 imageUrl: item.image?.url ?? '',
                                 fit: BoxFit.contain,
                                 errorWidget: (context, a, b) {
@@ -105,13 +109,13 @@ class ModalDialog {
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(responsive.ip(2)),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
+                          backgroundColor: WidgetStateColor.resolveWith(
                               (states) => Get.theme.colorScheme.error)),
                       child: Padding(
                         padding:

@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as slider;
 
-import 'package:utpl_totem/app/presentation/modules/ranking/ranking_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/ranking/ranking_controller.dart';
 
 class CarrouselSliderRanking extends StatelessWidget {
   final RankingController ctrl;
   const CarrouselSliderRanking({
-    Key? key,
+    super.key,
     required this.ctrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final CarouselController buttonCarouselController = CarouselController();
-    return CarouselSlider.builder(
+    final slider.CarouselSliderController buttonCarouselController =
+        slider.CarouselSliderController();
+    return slider.CarouselSlider.builder(
       carouselController: buttonCarouselController,
-      options: CarouselOptions(
+      options: slider.CarouselOptions(
         autoPlay: true,
         onPageChanged: (index, reason) => ctrl.onChangeImg(index),
         height: ctrl.responsive.hp(15),
@@ -45,10 +46,10 @@ class _ImgRanking extends StatelessWidget {
   final RankingController ctrl;
   final int index;
   const _ImgRanking({
-    Key? key,
+    super.key,
     required this.index,
     required this.ctrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +60,9 @@ class _ImgRanking extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ctrl.responsive.wp(5)),
           child: CachedNetworkImage(
+            httpHeaders: const {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64)',
+            },
             imageUrl: ctrl.rankingDetails[index].image?.url ?? '',
             fit: BoxFit.cover,
             errorWidget: (context, a, b) {

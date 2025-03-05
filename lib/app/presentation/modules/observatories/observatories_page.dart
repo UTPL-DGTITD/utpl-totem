@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/observatories/observatories_controller.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/observatories/observatories_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class ObservatoriesPage extends GetView<ObservatoriesController> {
-  const ObservatoriesPage({Key? key}) : super(key: key);
+  const ObservatoriesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

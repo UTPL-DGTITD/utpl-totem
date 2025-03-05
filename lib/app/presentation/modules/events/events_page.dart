@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'package:utpl_totem/app/presentation/modules/events/events_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/presentation/widgets/loading_utpl.dart';
-import 'package:utpl_totem/app/presentation/widgets/modal_dialog.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/events/events_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/loading_utpl.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/modal_dialog.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class EventsPage extends GetView<EventsController> {
-  const EventsPage({Key? key}) : super(key: key);
+  const EventsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +90,10 @@ class EventsPage extends GetView<EventsController> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                   child: CachedNetworkImage(
+                                                    httpHeaders: const {
+                                                      'User-Agent':
+                                                          'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                                                    },
                                                     imageUrl:
                                                         item.image?.url ?? '',
                                                     //fit: BoxFit.cover,

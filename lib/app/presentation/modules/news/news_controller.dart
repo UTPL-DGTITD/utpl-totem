@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class NewsController extends GetxController with GetTickerProviderStateMixin {
   final LocalRepository localRepository;
@@ -44,8 +44,8 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[events_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: "La información necesaria es incorrecta",
@@ -77,8 +77,8 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[news_controller] (loadNews)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',
@@ -114,8 +114,8 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
       loadingNews.value = false;
       ToolsHelper.logger.e(
         '[home_controller] (loadMoreNews)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',

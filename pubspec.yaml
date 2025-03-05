@@ -1,12 +1,13 @@
-name: utpl_totem
-description: UTPL application for totem device.
+name: utpl_totem_oficial
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-publish_to: "none"
-
-version: 1.9.0
+version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.0 <3.0.0"
+  sdk: ^3.5.3
 
 dependencies:
   flutter:
@@ -14,7 +15,7 @@ dependencies:
   animate_do: ^3.0.2
   bot_toast: ^4.0.3
   cached_network_image: ^3.2.2
-  carousel_slider: ^4.1.1
+  carousel_slider: ^5.0.0
   dio: ^5.1.1
   flutter_secure_storage: ^8.0.0
   flutter_svg: ^2.0.5
@@ -22,42 +23,50 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.0.3
   html: ^0.15.1
-  logger: ^1.1.0
+  logger: ^2.4.0
   mime_type: ^1.0.0
-  rive: ^0.11.14
+  rive: ^0.13.14
+  flutter_libserialport: ^0.4.0
   timeago: ^3.3.0
   url_launcher: ^6.1.6
-  slide_digital_clock: ^1.0.2
+  slide_digital_clock: ^1.0.3
   charts_painter: ^3.0.0
-  flutter_staggered_grid_view: ^0.6.2
-  card_swiper: ^2.0.4
-  marquee: ^2.2.3
+  flutter_staggered_grid_view: ^0.7.0
+  card_swiper: ^3.0.1
+  #marquee: ^2.2.3 //DEPRECADA
+  text_marquee: ^0.0.2
   #ext_video_player: ^0.1.2
-  wakelock: ^0.6.2
-  pretty_qr_code: ^2.0.2
-  window_manager: ^0.3.0
-  webview_windows: ^0.2.1
-  dart_vlc: ^0.4.0
+  #wakelock: ^0.6.2
+  wakelock_plus: ^1.2.8
+  pretty_qr_code: ^3.3.0
+  window_manager: ^0.4.2
+  webview_windows: ^0.4.0
+  #win32: 3.0.1
+  #dart_vlc: ^0.5.0
   youtube_explode_dart: ^2.0.2
-  gauge_indicator: ^0.3.3
+  gauge_indicator: ^0.4.3
   virtual_keyboard_multi_language: ^1.0.3
   platform_device_id: ^1.0.1
-  intl: ^0.18.1
+  intl: ^0.19.0
   http_parser: ^4.0.2
   calendar_day_view: ^3.1.1
-  flutter_map: ^5.0.0
+  flutter_map: ^7.0.2
   latlong2: ^0.9.0
   timelines: ^0.1.0
   flutter_wall_layout: ^2.1.1
   easy_image_viewer: ^1.2.1
-  photo_view: ^0.14.0
+  photo_view: ^0.15.0
+  cupertino_icons: ^1.0.8
+  media_kit: ^1.1.11
+  media_kit_video: ^1.2.5
+  media_kit_libs_video: ^1.0.5
+  
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
@@ -75,3 +84,4 @@ flutter:
     - family: MetroUi
       fonts:
         - asset: fonts/MetroUi.ttf
+

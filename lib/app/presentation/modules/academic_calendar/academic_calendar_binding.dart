@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/academic_calendar/academic_calendar_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/academic_calendar/academic_calendar_controller.dart';
 
 class AcademicCalendarBinding implements Bindings {
   @override

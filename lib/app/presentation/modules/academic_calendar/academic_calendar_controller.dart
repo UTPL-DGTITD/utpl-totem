@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/academic_calendar_model.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/models/academic_calendar_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class AcademicCalendarController extends GetxController {
   final LocalRepository localRepository;
@@ -54,8 +54,8 @@ class AcademicCalendarController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[academic_calendar_controller] (_initConfig) ',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.hideLoading();
       toastService.presentErrorToast(
@@ -107,8 +107,8 @@ class AcademicCalendarController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[academic_calendar_controller] (loadModalities)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',
@@ -158,8 +158,8 @@ class AcademicCalendarController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[academic_calendar_controller] (loadCalendarsByModality)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',

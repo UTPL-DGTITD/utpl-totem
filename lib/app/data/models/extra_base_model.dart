@@ -1,4 +1,4 @@
-import 'package:utpl_totem/app/data/models/related_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/related_base_model.dart';
 
 class Extra {
   Extra({

@@ -7,19 +7,19 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:utpl_totem/app/data/models/bus_route_detail_model.dart';
-import 'package:utpl_totem/app/data/models/bus_route_schedule_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/bus_route_detail_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/bus_route_schedule_model.dart';
 
-import 'package:utpl_totem/app/data/models/bus_route_week_day_model.dart';
-import 'package:utpl_totem/app/data/models/bus_station_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/presentation/modules/bus_routes/widgets/modal_bus_schedule_detail.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/app_theme.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/models/bus_route_week_day_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/bus_station_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/bus_routes/widgets/modal_bus_schedule_detail.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/app_theme.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class BusScheduleController extends GetxController {
   final ApiRepository apiRepository;
@@ -61,8 +61,8 @@ class BusScheduleController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[bus_schedule_controller](_initConfig) -> [error]',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.hideLoading();
       toastService.presentErrorToast(
@@ -102,7 +102,7 @@ class BusScheduleController extends GetxController {
           }
           ToolsHelper.logger.v(
             '[bus_schedule_controller](getBusRoutes) -> [busRoutes]',
-            busRoutes,
+            error: busRoutes,
           );
           update();
           break;
@@ -126,8 +126,8 @@ class BusScheduleController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[bus_schedule_controller](getBusRoutes) -> [error])',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Ocurrió un error, intenta nuevamente.',
@@ -232,8 +232,8 @@ class BusScheduleController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[bus_schedule_controller] (loadRouteShedule)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',
@@ -267,7 +267,7 @@ class BusScheduleController extends GetxController {
           height: responsive.hp(10),
           point: LatLng(
               item.routeMap!.route.first[1], item.routeMap!.route.first[0]),
-          builder: (_) => Transform.rotate(
+          child: Transform.rotate(
             angle: 3.14159265359 * 1.5, // 270 grados en radianes(
             child: Stack(
               alignment: Alignment.center,
@@ -293,7 +293,7 @@ class BusScheduleController extends GetxController {
           height: responsive.hp(10),
           point: LatLng(
               item.routeMap!.route.last[1], item.routeMap!.route.last[0]),
-          builder: (_) => Transform.rotate(
+          child: Transform.rotate(
             angle: 3.14159265359 * 1.5, // 270 grados en radianes((
             child: Stack(
               alignment: Alignment.center,
@@ -323,7 +323,7 @@ class BusScheduleController extends GetxController {
     LatLngBounds? bounds = mapBounds.value;
     if (bounds != null && getPoints(item.routeMap!.route).isNotEmpty) {
       hasMapBounds.value = true;
-      mapController.value.fitBounds(bounds);
+      //mapBounds.value.fitBounds(bounds);
     } else {
       hasMapBounds.value = false;
     }
@@ -373,7 +373,7 @@ class BusScheduleController extends GetxController {
             height: responsive.hp(8),
             point: LatLng(item.routeMap!.stops[i].location.coordinates[1],
                 item.routeMap!.stops[i].location.coordinates[0]),
-            builder: (_) => Transform.rotate(
+            child: Transform.rotate(
               angle: 3.14159265359 * 1.5, // 270 grados en radianes(((
               child: Stack(
                 alignment: Alignment.center,

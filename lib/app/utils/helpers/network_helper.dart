@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:dio/dio.dart';
-import 'package:utpl_totem/app/data/enviroment.dart';
-import 'package:utpl_totem/app/utils/exceptions/http_exception.dart';
+import 'package:utpl_totem_oficial/app/data/enviroment.dart';
+import 'package:utpl_totem_oficial/app/utils/exceptions/http_exception.dart';
 
 const String _endpoint = Environment.server;
 
@@ -77,7 +77,7 @@ class NetworkUtil {
         ),
       );
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -96,9 +96,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -132,7 +132,7 @@ class NetworkUtil {
         ),
       );
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -153,9 +153,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -184,7 +184,7 @@ class NetworkUtil {
       );
 
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -203,9 +203,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -233,7 +233,7 @@ class NetworkUtil {
         ),
       );
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -252,9 +252,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -309,7 +309,7 @@ class NetworkUtil {
       );
 
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -328,9 +328,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -361,7 +361,7 @@ class NetworkUtil {
       );
 
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -380,9 +380,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -435,7 +435,7 @@ class NetworkUtil {
       );
 
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -456,9 +456,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }
@@ -513,7 +513,7 @@ class NetworkUtil {
       );
 
       return res.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         final int? statusCode = e.response?.statusCode;
 
@@ -532,9 +532,9 @@ class NetworkUtil {
         }
       } else {
         if ([
-          DioErrorType.connectionTimeout,
-          DioErrorType.receiveTimeout,
-          DioErrorType.sendTimeout
+          DioExceptionType.connectionTimeout,
+          DioExceptionType.receiveTimeout,
+          DioExceptionType.sendTimeout
         ].contains(e.type)) {
           throw TimeoutException('Tiempo de espera agotado');
         }

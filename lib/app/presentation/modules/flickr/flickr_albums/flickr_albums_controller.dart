@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/flicker_album.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/models/flicker_album.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class FlickrAlbumsController extends GetxController
     with GetTickerProviderStateMixin {
@@ -47,8 +47,8 @@ class FlickrAlbumsController extends GetxController
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[flickr_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: "La información necesaria es incorrecta",
@@ -80,8 +80,8 @@ class FlickrAlbumsController extends GetxController
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[flicker_controller] (loadAlbums)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',
@@ -117,8 +117,8 @@ class FlickrAlbumsController extends GetxController
       loadingAlbum.value = false;
       ToolsHelper.logger.e(
         '[flicker_controller] (loadMoreAlbums)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',

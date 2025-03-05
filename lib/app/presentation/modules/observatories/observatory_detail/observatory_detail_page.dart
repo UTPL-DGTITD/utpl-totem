@@ -2,16 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/presentation/widgets/footer_utpl.dart';
-import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/observatories/observatory_detail/observatory_detail_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/footer_utpl.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/skeleton_list.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
-  const ObservatoryDetailPage({Key? key}) : super(key: key);
+  const ObservatoryDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +78,10 @@ class ObservatoryDetailPage extends GetView<ObservatoryDetailController> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: CachedNetworkImage(
+                                      httpHeaders: const {
+                                        'User-Agent':
+                                            'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                                      },
                                       height: ctrl.responsive.hp(25),
                                       imageUrl: item.image,
                                       fit: BoxFit.contain,

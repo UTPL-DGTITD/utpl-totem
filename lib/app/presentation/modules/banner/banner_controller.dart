@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as slider;
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
-import 'package:utpl_totem/app/utils/types/interaction_generic_item_type.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/utils/types/interaction_generic_item_type.dart';
 
 class BannerController extends GetxController with GetTickerProviderStateMixin {
   final LocalRepository localRepository;
@@ -24,7 +24,8 @@ class BannerController extends GetxController with GetTickerProviderStateMixin {
   final title = 'Banner UTPL'.obs;
 
   RxList<GenericListItemModel> bannerSlide = <GenericListItemModel>[].obs;
-  final CarouselController buttonCarouselController = CarouselController();
+  final slider.CarouselSliderController buttonCarouselController =
+      slider.CarouselSliderController();
 
   BannerController({
     required this.localRepository,
@@ -45,8 +46,8 @@ class BannerController extends GetxController with GetTickerProviderStateMixin {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[banner_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: "La información necesaria es incorrecta",
@@ -78,8 +79,8 @@ class BannerController extends GetxController with GetTickerProviderStateMixin {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[banner_controller] (loadBanners)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: 'Error nuestro, intenta más tarde',

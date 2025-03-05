@@ -4,14 +4,14 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:platform_device_id/platform_device_id.dart';
-import 'package:utpl_totem/app/data/models/tv_template_model.dart';
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
-import 'package:utpl_totem/app/utils/validators/validators_forms.dart';
+import 'package:utpl_totem_oficial/app/data/models/tv_template_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/utils/validators/validators_forms.dart';
 
 class ValidateController extends GetxController
     with GetTickerProviderStateMixin {
@@ -54,8 +54,8 @@ class ValidateController extends GetxController
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[validate_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: "La información necesaria es incorrecta",
@@ -109,8 +109,8 @@ class ValidateController extends GetxController
         navigateToTemplateOffline();
         ToolsHelper.logger.e(
           '[home_controller] (validate_code)',
-          error,
-          stack,
+          error: error,
+          stackTrace: stack,
         );
         toastService.presentErrorToast(
           text: 'Error nuestro, intenta más tarde',

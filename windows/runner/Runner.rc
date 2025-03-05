@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "ec.edu.utpl" "\0"
-            VALUE "FileDescription", "totem" "\0"
+            VALUE "FileDescription", "utpl_totem_oficial" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "totem" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 ec.edu.utpl. All rights reserved." "\0"
-            VALUE "OriginalFilename", "totem.exe" "\0"
-            VALUE "ProductName", "totem" "\0"
+            VALUE "InternalName", "utpl_totem_oficial" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 ec.edu.utpl. All rights reserved." "\0"
+            VALUE "OriginalFilename", "utpl_totem_oficial.exe" "\0"
+            VALUE "ProductName", "utpl_totem_oficial" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

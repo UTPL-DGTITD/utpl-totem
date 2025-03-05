@@ -1,5 +1,5 @@
-import 'package:utpl_totem/app/data/models/roles_model.dart';
-import 'package:utpl_totem/app/data/models/user_profile_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/roles_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/user_profile_model.dart';
 
 abstract class LocalRepository {
   Future<void> saveUsername({required String username});

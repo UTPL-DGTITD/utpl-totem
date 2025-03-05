@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/news/news_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/news/news_controller.dart';
 
 class NewsBinding implements Bindings {
   @override

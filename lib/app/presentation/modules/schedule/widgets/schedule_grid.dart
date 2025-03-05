@@ -1,14 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/extra_base_model.dart';
-import 'package:utpl_totem/app/data/models/generic_schedule_model.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byClassroom/schedule_card_day.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byUser/schedule_card.dart';
+import 'package:utpl_totem_oficial/app/data/models/extra_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_schedule_model.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/widgets/byClassroom/schedule_card_day.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/widgets/byUser/schedule_card.dart';
 
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
 
 class ScheduleGrid extends StatelessWidget {
   final ScheduleController ctrl;
@@ -18,13 +18,13 @@ class ScheduleGrid extends StatelessWidget {
   final String groupBy;
 
   const ScheduleGrid({
-    Key? key,
+    super.key,
     required this.scheduleData,
     required this.isLoading,
     this.onTap,
     required this.groupBy,
     required this.ctrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class ScheduleGrid extends StatelessWidget {
                                   ),
                           );
                         },
-                      ).toList(),
+                      ),
                     ]),
               ),
               groupBy == 'day'

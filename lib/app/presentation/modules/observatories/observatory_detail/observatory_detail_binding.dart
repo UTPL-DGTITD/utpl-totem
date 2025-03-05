@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/observatories/observatory_detail/observatory_detail_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/observatories/observatory_detail/observatory_detail_controller.dart';
 
 class ObservatoryDetailBinding implements Bindings {
   @override

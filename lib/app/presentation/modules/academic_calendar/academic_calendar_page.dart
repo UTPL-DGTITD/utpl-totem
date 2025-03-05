@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/academic_calendar/academic_calendar_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/academic_calendar/widgets/academic_calendar_item.dart';
-import 'package:utpl_totem/app/presentation/modules/academic_calendar/widgets/modality_item.dart';
-import 'package:utpl_totem/app/presentation/widgets/empty_results_widget.dart';
-import 'package:utpl_totem/app/presentation/widgets/skeleton_list.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/academic_calendar/academic_calendar_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/academic_calendar/widgets/academic_calendar_item.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/academic_calendar/widgets/modality_item.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/empty_results_widget.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/skeleton_list.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
 
 class AcademicCalendarPage extends GetView<AcademicCalendarController> {
-  const AcademicCalendarPage({Key? key}) : super(key: key);
+  const AcademicCalendarPage({super.key});
 
   @override
   Widget build(BuildContext context) {

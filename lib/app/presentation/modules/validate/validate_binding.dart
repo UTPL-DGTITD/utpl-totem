@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/validate/validate_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/validate/validate_controller.dart';
 
 class ValidateBinding implements Bindings {
   @override

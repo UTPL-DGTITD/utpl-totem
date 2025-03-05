@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/tv_template_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/tv_template_model.dart';
 
-import 'package:utpl_totem/app/data/repositories/api_repository.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
 
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ImageController extends GetxController with GetTickerProviderStateMixin {
   final LocalRepository localRepository;
@@ -35,8 +35,8 @@ class ImageController extends GetxController with GetTickerProviderStateMixin {
     try {} catch (error, stack) {
       ToolsHelper.logger.e(
         '[image_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.presentErrorToast(
         text: "La información necesaria es incorrecta",

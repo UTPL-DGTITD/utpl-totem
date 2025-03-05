@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:utpl_totem/app/data/models/roles_model.dart';
-import 'package:utpl_totem/app/data/models/user_profile_model.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/models/roles_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/user_profile_model.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class LocalProvider extends LocalRepository {
   final _storage = const FlutterSecureStorage();
@@ -14,7 +14,7 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "username", value: username)
         .catchError((onError) {
-      ToolsHelper.logger.e("saveUsername", onError);
+      ToolsHelper.logger.e("saveUsername", error: onError);
     });
     return;
   }
@@ -26,7 +26,7 @@ class LocalProvider extends LocalRepository {
   }) async {
     var contentStr = json.encode(content);
     await _storage.write(key: key, value: contentStr).catchError((onError) {
-      ToolsHelper.logger.e("saveCacheValue", onError);
+      ToolsHelper.logger.e("saveCacheValue", error: onError);
     });
     return;
   }
@@ -60,7 +60,7 @@ class LocalProvider extends LocalRepository {
             key: "user_profile",
             value: data != null ? userProfileModelToJson(data) : null)
         .catchError((onError) {
-      ToolsHelper.logger.e("save user_profile", onError);
+      ToolsHelper.logger.e("save user_profile", error: onError);
     });
     return;
   }
@@ -81,7 +81,7 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "user_roles", value: rolesModelListToJson(data))
         .catchError((onError) {
-      ToolsHelper.logger.e("save user_roles", onError);
+      ToolsHelper.logger.e("save user_roles", error: onError);
     });
     return;
   }
@@ -125,7 +125,7 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "skip_intro", value: skip.toString())
         .catchError((onError) {
-      ToolsHelper.logger.e("saveSkipIntro", onError);
+      ToolsHelper.logger.e("saveSkipIntro", error: onError);
     });
     return;
   }
@@ -146,7 +146,7 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "beta_code", value: code.toString())
         .catchError((onError) {
-      ToolsHelper.logger.e("saveBetaCode", onError);
+      ToolsHelper.logger.e("saveBetaCode", error: onError);
     });
     return;
   }
@@ -167,7 +167,7 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: "device_id", value: id.toString())
         .catchError((onError) {
-      ToolsHelper.logger.e("saveDeviceId", onError);
+      ToolsHelper.logger.e("saveDeviceId", error: onError);
     });
     return;
   }
@@ -188,7 +188,7 @@ class LocalProvider extends LocalRepository {
     await _storage
         .write(key: 'skip_version', value: appVersion.toString())
         .catchError((onError) {
-      ToolsHelper.logger.e("saveSkipVersion", onError);
+      ToolsHelper.logger.e("saveSkipVersion", error: onError);
     });
     return;
   }
@@ -196,7 +196,7 @@ class LocalProvider extends LocalRepository {
   @override
   Future<void> showAll({required String page}) async {
     var all = await _storage.readAll();
-    ToolsHelper.logger.v(all, page);
+    ToolsHelper.logger.v(all, error: page);
     return;
   }
 }

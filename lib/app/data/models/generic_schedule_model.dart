@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:utpl_totem/app/data/models/extra_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/extra_base_model.dart';
 
 GenericScheduleModel genericScheduleModelFromJson(String str) =>
     GenericScheduleModel.fromJson(json.decode(str));

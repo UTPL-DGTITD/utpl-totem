@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:utpl_totem/app/presentation/modules/flickr/flickr_albums/flickr_albums_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/presentation/widgets/footer_utpl.dart';
-import 'package:utpl_totem/app/presentation/widgets/loading_utpl.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/flickr/flickr_albums/flickr_albums_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/footer_utpl.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/loading_utpl.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class FlickrAlbumsPage extends GetView<FlickrAlbumsController> {
-  const FlickrAlbumsPage({Key? key}) : super(key: key);
+  const FlickrAlbumsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

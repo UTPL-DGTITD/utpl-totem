@@ -1,14 +1,16 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:dart_vlc/dart_vlc.dart';
+//import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/main_binding.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/app_theme.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:utpl_totem_oficial/app/main_binding.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/app_theme.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'package:wakelock/wakelock.dart';
+//import 'package:wakelock/wakelock.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app/controllers/main_controller.dart';
@@ -19,10 +21,10 @@ void main() async {
 
   WindowOptions windowOptions = const WindowOptions(
     // DESCOMENTAR PARA PRODUCCION
-    fullScreen: true,
+    //fullScreen: true,
     // DESCOMENTAR PARA PROBAR DE MANERA LOCAL   size: Size(385, 674),
-    // size: Size(385, 674),
-    center: true,
+    size: Size(385, 674),
+    //center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
@@ -31,7 +33,10 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
-  DartVLC.initialize();
+  //DartVLC.initialize();
+  WidgetsFlutterBinding.ensureInitialized();
+  WakelockPlus.enable();
+  MediaKit.ensureInitialized();
 
   runApp(MyApp());
 }
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Wakelock.enable();
+    //Wakelock.enable();
     return GestureDetector(
       child: GetMaterialApp(
         scrollBehavior: const MaterialScrollBehavior().copyWith(

@@ -1,10 +1,10 @@
-library date_time_extensions;
+library;
 
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 extension DateExtension on DateTime {
   String convertToTime() {
-    ToolsHelper.logger.i('DateExtension.convertToTime', this);
+    ToolsHelper.logger.i('DateExtension.convertToTime');
 
     var localDate = toLocal();
     var hour = localDate.hour;

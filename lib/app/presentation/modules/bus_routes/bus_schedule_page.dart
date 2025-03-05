@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:utpl_totem/app/presentation/modules/bus_routes/bus_schedule_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/presentation/widgets/footer_utpl.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/bus_routes/bus_schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/footer_utpl.dart';
 
 class BusSchedulePage extends GetView<BusScheduleController> {
   const BusSchedulePage({super.key});

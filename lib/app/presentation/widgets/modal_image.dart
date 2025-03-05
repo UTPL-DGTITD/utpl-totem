@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_controller.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class ModalImage {
   static Future<dynamic> showImage(
@@ -46,6 +46,10 @@ class ModalImage {
                           Expanded(
                             child: Obx(
                               () => CachedNetworkImage(
+                                httpHeaders: const {
+                                  'User-Agent':
+                                      'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                                },
                                 cacheKey: ctrl.actualUrlImg.value,
                                 placeholder: (context, url) =>
                                     Image.asset('assets/images/alt-image.png'),
@@ -117,14 +121,13 @@ class ModalImage {
                   padding: EdgeInsets.only(bottom: responsive.hp(1)),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(responsive.ip(2)),
                           ),
                         ),
-                        backgroundColor: MaterialStateColor.resolveWith(
+                        backgroundColor: WidgetStateColor.resolveWith(
                             (states) => Get.theme.colorScheme.error)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: responsive.hp(1)),

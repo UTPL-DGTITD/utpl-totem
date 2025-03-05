@@ -3,15 +3,19 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  dart_vlc
+  flutter_libserialport
   flutter_secure_storage_linux
+  media_kit_libs_linux
+  media_kit_video
   platform_device_id_linux
+  rive_common
   screen_retriever
   url_launcher_linux
   window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  media_kit_native_event_loop
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

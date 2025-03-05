@@ -4,19 +4,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
-import 'package:utpl_totem/app/presentation/modules/home/home_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/modal_services.dart';
-import 'package:utpl_totem/app/routes/app_pages.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/home/home_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/modal_services.dart';
+import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class SideHeader extends StatelessWidget {
   final HomeController ctrl;
   const SideHeader({
-    Key? key,
+    super.key,
     required this.ctrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class SideHeader extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 8,
+            flex: 6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -100,7 +100,7 @@ class SideHeader extends StatelessWidget {
                         : int.parse(ctrl.weather!.value.tempMax ?? '0') >= 26
                             ? 'assets/svg/sunny.svg'
                             : 'assets/svg/cloudy.svg',
-                    width: ctrl.responsive.ip(9),
+                    width: ctrl.responsive.wp(10),
                     colorFilter: ColorFilter.mode(
                       Get.theme.colorScheme.primary,
                       BlendMode.srcIn,
@@ -111,10 +111,10 @@ class SideHeader extends StatelessWidget {
                   () => Text(
                     ctrl.currentDescTemp.value,
                     style: TextStyle(
-                      fontSize: ctrl.responsive.ip(1.6),
-                      color: Get.theme.colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: ctrl.responsive.ip(1.6),
+                        color: Get.theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        height: ctrl.responsive.hp(0.17)),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -128,7 +128,7 @@ class SideHeader extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                customYMargin(ctrl.responsive.hp(1)),
+                customYMargin(ctrl.responsive.hp(0.5)),
                 Column(
                   children: [
                     Container(
@@ -140,7 +140,7 @@ class SideHeader extends StatelessWidget {
                           builder: (context, child, value) => Text(
                             ctrl.currentUv.value,
                             style: TextStyle(
-                              fontSize: ctrl.responsive.ip(2),
+                              fontSize: ctrl.responsive.ip(1.8),
                               color: Get.theme.cardColor,
                               fontWeight: FontWeight.bold,
                             ),
@@ -158,13 +158,23 @@ class SideHeader extends StatelessWidget {
                           // ),
 
                           axis: GaugeAxis(
-                            pointer: RoundedTrianglePointer(
-                              size: ctrl.responsive.ip(1.5),
-                              backgroundColor: Get.theme.colorScheme.primary,
+                            pointer: GaugePointer.needle(
+                              borderRadius: 16,
+                              width: 15,
+                              height: 15,
+                              color: Color(0xFF193663),
                               position: const GaugePointerPosition.surface(
                                 offset: Offset(0, 20 * 0.6),
                               ),
                             ),
+
+                            //  RoundedTrianglePointer(
+                            //   size: ctrl.responsive.ip(1.5),
+                            //   backgroundColor: Get.theme.colorScheme.primary,
+                            //   position: const GaugePointerPosition.surface(
+                            //     offset: Offset(0, 20 * 0.6),
+                            //   ),
+                            // ),
                             min: 0,
                             max: 15,
 
@@ -176,7 +186,7 @@ class SideHeader extends StatelessWidget {
                               segmentSpacing: 0,
                               blendColors: true,
                               thickness: ctrl.responsive.wp(3),
-                              background: Colors.green,
+                              background: Colors.transparent,
                             ),
                             segments: const [
                               GaugeSegment(
@@ -213,14 +223,15 @@ class SideHeader extends StatelessWidget {
                       () => Text(
                         ctrl.currentDescUv.value,
                         style: TextStyle(
-                          fontSize: ctrl.responsive.ip(2),
+                          fontSize: ctrl.responsive.ip(1.5),
                           color: Get.theme.cardColor,
                           fontWeight: FontWeight.bold,
+                          height: 0,
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    customYMargin(ctrl.responsive.hp(2)),
+                    customYMargin(ctrl.responsive.hp(1)),
                     InkWell(
                       onTap: () => ctrl.navigateToPage(Routes.schedule),
                       child: Row(
@@ -230,9 +241,10 @@ class SideHeader extends StatelessWidget {
                             child: Text(
                               'Consulta Horarios',
                               style: TextStyle(
-                                fontSize: ctrl.responsive.ip(1.7),
+                                fontSize: ctrl.responsive.ip(1.6),
                                 color: Get.theme.cardColor,
                                 fontWeight: FontWeight.bold,
+                                height: 1.5,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -281,28 +293,33 @@ class SideHeader extends StatelessWidget {
                 customYMargin(ctrl.responsive.hp(1)),
                 ElevatedButton(
                   style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.circular(ctrl.responsive.ip(1.6)),
+                              BorderRadius.circular(ctrl.responsive.ip(1)),
                         ),
                       ),
-                      backgroundColor: MaterialStateColor.resolveWith(
+                      backgroundColor: WidgetStateColor.resolveWith(
                           (states) => Get.theme.colorScheme.primary)),
                   child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: ctrl.responsive.hp(1)),
+                    padding: EdgeInsets.symmetric(
+                      vertical: ctrl.responsive.hp(1),
+                      horizontal: ctrl.responsive.wp(0),
+                    ),
                     child: Row(
                       children: [
                         Expanded(
                           flex: 2,
-                          child: Text('Ver más',
-                              style: Get.textTheme.titleLarge?.copyWith(
-                                fontSize: ctrl.responsive.ip(1.5),
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.colorScheme.onPrimaryContainer,
-                              ),
-                              textAlign: TextAlign.center),
+                          child: Text(
+                            'Ver más',
+                            style: Get.textTheme.titleLarge?.copyWith(
+                              fontSize: ctrl.responsive.ip(1.5),
+                              fontWeight: FontWeight.bold,
+                              color: Get.theme.cardColor,
+                              height: ctrl.responsive.hp(0.15),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),
@@ -385,9 +402,9 @@ class BottomLink extends StatelessWidget {
 
 class Clock extends StatelessWidget {
   const Clock({
-    Key? key,
+    super.key,
     required this.ctrl,
-  }) : super(key: key);
+  });
 
   final HomeController ctrl;
 

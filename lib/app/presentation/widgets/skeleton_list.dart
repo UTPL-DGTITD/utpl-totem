@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:g_skeleton/g_skeleton.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/themes/app_theme.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/app_theme.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
 
 class SkeletonList extends StatefulWidget {
   const SkeletonList({
-    Key? key,
+    super.key,
     required int length,
-  })  : _length = length,
-        super(key: key);
+  }) : _length = length;
 
   final int _length;
 

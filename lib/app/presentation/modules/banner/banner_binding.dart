@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/banner/banner_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/banner/banner_controller.dart';
 
 class BannerBinding implements Bindings {
   @override

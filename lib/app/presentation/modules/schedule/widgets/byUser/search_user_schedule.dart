@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byUser/schedule_results.dart';
-import 'package:utpl_totem/app/themes/custom_decoration.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/widgets/byUser/schedule_results.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_decoration.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
 class SearchUserSchedule extends StatelessWidget {

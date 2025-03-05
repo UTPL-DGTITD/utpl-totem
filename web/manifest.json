@@ -1,6 +1,6 @@
 {
-    "name": "totem",
-    "short_name": "totem",
+    "name": "utpl_totem_oficial",
+    "short_name": "utpl_totem_oficial",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

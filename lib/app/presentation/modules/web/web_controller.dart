@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/services/toast_service.dart';
-import 'package:utpl_totem/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 class WebController extends GetxController {
@@ -33,8 +33,8 @@ class WebController extends GetxController {
     } catch (error, stack) {
       ToolsHelper.logger.e(
         '[web_controller] (_initConfig)',
-        error,
-        stack,
+        error: error,
+        stackTrace: stack,
       );
       toastService.hideLoading();
       toastService.presentErrorToast(

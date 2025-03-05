@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
-import 'package:utpl_totem/app/data/models/image_base_model.dart';
-import 'package:utpl_totem/app/data/models/roles_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/end_point_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/image_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/roles_model.dart';
 
 UserProfileModel userProfileModelFromJson(String str) =>
     UserProfileModel.fromJson(json.decode(str));

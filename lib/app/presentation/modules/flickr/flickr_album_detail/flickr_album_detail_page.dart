@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wall_layout/flutter_wall_layout.dart';
 
 import 'package:get/get.dart';
-import 'package:marquee/marquee.dart';
-import 'package:utpl_totem/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_controller.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/presentation/widgets/footer_utpl.dart';
-import 'package:utpl_totem/app/presentation/widgets/loading_utpl.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
+import 'package:text_marquee/text_marquee.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/footer_utpl.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/loading_utpl.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
 
 class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
-  const FlickrAlbumDetailPage({Key? key}) : super(key: key);
+  const FlickrAlbumDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,29 +41,32 @@ class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
                   SizedBox(
                     width: ctrl.responsive.wp(100),
                     height: ctrl.responsive.hp(8),
-                    child: Marquee(
-                      text: ctrl.title.value,
-                      style: TextStyle(
-                        fontSize: ctrl.responsive.ip(3),
-                        color: Get.theme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
+                    child: Obx(
+                      () => Container(
+                        alignment: Alignment.center,
+                        child: TextMarquee(
+                          ctrl.title.value,
+                          spaceSize: 72,
+                          style: TextStyle(
+                            color: Get.theme.colorScheme.primary,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                          ),
+                          rtl: false,
+                          curve: Curves.linear,
+                          delay: Duration(seconds: 1),
+                          duration: Duration(
+                            seconds: (ctrl.title.value.length.toDouble() * 0.30)
+                                .toInt(),
+                          ),
+                        ),
                       ),
-                      scrollAxis: Axis.horizontal,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      blankSpace: 20.0,
-                      velocity: 25,
-                      pauseAfterRound: const Duration(seconds: 0),
-                      startPadding: 10.0,
-                      accelerationDuration: const Duration(seconds: 1),
-                      accelerationCurve: Curves.linear,
-                      decelerationCurve: Curves.easeOut,
                     ),
                   ),
                   customYMargin(ctrl.responsive.hp(1)),
                   ctrl.showSkeleton.isFalse
                       ? Expanded(
                           child: WallLayout(
-                            // scrollController: ctrl.scrollController,
                             stonePadding: 5,
                             stones: buildStones(ctrl, context),
                             layersCount: 4,
@@ -105,6 +108,9 @@ class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
               child: Container(
                 color: Get.theme.cardColor,
                 child: CachedNetworkImage(
+                  httpHeaders: const {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                  },
                   cacheKey: ctrl.albumFlicker[i].urlM,
                   placeholder: (context, url) =>
                       Image.asset('assets/images/alt-image.png'),

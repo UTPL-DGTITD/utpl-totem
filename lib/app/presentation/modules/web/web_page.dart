@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:utpl_totem/app/presentation/modules/web/web_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/web/web_controller.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/widgets/float_back_button.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 class WebPage extends GetView<WebController> {
-  const WebPage({Key? key}) : super(key: key);
+  const WebPage({super.key});
 
   @override
   Widget build(BuildContext context) {

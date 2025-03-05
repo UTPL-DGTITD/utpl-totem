@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:utpl_totem/app/data/models/image_base_model.dart';
-import 'package:utpl_totem/app/data/models/link_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/image_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/models/link_base_model.dart';
 
 TvTemplateModel tvTemplateModelFromJson(String str) =>
     TvTemplateModel.fromJson(json.decode(str));

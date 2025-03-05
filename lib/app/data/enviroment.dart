@@ -5,7 +5,7 @@ class Environment {
   static const String server = "https://appmovil.utpl.edu.ec:8080";
   static const String accessKey = '886D32B8F4841173DF763578BBE1C';
   // DESARROLLO
-  // static const String server = "http://172.17.171.140:3000";
+  //static const String server = "http://172.17.171.140:3000";
   // static const String accessKey = 'FA7691B26861AD7FCEBB412FFFE4F';
 
   static const Duration httpTimeout = Duration(milliseconds: 12000);

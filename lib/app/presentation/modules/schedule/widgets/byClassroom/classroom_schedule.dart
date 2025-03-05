@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/generic_list_item_model.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/byClassroom/modal_dialog_buildings.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/widgets/schedule_grid.dart';
-import 'package:utpl_totem/app/themes/custom_decoration.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/data/models/generic_list_item_model.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/widgets/byClassroom/modal_dialog_buildings.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/widgets/schedule_grid.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_decoration.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
 
 class ClassroomSchedule extends StatelessWidget {
   final ScheduleController ctrl;

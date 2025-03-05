@@ -69,7 +69,7 @@ final ThemeData appLightTheme = ThemeData(
         /// Icons: responsive.ip(2.5) | size: 25
       ),
   checkboxTheme: ThemeData.light().checkboxTheme.copyWith(
-        fillColor: MaterialStateProperty.all(LightSchema.primaryColor),
+        fillColor: WidgetStateProperty.all(LightSchema.primaryColor),
       ),
 );
 

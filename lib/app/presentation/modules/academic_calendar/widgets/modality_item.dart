@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/presentation/modules/academic_calendar/academic_calendar_controller.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/academic_calendar/academic_calendar_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
 
 class ModalityItem extends StatelessWidget {
   final int index;
 
   const ModalityItem({
-    Key? key,
+    super.key,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

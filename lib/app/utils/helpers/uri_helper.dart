@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/end_point_base_model.dart';
-import 'package:utpl_totem/app/data/providers/local_provider.dart';
-import 'package:utpl_totem/app/data/repositories/local_repository.dart';
+import 'package:utpl_totem_oficial/app/data/models/end_point_base_model.dart';
+import 'package:utpl_totem_oficial/app/data/providers/local_provider.dart';
+import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
 
 class UriHelper {
   static Future<Map<String, dynamic>> composeEndPoint(

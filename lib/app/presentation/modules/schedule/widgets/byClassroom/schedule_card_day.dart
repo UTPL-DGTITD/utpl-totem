@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:utpl_totem/app/data/models/extra_base_model.dart';
-import 'package:utpl_totem/app/presentation/modules/schedule/schedule_controller.dart';
-import 'package:utpl_totem/app/themes/custom_margin.dart';
-import 'package:utpl_totem/app/themes/responsive.dart';
-import 'package:utpl_totem/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/data/models/extra_base_model.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/schedule/schedule_controller.dart';
+import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
+import 'package:utpl_totem_oficial/app/themes/responsive.dart';
+import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
 
 class ScheduleCardDay extends StatelessWidget {
   final ScheduleController ctrl;
@@ -12,9 +12,9 @@ class ScheduleCardDay extends StatelessWidget {
 
   const ScheduleCardDay({
     required this.scheduleData,
-    Key? key,
+    super.key,
     required this.ctrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
