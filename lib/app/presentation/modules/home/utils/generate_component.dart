@@ -37,8 +37,8 @@ class GenerateComponent {
         //return SizedBox();
         return const InvestigationPage();
       case "image":
-        return const SizedBox();
-      //return VideosModulePage();
+        //return const SizedBox();
+        return VideosModulePage();
       default:
         return const SizedBox();
     }
