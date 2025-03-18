@@ -5,6 +5,7 @@ import 'package:utpl_totem_oficial/app/data/providers/local_provider.dart';
 import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
 import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/videos_module/videos_module_controller.dart';
 
 class MainBinding extends Bindings {
   @override
@@ -20,6 +21,10 @@ class MainBinding extends Bindings {
     );
     Get.put(
       ToastService(),
+    );
+    // Agregar el controlador de videos aquí
+    Get.put<VideosModuleController>(
+      VideosModuleController(),
     );
   }
 }

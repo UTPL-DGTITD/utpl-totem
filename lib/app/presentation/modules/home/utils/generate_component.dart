@@ -10,6 +10,7 @@ import 'package:utpl_totem_oficial/app/presentation/modules/observatories/observ
 import 'package:utpl_totem_oficial/app/presentation/modules/ranking/ranking_page.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/videos/videos_page.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/web_component/web_component_page.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/videos_module/videos_module_page.dart';
 
 class GenerateComponent {
   static dynamic generateComponent(
@@ -18,7 +19,7 @@ class GenerateComponent {
       case 'link':
         return WebComponentPage(item.link?.url ?? '');
       case "embedded_youtube":
-        return VideosPage(item);
+        return const SizedBox();
       case "banner":
         //return SizedBox();
         return const BannerPage();
@@ -36,8 +37,8 @@ class GenerateComponent {
         //return SizedBox();
         return const InvestigationPage();
       case "image":
-        //return VideosPage(item);
-        return ImagePage(item);
+        return const SizedBox();
+      //return VideosModulePage();
       default:
         return const SizedBox();
     }

@@ -43,7 +43,7 @@ dependencies:
   webview_windows: ^0.4.0
   #win32: 3.0.1
   #dart_vlc: ^0.5.0
-  youtube_explode_dart: ^2.0.2
+  youtube_explode_dart: ^2.3.4
   gauge_indicator: ^0.4.3
   virtual_keyboard_multi_language: ^1.0.3
   platform_device_id: ^1.0.1
@@ -60,7 +60,7 @@ dependencies:
   media_kit: ^1.1.11
   media_kit_video: ^1.2.5
   media_kit_libs_video: ^1.0.5
-  
+  youtube_player_flutter: ^8.1.2
 
 
 dev_dependencies:

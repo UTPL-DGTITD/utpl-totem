@@ -33,7 +33,7 @@ class ImagePage extends GetView<ImageController> {
         builder: (ctrl) {
           return ctrl.title.value.isNotEmpty
               ? Container(
-                  color: Get.theme.cardColor,
+                  color: Color.fromARGB(255, 232, 13, 13),
                   child: Center(
                     child: CachedNetworkImage(
                       httpHeaders: const {

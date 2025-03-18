@@ -8,8 +8,7 @@ import 'package:utpl_totem_oficial/app/presentation/modules/videos/videos_contro
 import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class VideosPage extends GetView<VideosController> {
-  final TvTemplateBody item;
-  const VideosPage(this.item, {super.key});
+  const VideosPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class VideosPage extends GetView<VideosController> {
           return SafeArea(
             child: ctrl.showSkeleton.isTrue
                 ? Container(
-                    color: Get.theme.cardColor,
+                    color: Color.fromARGB(255, 230, 227, 35),
                     padding: EdgeInsets.symmetric(
                       vertical: ctrl.responsive.hp(0),
                       horizontal: ctrl.responsive.hp(2.5),
