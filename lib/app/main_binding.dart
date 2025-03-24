@@ -22,9 +22,5 @@ class MainBinding extends Bindings {
     Get.put(
       ToastService(),
     );
-    // Agregar el controlador de videos aquí
-    Get.put<VideosModuleController>(
-      VideosModuleController(),
-    );
   }
 }

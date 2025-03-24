@@ -18,8 +18,7 @@ class GenerateComponent {
     switch (type) {
       case 'link':
         return WebComponentPage(item.link?.url ?? '');
-      case "embedded_youtube":
-        return const SizedBox();
+
       case "banner":
         //return SizedBox();
         return const BannerPage();
@@ -36,9 +35,12 @@ class GenerateComponent {
       case "indicators":
         //return SizedBox();
         return const InvestigationPage();
+      case "embedded_youtube":
+        //return const SizedBox();
+        return VideosModulePage(item);
       case "image":
         //return const SizedBox();
-        return VideosModulePage();
+        return ImagePage(item);
       default:
         return const SizedBox();
     }

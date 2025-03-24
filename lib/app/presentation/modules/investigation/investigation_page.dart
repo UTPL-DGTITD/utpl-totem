@@ -25,8 +25,7 @@ class InvestigationPage extends GetView<InvestigationController> {
         builder: (ctrl) {
           return ctrl.showSkeleton.isFalse
               ? Container(
-                  //color: Get.theme.cardColor,
-                  color: Color.fromARGB(255, 48, 204, 40),
+                  color: Get.theme.cardColor,
                   padding: EdgeInsets.symmetric(
                     vertical: ctrl.responsive.hp(1),
                     horizontal: ctrl.responsive.wp(1),
