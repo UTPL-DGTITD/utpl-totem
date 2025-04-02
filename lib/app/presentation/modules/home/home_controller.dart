@@ -12,6 +12,7 @@ import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
 import 'package:utpl_totem_oficial/app/routes/app_pages.dart';
 import 'package:utpl_totem_oficial/app/themes/responsive.dart';
 import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/videos_module/videos_module_controller.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   final LocalRepository localRepository;
@@ -256,6 +257,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       ToolsHelper.logger.v('INACTIVIDAD USUARIO');
       if (Get.currentRoute == Routes.home) {
         navigateToPage(Routes.screen_protector);
+        stopVideosComponent();
       } else {
         Get.until((route) => Get.currentRoute == Routes.home);
         resetTimer();
@@ -297,31 +299,28 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     resetTimer();
   }
 
+  // Actualiza estas funciones en HomeController:
+
   void stopVideosComponent() {
-    // try {
-    //   final VideosController videosController = Get.find<VideosController>();
-    //   videosController.player.value.pause();
-    //   videosController.timerVideoPlaying.isActive
-    //       ? videosController.timerVideoPlaying.cancel()
-    //       : null;
-    // } catch (e) {
-    //   ToolsHelper.logger.v('NO EXISTE COMPONENTE DE VIDEOS');
-    // }
+    try {
+      final VideosModuleController videosController =
+          Get.find<VideosModuleController>();
+      ToolsHelper.logger.w('Pausando componente de videos');
+      videosController.pauseVideo();
+    } catch (e) {
+      ToolsHelper.logger.v('NO EXISTE COMPONENTE DE VIDEOS');
+    }
   }
 
   void playVideosComponent() {
-    // try {
-    //   final VideosController videosController = Get.find<VideosController>();
-    //   videosController.player.value.play();
-    //   videosController.timerVideoPlaying.isActive
-    //       ? null
-    //       : videosController.timerVideoPlaying =
-    //           Timer.periodic(const Duration(minutes: 1), (timer) async {
-    //           videosController.validateVideo();
-    //         });
-    // } catch (e) {
-    //   ToolsHelper.logger.v('NO EXISTE COMPONENTE DE VIDEOS');
-    // }
+    try {
+      final VideosModuleController videosController =
+          Get.find<VideosModuleController>();
+      ToolsHelper.logger.w('Reproduciendo componente de videos');
+      videosController.resumeVideo();
+    } catch (e) {
+      ToolsHelper.logger.v('NO EXISTE COMPONENTE DE VIDEOS');
+    }
   }
 
   void loadWallpaper() async {

@@ -59,7 +59,6 @@ class VideosModulePage extends GetView<VideosModuleController> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.7,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
         child: Webview(ctrl.webviewController),
       ),
     );
@@ -97,18 +96,18 @@ class VideosModulePage extends GetView<VideosModuleController> {
 
   /// Inicializa los videos en el controlador
   void _initializeVideos(VideosModuleController ctrl) {
-    ToolsHelper.logger.v('Inicializando videos del módulo');
+    ToolsHelper.logger.w('Inicializando videos del módulo');
 
     if (item.embeddedYoutube.isNotEmpty) {
       // Hacer copia de la lista para evitar problemas de referencia
       List<String> videosCopy = [...item.embeddedYoutube];
       ctrl.setVideosFromItem(videosCopy);
       ToolsHelper.logger
-          .v('Videos cargados desde embeddedYoutube: ${videosCopy.length}');
+          .w('Videos cargados desde embeddedYoutube: ${videosCopy.length}');
     } else {
       // Si no hay videos, usar predeterminados
       ctrl.setVideosFromItem(['poC3PI9RM30', 'zdagGm-DrDQ', 'gyo8ee5aXF8']);
-      ToolsHelper.logger.v('Usando videos predeterminados');
+      ToolsHelper.logger.w('Usando videos predeterminados');
     }
   }
 }

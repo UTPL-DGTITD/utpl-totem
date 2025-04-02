@@ -85,7 +85,7 @@ class SplashScreenController extends GetxController {
       ToolsHelper.logger.v('-${deviceCode.trim()}-');
       //deviceCode.value = '5F6B4244-F2D7-B34D-A01D-1593561B9E98';
       //deviceCode.value = '03000200-0400-0500-0006-000700080009';
-      //deviceCode.value = "pruebas_valeria_007";
+      deviceCode.value = "pruebas_valeria_007";
       var result = await apiRepository.getTvTemplateByCode(
         body: {
           "tv_code": deviceCode.value,

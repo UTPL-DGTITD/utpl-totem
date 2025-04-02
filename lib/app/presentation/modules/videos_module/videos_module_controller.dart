@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/videos_module/videos_config.dart';
 import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 import 'dart:async';
+import 'dart:convert';
 import 'package:webview_windows/webview_windows.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-import 'package:utpl_totem_oficial/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem_oficial/app/data/repositories/api_repository.dart';
 import 'package:utpl_totem_oficial/app/data/repositories/local_repository.dart';
 import 'package:utpl_totem_oficial/app/data/services/toast_service.dart';
@@ -32,8 +33,9 @@ class VideosModuleController extends GetxController
   final RxBool isWebViewReady = false.obs;
   Timer? videoSwitchTimer;
   final RxBool isLoadingDurations = false.obs;
+  DateTime? pauseTime; // Momento en que se pausó el video
+  int remainingSeconds = 0; // variable para guardar tiempo restante
 
-  // Getter seguro para el ID actual
   String get currentVideoId => videoIds.isNotEmpty
       ? videoIds[currentVideoIndex.value % videoIds.length]
       : '';
@@ -47,25 +49,19 @@ class VideosModuleController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-    print("🔹 Inicializando el reproductor WebView...");
 
-    // Esperar a que haya videos antes de continuar
+    // Esperar a que haya videos en la lista antes de continuar
     if (videoIds.isEmpty) {
-      print("⏳ Esperando a que se asignen los videos...");
-
       // Esperar hasta 2 segundos máximo
       for (int i = 0; i < 20 && videoIds.isEmpty; i++) {
         await Future.delayed(Duration(milliseconds: 100));
       }
 
-      // Si sigue vacío después de esperar, usar predeterminados
+      // Si sigue vacío después de esperar, usar ids de videos predeterminados
       if (videoIds.isEmpty) {
-        print("⚠️ No se recibieron videos, usando predeterminados");
         videoIds.addAll(['poC3PI9RM30', 'zdagGm-DrDQ', 'gyo8ee5aXF8']);
       }
     }
-
-    print("✅ Videos disponibles: ${videoIds.length}");
 
     // Precarga las duraciones de los videos
     await loadNextDurations(2);
@@ -77,8 +73,6 @@ class VideosModuleController extends GetxController
     if (isLoadingDurations.value || videoIds.isEmpty) return;
     isLoadingDurations.value = true;
 
-    print("📊 Obteniendo duración para los próximos $count videos");
-
     int loaded = 0;
     int startIndex = currentVideoIndex.value;
 
@@ -86,7 +80,7 @@ class VideosModuleController extends GetxController
       int index = (startIndex + i) % videoIds.length;
       String videoId = videoIds[index];
 
-      // Si ya tenemos la duración, saltamos
+      // Si ya existe la duración del video, continuar
       if (videoDurations.containsKey(videoId)) continue;
 
       try {
@@ -96,11 +90,11 @@ class VideosModuleController extends GetxController
         // Guardar la duración en segundos
         videoDurations[videoId] = video.duration?.inSeconds ?? 180;
 
-        print("ℹ️ Video $videoId: ${videoDurations[videoId]} segundos");
         loaded++;
       } catch (e) {
-        print("⚠️ Error obteniendo duración del video $videoId: $e");
-        // Si hay error, establecer una duración predeterminada
+        ToolsHelper.logger
+            .w('Error obteniendo duración del video $videoId: $e');
+        // Duración predeterminada
         videoDurations[videoId] = 180; // 3 minutos por defecto
         loaded++;
       }
@@ -111,29 +105,55 @@ class VideosModuleController extends GetxController
 
   Future<void> initPlatformState() async {
     try {
+      ToolsHelper.logger.w('🔹 Inicializando WebView Windows...');
       await webviewController.initialize();
       await webviewController.setBackgroundColor(Colors.transparent);
       await webviewController
           .setPopupWindowPolicy(WebviewPopupWindowPolicy.deny);
 
+      // Configurar manejador de mensajes para detectar el fin de video
+      webviewController.webMessage.listen((message) {
+        try {
+          if (message == 'VIDEO_ENDED' || message == 'VIDEO_ALMOST_ENDED') {
+            videoSwitchTimer?.cancel();
+            Future.microtask(() => nextVideo());
+          } else if (message == 'VIDEO_READY') {
+            isLoading.value = false;
+          } else {
+            // Controles de video usando JSON y WebView
+            try {
+              final data = jsonDecode(message);
+              if (data['event'] == 'VIDEO_PAUSED' &&
+                  data['currentTime'] != null) {
+                double currentTime = (data['currentTime'] ?? 0.0).toDouble();
+                double duration = (data['duration'] ?? 0.0).toDouble();
+                remainingSeconds = (duration - currentTime).round();
+              }
+            } catch (e) {
+              // Si no es JSON válido, ignorar
+            }
+          }
+        } catch (e) {
+          ToolsHelper.logger.e('Error procesando mensaje de WebView: $e');
+        }
+      });
+
       // Cargar el primer video
       await loadCurrentVideo();
 
       isWebViewReady.value = true;
-      print(
-          "✅ WebView listo, reproduciendo video ${currentVideoIndex.value + 1} de ${videoIds.length}");
 
       // Programar cambio de videos basado en la duración estimada
       setupVideoSwitching();
     } catch (e) {
-      print("❌ Error inicializando WebView: $e");
+      ToolsHelper.logger.e('Error inicializando WebView: $e');
     }
   }
 
-  // Método para cargar el video actual de manera segura
+  //Cargar video actual
   Future<void> loadCurrentVideo() async {
     if (videoIds.isEmpty) {
-      print("⚠️ No hay videos disponibles para cargar");
+      ToolsHelper.logger.w('No hay videos disponibles para cargar');
       return;
     }
 
@@ -142,217 +162,57 @@ class VideosModuleController extends GetxController
       currentVideoIndex.value = 0;
     }
 
-    print("🎬 Cargando video: $currentVideoId");
-
     try {
       // Mostrar pantalla de carga
       isLoading.value = true;
 
-      // 1. PRIMERO aplicamos estilos generales que preparan el contenedor
-      await webviewController.executeScript('''
-        (function() {
-          // Crear estilos de preparación
-          var prepStyle = document.createElement('style');
-          prepStyle.id = 'youtube-prep-style';
-          prepStyle.textContent = `
-            body, html, * {
-              background-color: black !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              overflow: hidden !important;
-            }
-          `;
-          document.head.appendChild(prepStyle);
-        })();
-      ''');
+      // Estilos de YouTube
+      await webviewController.executeScript(youtubeStyle);
 
-      // 2. Construir la URL de YouTube con parámetros óptimos
-      final String embedUrl = 'https://www.youtube.com/embed/$currentVideoId?' +
-          'controls=0&' + // Sin controles de reproducción
-          'autoplay=1&' + // Inicia automáticamente
-          'mute=1&' + // Video silenciado
-          'rel=0&' + // Sin videos relacionados
-          'showinfo=0&' + // Sin información del video
-          'modestbranding=1&' + // Mínimo branding de YouTube
-          'iv_load_policy=3&' + // Sin anotaciones
-          'disablekb=1&' + // Deshabilita controles de teclado
-          'fs=0&' + // Deshabilita botón de pantalla completa
-          'playsinline=1&' + // Reproducir dentro del elemento
-          'enablejsapi=1'; // Habilita JavaScript API
+      // Url
+      final String embedUrl =
+          'https://www.youtube.com/embed/$currentVideoId? + $videoControls';
 
-      // 3. Cargar el video (mantenemos la pantalla de carga)
       await webviewController.loadUrl(embedUrl);
 
       await Future.delayed(const Duration(milliseconds: 800));
       await applyCustomSettings();
 
       // Verificar si el video está listo para reproducirse
-      await webviewController.executeScript('''
-        (function() {
-          var video = document.querySelector('video');
-          if (video) {
-            video.muted = true;
-            video.play();
-            window.chrome.webview.postMessage('VIDEO_READY');
-          } else {
-            window.chrome.webview.postMessage('VIDEO_NOT_READY');
-          }
-        })();
-      ''');
-
-      // 7. Ocultar la pantalla de carga después de que todo esté listo
-      isLoading.value = false;
-
-      print("✅ Video $currentVideoId cargado y adaptado completamente");
+      await webviewController.executeScript(videoReady);
     } catch (e) {
-      print("❌ Error cargando video: $e");
-      // Asegurarnos de ocultar la pantalla de carga incluso si hay error
+      ToolsHelper.logger.e("Error cargando video: $e");
+      // Ocultar la pantalla de carga.
       isLoading.value = false;
+
+      // Intentar recuperar cargando el siguiente video en caso de error
+      Future.delayed(Duration(seconds: 2), () {
+        if (isLoading.value) {
+          isLoading.value = false;
+          nextVideo();
+        }
+      });
     }
   }
 
   // Aplicar CSS y JavaScript para personalizar el reproductor
   Future<void> applyCustomSettings() async {
-    await webviewController.executeScript('''
-    (function() {
-      // Eliminar cualquier estilo previo para evitar duplicados
-      var oldStyle = document.getElementById('youtube-custom-style');
-      if (oldStyle) {
-        oldStyle.parentNode.removeChild(oldStyle);
-      }
-      
-      // Crear un nuevo estilo con ID para poder referenciarlo después
-      var style = document.createElement('style');
-      style.id = 'youtube-custom-style';
-      style.textContent = `
-        /* Ocultar logo de YouTube y otros elementos de la UI */
-        .ytp-chrome-top,
-        .ytp-chrome-bottom,
-        .ytp-watermark,
-        .ytp-youtube-button,
-        .ytp-embed-title,
-        .ytp-impression-link,
-        .ytp-pause-overlay,
-        .ytp-gradient-top,
-        .ytp-gradient-bottom,
-        .ytp-spinner,
-        .ytp-thumbnail-overlay,
-        .ytp-large-play-button,
-        .ytp-mute-button,
-        .ytp-volume-panel,
-        .ytp-volume-slider-handle,
-        .ytp-scrubber-container,
-        .ytp-progress-bar-container,
-        .ytp-time-display,
-        .ytp-chapter-container,
-        .ytp-menuitem,
-        .ytp-ce-element,
-        .ytp-ce-video,
-        .ytp-ce-element-shadow,
-        .ytp-watch-later-button,
-        .ytp-share-button,
-        .ytp-subtitles-button,
-        .ytp-settings-button,
-        .ytp-playlist-menu-button,
-        .ytp-autonav-endscreen-countdown-container {
-          display: none !important;
-          opacity: 0 !important;
-          pointer-events: none !important;
-          visibility: hidden !important;
-        }
-        
-        /* Configuración para que todo ocupe el 100% del espacio */
-        iframe, 
-        body, 
-        html, 
-        #player, 
-        .html5-video-player, 
-        .html5-video-container,
-        video {
-          width: 100% !important;
-          height: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          overflow: hidden !important;
-          object-fit: cover !important;
-          background-color: black !important;
-        }
-        
-        /* Forzar el video a ocupar todo el espacio disponible */
-        video {
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          right: 0 !important;
-          bottom: 0 !important;
-          object-fit: fill !important;
-          min-width: 100% !important;
-          min-height: 100% !important;
-          transform: none !important;
-        }
-        
-        /* Evitar barras de desplazamiento */
-        ::-webkit-scrollbar {
-          display: none !important;
-          width: 0 !important;
-          height: 0 !important;
-        }
-      `;
-      
-      document.head.appendChild(style);
-      
-      // Ajustar manualmente el tamaño de todos los elementos relevantes
-      function resizeElements() {
-        // Obtener todos los contenedores y elementos relevantes
-        const containers = [
-          document.querySelector('.html5-video-container'),
-          document.querySelector('.html5-video-player'),
-          document.querySelector('#player'),
-          document.querySelector('video')
-        ];
-        
-        // Establecer tamaño al 100% para cada elemento
-        containers.forEach(element => {
-          if (element) {
-            element.style.width = '100%';
-            element.style.height = '100%';
-            element.style.position = 'absolute';
-            element.style.top = '0';
-            element.style.left = '0';
-            element.style.objectFit = 'fill';
-          }
-        });
-        
-        // Establecer específicamente para el video
-        const video = document.querySelector('video');
-        if (video) {
-          video.muted = true;
-          video.play();
-          video.style.objectFit = 'fill';
-        }
-      }
-      
-      // Ejecutar ahora y periódicamente
-      resizeElements();
-      setInterval(resizeElements, 1000);
-      
-      // Prevenir cualquier interacción
-      document.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }, true);
-      
-      // Prevenir menú contextual
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
-      }, true);
-    })();
-  ''');
+    await webviewController.executeScript(customSettings);
   }
 
-  // Configurar el cambio de video basado en la duración real
+  // Obtener el tiempo actual del video en segundos
+  Future<int> getCurrentVideoTime() async {
+    try {
+      final result = await webviewController.executeScript(videoCurrentTime);
+
+      return int.tryParse(result) ?? 0;
+    } catch (e) {
+      ToolsHelper.logger.e('Error obteniendo tiempo actual del video: $e');
+      return 0;
+    }
+  }
+
+  // Cambio de video segun la duración del video
   Future<void> setupVideoSwitching() async {
     if (videoIds.isEmpty) return;
 
@@ -360,29 +220,46 @@ class VideosModuleController extends GetxController
     videoSwitchTimer?.cancel();
 
     // Obtener la duración del video actual
-    final int durationInSeconds = videoDurations[currentVideoId] ?? 180;
+    final int totalDuration = videoDurations[currentVideoId] ?? 180;
 
-    // Ajustar unos segundos menos para cambiar justo antes del final
-    final adjustedDuration = Duration(seconds: durationInSeconds - 2);
+    try {
+      // Obtener tiempo actual de reproducción
+      final int currentPosition = await getCurrentVideoTime();
 
-    print("⏱️ Programando cambio de video en $adjustedDuration");
+      // Calcular tiempo restante
+      int timeRemaining = totalDuration - currentPosition;
 
-    // Programar cambio al siguiente video
-    videoSwitchTimer = Timer(adjustedDuration, () {
-      nextVideo();
-    });
+      // Si queda poco tiempo, usar tiempo mínimo
+      if (timeRemaining <= 5) {
+        timeRemaining = 5;
+      }
+
+      // Ajustar 2 segundos menos para cambiar justo antes del final
+      final adjustedDuration = Duration(seconds: timeRemaining - 2);
+
+      // Programar cambio al siguiente video
+      videoSwitchTimer = Timer(adjustedDuration, () {
+        nextVideo();
+      });
+    } catch (e) {
+      // Si ocurre un error, usar duración completa
+      final adjustedDuration = Duration(seconds: totalDuration - 2);
+      ToolsHelper.logger.w(
+          '⚠️ Error obteniendo posición actual, usando duración estimada: ${adjustedDuration.inSeconds}s');
+
+      videoSwitchTimer = Timer(adjustedDuration, () {
+        nextVideo();
+      });
+    }
 
     // Cargar información del siguiente video si aún no la tenemos
-    // (esto se hace en segundo plano mientras se reproduce el actual)
     if (videoIds.length > 1) {
       int nextIndex = (currentVideoIndex.value + 1) % videoIds.length;
       String nextVideoId = videoIds[nextIndex];
 
       if (!videoDurations.containsKey(nextVideoId)) {
         // Cargamos en segundo plano la duración del siguiente
-        loadNextDurations(1).then((_) {
-          print("✓ Información del siguiente video precargada");
-        });
+        loadNextDurations(1).then((_) {});
       }
     }
   }
@@ -391,18 +268,32 @@ class VideosModuleController extends GetxController
   Future<void> nextVideo() async {
     if (videoIds.isEmpty) return;
 
-    // Avanzar al siguiente video (con loop al llegar al final)
-    currentVideoIndex.value = (currentVideoIndex.value + 1) % videoIds.length;
-    print(
-        "🔄 Cambiando al video ${currentVideoIndex.value + 1} de ${videoIds.length}");
+    try {
+      // Avanzar al siguiente video (con loop al llegar al final)
+      currentVideoIndex.value = (currentVideoIndex.value + 1) % videoIds.length;
 
-    await loadCurrentVideo();
-    setupVideoSwitching();
+      await loadCurrentVideo();
+      setupVideoSwitching();
+    } catch (e) {
+      ToolsHelper.logger.e('❌ Error cambiando al siguiente video: $e');
+
+      // Reintentar después de un breve retraso
+      Future.delayed(Duration(seconds: 2), () {
+        loadCurrentVideo();
+        setupVideoSwitching();
+      });
+    }
   }
 
   // Método para actualizar videos desde un item
   void setVideosFromItem(List<String> videos) {
     if (videos.isNotEmpty) {
+      ToolsHelper.logger
+          .w('📋 Actualizando lista de videos: ${videos.length} videos');
+
+      // Cancelar timer existente
+      videoSwitchTimer?.cancel();
+
       // Limpiar lista actual
       videoIds.clear();
 
@@ -412,24 +303,71 @@ class VideosModuleController extends GetxController
       // Reiniciar índice
       currentVideoIndex.value = 0;
 
-      print("✅ Lista de videos actualizada: ${videoIds.length} videos");
-
       // Si ya se inició el WebView, reiniciar la reproducción
       if (isWebViewReady.value) {
         loadCurrentVideo();
         setupVideoSwitching();
       }
     } else {
-      print("⚠️ Lista de videos vacía, no se actualiza");
+      ToolsHelper.logger.w("⚠️ Lista de videos vacía, no se actualiza");
+    }
+  }
+
+  // Método para pausar el video
+  void pauseVideo() {
+    try {
+      ToolsHelper.logger.w('🛑 Pausando video');
+
+      pauseTime = DateTime.now();
+
+      // Si el WebView está listo, pausar el video
+      if (isWebViewReady.value) {
+        webviewController.executeScript(videoPause);
+      }
+
+      // Cancelar timer de cambio de video
+      videoSwitchTimer?.cancel();
+    } catch (e) {
+      ToolsHelper.logger.e('Error pausando video: $e');
+    }
+  }
+
+  // Método para reanudar el video
+  void resumeVideo() {
+    try {
+      // Calcular el tiempo que el video estuvo pausado
+      int pauseDuration = 0;
+      if (pauseTime != null) {
+        pauseDuration = DateTime.now().difference(pauseTime!).inSeconds;
+      }
+
+      // Si estuvo pausado más de 20 segundos, cambiar al siguiente video
+      if (pauseDuration > 20) {
+        nextVideo();
+        return;
+      }
+
+      // De lo contrario, reanudar la reproducción y ajustar el timer
+      if (isWebViewReady.value) {
+        // Reanudar el video
+        webviewController.executeScript(videoResume);
+
+        // Reprogramar el cambio de video
+        setupVideoSwitching();
+      }
+    } catch (e) {
+      ToolsHelper.logger.e('Error reanudando video: $e');
+      // En caso de error, cambiar al siguiente video
+      nextVideo();
     }
   }
 
   @override
   void onClose() {
-    print("🛑 Cerrando el reproductor...");
+    ToolsHelper.logger.w("🛑 Cerrando el reproductor...");
     videoSwitchTimer?.cancel();
     webviewController.dispose();
-    yt.close(); // Importante cerrar el cliente de YouTube
+    yt.close(); // Cerrar el cliente de YouTube
     super.onClose();
   }
 }

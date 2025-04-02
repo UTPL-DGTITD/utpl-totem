@@ -411,7 +411,13 @@ class Clock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => ctrl.navigateToPage(Routes.screen_protector),
+      onTap: () {
+        // Primero pausamos el video
+        ctrl.stopVideosComponent();
+
+        // Luego navegamos a la pantalla protectora
+        ctrl.navigateToPage(Routes.screen_protector);
+      },
       child: DigitalClock(
         is24HourTimeFormat: true,
         areaDecoration: const BoxDecoration(

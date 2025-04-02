@@ -12,6 +12,7 @@ import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/screen_protector/screen_protector_controller.dart';
 import 'package:utpl_totem_oficial/app/themes/custom_margin.dart';
 import 'package:utpl_totem_oficial/app/themes/utpl_custom_icons.dart';
+import 'package:utpl_totem_oficial/app/presentation/modules/home/home_controller.dart';
 
 class ScreenProtectorPage extends GetView<ScreenProtectorController> {
   const ScreenProtectorPage({super.key});
@@ -42,7 +43,14 @@ class ScreenProtectorPage extends GetView<ScreenProtectorController> {
         builder: (ctrl) {
           return ctrl.showSkeleton.isFalse
               ? GestureDetector(
-                  onTap: () => controller.exitScreenProtector(),
+                  onTap: () {
+                    // Primero, ejecuta la función actual
+                    controller.exitScreenProtector();
+
+                    // Luego, busca el HomeController y ejecuta su función
+                    final homeController = Get.find<HomeController>();
+                    homeController.playVideosComponent();
+                  },
                   onPanDown: (_) => controller.exitScreenProtector(),
                   onTapDown: (_) => controller.exitScreenProtector(),
                   child: Container(

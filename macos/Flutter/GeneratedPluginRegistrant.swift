@@ -14,10 +14,10 @@ import path_provider_foundation
 import platform_device_id
 import platform_device_id_macos
 import rive_common
-import screen_brightness_macos
-import screen_retriever
+import screen_retriever_macos
 import sqflite_darwin
 import url_launcher_macos
+import volume_controller
 import wakelock_plus
 import window_manager
 
@@ -31,10 +31,10 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   PlatformDeviceIdMacosPlugin.register(with: registry.registrar(forPlugin: "PlatformDeviceIdMacosPlugin"))
   PlatformDeviceIdMacosPlugin.register(with: registry.registrar(forPlugin: "PlatformDeviceIdMacosPlugin"))
   RivePlugin.register(with: registry.registrar(forPlugin: "RivePlugin"))
-  ScreenBrightnessMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenBrightnessMacosPlugin"))
-  ScreenRetrieverPlugin.register(with: registry.registrar(forPlugin: "ScreenRetrieverPlugin"))
+  ScreenRetrieverMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenRetrieverMacosPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
+  VolumeControllerPlugin.register(with: registry.registrar(forPlugin: "VolumeControllerPlugin"))
   WakelockPlusMacosPlugin.register(with: registry.registrar(forPlugin: "WakelockPlusMacosPlugin"))
   WindowManagerPlugin.register(with: registry.registrar(forPlugin: "WindowManagerPlugin"))
 }

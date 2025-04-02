@@ -17,6 +17,7 @@ import 'app/controllers/main_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.splash_screen,
         getPages: AppPages.routes,
         initialBinding: MainBinding(),
+        debugShowMaterialGrid: false,
         // onUnknownRoute: (settings) => MaterialPageRoute(
         //   builder: (context) => UndefinedRoutePage(
         //     name: settings.name ?? 'Undefined',
