@@ -33,8 +33,8 @@ class VideosModuleController extends GetxController
   final RxBool isWebViewReady = false.obs;
   Timer? videoSwitchTimer;
   final RxBool isLoadingDurations = false.obs;
-  DateTime? pauseTime; // Momento en que se pausó el video
-  int remainingSeconds = 0; // variable para guardar tiempo restante
+  DateTime? pauseTime;
+  int remainingSeconds = 0;
 
   String get currentVideoId => videoIds.isNotEmpty
       ? videoIds[currentVideoIndex.value % videoIds.length]
@@ -200,18 +200,6 @@ class VideosModuleController extends GetxController
     await webviewController.executeScript(customSettings);
   }
 
-  // Obtener el tiempo actual del video en segundos
-  Future<int> getCurrentVideoTime() async {
-    try {
-      final result = await webviewController.executeScript(videoCurrentTime);
-
-      return int.tryParse(result) ?? 0;
-    } catch (e) {
-      ToolsHelper.logger.e('Error obteniendo tiempo actual del video: $e');
-      return 0;
-    }
-  }
-
   // Cambio de video segun la duración del video
   Future<void> setupVideoSwitching() async {
     if (videoIds.isEmpty) return;
@@ -223,11 +211,8 @@ class VideosModuleController extends GetxController
     final int totalDuration = videoDurations[currentVideoId] ?? 180;
 
     try {
-      // Obtener tiempo actual de reproducción
-      final int currentPosition = await getCurrentVideoTime();
-
       // Calcular tiempo restante
-      int timeRemaining = totalDuration - currentPosition;
+      int timeRemaining = totalDuration;
 
       // Si queda poco tiempo, usar tiempo mínimo
       if (timeRemaining <= 5) {
@@ -275,7 +260,7 @@ class VideosModuleController extends GetxController
       await loadCurrentVideo();
       setupVideoSwitching();
     } catch (e) {
-      ToolsHelper.logger.e('❌ Error cambiando al siguiente video: $e');
+      ToolsHelper.logger.e('Error cambiando al siguiente video: $e');
 
       // Reintentar después de un breve retraso
       Future.delayed(Duration(seconds: 2), () {
