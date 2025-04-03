@@ -200,6 +200,18 @@ class VideosModuleController extends GetxController
     await webviewController.executeScript(customSettings);
   }
 
+  // Obtener el tiempo actual del video en segundos
+  Future<int> getCurrentVideoTime() async {
+    try {
+      final result = await webviewController.executeScript(videoCurrentTime);
+
+      return result;
+    } catch (e) {
+      ToolsHelper.logger.e('Error obteniendo tiempo actual del video: $e');
+      return 0;
+    }
+  }
+
   // Cambio de video segun la duración del video
   Future<void> setupVideoSwitching() async {
     if (videoIds.isEmpty) return;
@@ -211,8 +223,11 @@ class VideosModuleController extends GetxController
     final int totalDuration = videoDurations[currentVideoId] ?? 180;
 
     try {
+      // Obtener tiempo actual de reproducción
+      final int currentPosition = await getCurrentVideoTime();
+
       // Calcular tiempo restante
-      int timeRemaining = totalDuration;
+      int timeRemaining = totalDuration - currentPosition;
 
       // Si queda poco tiempo, usar tiempo mínimo
       if (timeRemaining <= 5) {
@@ -274,7 +289,7 @@ class VideosModuleController extends GetxController
   void setVideosFromItem(List<String> videos) {
     if (videos.isNotEmpty) {
       ToolsHelper.logger
-          .w('📋 Actualizando lista de videos: ${videos.length} videos');
+          .w('Actualizando lista de videos: ${videos.length} videos');
 
       // Cancelar timer existente
       videoSwitchTimer?.cancel();

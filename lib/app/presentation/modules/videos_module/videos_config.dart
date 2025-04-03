@@ -185,6 +185,13 @@ var videoReady = '''
         })();
       ''';
 
+var videoCurrentTime = '''
+        (function() {
+          var video = document.querySelector('video');
+          return video ? Math.floor(video.currentTime) : 0;
+        })();
+      ''';
+
 var videoPause = '''
         (function() {
           var video = document.querySelector('video');
