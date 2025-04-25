@@ -34,7 +34,8 @@ dependencies:
   flutter_staggered_grid_view: ^0.7.0
   card_swiper: ^3.0.1
   #marquee: ^2.2.3 //DEPRECADA
-  text_marquee: ^0.0.2
+  marquee: ^2.3.0
+  #text_marquee: ^0.0.2
   #ext_video_player: ^0.1.2
   #wakelock: ^0.6.2
   wakelock_plus: ^1.2.8

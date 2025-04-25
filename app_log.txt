@@ -1,0 +1,39 @@
+[2025-04-04T15:14:47.853967] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:15:01.798731] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:15:02.192713] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:15:49.089] PROBANDO
+//live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:15:55.224530] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:19:01.137927] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:19:16.880925] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:19:17.308759] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:19:43.710319] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:20:16.669752] https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:21:05.624400] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:21:32.299616] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:21:50.736077] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:04.629102] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:05.051911] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:11.707721] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:15.313384] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:18.697252] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:22.826918] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:26.649038] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:28.885994] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:31.495992] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:38:35.217769] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:41:41.297016] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:41:45.757032] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:41:55.115607] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-04T15:41:58.799287] ⏳ Cargando imagen: https://live.staticflickr.com/65535/54395006524_97dab317cd_o.png
+[2025-04-07T08:08:03.664191] :) 🔹 Inicializando WebView Windows...
+[2025-04-07T08:08:05.430538] INICIO WebView Windows CORRECTO...
+[2025-04-07T15:04:45.577525] ✅ Inicializando WebView Windows...
+[2025-04-07T15:04:47.086489] ✅ INICIO WebView Windows CORRECTO...
+[2025-04-07T15:04:47.094490] Configurar manejador de mensajes para detectar el fin de video
+[2025-04-07T16:53:07.595817] ✅ Inicializando WebView Windows...
+[2025-04-07T16:53:09.071354] ✅ INICIO WebView Windows CORRECTO...
+[2025-04-07T16:53:09.077354] Configurar manejador de mensajes para detectar el fin de video
+[2025-04-07T16:54:43.227162] ✅ Inicializando WebView Windows...
+[2025-04-07T16:54:44.196388] ✅ INICIO WebView Windows CORRECTO...
+[2025-04-07T16:54:44.196388] Configurar manejador de mensajes para detectar el fin de video

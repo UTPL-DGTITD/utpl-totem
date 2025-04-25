@@ -81,7 +81,7 @@ class _ImgBanner extends StatelessWidget {
       ),
       width: double.maxFinite,
       child: GestureDetector(
-        // onTap: () => ctrl.navigateToBannerDetail(item),
+        onTap: () => ctrl.navigateToBannerDetail(item),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ctrl.responsive.wp(0)),
           child: CachedNetworkImage(

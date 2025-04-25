@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:utpl_totem_oficial/app/data/models/tv_template_model.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/image/image_controller.dart';
+import 'package:utpl_totem_oficial/app/utils/helpers/tools_helper.dart';
 
 class ImagePage extends GetView<ImageController> {
   final TvTemplateBody item;
@@ -20,9 +21,6 @@ class ImagePage extends GetView<ImageController> {
     );
     ctrl.currentItem.value = item;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Obx(() => Text(controller.title.value)),
-      // ),
       body: GetX<ImageController>(
         init: ImageController(
           localRepository: Get.find(),
@@ -33,19 +31,24 @@ class ImagePage extends GetView<ImageController> {
         builder: (ctrl) {
           return ctrl.title.value.isNotEmpty
               ? Container(
-                  color: Color.fromARGB(255, 232, 13, 13),
+                  color: Colors.transparent,
                   child: Center(
                     child: CachedNetworkImage(
                       httpHeaders: const {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                        'User-Agent':
+                            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
                       },
                       imageUrl: ctrl.currentItem.value.image?.url ?? '',
                       fit: BoxFit.cover,
-                      errorWidget: (context, a, b) {
+                      errorWidget: (context, url, error) {
+                        ToolsHelper().writeLog(
+                            '❌ Error cargando imagen: $url\nError: $error');
                         return Image.asset('assets/images/alt-banner.png');
                       },
-                      placeholder: (context, url) =>
-                          Image.asset('assets/images/alt-banner.png'),
+                      placeholder: (context, url) {
+                        ToolsHelper().writeLog('⏳ Cargando imagen: $url');
+                        return Image.asset('assets/images/alt-banner.png');
+                      },
                     ),
                   ),
                 )

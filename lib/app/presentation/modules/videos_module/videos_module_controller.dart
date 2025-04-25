@@ -105,13 +105,19 @@ class VideosModuleController extends GetxController
 
   Future<void> initPlatformState() async {
     try {
-      ToolsHelper.logger.w('🔹 Inicializando WebView Windows...');
+      ToolsHelper.logger.w('✅ Inicializando WebView Windows...');
+      ToolsHelper().writeLog('✅ Inicializando WebView Windows...');
+
       await webviewController.initialize();
+      ToolsHelper().writeLog('✅ INICIO WebView Windows CORRECTO...');
       await webviewController.setBackgroundColor(Colors.transparent);
       await webviewController
           .setPopupWindowPolicy(WebviewPopupWindowPolicy.deny);
 
       // Configurar manejador de mensajes para detectar el fin de video
+      ToolsHelper().writeLog(
+          'Configurar manejador de mensajes para detectar el fin de video');
+
       webviewController.webMessage.listen((message) {
         try {
           if (message == 'VIDEO_ENDED' || message == 'VIDEO_ALMOST_ENDED') {
@@ -135,6 +141,7 @@ class VideosModuleController extends GetxController
           }
         } catch (e) {
           ToolsHelper.logger.e('Error procesando mensaje de WebView: $e');
+          ToolsHelper().writeLog('❌ Error procesando mensaje de WebView: $e');
         }
       });
 
@@ -147,6 +154,7 @@ class VideosModuleController extends GetxController
       setupVideoSwitching();
     } catch (e) {
       ToolsHelper.logger.e('Error inicializando WebView: $e');
+      ToolsHelper().writeLog('❌ Error inicializando WebView: $e');
     }
   }
 
@@ -182,6 +190,8 @@ class VideosModuleController extends GetxController
       await webviewController.executeScript(videoReady);
     } catch (e) {
       ToolsHelper.logger.e("Error cargando video: $e");
+      ToolsHelper().writeLog('❌ Error cargando video: $e');
+
       // Ocultar la pantalla de carga.
       isLoading.value = false;
 
@@ -205,9 +215,13 @@ class VideosModuleController extends GetxController
     try {
       final result = await webviewController.executeScript(videoCurrentTime);
 
-      return int.tryParse(result) ?? 0;
+      if (result is int) return result;
+      if (result is String) return int.tryParse(result) ?? 0;
+
+      return 0; // Por si viene algo inesperado
     } catch (e) {
-      ToolsHelper.logger.e('Error obteniendo tiempo actual del video: $e');
+      ToolsHelper.logger.e('⛔ Error obteniendo tiempo actual del video: $e');
+      ToolsHelper().writeLog('⛔ Error obteniendo tiempo actual del video: $e');
       return 0;
     }
   }
@@ -245,6 +259,8 @@ class VideosModuleController extends GetxController
       // Si ocurre un error, usar duración completa
       final adjustedDuration = Duration(seconds: totalDuration - 2);
       ToolsHelper.logger.w(
+          '⚠️ Error obteniendo posición actual, usando duración estimada: ${adjustedDuration.inSeconds}s');
+      ToolsHelper().writeLog(
           '⚠️ Error obteniendo posición actual, usando duración estimada: ${adjustedDuration.inSeconds}s');
 
       videoSwitchTimer = Timer(adjustedDuration, () {

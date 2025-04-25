@@ -8,7 +8,6 @@ import 'package:utpl_totem_oficial/app/presentation/modules/news/new_page.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/home/home_controller.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/observatories/observatories_page.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/ranking/ranking_page.dart';
-import 'package:utpl_totem_oficial/app/presentation/modules/videos/videos_page.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/web_component/web_component_page.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/videos_module/videos_module_page.dart';
 

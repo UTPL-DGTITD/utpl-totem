@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 //import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/gestures.dart';
@@ -17,12 +19,13 @@ import 'app/controllers/main_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
 
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
     // DESCOMENTAR PARA PRODUCCION
-    //fullScreen: true,
+    ///fullScreen: true,
     // DESCOMENTAR PARA PROBAR DE MANERA LOCAL   size: Size(385, 674),
     size: Size(385, 674),
     //center: true,
@@ -82,5 +85,14 @@ class MyApp extends StatelessWidget {
         ToolsHelper.logger.v('HUBO CONTACTO');
       },
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

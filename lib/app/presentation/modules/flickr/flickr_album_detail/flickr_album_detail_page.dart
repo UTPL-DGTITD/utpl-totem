@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wall_layout/flutter_wall_layout.dart';
 
 import 'package:get/get.dart';
-import 'package:text_marquee/text_marquee.dart';
+import 'package:marquee/marquee.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/flickr/flickr_album_detail/flickr_album_detail_controller.dart';
 import 'package:utpl_totem_oficial/app/presentation/widgets/float_back_button.dart';
 import 'package:utpl_totem_oficial/app/presentation/widgets/footer_utpl.dart';
@@ -44,21 +44,26 @@ class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
                     child: Obx(
                       () => Container(
                         alignment: Alignment.center,
-                        child: TextMarquee(
-                          ctrl.title.value,
-                          spaceSize: 72,
+                        child: Marquee(
+                          key: ValueKey(ctrl.title
+                              .value), // para reiniciar si cambia el título
+                          text: ctrl.title.value,
                           style: TextStyle(
                             color: Get.theme.colorScheme.primary,
                             fontWeight: FontWeight.w600,
                             fontSize: 24,
                           ),
-                          rtl: false,
-                          curve: Curves.linear,
-                          delay: Duration(seconds: 1),
-                          duration: Duration(
-                            seconds: (ctrl.title.value.length.toDouble() * 0.30)
-                                .toInt(),
-                          ),
+                          scrollAxis: Axis.horizontal,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          blankSpace: 72.0,
+                          velocity: 30.0, // puedes ajustar según la longitud
+                          pauseAfterRound: const Duration(seconds: 1),
+                          startPadding: 0.0,
+                          accelerationDuration: const Duration(seconds: 1),
+                          accelerationCurve: Curves.linear,
+                          decelerationDuration:
+                              const Duration(milliseconds: 500),
+                          decelerationCurve: Curves.linear,
                         ),
                       ),
                     ),

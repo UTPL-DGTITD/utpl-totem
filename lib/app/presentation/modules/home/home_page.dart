@@ -3,7 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
-import 'package:text_marquee/text_marquee.dart';
+import 'package:marquee/marquee.dart';
 
 import 'package:utpl_totem_oficial/app/presentation/modules/home/home_controller.dart';
 import 'package:utpl_totem_oficial/app/presentation/modules/home/utils/generate_component.dart';
@@ -156,9 +156,8 @@ class HomePage extends GetView<HomeController> {
                                     color: ctrl.colorNotify.value,
                                     child: ctrl.notify.isNotEmpty
                                         ? Obx(
-                                            () => TextMarquee(
-                                              ctrl.notify.value,
-                                              spaceSize: 72,
+                                            () => Marquee(
+                                              text: ctrl.notify.value,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color:
@@ -166,16 +165,25 @@ class HomePage extends GetView<HomeController> {
                                                 fontSize:
                                                     ctrl.responsive.ip(1.8),
                                               ),
-                                              rtl: false,
-                                              curve: Curves.linear,
-                                              delay: Duration(seconds: 1),
-                                              duration: Duration(
-                                                seconds: (ctrl
-                                                            .notify.value.length
-                                                            .toDouble() *
-                                                        0.30)
-                                                    .toInt(),
-                                              ),
+                                              scrollAxis: Axis.horizontal,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              blankSpace: 72.0,
+                                              velocity:
+                                                  (ctrl.title.value.length *
+                                                          1.2)
+                                                      .toDouble()
+                                                      .clamp(20.0, 60.0),
+                                              pauseAfterRound:
+                                                  const Duration(seconds: 1),
+                                              startPadding: 10.0,
+                                              accelerationDuration:
+                                                  const Duration(seconds: 1),
+                                              accelerationCurve: Curves.linear,
+                                              decelerationDuration:
+                                                  const Duration(
+                                                      milliseconds: 500),
+                                              decelerationCurve: Curves.easeOut,
                                             ),
                                           )
                                         : const SizedBox(),
