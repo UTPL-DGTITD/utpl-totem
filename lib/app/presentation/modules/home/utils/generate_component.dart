@@ -20,26 +20,26 @@ class GenerateComponent {
         return WebComponentPage(item.link?.url ?? '');
 
       case "banner":
-        //return SizedBox();
+      //return SizedBox();
         return const BannerPage();
       case "news":
         return const NewsPage();
       case "events":
         return const EventsPage();
       case "ranking":
-        //return SizedBox();
+      //return SizedBox();
         return const RankingPage();
       case "observatories":
-        //return SizedBox();
+      //return SizedBox();
         return const ObservatoriesPage();
       case "indicators":
-        //return SizedBox();
+      //return SizedBox();
         return const InvestigationPage();
       case "embedded_youtube":
-        //return const SizedBox();
+      //return const SizedBox();
         return VideosModulePage(item);
       case "image":
-        //return const SizedBox();
+      //return const SizedBox();
         return ImagePage(item);
       default:
         return const SizedBox();

@@ -111,10 +111,11 @@ class SideHeader extends StatelessWidget {
                   () => Text(
                     ctrl.currentDescTemp.value,
                     style: TextStyle(
-                        fontSize: ctrl.responsive.ip(1.6),
-                        color: Get.theme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                        height: ctrl.responsive.hp(0.17)),
+                      fontSize: ctrl.responsive.ip(1.6),
+                      color: Get.theme.colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                      height: ctrl.responsive.hp(0.15),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),

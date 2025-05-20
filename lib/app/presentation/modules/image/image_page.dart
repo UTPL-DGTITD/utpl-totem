@@ -33,22 +33,22 @@ class ImagePage extends GetView<ImageController> {
         builder: (ctrl) {
           return ctrl.title.value.isNotEmpty
               ? Container(
-                  color: Color.fromARGB(255, 232, 13, 13),
-                  child: Center(
-                    child: CachedNetworkImage(
-                      httpHeaders: const {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64)',
-                      },
-                      imageUrl: ctrl.currentItem.value.image?.url ?? '',
-                      fit: BoxFit.cover,
-                      errorWidget: (context, a, b) {
-                        return Image.asset('assets/images/alt-banner.png');
-                      },
-                      placeholder: (context, url) =>
-                          Image.asset('assets/images/alt-banner.png'),
-                    ),
-                  ),
-                )
+            color: Color.fromARGB(255, 232, 13, 13),
+            child: Center(
+              child: CachedNetworkImage(
+                httpHeaders: const {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64)',
+                },
+                imageUrl: ctrl.currentItem.value.image?.url ?? '',
+                fit: BoxFit.cover,
+                errorWidget: (context, a, b) {
+                  return Image.asset('assets/images/alt-banner.png');
+                },
+                placeholder: (context, url) =>
+                    Image.asset('assets/images/alt-banner.png'),
+              ),
+            ),
+          )
               : const SizedBox();
         },
       ),

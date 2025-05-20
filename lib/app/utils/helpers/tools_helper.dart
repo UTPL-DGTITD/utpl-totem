@@ -1,4 +1,5 @@
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -124,6 +125,22 @@ class ToolsHelper {
       return document.documentElement!.text;
     } else {
       return '';
+    }
+  }
+
+  Future<void> writeLog(String message) async {
+    try {
+      final dir = Directory.current;
+      final logFile = File('${dir.path}/app_log.txt');
+
+      final now = DateTime.now().toIso8601String();
+      final logLine = '[$now] $message\n';
+
+      await logFile.writeAsString(logLine, mode: FileMode.append);
+
+      ToolsHelper.logger.v("✅ Log escrito en: ${logFile.path}");
+    } catch (e) {
+      ToolsHelper.logger.e('❌ Error escribiendo log', error: e);
     }
   }
 

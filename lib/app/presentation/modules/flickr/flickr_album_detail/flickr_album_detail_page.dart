@@ -42,7 +42,7 @@ class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
                     width: ctrl.responsive.wp(100),
                     height: ctrl.responsive.hp(8),
                     child: Obx(
-                      () => Container(
+                          () => Container(
                         alignment: Alignment.center,
                         child: TextMarquee(
                           ctrl.title.value,
@@ -66,14 +66,14 @@ class FlickrAlbumDetailPage extends GetView<FlickrAlbumDetailController> {
                   customYMargin(ctrl.responsive.hp(1)),
                   ctrl.showSkeleton.isFalse
                       ? Expanded(
-                          child: WallLayout(
-                            stonePadding: 5,
-                            stones: buildStones(ctrl, context),
-                            layersCount: 4,
-                            scrollDirection: Axis.vertical,
-                            reverse: false,
-                          ),
-                        )
+                    child: WallLayout(
+                      stonePadding: 5,
+                      stones: buildStones(ctrl, context),
+                      layersCount: 4,
+                      scrollDirection: Axis.vertical,
+                      reverse: false,
+                    ),
+                  )
                       : const Expanded(child: LoadingUtpl()),
                   const FooterUTPL(),
                 ],

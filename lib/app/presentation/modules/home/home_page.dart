@@ -19,7 +19,7 @@ class HomePage extends GetView<HomeController> {
     //TvTemplateModel item = tvTemplateModelFromJson('');
 
     return Obx(
-      () => Scaffold(
+          () => Scaffold(
         floatingActionButton: controller.showSkeleton.isFalse
             ? const SizedBox()
             : const SizedBox(),
@@ -49,143 +49,143 @@ class HomePage extends GetView<HomeController> {
               child: SafeArea(
                 child: ctrl.showSkeleton.isFalse
                     ? Container(
-                        color: Get.theme.cardColor,
-                        width: ctrl.responsive.wp(100),
-                        height: ctrl.responsive.hp(100),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
+                  color: Get.theme.cardColor,
+                  width: ctrl.responsive.wp(100),
+                  height: ctrl.responsive.hp(100),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ctrl.responsive.wp(0.5),
+                              vertical: ctrl.responsive.hp(1),
+                            ),
+                            color: Get.theme.cardColor,
+                            width: ctrl.responsive.wp(75),
+                            height: ctrl.responsive.hp(91),
+                            child: Column(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: ctrl.responsive.wp(0.5),
-                                    vertical: ctrl.responsive.hp(1),
-                                  ),
                                   color: Get.theme.cardColor,
-                                  width: ctrl.responsive.wp(75),
-                                  height: ctrl.responsive.hp(91),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        color: Get.theme.cardColor,
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: ctrl.responsive.wp(4),
-                                        ),
-                                        child: InkWell(
-                                          onTap: () => ctrl.refreshTemplate(),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'UTPL',
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      ctrl.responsive.ip(4),
-                                                  color: Get.theme.colorScheme
-                                                      .primary,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                '+',
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      ctrl.responsive.ip(4),
-                                                  color: Get.theme.colorScheme
-                                                      .tertiary,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ctrl.responsive.wp(4),
+                                  ),
+                                  child: InkWell(
+                                    onTap: () => ctrl.refreshTemplate(),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'UTPL',
+                                          style: TextStyle(
+                                            fontSize:
+                                            ctrl.responsive.ip(4),
+                                            color: Get.theme.colorScheme
+                                                .primary,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ),
-                                      customYMargin(ctrl.responsive.hp(0.5)),
-                                      Expanded(
-                                        child: StaggeredGrid.count(
-                                          // crossAxisCount: 14,
-                                          crossAxisCount: 10,
-                                          axisDirection: AxisDirection.down,
-                                          mainAxisSpacing:
-                                              ctrl.responsive.hp(1),
-                                          crossAxisSpacing:
-                                              ctrl.responsive.wp(0.5),
-                                          children:
-                                              //
-                                              generateComponents(ctrl),
-                                          //generateStaticComponents(ctrl),
+                                        Text(
+                                          '+',
+                                          style: TextStyle(
+                                            fontSize:
+                                            ctrl.responsive.ip(4),
+                                            color: Get.theme.colorScheme
+                                                .tertiary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Container(
-                                  width: ctrl.responsive.wp(25),
-                                  height: ctrl.responsive.hp(91),
-                                  color: Get.theme.colorScheme.tertiary,
-                                  child: SideHeader(ctrl: ctrl),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: ctrl.responsive.hp(0),
-                                  ),
-                                  width: ctrl.responsive.wp(20),
-                                  height: ctrl.responsive.hp(9),
-                                  decoration: BoxDecoration(
-                                    color: Get.theme.colorScheme.tertiary,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    'assets/svg/dgti_utpl.svg',
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  width: ctrl.responsive.wp(80),
-                                  height: ctrl.responsive.hp(9),
-                                  color: Get.theme.colorScheme.primary,
-                                  child: Container(
-                                    color: ctrl.colorNotify.value,
-                                    child: ctrl.notify.isNotEmpty
-                                        ? Obx(
-                                            () => TextMarquee(
-                                              ctrl.notify.value,
-                                              spaceSize: 72,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color:
-                                                    ctrl.colorTextNotify.value,
-                                                fontSize:
-                                                    ctrl.responsive.ip(1.8),
-                                              ),
-                                              rtl: false,
-                                              curve: Curves.linear,
-                                              delay: Duration(seconds: 1),
-                                              duration: Duration(
-                                                seconds: (ctrl
-                                                            .notify.value.length
-                                                            .toDouble() *
-                                                        0.30)
-                                                    .toInt(),
-                                              ),
-                                            ),
-                                          )
-                                        : const SizedBox(),
+                                customYMargin(ctrl.responsive.hp(0.5)),
+                                Expanded(
+                                  child: StaggeredGrid.count(
+                                    // crossAxisCount: 14,
+                                    crossAxisCount: 10,
+                                    axisDirection: AxisDirection.down,
+                                    mainAxisSpacing:
+                                    ctrl.responsive.hp(1),
+                                    crossAxisSpacing:
+                                    ctrl.responsive.wp(0.5),
+                                    children:
+                                    //
+                                    generateComponents(ctrl),
+                                    //generateStaticComponents(ctrl),
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      )
+                          ),
+                          Container(
+                            width: ctrl.responsive.wp(25),
+                            height: ctrl.responsive.hp(91),
+                            color: Get.theme.colorScheme.tertiary,
+                            child: SideHeader(ctrl: ctrl),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: ctrl.responsive.hp(0),
+                            ),
+                            width: ctrl.responsive.wp(20),
+                            height: ctrl.responsive.hp(9),
+                            decoration: BoxDecoration(
+                              color: Get.theme.colorScheme.tertiary,
+                            ),
+                            child: SvgPicture.asset(
+                              'assets/svg/dgti_utpl.svg',
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            width: ctrl.responsive.wp(80),
+                            height: ctrl.responsive.hp(9),
+                            color: Get.theme.colorScheme.primary,
+                            child: Container(
+                              color: ctrl.colorNotify.value,
+                              child: ctrl.notify.isNotEmpty
+                                  ? Obx(
+                                    () => TextMarquee(
+                                  ctrl.notify.value,
+                                  spaceSize: 72,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                    ctrl.colorTextNotify.value,
+                                    fontSize:
+                                    ctrl.responsive.ip(1.8),
+                                  ),
+                                  rtl: false,
+                                  curve: Curves.linear,
+                                  delay: Duration(seconds: 1),
+                                  duration: Duration(
+                                    seconds: (ctrl
+                                        .notify.value.length
+                                        .toDouble() *
+                                        0.30)
+                                        .toInt(),
+                                  ),
+                                ),
+                              )
+                                  : const SizedBox(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
                     : const Center(child: CircularProgressIndicator()),
               ),
             );
@@ -198,12 +198,12 @@ class HomePage extends GetView<HomeController> {
   List<StaggeredGridTile> generateComponents(HomeController ctrl) {
     List<StaggeredGridTile> items = [];
     for (var i = 0;
-        i <
-            ctrl.currentTemplate.value.tvTemplateHeader!.tvTemplateBodies
-                .length;
-        i++) {
+    i <
+        ctrl.currentTemplate.value.tvTemplateHeader!.tvTemplateBodies
+            .length;
+    i++) {
       var item =
-          ctrl.currentTemplate.value.tvTemplateHeader!.tvTemplateBodies[i];
+      ctrl.currentTemplate.value.tvTemplateHeader!.tvTemplateBodies[i];
       items.add(
         StaggeredGridTile.count(
           crossAxisCellCount: item.totalColumns,

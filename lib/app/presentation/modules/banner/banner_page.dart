@@ -26,34 +26,34 @@ class BannerPage extends GetView<BannerController> {
         builder: (ctrl) {
           return SafeArea(
               child: Center(
-            child: slider.CarouselSlider.builder(
-              carouselController: ctrl.buttonCarouselController,
-              options: slider.CarouselOptions(
-                height: ctrl.responsive.hp(22),
-                viewportFraction: 1,
-                initialPage: 0,
-                enableInfiniteScroll: ctrl.bannerSlide.isNotEmpty,
-                enlargeCenterPage: true,
-                autoPlay: true,
-                scrollDirection: Axis.horizontal,
-              ),
-              itemCount: ctrl.bannerSlide.length,
-              itemBuilder: (
-                BuildContext context,
-                int index,
-                int pageViewIndex,
-              ) =>
-                  Padding(
-                padding: EdgeInsets.symmetric(vertical: ctrl.responsive.hp(0)),
-                child: _ImgBanner(
-                  item: ctrl.bannerSlide[index],
-                  onSectionSelect: (item) => null,
-                  // ctrl.navigateToBannerDetail(item),
-                  ctrl: ctrl,
+              child: slider.CarouselSlider.builder(
+                carouselController: ctrl.buttonCarouselController,
+                options: slider.CarouselOptions(
+                  height: ctrl.responsive.hp(22),
+                  viewportFraction: 1,
+                  initialPage: 0,
+                  enableInfiniteScroll: ctrl.bannerSlide.isNotEmpty,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  scrollDirection: Axis.horizontal,
                 ),
+                itemCount: ctrl.bannerSlide.length,
+                itemBuilder: (
+                    BuildContext context,
+                    int index,
+                    int pageViewIndex,
+                    ) =>
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: ctrl.responsive.hp(0)),
+                      child: _ImgBanner(
+                        item: ctrl.bannerSlide[index],
+                        onSectionSelect: (item) => null,
+                        // ctrl.navigateToBannerDetail(item),
+                        ctrl: ctrl,
+                      ),
+                    ),
               ),
-            ),
-          ));
+            ));
         },
       ),
     );
